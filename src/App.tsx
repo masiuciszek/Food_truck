@@ -3,20 +3,18 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 
 import './App.css';
-import { LogsStore } from './context/logs/Logs.state';
+import Logs from './components/Logs';
+import AppLayout from './components/layout/AppLaout';
 
-const App: React.FC = () => {
-  const { getLogs, logs } = React.useContext(LogsStore);
-  console.log(logs);
 
-  React.useEffect(() => {
-    getLogs();
-  }, []);
-  return (
+const App: React.FC = () => (
+  <AppLayout>
     <div className="App">
       <h1>Apa</h1>
+      <Logs />
     </div>
-  );
-};
+  </AppLayout>
+
+);
 
 export default App;

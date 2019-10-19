@@ -7,6 +7,7 @@ type IAction = {
 
 type IState = {
   logs: [];
+  techs: [];
   loading: boolean;
   error: null;
   setCurrent: null;

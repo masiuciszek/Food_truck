@@ -8,6 +8,7 @@
     "@types/node": "12.11.1",
     "@types/react": "16.9.9",
     "@types/react-dom": "16.9.2",
+    "@types/styled-components": "^4.1.19",
     "materialize-css": "^1.0.0",
     "moment": "^2.24.0",
     "react": "^16.10.2",
