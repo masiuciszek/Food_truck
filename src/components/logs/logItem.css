@@ -1,0 +1,22 @@
+.logItem {
+  padding: .7rem;
+  margin: .4rem .5rem;
+  font-size: 1.2rem;
+  width: 90%;
+  position: relative;
+  background: #201e20;
+  border-radius: 1rem;
+}
+
+.logItem span {
+  margin: .4rem 0;
+  padding: 1rem;
+}
+
+.trash {
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: .2rem
+}

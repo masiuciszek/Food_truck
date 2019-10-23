@@ -5,11 +5,6 @@ const StoreReducer = (state: IState, action: IAction): IState => {
         ...state,
         logs: action.payload,
       };
-    case 'GET_TECHS':
-      return {
-        ...state,
-        techs: action.payload,
-      };
     default:
       return state;
   }

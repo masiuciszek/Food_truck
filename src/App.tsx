@@ -3,17 +3,24 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 
 import './App.css';
-import Logs from './components/Logs';
+import Logs from './components/logs/Logs';
 import AppLayout from './components/layout/AppLaout';
+import LogProvider from './context/logs/Logs.state';
+import TechProvider from './context/techs/Techs.state';
+import Techs from './components/techs/Techs';
 
 
 const App: React.FC = () => (
-  <AppLayout>
-    <div className="App">
-      <h1>Apa</h1>
-      <Logs />
-    </div>
-  </AppLayout>
+  <LogProvider>
+    <TechProvider>
+      <AppLayout>
+        <main className="App">
+          <Logs />
+          <Techs />
+        </main>
+      </AppLayout>
+    </TechProvider>
+  </LogProvider>
 
 );
 

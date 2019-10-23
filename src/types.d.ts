@@ -1,3 +1,4 @@
+import { string } from 'prop-types';
 
 type IAction = {
   type: string;
@@ -7,10 +8,15 @@ type IAction = {
 
 type IState = {
   logs: [];
-  techs: [];
   loading: boolean;
   error: null;
   setCurrent: null;
+}
+
+type IStateTechs = {
+  techs: [];
+  loading: boolean;
+  error: null;
 }
 
 type IActionsTypes = {
@@ -22,3 +28,20 @@ type IActionsTypes = {
   ADD_TECH: string;
   DELETE_TECH: string;
 }
+
+
+type Logs = {
+  message: string;
+  attention: boolean;
+  tech: Tech;
+  date: string;
+  id: number;
+}
+
+type Tech = {
+  id: number;
+  firstName: string;
+  lastName: string;
+}
+
+
