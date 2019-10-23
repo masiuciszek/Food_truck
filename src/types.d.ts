@@ -1,8 +1,7 @@
-import { string } from 'prop-types';
 
 type IAction = {
   type: string;
-  payload: any;
+  payload?: any;
 }
 
 
@@ -43,5 +42,3 @@ type Tech = {
   firstName: string;
   lastName: string;
 }
-
-
