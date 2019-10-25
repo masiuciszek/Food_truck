@@ -1,7 +1,7 @@
 import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 
-import Card from './components/layout/Card';
+import AddLog from './components/logs/AddLog';
 import './App.css';
 import Logs from './components/logs/Logs';
 import AppLayout from './components/layout/AppLaout';
@@ -12,29 +12,29 @@ import Modal from './components/layout/Modal';
 
 
 const App: React.FC = () => {
-  const [toggle, setToggle] = React.useState(false);
+  const [addLog, setAddLog] = React.useState(false);
 
   const handleToggle = () => {
-    setToggle(!toggle);
+    setAddLog(!addLog);
   };
 
-  let content;
-  if (toggle) {
-    content = <Card close={handleToggle} />;
+  let contentForAddLog;
+  if (addLog) {
+    contentForAddLog = <AddLog close={handleToggle} />;
   }
 
   return (
     <LogProvider>
       <TechProvider>
         <AppLayout>
-          {toggle ? <Modal close={handleToggle} show={toggle} content="apa" /> : null}
-        <main className="App">
-
+          {addLog ? <Modal close={handleToggle} show={addLog} content={contentForAddLog} /> : null}
+          <main className="App">
             <Logs />
-            <Techs />
-            <button onClick={handleToggle}>Show</button>
+            <div className="btns">
+              <button onClick={handleToggle}>add a new log</button>
+            </div>
           </main>
-      </AppLayout>
+        </AppLayout>
       </TechProvider>
     </LogProvider>
 

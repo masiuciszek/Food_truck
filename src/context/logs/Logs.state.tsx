@@ -1,7 +1,8 @@
 import * as React from 'react';
+import json5 from 'json5';
 import StoreReducer from './logs.reducer';
 import {
-  GET_LOGS, LOGS_ERROR, DELETE_LOG, UPDATE_LOG,
+  GET_LOGS, LOGS_ERROR, DELETE_LOG, UPDATE_LOG, ADD_LOG,
 } from '../type';
 
 
@@ -33,6 +34,19 @@ const LogProvider = (props: any): JSX.Element => {
       const data = await res.json();
       dispatch({
         type: GET_LOGS,
+        payload: data,
+      });
+    } catch (err) {
+      dispatch({ type: LOGS_ERROR, payload: err.message.response });
+    }
+  };
+  const addLog = async (log: Logs) => {
+    try {
+      setLoading();
+      const res = await fetch('/logs', { method: 'post', body: JSON.stringify(log), headers: { 'Content-Type': 'application/json' } });
+      const data = await res.json();
+      dispatch({
+        type: ADD_LOG,
         payload: data,
       });
     } catch (err) {
@@ -75,6 +89,7 @@ const LogProvider = (props: any): JSX.Element => {
       error: state.error,
       setCurrent: state.setCurrent,
       getLogs,
+      addLog,
       deleteLog,
       updateLog,
     }}

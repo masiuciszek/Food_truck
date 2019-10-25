@@ -1,11 +1,17 @@
 
 import {
-  SET_LOADING, GET_LOGS, LOGS_ERROR, DELETE_LOG, UPDATE_LOG,
+  SET_LOADING, GET_LOGS, LOGS_ERROR, DELETE_LOG, UPDATE_LOG, ADD_LOG,
 } from '../type';
 
 const StoreReducer = (state: IState, action: IAction): IState => {
   switch (action.type) {
     case GET_LOGS:
+      return {
+        ...state,
+        logs: action.payload,
+        loading: false,
+      };
+    case ADD_LOG:
       return {
         ...state,
         logs: action.payload,

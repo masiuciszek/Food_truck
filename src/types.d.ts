@@ -56,3 +56,10 @@ type Tech = {
   firstName: string;
   lastName: string;
 }
+
+type AddLogState = {
+  message: string;
+  attention: boolean;
+  tech: Tech;
+  date: string;
+}

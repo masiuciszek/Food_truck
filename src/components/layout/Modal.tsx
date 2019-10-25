@@ -2,9 +2,10 @@ import * as React from 'react';
 import './modal.css';
 
 interface Props {
-  content: string;
+  content: any;
   show: boolean;
   close: () => void;
+
 }
 
 const Modal: React.FC<Props> = ({ content, close, show }) => {

@@ -13,7 +13,6 @@ const Logs: React.FC<Props> = () => {
     getLogs, logs, loading,
   } = React.useContext(LogsStore);
 
-
   React.useEffect(() => {
     getLogs();
   }, []);
