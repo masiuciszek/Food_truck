@@ -2,21 +2,35 @@
 type IAction = {
   type: string;
   payload?: any;
-}
+};
 
+
+// type IState = {
+//   logs: [];
+//   loading: boolean;
+//   error: null;
+//   setCurrent: null;
+// }
 
 type IState = {
-  logs: [];
+  logs: Logs[];
   loading: boolean;
   error: null;
   setCurrent: null;
-}
+};
+
 
 type IStateTechs = {
-  techs: [];
+  techs: Tech[];
   loading: boolean;
   error: null;
-}
+};
+
+// type IStateTechs = {
+//   techs: [];
+//   loading: boolean;
+//   error: null;
+// }
 
 type IActionsTypes = {
   GET_LOGS: string;

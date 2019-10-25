@@ -1,4 +1,4 @@
-import { number } from 'prop-types';
+
 import {
   SET_LOADING, GET_LOGS, LOGS_ERROR, DELETE_LOG, UPDATE_LOG,
 } from '../type';
@@ -15,13 +15,13 @@ const StoreReducer = (state: IState, action: IAction): IState => {
       return {
         ...state,
         logs: state.logs.map((log) => (log.id === action.payload.id ? action.payload : log)),
+        loading: false,
       };
     case DELETE_LOG:
       return {
         ...state,
-        logs: action.payload,
+        logs: state.logs.filter((log) => log.id !== action.payload),
         loading: false,
-
       };
     case SET_LOADING:
       return {
