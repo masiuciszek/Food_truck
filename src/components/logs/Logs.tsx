@@ -5,10 +5,10 @@ import './logs.css';
 
 
 interface Props {
-
+  toggleEditLog: () => void;
 }
 
-const Logs: React.FC<Props> = () => {
+const Logs: React.FC<Props> = ({ toggleEditLog }) => {
   const {
     getLogs, logs, loading,
   } = React.useContext(LogsStore);
@@ -21,7 +21,7 @@ const Logs: React.FC<Props> = () => {
   return (
     <>
       <ul className="logs">
-        {!loading && logs && logs.length > 0 ? logs.map((log: Logs) => <LogItem key={log.id} log={log} />) : <p>loading...</p> }
+        {!loading && logs && logs.length > 0 ? logs.map((log: Logs) => <LogItem key={log.id} log={log} toggleEditLog={toggleEditLog} />) : <p>loading...</p> }
       </ul>
     </>
   );

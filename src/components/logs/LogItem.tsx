@@ -6,16 +6,22 @@ import { LogsStore } from '../../context/logs/Logs.state';
 
 interface Props {
   log: Logs;
-
+  toggleEditLog: () => void;
 }
 
-const LogItem: React.FC<Props> = ({ log }) => {
-  const { deleteLog } = React.useContext(LogsStore);
+const LogItem: React.FC<Props> = ({ log, toggleEditLog }) => {
+  const { deleteLog, handleCurrent } = React.useContext(LogsStore);
+
   const {
     message, attention, tech, date, id,
   } = log;
 
   const formatDate = date.split('-').slice(0, 2).join(' ');
+
+  const handleEdit = () => {
+    handleCurrent(log);
+    toggleEditLog();
+  };
 
   return (
     <>
@@ -33,6 +39,9 @@ const LogItem: React.FC<Props> = ({ log }) => {
           {' '}
           {formatDate}
           {' '}
+        </span>
+        <span className="edit" onClick={handleEdit}>
+            🥑
         </span>
         <span className="trash" onClick={() => deleteLog(id)}>
             🗑

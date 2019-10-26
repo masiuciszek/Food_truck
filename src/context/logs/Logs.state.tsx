@@ -1,9 +1,10 @@
 import * as React from 'react';
-import json5 from 'json5';
-import StoreReducer from './logs.reducer';
 import {
-  GET_LOGS, LOGS_ERROR, DELETE_LOG, UPDATE_LOG, ADD_LOG,
+  EContextActionTypes,
+  EContextBaseAction,
+  GET_LOGS, LOGS_ERROR, DELETE_LOG, UPDATE_LOG, ADD_LOG, SET_CURRENT,
 } from '../type';
+import StoreReducer from './logs.reducer';
 
 
 const initialState: IState = {
@@ -33,11 +34,11 @@ const LogProvider = (props: any): JSX.Element => {
       const res = await fetch('/logs');
       const data = await res.json();
       dispatch({
-        type: GET_LOGS,
+        type: EContextActionTypes.GET_LOGS,
         payload: data,
       });
     } catch (err) {
-      dispatch({ type: LOGS_ERROR, payload: err.message.response });
+      dispatch({ type: EContextActionTypes.LOGS_ERROR, payload: err.message.response });
     }
   };
   const addLog = async (log: Logs) => {
@@ -46,11 +47,11 @@ const LogProvider = (props: any): JSX.Element => {
       const res = await fetch('/logs', { method: 'post', body: JSON.stringify(log), headers: { 'Content-Type': 'application/json' } });
       const data = await res.json();
       dispatch({
-        type: ADD_LOG,
+        type: EContextActionTypes.ADD_LOG,
         payload: data,
       });
     } catch (err) {
-      dispatch({ type: LOGS_ERROR, payload: err.message.response });
+      dispatch({ type: EContextActionTypes.LOGS_ERROR, payload: err.message.response });
     }
   };
 
@@ -59,26 +60,32 @@ const LogProvider = (props: any): JSX.Element => {
       setLoading();
       await fetch(`/logs/${id}`, { method: 'DELETE' });
       dispatch({
-        type: DELETE_LOG,
+        type: EContextActionTypes.DELETE_LOG,
         payload: id,
       });
     } catch (err) {
-      dispatch({ type: LOGS_ERROR, payload: err.message.response });
+      dispatch({ type: EContextActionTypes.LOGS_ERROR, payload: err.message.response });
     }
   };
 
   const updateLog = async (log: Logs) => {
     try {
-      setLoading();
-      const res = await fetch(`/logs/${log.id}`, { method: 'PUT' });
-      const data = await JSON.stringify(res);
+      const res = await fetch(`/logs/${log.id}`, { method: 'PUT', body: JSON.stringify(log), headers: { 'Content-Type': 'application/json' } });
+      const data = await res.json();
       dispatch({
-        type: UPDATE_LOG,
+        type: EContextActionTypes.UPDATE_LOG,
         payload: data,
       });
     } catch (err) {
-      dispatch({ type: LOGS_ERROR, payload: err.message.response });
+      dispatch({ type: EContextActionTypes.LOGS_ERROR, payload: err.message.response });
     }
+  };
+
+  const handleCurrent = (log: Logs) => {
+    dispatch({
+      type: EContextActionTypes.SET_CURRENT,
+      payload: log,
+    });
   };
 
 
@@ -92,6 +99,7 @@ const LogProvider = (props: any): JSX.Element => {
       addLog,
       deleteLog,
       updateLog,
+      handleCurrent,
     }}
     >
       {props.children}

@@ -37,8 +37,8 @@
 
 
 
-.addlog {
-  background: rgba(24, 61, 141, 0.664);
+.addlog .updateLog {
+  background: rgba(24, 61, 141, 0.164);
   height: 100%;
 }
 
@@ -49,25 +49,23 @@
   margin-right: auto;
 }
 
-.addlog form {
+.addlog .updateLog form {
   padding: 1rem .5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
-.addlog form {
+.addlog .updateLog form {
   padding: .5rem;
 
 }
 
-.addlog {
-  border: 2px solid red;
-  ;
-}
+.addlog .updateLog {}
 
-.addlog form input[type="text"] {
+.addlog .updateLog form input[type="checkbox"] {
   border: 2px solid #333;
   font-size: 1.2rem;
   box-shadow: 1px 2px 2px 1px #333;
@@ -76,7 +74,7 @@
 
 }
 
-.addlog form input[type="checkbox"] {
+.addlog .updateLog form input[type="text"] {
   border: 2px solid #333;
   font-size: 1.2rem;
   box-shadow: 1px 2px 2px 1px #333;
@@ -85,18 +83,34 @@
 
 }
 
-.addlog form input[type="text"]:hover {
-  box-shadow: 1px 2px 2px 1px #3232;
-  border: 3px solid #3232;
+.addlog .updateLog form ::placeholder {
+  color: #000;
 }
 
-.addlog form input[type="text"]:focus {
+
+
+.addlog .updateLog form input[type="text"]:hover {
   box-shadow: 1px 2px 2px 1px #3232;
-  border: 3px solid rgba(29, 23, 29, 0.932);
+  border: 3px solid rgba(0, 0, 0, 0.904);
+}
+
+.addlog .updateLog form input[type="text"]:focus {
+  box-shadow: 1px 2px 2px 1px rgba(12, 12, 12, 0.877);
+  border: 3px solid rgba(5, 5, 5, 0.932);
   width: 35rem;
 }
 
 form select {
-  width: 100%;
-  padding: 3rem;
+  width: 80%;
+  padding: 1.3rem;
+}
+
+form button {
+  margin-top: 2rem;
+
+  padding: .4rem .8rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background: none;
 }

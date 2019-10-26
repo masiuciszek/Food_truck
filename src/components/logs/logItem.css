@@ -17,6 +17,14 @@
   cursor: pointer;
   display: inline-block;
   position: absolute;
-  right: 0;
+  right: 0rem;
+  top: .2rem
+}
+
+.edit {
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  right: 4rem;
   top: .2rem
 }

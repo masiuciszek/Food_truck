@@ -6,26 +6,36 @@ interface Props {
 }
 
 
-const AddLog: React.FC<Props> = ({ close }) => {
-  const { addLog } = React.useContext(LogsStore);
+const UpdateLog: React.FC<Props> = ({ close }) => {
+  const { updateLog, setCurrent } = React.useContext(LogsStore);
   const [message, setMessage] = React.useState('');
   const [attention, setAttention] = React.useState<any | boolean>(false);
   const [tech, setTech] = React.useState('');
 
+  React.useEffect(() => {
+    if (setCurrent) {
+      setMessage(setCurrent.message);
+      setAttention(setCurrent.attention);
+      setTech(setCurrent.tech);
+    }
+  }, [setCurrent]);
+
   return (
-    <div className="addlog">
+    <div className="updateLog">
       <span onClick={close} id="close-modal" style={{ float: 'right' }}>❌</span>
-      <h4>Add log</h4>
+      <h4>UpdateLog</h4>
       <form onSubmit={(e) => {
-        if (message === '' || tech === '') {
-          alert('please fill in the fileds');
-          close();
-        }
         e.preventDefault();
-        const newLog = {
-          message, attention, tech, date: new Date(),
+        const updatedLog = {
+          id: setCurrent.id,
+          message,
+          attention,
+          tech,
+          date: new Date(),
         };
-        addLog(newLog);
+        updateLog(updatedLog);
+        alert(`log got updated by ,${tech}`);
+
         close();
       }}
       >
@@ -57,4 +67,4 @@ const AddLog: React.FC<Props> = ({ close }) => {
     </div>
   );
 };
-export default AddLog;
+export default UpdateLog;
