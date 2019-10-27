@@ -1,6 +1,6 @@
 import * as React from 'react';
 import techReducer from './tech.reducer';
-
+import { EContextActionTypes, EContextBaseAction } from '../type';
 
 const initialState: IStateTechs = {
   techs: [],
@@ -17,8 +17,13 @@ const TechProvider = (props: any): JSX.Element => {
   const [state, dispatch] = React.useReducer(techReducer, initialState);
 
 
+  const setLoading = () => {
+    dispatch({ type: EContextActionTypes.SET_LOADING });
+  };
+
   const getTechs = async () => {
     try {
+      setLoading();
       const res = await fetch('/techs');
       const data = await res.json();
       dispatch({ type: 'GET_TECHS', payload: data });
@@ -26,6 +31,7 @@ const TechProvider = (props: any): JSX.Element => {
       dispatch({ type: 'TECHS_ERROR', payload: err.message.response });
     }
   };
+
 
   return (
     <TechStore.Provider value={{

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface Props {
-
+  tech: Tech;
 }
 
 const TechItem: React.FC<Props> = () => {

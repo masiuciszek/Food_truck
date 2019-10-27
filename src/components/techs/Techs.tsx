@@ -1,19 +1,26 @@
 import * as React from 'react';
 import { TechStore } from '../../context/techs/Techs.state';
+import TechItem from './TechItem';
 
 interface Props {
-
+  close: () => void;
 }
 
-const Techs: React.FC<Props> = () => {
-  const { getTechs, techs } = React.useContext(TechStore);
+const Techs: React.FC<Props> = ({ close }) => {
+  const { getTechs, techs, loading } = React.useContext(TechStore);
 
   React.useEffect(() => {
     getTechs();
   }, []);
-  console.log(techs);
+
+
   return (
-    <h1>Yechs</h1>
+    <>
+      <div className="techs">
+        {!loading && techs.length > 0 ? techs.map((tech: Tech) => <TechItem key={tech.id} tech={tech} />) : <p>loading...</p> }
+      </div>
+
+    </>
   );
 };
 export default Techs;

@@ -5,13 +5,6 @@ type IAction = {
 };
 
 
-// type IState = {
-//   logs: [];
-//   loading: boolean;
-//   error: null;
-//   setCurrent: null;
-// }
-
 type IState = {
   logs: Logs[];
   loading: boolean;
@@ -26,11 +19,6 @@ type IStateTechs = {
   error: null;
 };
 
-// type IStateTechs = {
-//   techs: [];
-//   loading: boolean;
-//   error: null;
-// }
 
 type IActionsTypes = {
   GET_LOGS: string;
