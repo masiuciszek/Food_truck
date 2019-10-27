@@ -26,9 +26,21 @@ const TechProvider = (props: any): JSX.Element => {
       setLoading();
       const res = await fetch('/techs');
       const data = await res.json();
-      dispatch({ type: 'GET_TECHS', payload: data });
+      dispatch({ type: EContextActionTypes.GET_TECHS, payload: data });
     } catch (err) {
-      dispatch({ type: 'TECHS_ERROR', payload: err.message.response });
+      dispatch({ type: EContextActionTypes.TECH_ERROR, payload: err.message.response });
+    }
+  };
+
+  const deleteTech = async (id: string) => {
+    try {
+      await fetch(`/techs/${id}`, { method: 'DELETE' });
+      dispatch({
+        type: EContextActionTypes.DELETE_TECH,
+        payload: id,
+      });
+    } catch (err) {
+      dispatch({ type: EContextActionTypes.TECH_ERROR, payload: err.message.response });
     }
   };
 
@@ -39,6 +51,7 @@ const TechProvider = (props: any): JSX.Element => {
       loading: state.loading,
       error: state.loading,
       getTechs,
+      deleteTech,
     }}
     >
       {props.children}

@@ -39,6 +39,7 @@ const App: React.FC = () => {
         <AppLayout>
           {addLog ? <Modal close={toggleAdd} show={addLog} content={contentForAddLog} /> : null}
           {editLog ? <Modal close={toggleEditLog} show={editLog} content={contentForUpdateLog} /> : null}
+          {showTechs ? <Modal close={toggleShowTechs} show={showTechs} content={techsContent} /> : null}
           <main className="App">
             <Logs toggleEditLog={toggleEditLog} />
             <div className="btns">

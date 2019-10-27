@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   EContextActionTypes,
   EContextBaseAction,
-  GET_LOGS, LOGS_ERROR, DELETE_LOG, UPDATE_LOG, ADD_LOG, SET_CURRENT,
 } from '../type';
 import StoreReducer from './logs.reducer';
 
@@ -24,7 +23,7 @@ const LogProvider = (props: any): JSX.Element => {
 
   const setLoading = () => {
     dispatch({
-      type: 'SET_LOADING',
+      type: EContextActionTypes.SET_LOADING,
     });
   };
 

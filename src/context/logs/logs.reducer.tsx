@@ -2,7 +2,6 @@
 import {
   EContextActionTypes,
   EContextBaseAction,
-  SET_LOADING, GET_LOGS, LOGS_ERROR, DELETE_LOG, UPDATE_LOG, ADD_LOG, SET_CURRENT,
 } from '../type';
 
 const StoreReducer = (state: IState, action: IAction): IState => {
