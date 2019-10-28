@@ -1,18 +1,11 @@
 {
   "logs": [
     {
-      "message": "Changed network card in server 007",
+      "id": 1,
+      "message": "Changed network card in server 007212",
       "attention": false,
-      "tech": "Sam Smith",
-      "date": "2019-05-31T15:46:10.179Z",
-      "id": 1
-    },
-    {
-      "id": 2,
-      "message": "Fixed hard drive on workstation 0022",
-      "attention": false,
-      "tech": "Sara Wilsons",
-      "date": "2019-10-26T11:33:02.237Z"
+      "tech": "Boris Levin",
+      "date": "2019-10-28T18:47:10.623Z"
     },
     {
       "message": "1122 wireless down",
@@ -22,18 +15,32 @@
       "id": 3
     },
     {
-      "id": 5,
-      "message": "hello Marcello",
-      "attention": false,
-      "tech": "Sam Smith",
-      "date": "2019-10-26T11:32:51.733Z"
-    },
-    {
       "id": 6,
       "message": "fixing the X-box",
       "attention": false,
       "tech": "John Doe",
       "date": "2019-10-26T11:22:34.270Z"
+    },
+    {
+      "message": "hello",
+      "attention": false,
+      "tech": "Sara Wilsons",
+      "date": "2019-10-28T18:21:37.926Z",
+      "id": 7
+    },
+    {
+      "message": "Coding all day long !!!!!",
+      "attention": false,
+      "tech": "Zlatan Ibrahimovic",
+      "date": "2019-10-28T18:45:37.659Z",
+      "id": 8
+    },
+    {
+      "message": "Hello",
+      "attention": false,
+      "tech": "Boris Levin",
+      "date": "2019-10-28T18:46:26.120Z",
+      "id": 9
     }
   ],
   "techs": [
@@ -46,6 +53,11 @@
       "id": 2,
       "firstName": "Sam",
       "lastName": "Smith"
+    },
+    {
+      "firstName": "Boris",
+      "lastName": "Levin",
+      "id": 3
     }
   ]
 }

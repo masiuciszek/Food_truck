@@ -8,6 +8,12 @@ export default (state: IStateTechs, action: IAction): IStateTechs => {
         techs: action.payload,
         loading: false,
       };
+    case EContextActionTypes.ADD_TECH:
+      return {
+        ...state,
+        techs: [state.techs, ...action.payload],
+        loading: false,
+      };
     case EContextActionTypes.DELETE_TECH:
       return {
         ...state,

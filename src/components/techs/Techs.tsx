@@ -5,6 +5,7 @@ import './techs.css';
 
 interface Props {
   close: () => void;
+
 }
 
 const Techs: React.FC<Props> = ({ close }) => {
@@ -22,7 +23,7 @@ const Techs: React.FC<Props> = ({ close }) => {
         <ul className="techs-list">
           {!loading && techs.length > 0 ? techs.map((tech: Tech) => <TechItem key={tech.id} tech={tech} />) : <p>loading...</p> }
         </ul>
-        <button className="btn-one">Add A tech</button>
+
       </div>
 
     </>

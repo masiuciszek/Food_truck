@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { LogsStore } from '../../context/logs/Logs.state';
+import TechSelect from '../layout/TechSelect';
 
 interface Props {
   close: () => void;
@@ -46,9 +47,7 @@ const AddLog: React.FC<Props> = ({ close }) => {
           onChange={(e) => setTech(e.target.value)}
         >
           <option disabled value="">Choose a tech</option>
-          <option value="John Doe">John Doe</option>
-          <option value="Sam Smith">Sam Smith</option>
-          <option value="Sara Wilsons">Sara Wilson</option>
+          <TechSelect />
         </select>
         <button className="btn-one" type="submit">Submit</button>
       </form>

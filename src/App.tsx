@@ -11,11 +11,14 @@ import TechProvider from './context/techs/Techs.state';
 import Techs from './components/techs/Techs';
 import Modal from './components/layout/Modal';
 import useToggle from './hooks/useToggle';
+import AddTech from './components/techs/AddTech';
+
 
 const App: React.FC = () => {
   const [addLog, toggleAdd] = useToggle(false);
   const [editLog, toggleEditLog] = useToggle(false);
   const [showTechs, toggleShowTechs] = useToggle(false);
+  const [addTech, toggleAddTech] = useToggle(false);
 
 
   let contentForAddLog;
@@ -33,11 +36,17 @@ const App: React.FC = () => {
     techsContent = <Techs close={toggleShowTechs} />;
   }
 
+  let contentForAddTech;
+  if (addTech) {
+    contentForAddTech = <AddTech close={toggleAddTech} />;
+  }
+
   return (
     <LogProvider>
       <TechProvider>
         <AppLayout>
           {addLog ? <Modal close={toggleAdd} show={addLog} content={contentForAddLog} /> : null}
+          {addTech ? <Modal close={toggleAddTech} show={addTech} content={contentForAddTech} /> : null}
           {editLog ? <Modal close={toggleEditLog} show={editLog} content={contentForUpdateLog} /> : null}
           {showTechs ? <Modal close={toggleShowTechs} show={showTechs} content={techsContent} /> : null}
           <main className="App">
@@ -45,6 +54,7 @@ const App: React.FC = () => {
             <div className="btns">
               <button className="btn-one" type="button" onClick={toggleAdd}>add a new log</button>
               <button className="btn-one" type="button" onClick={toggleShowTechs}>Techs</button>
+              <button className="btn-one" type="button" onClick={toggleAddTech}>Add Tech</button>
             </div>
           </main>
         </AppLayout>

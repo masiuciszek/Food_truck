@@ -32,6 +32,20 @@ const TechProvider = (props: any): JSX.Element => {
     }
   };
 
+  const addTech = async (tech: Tech) => {
+    try {
+      setLoading();
+      const res = await fetch('/techs', { method: 'POST', body: JSON.stringify(tech), headers: { 'Content-Type': 'application/json' } });
+      const data = await res.json();
+      dispatch({
+        type: EContextActionTypes.ADD_LOG,
+        payload: data,
+      });
+    } catch (err) {
+      dispatch({ type: EContextActionTypes.TECH_ERROR, payload: err.message.response });
+    }
+  };
+
   const deleteTech = async (id: string) => {
     try {
       await fetch(`/techs/${id}`, { method: 'DELETE' });
@@ -52,6 +66,7 @@ const TechProvider = (props: any): JSX.Element => {
       error: state.loading,
       getTechs,
       deleteTech,
+      addTech,
     }}
     >
       {props.children}
