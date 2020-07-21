@@ -1,0 +1,19 @@
+{
+  "$schema": "./tsconfig.schemastore-schema.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "lib": ["es2015"],
+    "outDir": "./build" /* Redirect output structure to the directory. */,
+    // "rootDir": "./src", /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "declaration": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "types": ["node", "mocha"],
+    "stripInternal": true
+  },
+  "include": ["src/**/*"]
+}
