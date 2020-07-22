@@ -13,6 +13,9 @@ export const registerUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const newUser = await User.create(req.body);
 
+    // Create new Token
+    await newUser.generateAuthToken();
+
     res
       .status(201)
       .json({ success: true, msg: 'User Registered!', data: newUser });

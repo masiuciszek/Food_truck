@@ -2,7 +2,7 @@ import { NextFunction } from 'express';
 import mongoose, { Schema } from 'mongoose';
 import { User } from './documents';
 import bcrypt from 'bcryptjs';
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 const UserSchema = new Schema<User>({
   firstName: {
@@ -65,6 +65,17 @@ UserSchema.pre<User>('save', async function (next: NextFunction) {
   }
   next();
 });
+
+// Generate a new token for a log in session ore register
+UserSchema.methods.generateAuthToken = async function (): Promise<string> {
+  const user = this;
+  const token = jwt.sign({ id: user._id, role: user.role }, 'secret', {
+    expiresIn: '3h',
+  });
+  user.tokens = user.tokens.concat({ token });
+  await user.save();
+  return token;
+};
 
 const userModel = mongoose.model<User>('User', UserSchema);
 

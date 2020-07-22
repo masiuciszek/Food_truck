@@ -24,4 +24,5 @@ export interface User extends Document {
   age: number;
   tokens: Token[];
   createdAt: Date;
+  generateAuthToken: () => Promise<string>;
 }
