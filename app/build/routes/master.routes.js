@@ -23,10 +23,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
-var userController = __importStar(require("../controllers/user.controller"));
+var masterController = __importStar(require("../controllers/master.controller"));
 var express_1 = require("express");
 var authHandler_1 = __importDefault(require("../middleware/authHandler"));
+var handleMaster_1 = require("../middleware/handleMaster");
 var router = express_1.Router();
 exports.router = router;
-router.route('/me').get(authHandler_1.default, userController.getMe);
-router.route('/register').post(userController.registerUser);
+router
+    .route('/all_users')
+    .get(authHandler_1.default, handleMaster_1.handleMaster, masterController.getAllUsers);
+router
+    .route('/delete_all_users')
+    .delete(authHandler_1.default, handleMaster_1.handleMaster, masterController.deleteAllUsers);

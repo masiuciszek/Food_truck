@@ -39,46 +39,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMe = exports.registerUser = void 0;
-var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
-var User_1 = require("../models/User");
-/**
- * @method --- POST
- * @access --- Public
- * @route --- user/register
- */
-exports.registerUser = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var newUser, token;
+exports.handleMaster = void 0;
+var asyncHandler_1 = __importDefault(require("./asyncHandler"));
+var handleMaster = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var isMaster;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.userModel.create(req.body)];
-            case 1:
-                newUser = _a.sent();
-                return [4 /*yield*/, newUser.generateAuthToken()];
-            case 2:
-                token = _a.sent();
-                res
-                    .status(201)
-                    .json({ success: true, msg: 'User Registered!', data: newUser, token: token });
-                return [2 /*return*/];
+        isMaster = req.user.role === 'MASTER';
+        if (!isMaster) {
+            throw new Error('You are not the master');
         }
+        next();
+        return [2 /*return*/];
     });
 }); });
-/**
- * @method --- GET
- * @desc --- GET user by id
- * @access --- Private
- * @route --- user/me
- */
-exports.getMe = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var user;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id).select('')];
-            case 1:
-                user = _a.sent();
-                res.status(200).json({ success: true, msg: 'Get me', data: user });
-                return [2 /*return*/];
-        }
-    });
-}); });
+exports.handleMaster = handleMaster;

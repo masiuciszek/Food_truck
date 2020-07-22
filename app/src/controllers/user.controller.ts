@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import asyncHandler from '../middleware/asyncHandler';
+import { AuthRequest } from '../middleware/authHandler';
 import { userModel as User } from '../models/User';
 import { ErrorResponse } from '../utils/errorResponse';
 
@@ -26,26 +27,12 @@ export const registerUser = asyncHandler(
  * @method --- GET
  * @desc --- GET user by id
  * @access --- Private
- * @route --- user/me/:id
+ * @route --- user/me
  */
 
 export const getMe = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const user = await User.findById(req.params.id);
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.user._id).select('');
     res.status(200).json({ success: true, msg: 'Get me', data: user });
-  },
-);
-
-/**
- * @method --- GET
- * @access --- Public
- * @route --- user/all_users
- */
-
-export const getAllUsers = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const users = await User.find({});
-
-    res.status(200).json({ success: true, msg: 'All Users', data: users });
   },
 );

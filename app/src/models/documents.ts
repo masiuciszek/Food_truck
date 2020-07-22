@@ -1,14 +1,18 @@
 import { Document } from 'mongoose';
 
-export enum Gender {
-  MALE = 'MALE',
-  FEMALE = 'FEMALE',
-}
-enum Role {
-  USER = 'USER',
-  ADMIN = 'ADMIN',
-  MASTER = 'MASTER',
-}
+// export enum Gender {
+//   MALE = 'MALE',
+//   FEMALE = 'FEMALE',
+// }
+export type Gender = 'MALE' | 'FEMALE';
+
+export type Role = 'USER' | 'ADMIN' | 'MASTER';
+
+// enum Role {
+//   USER = 'USER',
+//   ADMIN = 'ADMIN',
+//   MASTER = 'MASTER',
+// }
 
 export interface Token {
   token: string;

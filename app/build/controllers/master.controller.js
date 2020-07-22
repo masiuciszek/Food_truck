@@ -39,45 +39,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMe = exports.registerUser = void 0;
+exports.getAllUsers = exports.deleteAllUsers = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
 var User_1 = require("../models/User");
 /**
- * @method --- POST
- * @access --- Public
- * @route --- user/register
+ * @method --- DELETE
+ * @access --- Private
+ * @route --- /master/delete_all_users
+ * @desc --- Ban all users
  */
-exports.registerUser = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var newUser, token;
+exports.deleteAllUsers = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.userModel.create(req.body)];
-            case 1:
-                newUser = _a.sent();
-                return [4 /*yield*/, newUser.generateAuthToken()];
-            case 2:
-                token = _a.sent();
-                res
-                    .status(201)
-                    .json({ success: true, msg: 'User Registered!', data: newUser, token: token });
-                return [2 /*return*/];
-        }
+        res.send('master');
+        return [2 /*return*/];
     });
 }); });
 /**
  * @method --- GET
- * @desc --- GET user by id
  * @access --- Private
- * @route --- user/me
+ * @route --- master/all_users
  */
-exports.getMe = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var user;
+exports.getAllUsers = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var users;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id).select('')];
+            case 0: return [4 /*yield*/, User_1.userModel.find({})];
             case 1:
-                user = _a.sent();
-                res.status(200).json({ success: true, msg: 'Get me', data: user });
+                users = _a.sent();
+                res.status(200).json({ success: true, msg: 'All Users', data: users });
                 return [2 /*return*/];
         }
     });
