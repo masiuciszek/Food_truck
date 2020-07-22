@@ -39,27 +39,93 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.test = exports.logout = exports.login = void 0;
+exports.logoutAllSessions = exports.logout = exports.login = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
+var User_1 = require("../models/User");
+var errorResponse_1 = require("../utils/errorResponse");
+/**
+ * @method --- POST
+ * @access --- Public
+ * @route --- auth/login
+ */
 exports.login = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        res.send('login');
-        return [2 /*return*/];
+    var _a, email, password, user, isMatchedPassword, token;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = req.body, email = _a.email, password = _a.password;
+                if (!email || !password) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('Please enter email and password', 404))];
+                }
+                return [4 /*yield*/, User_1.userModel.findOne({ email: email })];
+            case 1:
+                user = _b.sent();
+                if (!user) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('Authentication error', 404))];
+                }
+                return [4 /*yield*/, user.comparePassword(password)];
+            case 2:
+                isMatchedPassword = _b.sent();
+                if (!isMatchedPassword) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('Authentication error', 404))];
+                }
+                return [4 /*yield*/, user.generateAuthToken()];
+            case 3:
+                token = _b.sent();
+                res
+                    .status(200)
+                    .json({ success: true, msg: 'Logged in', data: user, token: token });
+                return [2 /*return*/];
+        }
     });
 }); });
+/**
+ * @method --- POST
+ * @access --- Private
+ * @route --- auth/logout
+ * @desc --- logout single session
+ */
 exports.logout = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        res.send('logout user');
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                req.user.tokens = req.user.tokens.filter(function (token) { return token.token !== req.token; });
+                return [4 /*yield*/, req.user.save()];
+            case 1:
+                _a.sent();
+                res.status(200).json({ success: true, msg: 'Logged out', data: {} });
+                return [2 /*return*/];
+        }
     });
 }); });
-exports.test = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+/**
+ * @method --- POST
+ * @access --- Private
+ * @route --- auth/logout_tokens
+ * @desc --- clear tokens list
+ */
+exports.logoutAllSessions = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        console.log(req.url);
-        console.log(req.method);
-        console.log(req.baseUrl);
-        console.log(req.path);
-        res.send('test');
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                // req.user.tokens = [];
+                req.user.tokens = req.user.tokens.splice(1);
+                return [4 /*yield*/, req.user.save()];
+            case 1:
+                _a.sent();
+                res
+                    .status(200)
+                    .json({ success: true, msg: 'Logged out all token sessions!', data: {} });
+                return [2 /*return*/];
+        }
     });
 }); });
+// export const test = asyncHandler(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     console.log(req.url);
+//     console.log(req.method);
+//     console.log(req.baseUrl);
+//     console.log(req.path);
+//     res.send('test');
+//   },
+// );

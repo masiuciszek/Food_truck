@@ -18,6 +18,10 @@ export const errorHandler = (
     const message = 'You are already registered!';
     error = new ErrorResponse(message, 404);
   }
+  if (error.name === 'JsonWebTokenError') {
+    const message = 'Authentication denied';
+    error = new ErrorResponse(message, 401);
+  }
 
   res
     .status(error.statusCode || 500)

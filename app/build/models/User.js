@@ -61,7 +61,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userModel = void 0;
 var mongoose_1 = __importStar(require("mongoose"));
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
-// import jwt from 'jsonwebtoken';
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var UserSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
@@ -134,5 +134,40 @@ UserSchema.pre('save', function (next) {
         });
     });
 });
+// Generate a new token for a log in session ore register
+UserSchema.methods.generateAuthToken = function () {
+    return __awaiter(this, void 0, void 0, function () {
+        var user, token;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    user = this;
+                    token = jsonwebtoken_1.default.sign({ id: user._id, role: user.role }, 'secret', {
+                        expiresIn: '3h',
+                    });
+                    user.tokens = user.tokens.concat({ token: token });
+                    return [4 /*yield*/, user.save()];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, token];
+            }
+        });
+    });
+};
+UserSchema.methods.comparePassword = function (password) {
+    return __awaiter(this, void 0, void 0, function () {
+        var user, isMatched;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    user = this;
+                    return [4 /*yield*/, bcryptjs_1.default.compare(password, user.password)];
+                case 1:
+                    isMatched = _a.sent();
+                    return [2 /*return*/, isMatched];
+            }
+        });
+    });
+};
 var userModel = mongoose_1.default.model('User', UserSchema);
 exports.userModel = userModel;

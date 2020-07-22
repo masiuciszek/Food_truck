@@ -18,12 +18,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 var authController = __importStar(require("../controllers/auth.controller"));
 var express_1 = require("express");
+var authHandler_1 = __importDefault(require("../middleware/authHandler"));
 var router = express_1.Router();
 exports.router = router;
 router.route('/login').post(authController.login);
-router.route('/logout').post(authController.logout);
-router.route('/').get(authController.test);
+router.route('/logout').post(authHandler_1.default, authController.logout);
+router
+    .route('/logout_tokens')
+    .post(authHandler_1.default, authController.logoutAllSessions);

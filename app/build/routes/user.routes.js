@@ -25,4 +25,5 @@ var express_1 = require("express");
 var router = express_1.Router();
 exports.router = router;
 router.route('/all_users').get(userController.getAllUsers);
+router.route('/me/:id').get(userController.getMe);
 router.route('/register').post(userController.registerUser);

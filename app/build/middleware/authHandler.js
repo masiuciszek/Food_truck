@@ -39,63 +39,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUsers = exports.getMe = exports.registerUser = void 0;
-var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
+var asyncHandler_1 = __importDefault(require("./asyncHandler"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var errorResponse_1 = require("../utils/errorResponse");
 var User_1 = require("../models/User");
-/**
- * @method --- POST
- * @access --- Public
- * @route --- user/register
- */
-exports.registerUser = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var newUser, token;
+var authHandler = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var token, decoded, user;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.userModel.create(req.body)];
-            case 1:
-                newUser = _a.sent();
-                return [4 /*yield*/, newUser.generateAuthToken()];
-            case 2:
-                token = _a.sent();
-                res
-                    .status(201)
-                    .json({ success: true, msg: 'User Registered!', data: newUser, token: token });
-                return [2 /*return*/];
-        }
-    });
-}); });
-/**
- * @method --- GET
- * @desc --- GET user by id
- * @access --- Private
- * @route --- user/me/:id
- */
-exports.getMe = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var user;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.userModel.findById(req.params.id)];
+            case 0:
+                if (req.headers.authorization &&
+                    req.headers.authorization.startsWith('Bearer')) {
+                    token = req.headers.authorization.split(' ')[1];
+                }
+                else {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('Auth Error', 401))];
+                }
+                if (!token) {
+                    throw new Error('No Bearer Token');
+                }
+                decoded = jsonwebtoken_1.default.verify(token, 'secret');
+                console.log(decoded);
+                return [4 /*yield*/, User_1.userModel.findOne({
+                        _id: decoded.id,
+                        'tokens.token': token,
+                    })];
             case 1:
                 user = _a.sent();
-                res.status(200).json({ success: true, msg: 'Get me', data: user });
+                if (!user) {
+                    throw new Error('Not Authorized');
+                }
+                req.user = user;
+                req.token = token;
+                next();
                 return [2 /*return*/];
         }
     });
 }); });
-/**
- * @method --- GET
- * @access --- Public
- * @route --- user/all_users
- */
-exports.getAllUsers = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var users;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.userModel.find({})];
-            case 1:
-                users = _a.sent();
-                res.status(200).json({ success: true, msg: 'All Users', data: users });
-                return [2 /*return*/];
-        }
-    });
-}); });
+exports.default = authHandler;

@@ -14,11 +14,25 @@ export const registerUser = asyncHandler(
     const newUser = await User.create(req.body);
 
     // Create new Token
-    await newUser.generateAuthToken();
+    let token = await newUser.generateAuthToken();
 
     res
       .status(201)
-      .json({ success: true, msg: 'User Registered!', data: newUser });
+      .json({ success: true, msg: 'User Registered!', data: newUser, token });
+  },
+);
+
+/**
+ * @method --- GET
+ * @desc --- GET user by id
+ * @access --- Private
+ * @route --- user/me/:id
+ */
+
+export const getMe = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.params.id);
+    res.status(200).json({ success: true, msg: 'Get me', data: user });
   },
 );
 

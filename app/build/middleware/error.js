@@ -22,6 +22,10 @@ exports.errorHandler = function (err, req, res, next) {
         var message = 'You are already registered!';
         error = new errorResponse_1.ErrorResponse(message, 404);
     }
+    if (error.name === 'JsonWebTokenError') {
+        var message = 'Authentication denied';
+        error = new errorResponse_1.ErrorResponse(message, 401);
+    }
     res
         .status(error.statusCode || 500)
         .json({ success: false, error: error.message || 'SERVER_ERROR!!!' });

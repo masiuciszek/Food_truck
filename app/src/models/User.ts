@@ -77,6 +77,16 @@ UserSchema.methods.generateAuthToken = async function (): Promise<string> {
   return token;
 };
 
+UserSchema.methods.comparePassword = async function (
+  password: string,
+): Promise<boolean> {
+  const user = this;
+
+  const isMatched = await bcrypt.compare(password, user.password);
+
+  return isMatched;
+};
+
 const userModel = mongoose.model<User>('User', UserSchema);
 
 export { userModel };

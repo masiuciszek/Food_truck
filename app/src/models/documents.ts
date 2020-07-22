@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-enum Gender {
+export enum Gender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
 }
@@ -10,7 +10,7 @@ enum Role {
   MASTER = 'MASTER',
 }
 
-interface Token {
+export interface Token {
   token: string;
 }
 
@@ -25,4 +25,5 @@ export interface User extends Document {
   tokens: Token[];
   createdAt: Date;
   generateAuthToken: () => Promise<string>;
+  comparePassword: (password: string) => Promise<boolean>;
 }
