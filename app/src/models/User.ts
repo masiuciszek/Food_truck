@@ -4,30 +4,32 @@ import { User } from './documents';
 const userSchema = new Schema<User>({
   firstName: {
     type: String,
-    required: true,
+    required: ['pleas fill in your firstName', true],
   },
   lastName: {
     type: String,
-    required: true,
+    required: ['pleas fill in your lastName', true],
   },
   email: {
     type: String,
-    required: true,
+    required: ['pleas fill in your email', true],
     unique: true,
   },
   password: {
     type: String,
-    required: true,
+    required: ['pleas fill in your password', true],
     minlength: 5,
   },
   gender: {
+    type: String,
     enum: ['MALE', 'FEMALE'],
     default: 'MALE',
   },
   age: {
     type: Number,
-    required: true,
+    required: ['pleas fill in your age', true],
   },
+
   tokens: [
     {
       token: {
@@ -45,4 +47,4 @@ const userSchema = new Schema<User>({
 
 const userModel = mongoose.model<User>('User', userSchema);
 
-export default userModel;
+export { userModel };
