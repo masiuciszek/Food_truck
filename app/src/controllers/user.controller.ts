@@ -13,10 +13,6 @@ export const registerUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const newUser = await User.create(req.body);
 
-    if (req.body.age < 18) {
-      return next(new ErrorResponse('To young to join', 404));
-    }
-
     res
       .status(201)
       .json({ success: true, msg: 'User Registered!', data: newUser });

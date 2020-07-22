@@ -4,6 +4,11 @@ enum Gender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
 }
+enum Role {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+  MASTER = 'MASTER',
+}
 
 interface Token {
   token: string;
@@ -15,6 +20,7 @@ export interface User extends Document {
   email: string;
   password: string;
   gender: Gender;
+  role: Role;
   age: number;
   tokens: Token[];
   createdAt: Date;
