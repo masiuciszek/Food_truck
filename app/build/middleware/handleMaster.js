@@ -44,12 +44,13 @@ var asyncHandler_1 = __importDefault(require("./asyncHandler"));
 var handleMaster = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var isMaster;
     return __generator(this, function (_a) {
-        isMaster = req.user.role === 'MASTER';
+        isMaster = req.user.role === "MASTER";
         if (!isMaster) {
-            throw new Error('You are not the master');
+            throw new Error("You are not the master");
         }
         next();
         return [2 /*return*/];
     });
 }); });
 exports.handleMaster = handleMaster;
+//# sourceMappingURL=handleMaster.js.map

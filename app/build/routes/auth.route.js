@@ -33,3 +33,4 @@ router.route('/logout').post(authHandler_1.default, authController.logout);
 router
     .route('/logout_tokens')
     .post(authHandler_1.default, authController.logoutAllSessions);
+//# sourceMappingURL=auth.route.js.map

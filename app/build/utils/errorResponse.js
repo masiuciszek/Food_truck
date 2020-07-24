@@ -34,3 +34,4 @@ exports.handleErrors = function (err, res) {
         message: message,
     });
 };
+//# sourceMappingURL=errorResponse.js.map

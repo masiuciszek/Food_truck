@@ -65,3 +65,4 @@ app.use(error_1.errorHandler);
 app.listen(port, function () {
     console.log("port is on localhost " + port);
 });
+//# sourceMappingURL=index.js.map

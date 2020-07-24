@@ -18,18 +18,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
-var userController = __importStar(require("../controllers/user.controller"));
+var storeController = __importStar(require("../controllers/store.controller"));
 var express_1 = require("express");
-var authHandler_1 = __importDefault(require("../middleware/authHandler"));
 var router = express_1.Router();
 exports.router = router;
-router.route('/me').get(authHandler_1.default, userController.getMe);
-router.route('/me/update').put(authHandler_1.default, userController.updateMe);
-router.route('/me/remove').delete(authHandler_1.default, userController.removeMe);
-router.route('/register').post(userController.registerUser);
-//# sourceMappingURL=user.routes.js.map
+router.route("/create_new_store").post(storeController.createStore);
+//# sourceMappingURL=store.routes.js.map

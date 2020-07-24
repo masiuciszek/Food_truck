@@ -6,3 +6,4 @@ function asyncHandler(fn) {
     };
 }
 exports.default = asyncHandler;
+//# sourceMappingURL=asyncHandler.js.map

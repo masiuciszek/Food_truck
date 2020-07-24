@@ -2,11 +2,11 @@ import { Response, NextFunction } from "express";
 import asyncHandler from "./asyncHandler";
 import { AuthRequest } from "./authHandler";
 
-const handleMaster = asyncHandler(
+const handleAdmin = asyncHandler(
   async (req: AuthRequest, res: Response, next: NextFunction) => {
-    const isMaster = req.user.role === "MASTER";
+    const isAdmin = req.user.role === "ADMIN";
 
-    if (!isMaster) {
+    if (!isAdmin) {
       throw new Error("You are not the master");
     }
 
@@ -14,4 +14,4 @@ const handleMaster = asyncHandler(
   },
 );
 
-export { handleMaster };
+export { handleAdmin };

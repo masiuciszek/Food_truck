@@ -31,3 +31,4 @@ exports.errorHandler = function (err, req, res, next) {
         .json({ success: false, error: error.message || 'SERVER_ERROR!!!' });
     next();
 };
+//# sourceMappingURL=error.js.map

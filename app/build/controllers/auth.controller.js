@@ -55,26 +55,26 @@ exports.login = asyncHandler_1.default(function (req, res, next) { return __awai
             case 0:
                 _a = req.body, email = _a.email, password = _a.password;
                 if (!email || !password) {
-                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('Please enter email and password', 404))];
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Please enter email and password", 404))];
                 }
                 return [4 /*yield*/, User_1.userModel.findOne({ email: email })];
             case 1:
                 user = _b.sent();
                 if (!user) {
-                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('Authentication error', 404))];
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Authentication error", 404))];
                 }
                 return [4 /*yield*/, user.comparePassword(password)];
             case 2:
                 isMatchedPassword = _b.sent();
                 if (!isMatchedPassword) {
-                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('Authentication error', 404))];
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Authentication error", 404))];
                 }
                 return [4 /*yield*/, user.generateAuthToken()];
             case 3:
                 token = _b.sent();
                 res
                     .status(200)
-                    .json({ success: true, msg: 'Logged in', data: user, token: token });
+                    .json({ success: true, msg: "Logged in", data: user, token: token });
                 return [2 /*return*/];
         }
     });
@@ -93,7 +93,7 @@ exports.logout = asyncHandler_1.default(function (req, res, next) { return __awa
                 return [4 /*yield*/, req.user.save()];
             case 1:
                 _a.sent();
-                res.status(200).json({ success: true, msg: 'Logged out', data: {} });
+                res.status(200).json({ success: true, msg: "Logged out", data: {} });
                 return [2 /*return*/];
         }
     });
@@ -115,7 +115,7 @@ exports.logoutAllSessions = asyncHandler_1.default(function (req, res, next) { r
                 _a.sent();
                 res
                     .status(200)
-                    .json({ success: true, msg: 'Logged out all token sessions!', data: {} });
+                    .json({ success: true, msg: "Logged out all token sessions!", data: {} });
                 return [2 /*return*/];
         }
     });
@@ -129,3 +129,4 @@ exports.logoutAllSessions = asyncHandler_1.default(function (req, res, next) { r
 //     res.send('test');
 //   },
 // );
+//# sourceMappingURL=auth.controller.js.map

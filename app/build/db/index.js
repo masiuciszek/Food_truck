@@ -67,3 +67,4 @@ var connectDb = function () { return __awaiter(void 0, void 0, void 0, function 
     });
 }); };
 exports.default = connectDb;
+//# sourceMappingURL=index.js.map

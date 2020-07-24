@@ -47,6 +47,7 @@ var errorResponse_1 = require("../utils/errorResponse");
  * @method --- POST
  * @access --- Public
  * @route --- user/register
+ * @desc --- register new user
  */
 exports.registerUser = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var newUser, token;
@@ -140,3 +141,4 @@ exports.removeMe = asyncHandler_1.default(function (req, res, next) { return __a
         }
     });
 }); });
+//# sourceMappingURL=user.controller.js.map

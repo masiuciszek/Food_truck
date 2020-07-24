@@ -22,14 +22,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.router = void 0;
-var userController = __importStar(require("../controllers/user.controller"));
-var express_1 = require("express");
-var authHandler_1 = __importDefault(require("../middleware/authHandler"));
-var router = express_1.Router();
-exports.router = router;
-router.route('/me').get(authHandler_1.default, userController.getMe);
-router.route('/me/update').put(authHandler_1.default, userController.updateMe);
-router.route('/me/remove').delete(authHandler_1.default, userController.removeMe);
-router.route('/register').post(userController.registerUser);
-//# sourceMappingURL=user.routes.js.map
+exports.store = void 0;
+var mongoose_1 = __importStar(require("mongoose"));
+var slugify_1 = __importDefault(require("slugify"));
+var StoreSchema = new mongoose_1.Schema({
+    name: {
+        type: String,
+        required: ["please enter a store name ", true],
+    },
+    slug: String,
+    owner: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "User",
+        required: ["owner must be valid", true],
+    },
+    type: {
+        type: String,
+        required: ["please enter a store name ", true],
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+});
+var store = mongoose_1.default.model("Store", StoreSchema);
+exports.store = store;
+// for creating slug when created
+StoreSchema.pre("save", function (next) {
+    var store = this;
+    store.slug = slugify_1.default(store.name, { lower: true, replacement: "-" });
+    next();
+});
+//# sourceMappingURL=Store.js.map

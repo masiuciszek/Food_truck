@@ -35,3 +35,4 @@ router
 router
     .route('/delete_all_users')
     .delete(authHandler_1.default, handleMaster_1.handleMaster, masterController.deleteAllUsers);
+//# sourceMappingURL=master.routes.js.map

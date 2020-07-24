@@ -71,3 +71,4 @@ exports.getAllUsers = asyncHandler_1.default(function (req, res, next) { return 
         }
     });
 }); });
+//# sourceMappingURL=master.controller.js.map

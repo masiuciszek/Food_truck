@@ -65,36 +65,36 @@ var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var UserSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
-        required: ['pleas fill in your firstName', true],
+        required: ["pleas fill in your firstName", true],
     },
     lastName: {
         type: String,
-        required: ['pleas fill in your lastName', true],
+        required: ["pleas fill in your lastName", true],
     },
     email: {
         type: String,
-        required: ['pleas fill in your email', true],
+        required: ["pleas fill in your email", true],
         unique: true,
     },
     password: {
         type: String,
-        required: ['pleas fill in your password', true],
+        required: ["pleas fill in your password", true],
         minlength: 5,
     },
     gender: {
         type: String,
-        enum: ['MALE', 'FEMALE'],
-        default: 'MALE',
+        enum: ["MALE", "FEMALE"],
+        default: "MALE",
     },
     role: {
         type: String,
-        enum: ['USER', 'ADMIN', 'MASTER'],
-        default: 'USER',
+        enum: ["USER", "ADMIN", "MASTER"],
+        default: "USER",
     },
     age: {
         type: Number,
         min: 18,
-        required: ['pleas fill in your age', true],
+        required: ["pleas fill in your age", true],
     },
     tokens: [
         {
@@ -111,7 +111,7 @@ var UserSchema = new mongoose_1.Schema({
 });
 // Middleware that is binned tou our user schema
 // Hash password before registered
-UserSchema.pre('save', function (next) {
+UserSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function () {
         var user, salt, _a;
         return __generator(this, function (_b) {
@@ -121,7 +121,7 @@ UserSchema.pre('save', function (next) {
                     return [4 /*yield*/, bcryptjs_1.default.genSalt(8)];
                 case 1:
                     salt = _b.sent();
-                    if (!user.isModified('password')) return [3 /*break*/, 3];
+                    if (!user.isModified("password")) return [3 /*break*/, 3];
                     _a = user;
                     return [4 /*yield*/, bcryptjs_1.default.hash(user.password, salt)];
                 case 2:
@@ -142,8 +142,8 @@ UserSchema.methods.generateAuthToken = function () {
             switch (_a.label) {
                 case 0:
                     user = this;
-                    token = jsonwebtoken_1.default.sign({ id: user._id, role: user.role }, 'secret', {
-                        expiresIn: '3h',
+                    token = jsonwebtoken_1.default.sign({ id: user._id, role: user.role }, "secret", {
+                        expiresIn: "3h",
                     });
                     user.tokens = user.tokens.concat({ token: token });
                     return [4 /*yield*/, user.save()];
@@ -169,5 +169,6 @@ UserSchema.methods.comparePassword = function (password) {
         });
     });
 };
-var userModel = mongoose_1.default.model('User', UserSchema);
+var userModel = mongoose_1.default.model("User", UserSchema);
 exports.userModel = userModel;
+//# sourceMappingURL=User.js.map

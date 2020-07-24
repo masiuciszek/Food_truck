@@ -1,18 +1,10 @@
-import { Document } from 'mongoose';
+import { Document } from "mongoose";
 
-// export enum Gender {
-//   MALE = 'MALE',
-//   FEMALE = 'FEMALE',
-// }
-export type Gender = 'MALE' | 'FEMALE';
+export type Gender = "MALE" | "FEMALE";
 
-export type Role = 'USER' | 'ADMIN' | 'MASTER';
+export type Role = "USER" | "ADMIN" | "MASTER";
 
-// enum Role {
-//   USER = 'USER',
-//   ADMIN = 'ADMIN',
-//   MASTER = 'MASTER',
-// }
+export type StoreType = "FRIENDLY" | "LOVELY" | "FAMILY" | "SPORTS_FAN";
 
 export interface Token {
   token: string;
@@ -30,4 +22,12 @@ export interface User extends Document {
   createdAt: Date;
   generateAuthToken: () => Promise<string>;
   comparePassword: (password: string) => Promise<boolean>;
+}
+
+export interface Store extends Document {
+  name: string;
+  slug: string;
+  owner: User;
+  type: StoreType;
+  createdAt: Date;
 }

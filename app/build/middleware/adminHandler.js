@@ -39,42 +39,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.handleAdmin = void 0;
 var asyncHandler_1 = __importDefault(require("./asyncHandler"));
-var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var errorResponse_1 = require("../utils/errorResponse");
-var User_1 = require("../models/User");
-var authHandler = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var token, decoded, user;
+var handleAdmin = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var isAdmin;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                if (req.headers.authorization &&
-                    req.headers.authorization.startsWith('Bearer')) {
-                    token = req.headers.authorization.split(' ')[1];
-                }
-                else {
-                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('Auth Error', 401))];
-                }
-                if (!token) {
-                    throw new Error('No Bearer Token');
-                }
-                decoded = jsonwebtoken_1.default.verify(token, 'secret');
-                console.log(decoded);
-                return [4 /*yield*/, User_1.userModel.findOne({
-                        _id: decoded.id,
-                        'tokens.token': token,
-                    })];
-            case 1:
-                user = _a.sent();
-                if (!user) {
-                    throw new Error('Not Authorized');
-                }
-                req.user = user;
-                req.token = token;
-                next();
-                return [2 /*return*/];
+        isAdmin = req.user.role === "ADMIN";
+        if (!isAdmin) {
+            throw new Error("You are not the master");
         }
+        next();
+        return [2 /*return*/];
     });
 }); });
-exports.default = authHandler;
-//# sourceMappingURL=authHandler.js.map
+exports.handleAdmin = handleAdmin;
+//# sourceMappingURL=adminHandler.js.map
