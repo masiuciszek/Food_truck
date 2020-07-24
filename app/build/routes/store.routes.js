@@ -18,11 +18,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 var storeController = __importStar(require("../controllers/store.controller"));
 var express_1 = require("express");
+var authHandler_1 = __importDefault(require("../middleware/authHandler"));
+var adminHandler_1 = require("../middleware/adminHandler");
 var router = express_1.Router();
 exports.router = router;
-router.route("/create_new_store").post(storeController.createStore);
+router
+    .route("/create_new_store")
+    .post(authHandler_1.default, adminHandler_1.handleAdmin, storeController.createStore);
+router
+    .route("/user/my_stores")
+    .get(authHandler_1.default, adminHandler_1.handleAdmin, storeController.myStores);
 //# sourceMappingURL=store.routes.js.map

@@ -45,6 +45,7 @@ var error_1 = require("./middleware/error");
 var auth_route_1 = require("./routes/auth.route");
 var user_routes_1 = require("./routes/user.routes");
 var master_routes_1 = require("./routes/master.routes");
+var store_routes_1 = require("./routes/store.routes");
 var app = express_1.default();
 var port = process.env.PORT || 4000;
 (function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -58,9 +59,10 @@ var port = process.env.PORT || 4000;
     });
 }); })();
 app.use(express_1.default.json());
-app.use('/auth', auth_route_1.router);
-app.use('/user', user_routes_1.router);
-app.use('/master', master_routes_1.router);
+app.use("/auth", auth_route_1.router);
+app.use("/user", user_routes_1.router);
+app.use("/master", master_routes_1.router);
+app.use("/store", store_routes_1.router);
 app.use(error_1.errorHandler);
 app.listen(port, function () {
     console.log("port is on localhost " + port);

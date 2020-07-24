@@ -39,17 +39,68 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createStore = void 0;
+exports.updateMyStore = exports.mySingleStore = exports.myStores = exports.createStore = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
+var Store_1 = require("../models/Store");
 /**
  * @method --- POST
  * @access --- Private
  * @route --- store/create_new_store
  * @desc Must be a amin to create a store
  */
-exports.createStore = asyncHandler_1.default(function (req, req, next) { return __awaiter(void 0, void 0, void 0, function () {
+exports.createStore = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var newStore;
     return __generator(this, function (_a) {
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                req.body.owner = req.user._id;
+                return [4 /*yield*/, Store_1.Store.create(req.body)];
+            case 1:
+                newStore = _a.sent();
+                res
+                    .status(201)
+                    .json({ success: true, msg: "store created", data: newStore });
+                return [2 /*return*/];
+        }
     });
 }); });
+/**
+ * @method --- GET
+ * @access --- Private
+ * @route --- store/user/my_stores
+ * @desc Get all of my stores
+ */
+exports.myStores = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var stores;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Store_1.Store.find({}).populate({
+                    path: "owner",
+                    select: "firstName lastName email",
+                })];
+            case 1:
+                stores = _a.sent();
+                res.status(201).json({ success: true, msg: "my stores", data: stores });
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- GET
+ * @access --- Private
+ * @route --- store/user/my_store/:id
+ * @desc Get A Single Store
+ */
+exports.mySingleStore = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    return [2 /*return*/];
+}); }); });
+/**
+ * @method --- PUT
+ * @access --- Private
+ * @route --- store/user/update/:id
+ * @desc Update A Single Store
+ */
+exports.updateMyStore = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    return [2 /*return*/];
+}); }); });
 //# sourceMappingURL=store.controller.js.map

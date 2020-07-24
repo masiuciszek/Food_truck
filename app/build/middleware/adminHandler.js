@@ -42,11 +42,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleAdmin = void 0;
 var asyncHandler_1 = __importDefault(require("./asyncHandler"));
 var handleAdmin = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var isAdmin;
+    var isAdmin, isMaster;
     return __generator(this, function (_a) {
         isAdmin = req.user.role === "ADMIN";
+        isMaster = req.user.role === "MASTER";
         if (!isAdmin) {
-            throw new Error("You are not the master");
+            throw new Error("You are no access to this route");
         }
         next();
         return [2 /*return*/];

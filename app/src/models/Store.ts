@@ -16,7 +16,9 @@ const StoreSchema = new Schema<Store>({
   },
   type: {
     type: String,
-    required: ["please enter a store name ", true],
+    enum: ["FRIENDLY", "LOVELY", "FAMILY", "SPORTS_FAN"],
+    default: "FRIENDLY",
+    // required: ["please enter a store name ", true],
   },
   createdAt: {
     type: Date,
@@ -24,7 +26,7 @@ const StoreSchema = new Schema<Store>({
   },
 });
 
-const store = mongoose.model<Store>("Store", StoreSchema);
+const Store = mongoose.model<Store>("Store", StoreSchema);
 
 // for creating slug when created
 StoreSchema.pre<Store>("save", function (next: NextFunction): void {
@@ -33,4 +35,4 @@ StoreSchema.pre<Store>("save", function (next: NextFunction): void {
   next();
 });
 
-export { store };
+export { Store };

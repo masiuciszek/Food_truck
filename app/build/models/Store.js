@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.store = void 0;
+exports.Store = void 0;
 var mongoose_1 = __importStar(require("mongoose"));
 var slugify_1 = __importDefault(require("slugify"));
 var StoreSchema = new mongoose_1.Schema({
@@ -38,15 +38,16 @@ var StoreSchema = new mongoose_1.Schema({
     },
     type: {
         type: String,
-        required: ["please enter a store name ", true],
+        enum: ["FRIENDLY", "LOVELY", "FAMILY", "SPORTS_FAN"],
+        default: "FRIENDLY",
     },
     createdAt: {
         type: Date,
         default: Date.now,
     },
 });
-var store = mongoose_1.default.model("Store", StoreSchema);
-exports.store = store;
+var Store = mongoose_1.default.model("Store", StoreSchema);
+exports.Store = Store;
 // for creating slug when created
 StoreSchema.pre("save", function (next) {
     var store = this;
