@@ -6,6 +6,9 @@ const router = Router();
 
 router.route('/me').get(authHandler, userController.getMe);
 
+router.route('/me/update').put(authHandler, userController.updateMe);
+router.route('/me/remove').delete(authHandler, userController.removeMe);
+
 router.route('/register').post(userController.registerUser);
 
 export { router };

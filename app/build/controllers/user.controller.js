@@ -39,9 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMe = exports.registerUser = void 0;
+exports.removeMe = exports.updateMe = exports.getMe = exports.registerUser = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
 var User_1 = require("../models/User");
+var errorResponse_1 = require("../utils/errorResponse");
 /**
  * @method --- POST
  * @access --- Public
@@ -66,7 +67,7 @@ exports.registerUser = asyncHandler_1.default(function (req, res, next) { return
 }); });
 /**
  * @method --- GET
- * @desc --- GET user by id
+ * @desc --- get user profile
  * @access --- Private
  * @route --- user/me
  */
@@ -74,10 +75,67 @@ exports.getMe = asyncHandler_1.default(function (req, res, next) { return __awai
     var user;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id).select('')];
+            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id).select('-password -tokens')];
             case 1:
                 user = _a.sent();
                 res.status(200).json({ success: true, msg: 'Get me', data: user });
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- PUT
+ * @desc --- update user profile
+ * @access --- Private
+ * @route --- user/me/update
+ */
+exports.updateMe = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id)];
+            case 1:
+                user = _a.sent();
+                if (!user) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('User not found', 404))];
+                }
+                return [4 /*yield*/, User_1.userModel.findByIdAndUpdate(req.user._id, req.body, {
+                        new: true,
+                        runValidators: true,
+                    })];
+            case 2:
+                user = _a.sent();
+                res.status(201).json({
+                    success: true,
+                    msg: (user === null || user === void 0 ? void 0 : user.firstName) + " got updated!",
+                    data: user,
+                });
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- Delete
+ * @desc --- remove user profile
+ * @access --- Private
+ * @route --- user/me/remove
+ */
+exports.removeMe = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id)];
+            case 1:
+                user = _a.sent();
+                if (!user) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('User not found', 404))];
+                }
+                return [4 /*yield*/, User_1.userModel.findByIdAndRemove(req.user._id)];
+            case 2:
+                _a.sent();
+                res
+                    .status(200)
+                    .json({ success: true, msg: user.firstName + " got removed", data: {} });
                 return [2 /*return*/];
         }
     });
