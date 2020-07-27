@@ -63,6 +63,7 @@ var mongoose_1 = __importStar(require("mongoose"));
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var crypto_1 = __importDefault(require("crypto"));
+require("dotenv/config");
 var UserSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
@@ -146,7 +147,7 @@ UserSchema.methods.generateAuthToken = function () {
             switch (_a.label) {
                 case 0:
                     user = this;
-                    token = jsonwebtoken_1.default.sign({ id: user._id, role: user.role }, "secret", {
+                    token = jsonwebtoken_1.default.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
                         expiresIn: "3h",
                     });
                     user.tokens = user.tokens.concat({ token: token });

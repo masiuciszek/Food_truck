@@ -40,14 +40,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
-var mongoUri = 'mongodb://127.0.0.1:27017/food_truck';
+require("dotenv/config");
 var connectDb = function () { return __awaiter(void 0, void 0, void 0, function () {
     var err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, mongoose_1.default.connect(mongoUri, {
+                return [4 /*yield*/, mongoose_1.default.connect(process.env.MONGO_URI, {
                         useNewUrlParser: true,
                         useCreateIndex: true,
                         useFindAndModify: false,
@@ -59,7 +59,7 @@ var connectDb = function () { return __awaiter(void 0, void 0, void 0, function 
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                console.error(err_1, ' Db error');
+                console.error(err_1, " Db error");
                 process.exit(1);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];

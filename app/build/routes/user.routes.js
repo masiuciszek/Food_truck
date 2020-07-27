@@ -33,6 +33,7 @@ router.route("/me/update").put(authHandler_1.default, userController.updateMe);
 router
     .route("/me/update_password")
     .post(authHandler_1.default, userController.updatePassword);
+router.route("/me/forgot_password").post(userController.forgotPassword);
 router.route("/me/remove").delete(authHandler_1.default, userController.removeMe);
 router.route("/register").post(userController.registerUser);
 //# sourceMappingURL=user.routes.js.map

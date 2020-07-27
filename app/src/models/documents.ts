@@ -19,8 +19,8 @@ export interface User extends Document {
   role: Role;
   age: number;
   tokens: Token[];
-  resetPasswordToken: string;
-  resetPasswordExpire: number;
+  resetPasswordToken: string | undefined;
+  resetPasswordExpire: number | undefined;
   createdAt: Date;
   generateAuthToken: () => Promise<string>;
   comparePassword: (password: string) => Promise<boolean>;

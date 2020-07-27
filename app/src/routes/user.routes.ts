@@ -12,6 +12,8 @@ router
   .route("/me/update_password")
   .post(authHandler, userController.updatePassword);
 
+router.route("/me/forgot_password").post(userController.forgotPassword);
+
 router.route("/me/remove").delete(authHandler, userController.removeMe);
 
 router.route("/register").post(userController.registerUser);

@@ -5,6 +5,8 @@ import { User as UserType } from "../models/documents";
 import { userModel as User } from "../models/User";
 import { ErrorResponse } from "../utils/errorResponse";
 import { jsonResponse } from "../utils/helpers";
+import { sendEmail } from "../utils/sendEmail";
+import "dotenv/config";
 
 /**
  * @method --- POST
@@ -99,11 +101,52 @@ export const updatePassword = asyncHandler(
  * @route --- user/me/forgot_password
  */
 
+export const forgotPassword = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      return next(new ErrorResponse("No user with this email", 404));
+    }
+
+    // console.log(req.protocol);  // http
+
+    // get the reset token
+    const resetToken = user.getResetPasswordToken();
+    await user.save({ validateBeforeSave: false });
+
+    // Create reset url
+    // info for the user what to do next
+    const resetUrl = `${req.protocol}://${req.get(
+      "host",
+    )}user/me/resetpassword/${resetToken}`;
+
+    const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
+
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: "Password reset token",
+        message,
+      });
+      jsonResponse<{}>(res, 200, true, "email sent", {});
+    } catch (err) {
+      console.error(err);
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+
+      await user.save({ validateBeforeSave: false });
+
+      return next(new ErrorResponse("Email could not be sent", 500));
+    }
+  },
+);
+
 /**
  * @method --- POST
  * @desc --- reset password
  * @access --- Public
- * @route --- user/me/reset_password/:resetPasswordToken
+ * @route --- user/me/resetpassword/:resetPasswordToken
  */
 
 /**

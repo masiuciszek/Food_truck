@@ -1,9 +1,10 @@
-import { NextFunction, Request } from 'express';
-import asyncHandler from './asyncHandler';
-import jwt from 'jsonwebtoken';
-import { Gender, User, Token } from '../models/documents';
-import { ErrorResponse } from '../utils/errorResponse';
-import { userModel as UserModel } from '../models/User';
+import { NextFunction, Request } from "express";
+import asyncHandler from "./asyncHandler";
+import jwt from "jsonwebtoken";
+import { Gender, User, Token } from "../models/documents";
+import { ErrorResponse } from "../utils/errorResponse";
+import { userModel as UserModel } from "../models/User";
+import "dotenv/config";
 
 export interface AuthRequest extends Request {
   user: User;
@@ -25,26 +26,26 @@ const authHandler = asyncHandler(
 
     if (
       req.headers.authorization &&
-      req.headers.authorization.startsWith('Bearer')
+      req.headers.authorization.startsWith("Bearer")
     ) {
-      token = req.headers.authorization.split(' ')[1];
+      token = req.headers.authorization.split(" ")[1];
     } else {
-      return next(new ErrorResponse('Auth Error', 401));
+      return next(new ErrorResponse("Auth Error", 401));
     }
 
     if (!token) {
-      throw new Error('No Bearer Token');
+      throw new Error("No Bearer Token");
     }
 
-    const decoded: D = jwt.verify(token, 'secret');
+    const decoded: D = jwt.verify(token, process.env.JWT_SECRET!);
     console.log(decoded);
     const user = await UserModel.findOne({
       _id: decoded.id,
-      'tokens.token': token,
+      "tokens.token": token,
     });
 
     if (!user) {
-      throw new Error('Not Authorized');
+      throw new Error("Not Authorized");
     }
 
     req.user = user;

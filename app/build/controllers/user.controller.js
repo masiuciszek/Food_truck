@@ -39,11 +39,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeMe = exports.updatePassword = exports.updateMe = exports.getMe = exports.registerUser = void 0;
+exports.removeMe = exports.forgotPassword = exports.updatePassword = exports.updateMe = exports.getMe = exports.registerUser = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
 var User_1 = require("../models/User");
 var errorResponse_1 = require("../utils/errorResponse");
 var helpers_1 = require("../utils/helpers");
+var sendEmail_1 = require("../utils/sendEmail");
+require("dotenv/config");
 /**
  * @method --- POST
  * @access --- Public
@@ -148,11 +150,52 @@ exports.updatePassword = asyncHandler_1.default(function (req, res, next) { retu
  * @access --- Public
  * @route --- user/me/forgot_password
  */
+exports.forgotPassword = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, resetToken, resetUrl, message, err_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, User_1.userModel.findOne({ email: req.body.email })];
+            case 1:
+                user = _a.sent();
+                if (!user) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("No user with this email", 404))];
+                }
+                resetToken = user.getResetPasswordToken();
+                return [4 /*yield*/, user.save({ validateBeforeSave: false })];
+            case 2:
+                _a.sent();
+                resetUrl = req.protocol + "://" + req.get("host") + "user/me/resetpassword/" + resetToken;
+                message = "You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n " + resetUrl;
+                _a.label = 3;
+            case 3:
+                _a.trys.push([3, 5, , 7]);
+                return [4 /*yield*/, sendEmail_1.sendEmail({
+                        email: user.email,
+                        subject: "Password reset token",
+                        message: message,
+                    })];
+            case 4:
+                _a.sent();
+                helpers_1.jsonResponse(res, 200, true, "email sent", {});
+                return [3 /*break*/, 7];
+            case 5:
+                err_1 = _a.sent();
+                console.error(err_1);
+                user.resetPasswordToken = undefined;
+                user.resetPasswordExpire = undefined;
+                return [4 /*yield*/, user.save({ validateBeforeSave: false })];
+            case 6:
+                _a.sent();
+                return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Email could not be sent", 500))];
+            case 7: return [2 /*return*/];
+        }
+    });
+}); });
 /**
  * @method --- POST
  * @desc --- reset password
  * @access --- Public
- * @route --- user/me/reset_password/:resetPasswordToken
+ * @route --- user/me/resetpassword/:resetPasswordToken
  */
 /**
  * @method --- Delete
