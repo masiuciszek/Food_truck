@@ -62,6 +62,7 @@ exports.userModel = void 0;
 var mongoose_1 = __importStar(require("mongoose"));
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var crypto_1 = __importDefault(require("crypto"));
 var UserSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
@@ -104,12 +105,15 @@ var UserSchema = new mongoose_1.Schema({
             },
         },
     ],
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
     createdAt: {
         type: Date,
         default: Date.now,
     },
 });
 // Middleware that is binned tou our user schema
+// Encrypt password
 // Hash password before registered
 UserSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function () {
@@ -168,6 +172,15 @@ UserSchema.methods.comparePassword = function (password) {
             }
         });
     });
+};
+UserSchema.methods.getResetPasswordToken = function () {
+    var resetToken = crypto_1.default.randomBytes(20).toString("hex");
+    this.resetPasswordToken = crypto_1.default
+        .createHash("sha256")
+        .update(resetToken)
+        .digest("hex");
+    this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+    return resetToken;
 };
 var userModel = mongoose_1.default.model("User", UserSchema);
 exports.userModel = userModel;

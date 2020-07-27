@@ -39,10 +39,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeMe = exports.updateMe = exports.getMe = exports.registerUser = void 0;
+exports.removeMe = exports.updatePassword = exports.updateMe = exports.getMe = exports.registerUser = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
 var User_1 = require("../models/User");
 var errorResponse_1 = require("../utils/errorResponse");
+var helpers_1 = require("../utils/helpers");
 /**
  * @method --- POST
  * @access --- Public
@@ -61,7 +62,7 @@ exports.registerUser = asyncHandler_1.default(function (req, res, next) { return
                 token = _a.sent();
                 res
                     .status(201)
-                    .json({ success: true, msg: 'User Registered!', data: newUser, token: token });
+                    .json({ success: true, msg: "User Registered!", data: newUser, token: token });
                 return [2 /*return*/];
         }
     });
@@ -76,10 +77,10 @@ exports.getMe = asyncHandler_1.default(function (req, res, next) { return __awai
     var user;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id).select('-password -tokens')];
+            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id).select("-password -tokens")];
             case 1:
                 user = _a.sent();
-                res.status(200).json({ success: true, msg: 'Get me', data: user });
+                res.status(200).json({ success: true, msg: "Get me", data: user });
                 return [2 /*return*/];
         }
     });
@@ -98,7 +99,7 @@ exports.updateMe = asyncHandler_1.default(function (req, res, next) { return __a
             case 1:
                 user = _a.sent();
                 if (!user) {
-                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('User not found', 404))];
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("User not found", 404))];
                 }
                 return [4 /*yield*/, User_1.userModel.findByIdAndUpdate(req.user._id, req.body, {
                         new: true,
@@ -116,6 +117,44 @@ exports.updateMe = asyncHandler_1.default(function (req, res, next) { return __a
     });
 }); });
 /**
+ * @method --- POST
+ * @desc --- update password
+ * @access --- Private
+ * @route --- user/me/update_password
+ */
+exports.updatePassword = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id)];
+            case 1:
+                user = _a.sent();
+                if (!user) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("password incorrect", 404))];
+                }
+                user.password = req.body.password;
+                return [4 /*yield*/, user.save()];
+            case 2:
+                _a.sent();
+                res.status(200).json({ success: true, message: "password updated" });
+                helpers_1.jsonResponse(res, 200, true, "password updated", user);
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- POST
+ * @desc --- forgot password
+ * @access --- Public
+ * @route --- user/me/forgot_password
+ */
+/**
+ * @method --- POST
+ * @desc --- reset password
+ * @access --- Public
+ * @route --- user/me/reset_password/:resetPasswordToken
+ */
+/**
  * @method --- Delete
  * @desc --- remove user profile
  * @access --- Private
@@ -129,7 +168,7 @@ exports.removeMe = asyncHandler_1.default(function (req, res, next) { return __a
             case 1:
                 user = _a.sent();
                 if (!user) {
-                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse('User not found', 404))];
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("User not found", 404))];
                 }
                 return [4 /*yield*/, User_1.userModel.findByIdAndRemove(req.user._id)];
             case 2:

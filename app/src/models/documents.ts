@@ -19,9 +19,12 @@ export interface User extends Document {
   role: Role;
   age: number;
   tokens: Token[];
+  resetPasswordToken: string;
+  resetPasswordExpire: number;
   createdAt: Date;
   generateAuthToken: () => Promise<string>;
   comparePassword: (password: string) => Promise<boolean>;
+  getResetPasswordToken: () => string;
 }
 
 export interface Store extends Document {

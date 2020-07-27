@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 import { User } from "./documents";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 
 const UserSchema = new Schema<User>({
   firstName: {
@@ -46,7 +47,8 @@ const UserSchema = new Schema<User>({
       },
     },
   ],
-
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
   createdAt: {
     type: Date,
     default: Date.now,
@@ -54,7 +56,7 @@ const UserSchema = new Schema<User>({
 });
 
 // Middleware that is binned tou our user schema
-
+// Encrypt password
 // Hash password before registered
 UserSchema.pre<User>("save", async function (next: NextFunction) {
   const user = this;
@@ -85,6 +87,19 @@ UserSchema.methods.comparePassword = async function (
   const isMatched = await bcrypt.compare(password, user.password);
 
   return isMatched;
+};
+
+UserSchema.methods.getResetPasswordToken = function () {
+  const resetToken = crypto.randomBytes(20).toString("hex");
+
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
 };
 
 const userModel = mongoose.model<User>("User", UserSchema);

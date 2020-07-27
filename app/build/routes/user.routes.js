@@ -28,8 +28,11 @@ var express_1 = require("express");
 var authHandler_1 = __importDefault(require("../middleware/authHandler"));
 var router = express_1.Router();
 exports.router = router;
-router.route('/me').get(authHandler_1.default, userController.getMe);
-router.route('/me/update').put(authHandler_1.default, userController.updateMe);
-router.route('/me/remove').delete(authHandler_1.default, userController.removeMe);
-router.route('/register').post(userController.registerUser);
+router.route("/me").get(authHandler_1.default, userController.getMe);
+router.route("/me/update").put(authHandler_1.default, userController.updateMe);
+router
+    .route("/me/update_password")
+    .post(authHandler_1.default, userController.updatePassword);
+router.route("/me/remove").delete(authHandler_1.default, userController.removeMe);
+router.route("/register").post(userController.registerUser);
 //# sourceMappingURL=user.routes.js.map

@@ -1,8 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
-import asyncHandler from '../middleware/asyncHandler';
-import { AuthRequest } from '../middleware/authHandler';
-import { userModel as User } from '../models/User';
-import { ErrorResponse } from '../utils/errorResponse';
+import { NextFunction, Request, Response } from "express";
+import asyncHandler from "../middleware/asyncHandler";
+import { AuthRequest } from "../middleware/authHandler";
+import { User as UserType } from "../models/documents";
+import { userModel as User } from "../models/User";
+import { ErrorResponse } from "../utils/errorResponse";
+import { jsonResponse } from "../utils/helpers";
 
 /**
  * @method --- POST
@@ -20,7 +22,7 @@ export const registerUser = asyncHandler(
 
     res
       .status(201)
-      .json({ success: true, msg: 'User Registered!', data: newUser, token });
+      .json({ success: true, msg: "User Registered!", data: newUser, token });
   },
 );
 
@@ -33,8 +35,8 @@ export const registerUser = asyncHandler(
 
 export const getMe = asyncHandler(
   async (req: AuthRequest, res: Response, next: NextFunction) => {
-    const user = await User.findById(req.user._id).select('-password -tokens');
-    res.status(200).json({ success: true, msg: 'Get me', data: user });
+    const user = await User.findById(req.user._id).select("-password -tokens");
+    res.status(200).json({ success: true, msg: "Get me", data: user });
   },
 );
 
@@ -50,7 +52,7 @@ export const updateMe = asyncHandler(
     let user = await User.findById(req.user._id);
 
     if (!user) {
-      return next(new ErrorResponse('User not found', 404));
+      return next(new ErrorResponse("User not found", 404));
     }
 
     user = await User.findByIdAndUpdate(req.user._id, req.body, {
@@ -67,6 +69,44 @@ export const updateMe = asyncHandler(
 );
 
 /**
+ * @method --- POST
+ * @desc --- update password
+ * @access --- Private
+ * @route --- user/me/update_password
+ */
+
+export const updatePassword = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return next(new ErrorResponse(`password incorrect`, 404));
+    }
+
+    user.password = req.body.password;
+    await user.save();
+
+    res.status(200).json({ success: true, message: "password updated" });
+
+    jsonResponse<UserType>(res, 200, true, "password updated", user);
+  },
+);
+
+/**
+ * @method --- POST
+ * @desc --- forgot password
+ * @access --- Public
+ * @route --- user/me/forgot_password
+ */
+
+/**
+ * @method --- POST
+ * @desc --- reset password
+ * @access --- Public
+ * @route --- user/me/reset_password/:resetPasswordToken
+ */
+
+/**
  * @method --- Delete
  * @desc --- remove user profile
  * @access --- Private
@@ -78,7 +118,7 @@ export const removeMe = asyncHandler(
     let user = await User.findById(req.user._id);
 
     if (!user) {
-      return next(new ErrorResponse('User not found', 404));
+      return next(new ErrorResponse("User not found", 404));
     }
 
     await User.findByIdAndRemove(req.user._id);
