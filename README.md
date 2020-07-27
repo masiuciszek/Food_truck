@@ -3,6 +3,8 @@
 Application focused on the backend , using express and typescript.
 Mongodb as database and using NEXT JS for servers side rendering the UI.
 
+This is just production application for own case, nothing that will be in production. That's why some error messages that I handle is there for a special purpose. Just to understand the code on what's going on. I know that in a real case you would have write in a more a anonymous way. 🧛‍♂️
+
 ## App
 
 is just the backend server , with all different end points end middleware
@@ -26,15 +28,9 @@ Is the same but built with a custom server together with Next JS.
 
 ## Endpoints 🅰🅿🅸
 
-#### users
+**USERS** 👩🏻‍💻
 
 ```ts
-import { NextFunction, Request, Response } from "express";
-import asyncHandler from "../middleware/asyncHandler";
-import { AuthRequest } from "../middleware/authHandler";
-import { userModel as User } from "../models/User";
-import { ErrorResponse } from "../utils/errorResponse";
-
 /**
  * @method --- POST
  * @access --- Public
