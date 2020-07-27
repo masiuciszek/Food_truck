@@ -60,7 +60,6 @@ var authHandler = asyncHandler_1.default(function (req, res, next) { return __aw
                     throw new Error("No Bearer Token");
                 }
                 decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-                console.log(decoded);
                 return [4 /*yield*/, User_1.userModel.findOne({
                         _id: decoded.id,
                         "tokens.token": token,

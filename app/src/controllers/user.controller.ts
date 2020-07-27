@@ -6,6 +6,8 @@ import { userModel as User } from "../models/User";
 import { ErrorResponse } from "../utils/errorResponse";
 import { jsonResponse } from "../utils/helpers";
 import { sendEmail } from "../utils/sendEmail";
+import sharp from "sharp";
+import crypto from "crypto";
 import "dotenv/config";
 
 /**
@@ -146,8 +148,61 @@ export const forgotPassword = asyncHandler(
  * @method --- POST
  * @desc --- reset password
  * @access --- Public
- * @route --- user/me/resetpassword/:resetPasswordToken
+ * @route --- user/me/resetpassword/:resettoken
  */
+
+export const resetPassword = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const resetPasswordToken = crypto
+      .createHash("sha256")
+      .update(req.params.resettoken)
+      .digest("hex");
+
+    console.log(resetPasswordToken);
+
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+    if (!user) {
+      return next(new ErrorResponse("Invalid token", 400));
+    }
+
+    user.password = req.body.password;
+    // when user is done
+    // then clear the resetPasswordToken property on the schema
+    // and resetPasswordExpire
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+
+    jsonResponse<UserType>(res, 200, true, "new password", user);
+  },
+);
+
+/**
+ * @method --- POST
+ * @desc --- Upload avatar
+ * @access --- Private
+ * @route --- user/me/avatar
+ */
+
+export const uploadAvatar = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    // console.log(req.file);
+
+    // console.log("hello");
+    const resizeBufferImage = await sharp(req.file.buffer)
+      .resize({ width: 250, height: 250 })
+      .png()
+      .toBuffer();
+
+    req.user.avatar = resizeBufferImage;
+    await req.user.save();
+
+    jsonResponse(res, 201, true, "uploaded avatar", {});
+  },
+);
 
 /**
  * @method --- Delete
@@ -166,8 +221,6 @@ export const removeMe = asyncHandler(
 
     await User.findByIdAndRemove(req.user._id);
 
-    res
-      .status(200)
-      .json({ success: true, msg: `${user.firstName} got removed`, data: {} });
+    jsonResponse(res, 200, true, `${user.firstName} got removed`, {});
   },
 );

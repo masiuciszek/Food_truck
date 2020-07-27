@@ -26,6 +26,7 @@ exports.router = void 0;
 var userController = __importStar(require("../controllers/user.controller"));
 var express_1 = require("express");
 var authHandler_1 = __importDefault(require("../middleware/authHandler"));
+var imgUpload_1 = require("../utils/imgUpload");
 var router = express_1.Router();
 exports.router = router;
 router.route("/me").get(authHandler_1.default, userController.getMe);
@@ -34,6 +35,12 @@ router
     .route("/me/update_password")
     .post(authHandler_1.default, userController.updatePassword);
 router.route("/me/forgot_password").post(userController.forgotPassword);
+router
+    .route("/me/resetpassword/:resettoken")
+    .post(userController.resetPassword);
+router
+    .route("/me/avatar")
+    .post(imgUpload_1.upload.single("avatar"), authHandler_1.default, userController.uploadAvatar);
 router.route("/me/remove").delete(authHandler_1.default, userController.removeMe);
 router.route("/register").post(userController.registerUser);
 //# sourceMappingURL=user.routes.js.map

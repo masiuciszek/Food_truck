@@ -39,12 +39,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeMe = exports.forgotPassword = exports.updatePassword = exports.updateMe = exports.getMe = exports.registerUser = void 0;
+exports.removeMe = exports.uploadAvatar = exports.resetPassword = exports.forgotPassword = exports.updatePassword = exports.updateMe = exports.getMe = exports.registerUser = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
 var User_1 = require("../models/User");
 var errorResponse_1 = require("../utils/errorResponse");
 var helpers_1 = require("../utils/helpers");
 var sendEmail_1 = require("../utils/sendEmail");
+var sharp_1 = __importDefault(require("sharp"));
+var crypto_1 = __importDefault(require("crypto"));
 require("dotenv/config");
 /**
  * @method --- POST
@@ -195,8 +197,66 @@ exports.forgotPassword = asyncHandler_1.default(function (req, res, next) { retu
  * @method --- POST
  * @desc --- reset password
  * @access --- Public
- * @route --- user/me/resetpassword/:resetPasswordToken
+ * @route --- user/me/resetpassword/:resettoken
  */
+exports.resetPassword = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var resetPasswordToken, user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                resetPasswordToken = crypto_1.default
+                    .createHash("sha256")
+                    .update(req.params.resettoken)
+                    .digest("hex");
+                console.log(resetPasswordToken);
+                return [4 /*yield*/, User_1.userModel.findOne({
+                        resetPasswordToken: resetPasswordToken,
+                        resetPasswordExpire: { $gt: Date.now() },
+                    })];
+            case 1:
+                user = _a.sent();
+                if (!user) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Invalid token", 400))];
+                }
+                user.password = req.body.password;
+                // when user is done
+                // then clear the resetPasswordToken property on the schema
+                // and resetPasswordExpire
+                user.resetPasswordToken = undefined;
+                user.resetPasswordExpire = undefined;
+                return [4 /*yield*/, user.save()];
+            case 2:
+                _a.sent();
+                helpers_1.jsonResponse(res, 200, true, "new password", user);
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- POST
+ * @desc --- Upload avatar
+ * @access --- Private
+ * @route --- user/me/avatar
+ */
+exports.uploadAvatar = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var resizeBufferImage;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, sharp_1.default(req.file.buffer)
+                    .resize({ width: 250, height: 250 })
+                    .png()
+                    .toBuffer()];
+            case 1:
+                resizeBufferImage = _a.sent();
+                req.user.avatar = resizeBufferImage;
+                return [4 /*yield*/, req.user.save()];
+            case 2:
+                _a.sent();
+                helpers_1.jsonResponse(res, 201, true, "uploaded avatar", {});
+                return [2 /*return*/];
+        }
+    });
+}); });
 /**
  * @method --- Delete
  * @desc --- remove user profile
@@ -216,9 +276,7 @@ exports.removeMe = asyncHandler_1.default(function (req, res, next) { return __a
                 return [4 /*yield*/, User_1.userModel.findByIdAndRemove(req.user._id)];
             case 2:
                 _a.sent();
-                res
-                    .status(200)
-                    .json({ success: true, msg: user.firstName + " got removed", data: {} });
+                helpers_1.jsonResponse(res, 200, true, user.firstName + " got removed", {});
                 return [2 /*return*/];
         }
     });

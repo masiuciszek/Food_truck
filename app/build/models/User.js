@@ -98,6 +98,9 @@ var UserSchema = new mongoose_1.Schema({
         min: 18,
         required: ["pleas fill in your age", true],
     },
+    avatar: {
+        type: Buffer,
+    },
     tokens: [
         {
             token: {

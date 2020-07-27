@@ -11,14 +11,14 @@ export interface AuthRequest extends Request {
   token?: string;
 }
 
-interface Decoded extends Object {
+interface Decoded {
   id: string;
   role: Gender;
   iat: number;
   exp: number;
 }
 
-type D = Decoded | Object;
+type D = Decoded;
 
 const authHandler = asyncHandler(
   async (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -37,8 +37,8 @@ const authHandler = asyncHandler(
       throw new Error("No Bearer Token");
     }
 
-    const decoded: D = jwt.verify(token, process.env.JWT_SECRET!);
-    console.log(decoded);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+
     const user = await UserModel.findOne({
       _id: decoded.id,
       "tokens.token": token,
