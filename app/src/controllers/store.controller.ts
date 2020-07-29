@@ -77,7 +77,24 @@ export const mySingleStore = asyncHandler(
  * @desc Update My Single Store
  */
 export const updateMyStore = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {},
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    let store = await Store.findById(req.params.id);
+    if (!store) {
+      return next(
+        new ErrorResponse(`Store with id ${req.params.id} was not found`, 404),
+      );
+    }
+    if (store.owner.toString() !== req.user.id) {
+      return next(new ErrorResponse(`User ${req.user.id} has no access`, 404));
+    }
+
+    store = await Store.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    jsonResponse(res, 200, true, "updated store", store);
+  },
 );
 
 /**

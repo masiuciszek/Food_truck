@@ -17,4 +17,8 @@ router
   .route("/user/my_store/:id")
   .get(authHandler, storeController.mySingleStore);
 
+router
+  .route("/user/update/:id")
+  .put(authHandler, storeController.updateMyStore);
+
 export { router };
