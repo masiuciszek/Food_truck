@@ -59,3 +59,13 @@ export const mySingleStore = asyncHandler(
 export const updateMyStore = asyncHandler(
   async (req: AuthRequest, res: Response, next: NextFunction) => {},
 );
+
+/**
+ * @method --- POST
+ * @access --- Private
+ * @route --- store/user/my_store/image/:id
+ * @desc Upload image
+ */
+export const uploadStoreImage = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {},
+);

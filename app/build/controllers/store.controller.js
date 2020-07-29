@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateMyStore = exports.mySingleStore = exports.myStores = exports.createStore = void 0;
+exports.uploadStoreImage = exports.updateMyStore = exports.mySingleStore = exports.myStores = exports.createStore = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
 var Store_1 = require("../models/Store");
 /**
@@ -101,6 +101,15 @@ exports.mySingleStore = asyncHandler_1.default(function (req, res, next) { retur
  * @desc Update A Single Store
  */
 exports.updateMyStore = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    return [2 /*return*/];
+}); }); });
+/**
+ * @method --- POST
+ * @access --- Private
+ * @route --- store/user/my_store/image/:id
+ * @desc Upload image
+ */
+exports.uploadStoreImage = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
     return [2 /*return*/];
 }); }); });
 //# sourceMappingURL=store.controller.js.map

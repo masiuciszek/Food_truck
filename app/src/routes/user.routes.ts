@@ -24,6 +24,12 @@ router
   .route("/me/avatar")
   .post(upload.single("avatar"), authHandler, userController.uploadAvatar);
 
+router.route("/me/get_avatar").get(authHandler, userController.getAvatar);
+
+router
+  .route("/me/remove_avatar")
+  .delete(authHandler, userController.deleteAvatar);
+
 router.route("/me/remove").delete(authHandler, userController.removeMe);
 
 router.route("/register").post(userController.registerUser);

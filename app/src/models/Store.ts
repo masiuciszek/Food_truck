@@ -18,7 +18,9 @@ const StoreSchema = new Schema<Store>({
     type: String,
     enum: ["FRIENDLY", "LOVELY", "FAMILY", "SPORTS_FAN"],
     default: "FRIENDLY",
-    // required: ["please enter a store name ", true],
+  },
+  image: {
+    type: Buffer,
   },
   createdAt: {
     type: Date,

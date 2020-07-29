@@ -189,9 +189,6 @@ export const resetPassword = asyncHandler(
 
 export const uploadAvatar = asyncHandler(
   async (req: AuthRequest, res: Response, next: NextFunction) => {
-    // console.log(req.file);
-
-    // console.log("hello");
     const resizeBufferImage = await sharp(req.file.buffer)
       .resize({ width: 250, height: 250 })
       .png()
@@ -201,6 +198,49 @@ export const uploadAvatar = asyncHandler(
     await req.user.save();
 
     jsonResponse(res, 201, true, "uploaded avatar", {});
+  },
+);
+
+/**
+ * @method --- GET
+ * @desc --- Get avatar
+ * @access --- Private
+ * @route --- user/me/get_avatar
+ */
+
+export const getAvatar = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return next(new ErrorResponse(`no user founded`, 404));
+    }
+
+    // res.set("Content-Type", "image/png");
+    res.set("Content-Type", "image/png");
+    res.status(200).send(user.avatar);
+    // jsonResponse(res, 201, true, "uploaded avatar", user.avatar);
+  },
+);
+
+/**
+ * @method --- DELETE
+ * @desc --- Delete avatar
+ * @access --- Private
+ * @route --- user/me/remove_avatar
+ */
+
+export const deleteAvatar = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return next(new ErrorResponse(`no user founded`, 404));
+    }
+
+    req.user.avatar = undefined;
+    await req.user.save();
+
+    jsonResponse(res, 200, true, "avatar deleted", {});
   },
 );
 

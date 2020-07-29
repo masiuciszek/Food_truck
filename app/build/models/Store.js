@@ -41,6 +41,9 @@ var StoreSchema = new mongoose_1.Schema({
         enum: ["FRIENDLY", "LOVELY", "FAMILY", "SPORTS_FAN"],
         default: "FRIENDLY",
     },
+    image: {
+        type: Buffer,
+    },
     createdAt: {
         type: Date,
         default: Date.now,

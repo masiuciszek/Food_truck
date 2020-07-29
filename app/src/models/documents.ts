@@ -33,5 +33,6 @@ export interface Store extends Document {
   slug: string;
   owner: User;
   type: StoreType;
+  image: Buffer | undefined;
   createdAt: Date;
 }

@@ -41,6 +41,10 @@ router
 router
     .route("/me/avatar")
     .post(imgUpload_1.upload.single("avatar"), authHandler_1.default, userController.uploadAvatar);
+router.route("/me/get_avatar").get(authHandler_1.default, userController.getAvatar);
+router
+    .route("/me/remove_avatar")
+    .delete(authHandler_1.default, userController.deleteAvatar);
 router.route("/me/remove").delete(authHandler_1.default, userController.removeMe);
 router.route("/register").post(userController.registerUser);
 //# sourceMappingURL=user.routes.js.map

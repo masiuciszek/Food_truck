@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeMe = exports.uploadAvatar = exports.resetPassword = exports.forgotPassword = exports.updatePassword = exports.updateMe = exports.getMe = exports.registerUser = void 0;
+exports.removeMe = exports.deleteAvatar = exports.getAvatar = exports.uploadAvatar = exports.resetPassword = exports.forgotPassword = exports.updatePassword = exports.updateMe = exports.getMe = exports.registerUser = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
 var User_1 = require("../models/User");
 var errorResponse_1 = require("../utils/errorResponse");
@@ -253,6 +253,54 @@ exports.uploadAvatar = asyncHandler_1.default(function (req, res, next) { return
             case 2:
                 _a.sent();
                 helpers_1.jsonResponse(res, 201, true, "uploaded avatar", {});
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- GET
+ * @desc --- Get avatar
+ * @access --- Private
+ * @route --- user/me/get_avatar
+ */
+exports.getAvatar = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id)];
+            case 1:
+                user = _a.sent();
+                if (!user) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("no user founded", 404))];
+                }
+                // res.set("Content-Type", "image/png");
+                res.set("Content-Type", "image/png");
+                res.status(200).send(user.avatar);
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- DELETE
+ * @desc --- Delete avatar
+ * @access --- Private
+ * @route --- user/me/remove_avatar
+ */
+exports.deleteAvatar = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id)];
+            case 1:
+                user = _a.sent();
+                if (!user) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("no user founded", 404))];
+                }
+                req.user.avatar = undefined;
+                return [4 /*yield*/, req.user.save()];
+            case 2:
+                _a.sent();
+                helpers_1.jsonResponse(res, 200, true, "avatar deleted", {});
                 return [2 /*return*/];
         }
     });
