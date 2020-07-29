@@ -1,5 +1,10 @@
 # Food truck App 🧄🚚λ⚛️
 
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=200px height=200px src="./server.png" alt="server logo"></a>
+</p>
+
 Application focused on the backend , using express and typescript.
 Mongodb as database and using NEXT JS for servers side rendering the UI.
 
@@ -15,22 +20,22 @@ Is the same but built with a custom server together with Next JS.
 
 ### Tools 🛠
 
-- Node JS 🥝
-- Typescript λ
-- React ⚛️
-- Next js 💥
-- Express 🚝
-- Mongoose 🐨
-- Mongo DB ᠣ
-- jsonwebtoken 🗼
-- bcryptjs ⳮ
-- Styled-components 💅🏻
+* Node JS 🥝
+* Typescript λ
+* React ⚛️
+* Next js 💥
+* Express 🚝
+* Mongoose 🐨
+* Mongo DB ᠣ
+* jsonwebtoken 🗼
+* bcryptjs ⳮ
+* Styled-components 💅🏻
 
 ## Endpoints 🅰🅿🅸
 
 **USERS** 👩🏻‍💻
 
-```ts
+``` ts
 /**
  * @method --- POST
  * @access --- Public
@@ -87,7 +92,7 @@ export const updateMe = asyncHandler(
 
     res.status(201).json({
       success: true,
-      msg: `${user?.firstName} got updated!`,
+      msg: `${user?.firstName} got updated!` ,
       data: user,
     });
   },
@@ -112,7 +117,7 @@ export const removeMe = asyncHandler(
 
     res
       .status(200)
-      .json({ success: true, msg: `${user.firstName} got removed`, data: {} });
+      .json({ success: true, msg: `${user.firstName} got removed` , data: {} });
   },
 );
 ```
