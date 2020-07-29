@@ -1,7 +1,6 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, HookNextFunction } from "mongoose";
 import { User, Store } from "./documents";
 import slugify from "slugify";
-import { NextFunction } from "express";
 
 const StoreSchema = new Schema<Store>({
   name: {
@@ -31,7 +30,7 @@ const StoreSchema = new Schema<Store>({
 const Store = mongoose.model<Store>("Store", StoreSchema);
 
 // for creating slug when created
-StoreSchema.pre<Store>("save", function (next: NextFunction): void {
+StoreSchema.pre<Store>("save", function (next: HookNextFunction): void {
   const store = this;
   store.slug = slugify(store.name, { lower: true, replacement: "-" });
   next();

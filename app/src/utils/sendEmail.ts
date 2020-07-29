@@ -1,5 +1,6 @@
-import nodemailer from "nodemailer";
+import nodemailer, { Transporter, TransportOptions } from "nodemailer";
 import "dotenv/config";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 interface Option {
   email: string;
@@ -13,11 +14,12 @@ interface Message {
   subject: string;
   text: string;
 }
-
+let host: any = process.env.SMTP_HOST!;
+let port: any = process.env.SMTP_PORT!;
 export const sendEmail = async (options: Option): Promise<void> => {
-  let transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
+  let transporter: any = nodemailer.createTransport({
+    host,
+    port,
     auth: {
       user: process.env.SMTP_USERNAME,
       pass: process.env.SMTP_PASSWORD,

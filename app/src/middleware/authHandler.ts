@@ -37,7 +37,7 @@ const authHandler = asyncHandler(
       throw new Error("No Bearer Token");
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+    const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
 
     const user = await UserModel.findOne({
       _id: decoded.id,

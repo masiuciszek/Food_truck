@@ -31,8 +31,16 @@ export interface User extends Document {
 export interface Store extends Document {
   name: string;
   slug: string;
-  owner: User;
+  owner: User["_id"];
   type: StoreType;
   image: Buffer | undefined;
   createdAt: Date;
+}
+
+export interface Review extends Document {
+  author: User["_id"];
+  store: Store["_id"];
+  createdAt: Date;
+  text: string;
+  rating: number;
 }

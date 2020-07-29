@@ -1,5 +1,4 @@
-import { NextFunction } from "express";
-import mongoose, { Schema } from "mongoose";
+import mongoose, { HookNextFunction, Schema } from "mongoose";
 import { User } from "./documents";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -62,7 +61,7 @@ const UserSchema = new Schema<User>({
 // Middleware that is binned tou our user schema
 // Encrypt password
 // Hash password before registered
-UserSchema.pre<User>("save", async function (next: NextFunction) {
+UserSchema.pre<User>("save", async function (next: HookNextFunction) {
   const user = this;
 
   const salt = await bcrypt.genSalt(8);

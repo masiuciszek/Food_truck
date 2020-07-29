@@ -13,4 +13,8 @@ router
   .route("/user/my_stores")
   .get(authHandler, handleAdmin, storeController.myStores);
 
+router
+  .route("/user/my_store/:id")
+  .get(authHandler, storeController.mySingleStore);
+
 export { router };
