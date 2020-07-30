@@ -7,7 +7,6 @@ import { handleTheme } from "src/store/page/page.actions";
 
 const TogglerStyles = styled.div`
   display: flex;
-
   flex: 1;
 `;
 

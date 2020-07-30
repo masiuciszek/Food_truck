@@ -7,6 +7,7 @@ export const lightTheme: DefaultTheme = {
     button: "#f04437",
     secondary: "#8693AD",
     background: "#fff",
+    shadowOne: "rgba(0,0,0,0.5)",
   },
   size: {
     h1: "50px",
@@ -40,6 +41,7 @@ export const darkTheme: DefaultTheme = {
     button: "#8693AD",
     secondary: "#f04437",
     background: "#212121",
+    shadowOne: "rgba(0,0,0,0.5)",
   },
   size: {
     h1: "50px",
