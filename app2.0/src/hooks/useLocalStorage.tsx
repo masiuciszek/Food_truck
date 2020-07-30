@@ -5,14 +5,13 @@ type UseLocalStorageReturnType = [
   React.Dispatch<React.SetStateAction<string>>,
 ];
 
-export default (
+function useLocalStorage(
   key: string,
   initialValue: string,
-): UseLocalStorageReturnType => {
+): UseLocalStorageReturnType {
   const item =
     typeof window === "object" ? window.localStorage.getItem(key) : null;
-
-  const [value, setValue] = React.useState(item || initialValue);
+  const [value, setValue] = React.useState<string>(item || initialValue);
 
   React.useEffect(() => {
     if (!item) {
@@ -23,4 +22,6 @@ export default (
   }, [value, key]);
 
   return [value, setValue];
-};
+}
+
+export default useLocalStorage;

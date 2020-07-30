@@ -1,6 +1,10 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
+import useLocalStorage from "src/hooks/useLocalStorage";
+import { AppState } from "src/store";
+import { selectTheme } from "src/store/page/page.selector";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
-import { lightTheme } from "utils/theme";
+import { lightTheme, darkTheme } from "utils/theme";
 import Nav from "./Nav";
 
 const StyledPage = styled.div`
@@ -57,8 +61,13 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Page: React.FC = ({ children }) => {
+  const themeState = useSelector((state: AppState) => selectTheme(state));
+
+  // if(window.localStorage)
+  console.log(themeState);
+
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={themeState === "LIGHT" ? lightTheme : darkTheme}>
       <GlobalStyles />
       <Nav className='main-nav' />
       <StyledPage>

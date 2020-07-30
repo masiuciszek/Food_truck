@@ -39,7 +39,7 @@ export const darkTheme: DefaultTheme = {
     text: "#fff",
     button: "#8693AD",
     secondary: "#f04437",
-    background: "#000",
+    background: "#212121",
   },
   size: {
     h1: "50px",
