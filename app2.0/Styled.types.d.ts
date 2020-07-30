@@ -11,6 +11,7 @@ declare module "styled-components" {
       background: string;
       secondary: string;
       button: string;
+      shadowOne: string;
     };
     size: {
       h1: string;
