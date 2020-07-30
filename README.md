@@ -1,4 +1,4 @@
-# Food truck App 🧄🚚λ⚛️
+<h1 align="center"> Food truck App 🧄🚚λ⚛️ </h1>
 
 <p align="center">
   <a href="" rel="noopener">
