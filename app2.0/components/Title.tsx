@@ -39,5 +39,6 @@ export default styled(Title)`
   ${handleFlex("column", "center", "center")};
   h1 {
     font-size: 4rem;
+    border-bottom: 2px solid ${({ theme: { colors } }) => colors.button};
   }
 `;

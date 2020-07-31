@@ -5,6 +5,7 @@ import { AppState } from "src/store";
 import { selectTheme } from "src/store/page/page.selector";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { lightTheme, darkTheme } from "utils/theme";
+import Footer from "./Footer";
 import Nav from "./Nav";
 
 const StyledPage = styled.div`
@@ -16,18 +17,15 @@ const Main = styled.main`
   max-width: ${({ theme }) => theme.size.maxWidth};
   margin: 0 auto;
   padding: 2rem;
-  /* TODO: DELETE */
-  border: 2px solid red;
 `;
 
 const GlobalStyles = createGlobalStyle`
 
-    @font-face {
-    font-family: 'Lato';
-    src: url('/public/static/font/Lato-Regular.ttf') format('ttf');
-    src: url('/public/static/font/Lato-Italic.ttf') format('ttf');
-    font-weight: italic;
-    font-style: italic;
+  @font-face {
+    font-family: 'radnika_next';
+    src: url('/static/font/radnikanext-medium-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
   }
 
   *, *:before, *:after {
@@ -45,7 +43,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     font-size: 1.5rem;
     line-height: 2;
-    font-family: 'Lato';
+    font-family: 'radnika_next';
     background: ${(props) => props.theme.colors.background};
   }
   a {
@@ -57,15 +55,12 @@ const GlobalStyles = createGlobalStyle`
     list-style: none;
   }
 
-  button {  font-family: 'Lato'; }
+  button { font-family: 'radnika_next'; font-weight: 300; }
 
 `;
 
 const Page: React.FC = ({ children }) => {
   const themeState = useSelector((state: AppState) => selectTheme(state));
-
-  // if(window.localStorage)
-  console.log(themeState);
 
   return (
     <ThemeProvider theme={themeState === "LIGHT" ? lightTheme : darkTheme}>
@@ -74,6 +69,7 @@ const Page: React.FC = ({ children }) => {
       <StyledPage>
         <Main>{children}</Main>
       </StyledPage>
+      <Footer className='main-footer' />
     </ThemeProvider>
   );
 };

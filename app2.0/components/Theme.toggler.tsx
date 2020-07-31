@@ -8,7 +8,7 @@ import LoginRegister from "./Login.register";
 
 const TogglerStyles = styled.div`
   display: flex;
-  flex: 1;
+  flex: 2;
   padding: 0.5rem 0;
 `;
 
@@ -20,7 +20,7 @@ const ThemeToggler = () => {
   return (
     <TogglerStyles>
       <LoginRegister />
-      <ToggleStyles onTheme={theme}>
+      <ToggleStyles themeProp={theme}>
         {theme === "LIGHT" ? (
           <button
             onClick={() => {
@@ -39,7 +39,7 @@ const ThemeToggler = () => {
           </button>
         )}
 
-        <Knob onTheme={theme} />
+        <Knob themeProp={theme} />
       </ToggleStyles>
     </TogglerStyles>
   );
