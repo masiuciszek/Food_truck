@@ -4,10 +4,12 @@ import useTheme from "src/hooks/useTheme";
 import { ToggleStyles, Knob } from "./styles/Toggle.switch.styles";
 import styled from "styled-components";
 import { handleTheme } from "src/store/page/page.actions";
+import LoginRegister from "./Login.register";
 
 const TogglerStyles = styled.div`
   display: flex;
   flex: 1;
+  padding: 0.5rem 0;
 `;
 
 const ThemeToggler = () => {
@@ -17,6 +19,7 @@ const ThemeToggler = () => {
 
   return (
     <TogglerStyles>
+      <LoginRegister />
       <ToggleStyles onTheme={theme}>
         {theme === "LIGHT" ? (
           <button
