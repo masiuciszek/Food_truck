@@ -25,8 +25,9 @@ const GlobalStyles = createGlobalStyle`
     @font-face {
     font-family: 'Lato';
     src: url('/public/static/font/Lato-Regular.ttf') format('ttf');
-    font-weight: normal;
-    font-style: normal;
+    src: url('/public/static/font/Lato-Italic.ttf') format('ttf');
+    font-weight: italic;
+    font-style: italic;
   }
 
   *, *:before, *:after {
