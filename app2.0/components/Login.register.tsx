@@ -9,9 +9,6 @@ const LoginRegisterStyles = styled.ul`
   padding: 1rem;
   width: 10rem;
   ${handleFlex("row", "space-evenly", "center")};
-  /* display: flex;
-  justify-content: space-evenly;
-  align-items: center; */
   margin: 0 1rem;
   ${below.smallMedium`
     width: 30rem;
