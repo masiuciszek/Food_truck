@@ -7,6 +7,7 @@ export const lightTheme: DefaultTheme = {
     button: "#f04437",
     secondary: "#8693AD",
     background: "#fff",
+    menuBg: "rgba(250,250,250,.7)",
     shadowOne: "rgba(0,0,0,0.5)",
   },
   size: {
@@ -38,9 +39,10 @@ export const darkTheme: DefaultTheme = {
   appSize: "10px",
   colors: {
     text: "#fff",
-    button: "#8693AD",
-    secondary: "#f04437",
+    button: "#f04437",
+    secondary: "#8693AD",
     background: "#212121",
+    menuBg: "rgba(33,33,33,.7)",
     shadowOne: "rgba(0,0,0,0.5)",
   },
   size: {

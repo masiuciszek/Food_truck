@@ -30,11 +30,12 @@ export const ToggleStyles = styled.div<P>`
 export const Knob = styled.div<P>`
   background: ${({ onTheme }) =>
     onTheme === "LIGHT" ? "rgba(0, 0, 0, 0.4)" : "rgba(255, 255, 255, 0.4)"};
-  width: 8rem;
+  /* width: 8rem; */
+  width: 12rem;
   height: 100%;
   transition: ${({ theme }) => theme.transition.mainTransition};
   transform: ${({ onTheme }) =>
-    onTheme === "LIGHT" ? "translateX(0%)" : "translateX(80%)"};
+    onTheme === "LIGHT" ? "translateX(0%)" : "translateX(20%)"};
   position: absolute;
   left: 0;
   top: 0;
