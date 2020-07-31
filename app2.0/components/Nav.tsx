@@ -6,22 +6,13 @@ import { handleNavOpen } from "src/store/page/page.actions";
 import { selectNavOpen, selectTheme } from "src/store/page/page.selector";
 import styled from "styled-components";
 import MainNavMenu from "./Main.nav.menu";
-import { above } from "./styles/Helpers";
+import { above, handleFlex } from "./styles/Helpers";
+import { NavLogo } from "./styles/Wrappers";
 import ThemeToggler from "./Theme.toggler";
 
 interface Props {
   className: string;
 }
-
-const NavLogo = styled.div`
-  padding: 0.4rem;
-  ${(props) => props.theme.shadow.elevations[2]};
-  border-radius: 0.5rem;
-  width: 15rem;
-  img {
-    width: 12rem;
-  }
-`;
 
 const Nav = ({ className }: Props) => {
   const whatTheme = useSelector((state: AppState) => selectTheme(state));
@@ -53,10 +44,9 @@ const Nav = ({ className }: Props) => {
 
 export default styled(Nav)`
   padding: 2rem 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: ${(props) => props.theme.colors.background};
+  ${handleFlex("row", "space-between", "center")};
+
   position: relative;
   .title {
     flex: 1;
