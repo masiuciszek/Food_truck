@@ -3,7 +3,6 @@ import { handleFlex } from "./Helpers";
 
 export const FormStyles = styled.form`
   ${handleFlex("column", "center", "flex-start")};
-
   padding: 2rem 1rem;
   button {
     margin: 2rem auto 0 auto;
