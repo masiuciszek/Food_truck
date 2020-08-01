@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { handleFlex } from "./styles/Helpers";
+import { Btn } from "./styles/Btns";
 
 interface Props {
   mainTitle: string;
@@ -12,22 +13,21 @@ interface Props {
   className: string;
 }
 
-const Title = ({
+const Title: React.FC<Props> = ({
   mainTitle,
   subTitle,
   className,
   cta,
   ctaPath,
   ctaText,
-}: Props) => {
+}) => {
   return (
     <section className={className}>
       <h1>{mainTitle}</h1>
       {subTitle && <h4>{subTitle}</h4>}
       {cta && (
         <Link href={`/${ctaPath}`}>
-          {" "}
-          <a> {ctaText} </a>{" "}
+          <Btn as='a'> {ctaText} </Btn>
         </Link>
       )}
     </section>

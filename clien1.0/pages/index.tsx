@@ -12,7 +12,13 @@ function Index({ data }: ServerSideProps) {
     <>
       <Hero className='Hero-Home'>
         <HeroContentWrapper>
-          <Title className='HomeTitle' mainTitle='Delicious tables' />
+          <Title
+            className='HomeTitle'
+            mainTitle='Delicious tables'
+            cta
+            ctaText='Tables'
+            ctaPath='tables'
+          />
           <img src='/images/the-munchies.png' alt='Home Hero' />
         </HeroContentWrapper>
       </Hero>
