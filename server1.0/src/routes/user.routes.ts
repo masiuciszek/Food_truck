@@ -1,7 +1,6 @@
 import * as userController from "../controllers/user.controller";
 import { Router } from "express";
 import authHandler from "../middleware/authHandler";
-import multer from "multer";
 import { upload } from "../utils/imgUpload";
 
 const router = Router();
