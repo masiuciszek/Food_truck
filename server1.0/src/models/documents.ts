@@ -17,7 +17,6 @@ export interface User extends Document {
   password: string;
   gender: Gender;
   role: Role;
-  age: number;
   tokens: Token[];
   avatar: Buffer | undefined;
   resetPasswordToken: string | undefined;

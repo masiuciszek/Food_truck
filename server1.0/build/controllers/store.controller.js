@@ -39,9 +39,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadStoreImage = exports.updateMyStore = exports.mySingleStore = exports.myStores = exports.createStore = void 0;
+exports.getStoreImage = exports.uploadStoreImage = exports.deleteAllMyStores = exports.deleteSelectedStore = exports.updateMyStore = exports.mySingleStore = exports.getAllStores = exports.myStores = exports.createStore = void 0;
+var sharp_1 = __importDefault(require("sharp"));
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
 var Store_1 = require("../models/Store");
+var User_1 = require("../models/User");
+var errorResponse_1 = require("../utils/errorResponse");
+var helpers_1 = require("../utils/helpers");
 /**
  * @method --- POST
  * @access --- Private
@@ -71,16 +75,42 @@ exports.createStore = asyncHandler_1.default(function (req, res, next) { return 
  * @desc Get all of my stores
  */
 exports.myStores = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var me, stores;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id)];
+            case 1:
+                me = _a.sent();
+                return [4 /*yield*/, Store_1.Store.find({ owner: me }).populate({
+                        path: "owner",
+                        select: "firstName lastName email",
+                    })];
+            case 2:
+                stores = _a.sent();
+                res.status(201).json({ success: true, msg: "my stores", data: stores });
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- GET
+ * @access --- Public
+ * @route --- store/stores
+ * @desc Get All Stores
+ */
+exports.getAllStores = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var stores;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, Store_1.Store.find({}).populate({
                     path: "owner",
-                    select: "firstName lastName email",
+                    select: "firstName email",
                 })];
             case 1:
                 stores = _a.sent();
-                res.status(201).json({ success: true, msg: "my stores", data: stores });
+                if (!stores)
+                    return [2 /*return*/, new errorResponse_1.ErrorResponse("No stores", 400)];
+                helpers_1.jsonResponse(res, 200, true, "all stores", stores);
                 return [2 /*return*/];
         }
     });
@@ -91,25 +121,165 @@ exports.myStores = asyncHandler_1.default(function (req, res, next) { return __a
  * @route --- store/user/my_store/:id
  * @desc Get A Single Store
  */
-exports.mySingleStore = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-    return [2 /*return*/];
-}); }); });
+exports.mySingleStore = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var store;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Store_1.Store.findById(req.params.id).populate({
+                    path: "owner",
+                    select: "_id firstName lastName",
+                })];
+            case 1:
+                store = _a.sent();
+                if (!store) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Store with id " + req.params.id + " was not found", 404))];
+                }
+                if ((store === null || store === void 0 ? void 0 : store.owner._id.toString()) !== req.user._id.toString()) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("User " + req.user.id + " has no access", 404))];
+                }
+                helpers_1.jsonResponse(res, 200, true, "store " + req.params.id + " ", store);
+                return [2 /*return*/];
+        }
+    });
+}); });
 /**
  * @method --- PUT
  * @access --- Private
  * @route --- store/user/update/:id
- * @desc Update A Single Store
+ * @desc Update My Single Store
  */
-exports.updateMyStore = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-    return [2 /*return*/];
-}); }); });
+exports.updateMyStore = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var store;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Store_1.Store.findById(req.params.id)];
+            case 1:
+                store = _a.sent();
+                if (!store) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Store with id " + req.params.id + " was not found", 404))];
+                }
+                if (store.owner.toString() !== req.user.id) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("User " + req.user.id + " has no access", 404))];
+                }
+                return [4 /*yield*/, Store_1.Store.findByIdAndUpdate(req.params.id, req.body, {
+                        new: true,
+                        runValidators: true,
+                    })];
+            case 2:
+                store = _a.sent();
+                helpers_1.jsonResponse(res, 200, true, "updated store", store);
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- Delete
+ * @access --- Private
+ * @route --- store/user/delete/:id
+ * @desc Delete selected Store
+ */
+exports.deleteSelectedStore = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var store;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Store_1.Store.findById(req.params.id)];
+            case 1:
+                store = _a.sent();
+                if (!store) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Store with id " + req.params.id + " was not found", 404))];
+                }
+                if (store.owner.toString() !== req.user.id) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("User " + req.user.id + " has no access", 404))];
+                }
+                return [4 /*yield*/, Store_1.Store.findByIdAndDelete(req.params.id)];
+            case 2:
+                _a.sent();
+                helpers_1.jsonResponse(res, 200, true, "deleted store " + req.params.id, {});
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- Delete
+ * @access --- Private
+ * @route --- store/user/deleteall
+ * @desc Delete all stores
+ */
+exports.deleteAllMyStores = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var me;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, User_1.userModel.findById(req.user._id)];
+            case 1:
+                me = _a.sent();
+                if (!me) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("User  has no access", 404))];
+                }
+                return [4 /*yield*/, Store_1.Store.deleteMany({ owner: req.user.id })];
+            case 2:
+                _a.sent();
+                helpers_1.jsonResponse(res, 200, true, "stores got deleted", {});
+                return [2 /*return*/];
+        }
+    });
+}); });
 /**
  * @method --- POST
  * @access --- Private
  * @route --- store/user/my_store/image/:id
- * @desc Upload image
+ * @desc Upload Image
  */
-exports.uploadStoreImage = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-    return [2 /*return*/];
-}); }); });
+exports.uploadStoreImage = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var store, resizeBufferImage;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Store_1.Store.findById(req.params.id).populate({
+                    path: "owner",
+                    select: "firstName lastName",
+                })];
+            case 1:
+                store = _a.sent();
+                if (!store) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Store with id " + req.params.id + " was not found", 404))];
+                }
+                if (store.owner.id !== req.user.id) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("User " + req.user.id + " has no access", 404))];
+                }
+                return [4 /*yield*/, sharp_1.default(req.file.buffer)
+                        .resize({ width: 250, height: 250 })
+                        .png()
+                        .toBuffer()];
+            case 2:
+                resizeBufferImage = _a.sent();
+                store.image = resizeBufferImage;
+                return [4 /*yield*/, store.save()];
+            case 3:
+                _a.sent();
+                helpers_1.jsonResponse(res, 201, true, "uploaded image", {});
+                return [2 /*return*/];
+        }
+    });
+}); });
+/**
+ * @method --- GET
+ * @access --- Public
+ * @route --- store/image/:id
+ * @desc Get Store Image
+ */
+exports.getStoreImage = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var store;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Store_1.Store.findById(req.params.id)];
+            case 1:
+                store = _a.sent();
+                if (!store) {
+                    return [2 /*return*/, next(new errorResponse_1.ErrorResponse("no store with ID " + req.params.id, 404))];
+                }
+                res.set("Content-Type", "image/png");
+                res.status(200).send(store === null || store === void 0 ? void 0 : store.image);
+                return [2 /*return*/];
+        }
+    });
+}); });
 //# sourceMappingURL=store.controller.js.map

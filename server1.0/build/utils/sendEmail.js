@@ -42,14 +42,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendEmail = void 0;
 var nodemailer_1 = __importDefault(require("nodemailer"));
 require("dotenv/config");
+var host = process.env.SMTP_HOST;
+var port = process.env.SMTP_PORT;
 exports.sendEmail = function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var transporter, message, info;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 transporter = nodemailer_1.default.createTransport({
-                    host: process.env.SMTP_HOST,
-                    port: process.env.SMTP_PORT,
+                    host: host,
+                    port: port,
                     auth: {
                         user: process.env.SMTP_USERNAME,
                         pass: process.env.SMTP_PASSWORD,

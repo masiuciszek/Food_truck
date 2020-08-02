@@ -93,11 +93,6 @@ var UserSchema = new mongoose_1.Schema({
         enum: ["USER", "ADMIN", "MASTER"],
         default: "USER",
     },
-    age: {
-        type: Number,
-        min: 18,
-        required: ["pleas fill in your age", true],
-    },
     avatar: {
         type: Buffer,
     },

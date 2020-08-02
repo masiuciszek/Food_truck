@@ -46,6 +46,7 @@ var auth_route_1 = require("./routes/auth.route");
 var user_routes_1 = require("./routes/user.routes");
 var master_routes_1 = require("./routes/master.routes");
 var store_routes_1 = require("./routes/store.routes");
+var cors_1 = __importDefault(require("cors"));
 var app = express_1.default();
 var port = process.env.PORT || 4000;
 (function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -58,7 +59,15 @@ var port = process.env.PORT || 4000;
         }
     });
 }); })();
+app.use(cors_1.default());
 app.use(express_1.default.json());
+// TODO: DELETE
+app.get("/", function (req, res) {
+    res.json([
+        { id: 1, name: "Yooo" },
+        { id: 2, name: "Coool" },
+    ]);
+});
 app.use("/auth", auth_route_1.router);
 app.use("/user", user_routes_1.router);
 app.use("/master", master_routes_1.router);

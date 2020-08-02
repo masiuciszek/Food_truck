@@ -5,6 +5,7 @@ import { router as authRoutes } from "./routes/auth.route";
 import { router as userRoutes } from "./routes/user.routes";
 import { router as masterRoutes } from "./routes/master.routes";
 import { router as storeRoutes } from "./routes/store.routes";
+import cors from "cors";
 
 const app: Application = express();
 
@@ -14,6 +15,7 @@ const port = process.env.PORT || 4000;
   await connectDb();
 })();
 
+app.use(cors());
 app.use(express.json());
 
 // TODO: DELETE
