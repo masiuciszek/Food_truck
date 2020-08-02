@@ -50,3 +50,9 @@ interface RegisterFormData {
   email: string;
   password: string;
 }
+
+type ErrorMessage =
+  | "Please Try Again"
+  | "Success"
+  | "Ooops Something went wrong"
+  | "";

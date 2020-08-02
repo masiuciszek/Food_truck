@@ -5,7 +5,7 @@ const initialState: PageState = {
   theme: "LIGHT",
 };
 
-export default (state: PageState = initialState, action: Action) => {
+const pageReducer = (state: PageState = initialState, action: Action) => {
   switch (action.type) {
     case "SET_NAV_OPEN":
       return {
@@ -22,3 +22,5 @@ export default (state: PageState = initialState, action: Action) => {
       return state;
   }
 };
+
+export default pageReducer;

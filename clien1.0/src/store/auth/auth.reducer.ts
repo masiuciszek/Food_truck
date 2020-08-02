@@ -4,9 +4,11 @@ const initialState: AuthState = {
   isAuth: false,
   user: null,
   status: "passive",
+  userError: "",
+  token: "",
 };
 
-export default (state: AuthState = initialState, action: Action) => {
+const authReducer = (state: AuthState = initialState, action: Action) => {
   switch (action.type) {
     case ActionTypes.REGISTER_USER:
     case ActionTypes.LOGIN_USER:
@@ -17,8 +19,31 @@ export default (state: AuthState = initialState, action: Action) => {
         isAuth: true,
         status: "resolved",
       };
-
+    case ActionTypes.SET_ERROR_MSG:
+      return {
+        ...state,
+        userError: action.payload,
+      };
+    case ActionTypes.CLEAR_ERROR_MSG:
+      return {
+        ...state,
+        userError: "",
+      };
+    case ActionTypes.SET_LOGGED_IN:
+      return {
+        ...state,
+        isAuth: action.payload,
+      };
+    case ActionTypes.USER_LOADED:
+      return {
+        ...state,
+        isAuth: true,
+        status: "resolved",
+        user: action.payload,
+      };
     default:
-      break;
+      return state;
   }
 };
+
+export default authReducer;

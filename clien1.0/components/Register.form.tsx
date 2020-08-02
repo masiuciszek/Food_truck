@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "src/store";
+import { registerUser } from "src/store/auth/auth.actions";
 import { Btn } from "./styles/Btns";
+import { Router, useRouter } from "next/router";
 import {
   FormGroupForCheckBox,
   FormGroup,
@@ -14,16 +18,23 @@ interface Props {
 }
 
 const RegisterForm = ({ title }: Props) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RegisterFormData>({
     firstName: "",
     lastName: "",
+    role: "USER",
     email: "",
     password: "",
-    password2: "",
     gender: "FEMALE",
   });
 
-  const { firstName, lastName, email, password, password2, gender } = formData;
+  const [password2, setPassword2] = React.useState("");
+
+  const dispatch = useDispatch();
+
+  const { firstName, lastName, email, password, gender } = formData;
+
+  const isAuth = useSelector((state: AppState) => state.auth.isAuth);
+  const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = event.target;
@@ -39,29 +50,27 @@ const RegisterForm = ({ title }: Props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const data = {
+    const data: RegisterFormData = {
       firstName: firstName,
       lastName: lastName,
+      role: "USER",
       email: email,
       password: password,
       gender: gender,
     };
 
-    const foo = async () => {
-      await fetch("http://localhost:4000/user/register", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    };
     if (password === password2) {
-      foo();
+      dispatch(registerUser(data));
     } else {
       return;
     }
   };
+
+  React.useEffect(() => {
+    if (isAuth) {
+      router.push("/");
+    }
+  }, [isAuth]);
 
   return (
     <FormWrapper>
@@ -134,7 +143,7 @@ const RegisterForm = ({ title }: Props) => {
             type='password'
             placeholder='repeat password'
             value={password2}
-            onChange={handleChange}
+            onChange={(e) => setPassword2(e.target.value)}
           />
         </FormGroup>
         <Btn type='submit'>Register</Btn>
