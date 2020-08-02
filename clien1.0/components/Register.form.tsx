@@ -5,6 +5,7 @@ import {
   FormGroup,
   FormStyles,
   Input,
+  Label,
 } from "./styles/Form.elements";
 import { FormWrapper } from "./styles/Wrappers";
 
@@ -19,28 +20,53 @@ const RegisterForm = ({ title }: Props) => {
     email: "",
     password: "",
     password2: "",
-    gender: "female",
+    gender: "FEMALE",
   });
 
   const { firstName, lastName, email, password, password2, gender } = formData;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target } = event;
+    const { name } = event.target;
 
     const inputValue =
       event.target.type === "checkbox"
         ? event.target.checked
         : event.target.value;
 
-    setFormData({ ...formData, [event.target.name]: inputValue });
+    setFormData({ ...formData, [name]: inputValue });
+  };
 
-    console.log(gender);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      gender: gender,
+    };
+
+    const foo = async () => {
+      await fetch("http://localhost:4000/user/register", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    };
+    if (password === password2) {
+      foo();
+    } else {
+      return;
+    }
   };
 
   return (
     <FormWrapper>
       <h3>{title}</h3>
-      <FormStyles>
+      <FormStyles onSubmit={handleSubmit}>
         <FormGroup>
           <Input
             type='text'
@@ -72,17 +98,26 @@ const RegisterForm = ({ title }: Props) => {
           <Input
             type='radio'
             name='gender'
-            value='female'
-            checked={gender === "female"}
+            value='FEMALE'
+            id='FEMALE'
+            checked={gender === "FEMALE"}
             onChange={handleChange}
           />
+          <Label htmlFor='FEMALE'>
+            <span>Female</span>
+          </Label>
+
           <Input
             type='radio'
             name='gender'
-            value='male'
-            checked={gender === "male"}
+            value='MALE'
+            id='MALE'
+            checked={gender === "MALE"}
             onChange={handleChange}
           />
+          <Label htmlFor='MALE'>
+            <span>Male</span>
+          </Label>
         </FormGroupForCheckBox>
         <FormGroup>
           <Input
