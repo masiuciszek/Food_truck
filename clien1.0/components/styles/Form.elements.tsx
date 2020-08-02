@@ -9,8 +9,6 @@ export const FormStyles = styled.form`
   }
 `;
 
-export const Label = styled.label``;
-
 export const Input = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.secondary};
   border-radius: 5px;
@@ -36,6 +34,18 @@ export const Input = styled.input`
     height: 6.3rem;
     margin: 1rem 0;
   }
+  &[type="radio"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    transition: ${(props) => props.theme.transition.mainTransition};
+    &:checked + label {
+      border: 0.2em solid ${(props) => props.theme.colors.text};
+      padding: 1rem;
+      background: ${(props) => props.theme.colors.button};
+      ${(props) => props.theme.shadow.elevations[1]};
+    }
+  }
   font-size: 18px;
   line-height: 23px;
   outline: 0;
@@ -54,8 +64,30 @@ export const Input = styled.input`
       },
     }) => elevations[2]};
   }
+
+  /* &:checked + label {
+    padding: 3rem;
+
+  } */
 `;
 
 export const FormGroup = styled.div``;
 
-export const FormGroupForCheckBox = styled(FormGroup)``;
+export const Label = styled.label`
+  display: block;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  border: 0.2em solid ${(props) => props.theme.colors.button};
+  margin-right: auto;
+  cursor: pointer;
+  span {
+    padding: 0 0 0 4rem;
+  }
+`;
+
+export const FormGroupForCheckBox = styled(FormGroup)`
+  ${handleFlex("row", "space-around", "center")};
+  padding: 2rem 0;
+  width: 60%;
+`;

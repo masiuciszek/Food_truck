@@ -5,6 +5,7 @@ import {
   FormGroup,
   FormStyles,
   Input,
+  Label,
 } from "./styles/Form.elements";
 import { FormWrapper } from "./styles/Wrappers";
 
@@ -73,16 +74,24 @@ const RegisterForm = ({ title }: Props) => {
             type='radio'
             name='gender'
             value='female'
+            id='female'
             checked={gender === "female"}
             onChange={handleChange}
           />
+          <Label htmlFor='female'>
+            <span>Female</span>
+          </Label>
           <Input
             type='radio'
             name='gender'
             value='male'
+            id='male'
             checked={gender === "male"}
             onChange={handleChange}
           />
+          <Label htmlFor='male'>
+            <span>Male</span>
+          </Label>
         </FormGroupForCheckBox>
         <FormGroup>
           <Input
