@@ -10,28 +10,28 @@ export enum ActionTypes {
   REGISTER_USER = "REGISTER_USER",
   USER_LOADED = "USER_LOADED",
   LOGIN_USER = "LOGIN_USER",
+  SET_AUTH_TOKEN = "SET_AUTH_TOKEN",
   SET_ERROR_MSG = "SET_ERROR_MSG",
   CLEAR_ERROR_MSG = "CLEAR_ERROR_MSG",
-  SET_LOGGED_IN = "SET_LOGGED_IN",
 }
 
 export interface RegisterUser {
   type: ActionTypes.REGISTER_USER;
-  payload: RegisterLoginResponse;
+  payload: string;
 }
 export interface UserLoaded {
   type: ActionTypes.USER_LOADED;
   payload: User;
 }
 
-export interface SetLoggedIn {
-  type: ActionTypes.SET_LOGGED_IN;
-  payload: boolean;
+export interface SetAuthToken {
+  type: ActionTypes.SET_AUTH_TOKEN;
+  payload: string;
 }
 
 export interface LoginUser {
   type: ActionTypes.LOGIN_USER;
-  payload: RegisterLoginResponse;
+  payload: string;
 }
 
 export interface SetErrorMsg {
@@ -47,5 +47,5 @@ export type Action =
   | LoginUser
   | SetErrorMsg
   | UserLoaded
-  | ClearErrorMsg
-  | SetLoggedIn;
+  | SetAuthToken
+  | ClearErrorMsg;

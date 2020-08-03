@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "src/store";
 import { registerUser } from "src/store/auth/auth.actions";
 import { Btn } from "./styles/Btns";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import {
   FormGroupForCheckBox,
   FormGroup,
@@ -12,6 +12,7 @@ import {
   Label,
 } from "./styles/Form.elements";
 import { FormWrapper } from "./styles/Wrappers";
+import { selectIsAuth } from "src/store/auth/auth.selectors";
 
 interface Props {
   title: string;
@@ -33,7 +34,7 @@ const RegisterForm = ({ title }: Props) => {
 
   const { firstName, lastName, email, password, gender } = formData;
 
-  const isAuth = useSelector((state: AppState) => state.auth.isAuth);
+  const isAuth = useSelector((state: AppState) => selectIsAuth(state));
   const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,75 +79,75 @@ const RegisterForm = ({ title }: Props) => {
       <FormStyles onSubmit={handleSubmit}>
         <FormGroup>
           <Input
-            type='text'
-            name='firstName'
-            placeholder='firstName'
+            type="text"
+            name="firstName"
+            placeholder="firstName"
             value={firstName}
             onChange={handleChange}
           />
         </FormGroup>
         <FormGroup>
           <Input
-            type='text'
-            name='lastName'
-            placeholder='lastName'
+            type="text"
+            name="lastName"
+            placeholder="lastName"
             value={lastName}
             onChange={handleChange}
           />
         </FormGroup>
         <FormGroup>
           <Input
-            name='email'
-            type='email'
-            placeholder='email'
+            name="email"
+            type="email"
+            placeholder="email"
             value={email}
             onChange={handleChange}
           />
         </FormGroup>
         <FormGroupForCheckBox>
           <Input
-            type='radio'
-            name='gender'
-            value='FEMALE'
-            id='FEMALE'
+            type="radio"
+            name="gender"
+            value="FEMALE"
+            id="FEMALE"
             checked={gender === "FEMALE"}
             onChange={handleChange}
           />
-          <Label htmlFor='FEMALE'>
+          <Label htmlFor="FEMALE">
             <span>Female</span>
           </Label>
 
           <Input
-            type='radio'
-            name='gender'
-            value='MALE'
-            id='MALE'
+            type="radio"
+            name="gender"
+            value="MALE"
+            id="MALE"
             checked={gender === "MALE"}
             onChange={handleChange}
           />
-          <Label htmlFor='MALE'>
+          <Label htmlFor="MALE">
             <span>Male</span>
           </Label>
         </FormGroupForCheckBox>
         <FormGroup>
           <Input
-            name='password'
-            type='password'
-            placeholder='password'
+            name="password"
+            type="password"
+            placeholder="password"
             value={password}
             onChange={handleChange}
           />
         </FormGroup>
         <FormGroup>
           <Input
-            name='password2'
-            type='password'
-            placeholder='repeat password'
+            name="password2"
+            type="password"
+            placeholder="repeat password"
             value={password2}
             onChange={(e) => setPassword2(e.target.value)}
           />
         </FormGroup>
-        <Btn type='submit'>Register</Btn>
+        <Btn type="submit">Register</Btn>
       </FormStyles>
     </FormWrapper>
   );

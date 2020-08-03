@@ -1,4 +1,5 @@
 import { AuthState, Action, ActionTypes } from "./auth.types";
+import Cookie from "js-cookie";
 
 const initialState: AuthState = {
   isAuth: false,
@@ -12,12 +13,16 @@ const authReducer = (state: AuthState = initialState, action: Action) => {
   switch (action.type) {
     case ActionTypes.REGISTER_USER:
     case ActionTypes.LOGIN_USER:
-      window.localStorage.setItem("token", action.payload.token);
+      Cookie.set("token", action.payload);
       return {
         ...state,
-        ...action.payload,
         isAuth: true,
         status: "resolved",
+      };
+    case ActionTypes.SET_AUTH_TOKEN:
+      return {
+        ...state,
+        token: action.payload,
       };
     case ActionTypes.SET_ERROR_MSG:
       return {
@@ -28,11 +33,6 @@ const authReducer = (state: AuthState = initialState, action: Action) => {
       return {
         ...state,
         userError: "",
-      };
-    case ActionTypes.SET_LOGGED_IN:
-      return {
-        ...state,
-        isAuth: action.payload,
       };
     case ActionTypes.USER_LOADED:
       return {

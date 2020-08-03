@@ -56,3 +56,8 @@ type ErrorMessage =
   | "Success"
   | "Ooops Something went wrong"
   | "";
+
+interface TokenResponse {
+  success: boolean;
+  token: string;
+}
