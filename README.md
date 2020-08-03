@@ -1,123 +1,115 @@
-<h1 align="center"> Food truck App 🧄🚚λ⚛️ </h1>
-
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="./server.png" alt="server logo"></a>
+ <img width=200px height=200px src="server.png" alt="Project logo"></a>
 </p>
 
+<h3 align="center">Food trucks</h3>
+
+<div align="center">
+
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+
+</div>
+
+---
+
+<p align="center">
 Application focused on the backend , using express and typescript.
 Mongodb as database and using NEXT JS for servers side rendering the UI.
 
 This is just production application for own case, nothing that will be in production. That's why some error messages that I handle is there for a special purpose. Just to understand the code on what's going on. I know that in a real case you would have write in a more a anonymous way. 🧛‍♂️
+<br>
 
-## App
+</p>
 
-is just the backend server , with all different end points end middleware
+## 📝 Table of Contents
 
-## App2.0
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Built Using](#built_using)
+- [TODO](../TODO.md)
+- [Contributing](../CONTRIBUTING.md)
+- [Authors](#authors)
+<!-- - [Acknowledgments](#acknowledgement) -->
 
-Is the same but built with a custom server together with Next JS.
+## 🧐 About <a name = "about"></a>
 
-### Tools 🛠
+Practicing on building a fullstack modern application. Using server side rendered content with Next js.
 
-* Node JS 🥝
-* Typescript λ
-* React ⚛️
-* Next js 💥
-* Express 🚝
-* Mongoose 🐨
-* Mongo DB ᠣ
-* jsonwebtoken 🗼
-* bcryptjs ⳮ
-* Styled-components 💅🏻
+## 🏁 Getting Started <a name = "getting_started"></a>
 
-## Endpoints 🅰🅿🅸
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
-**USERS** 👩🏻‍💻
+```bash
+  git clone <project url>
 
-``` ts
-/**
- * @method --- POST
- * @access --- Public
- * @route --- user/register
- * @desc --- register new user
- */
+  cd <project name> / server or frontend
 
-export const registerUser = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const newUser = await User.create(req.body);
 
-    // Create new Token
-    let token = await newUser.generateAuthToken();
+  yarn/npm install (in both server and client)
 
-    res
-      .status(201)
-      .json({ success: true, msg: "User Registered!", data: newUser, token });
-  },
-);
+  yarn/npm start in server
+  yarn/npm dev in client
 
-/**
- * @method --- GET
- * @desc --- get user profile
- * @access --- Private
- * @route --- user/me
- */
-
-export const getMe = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
-    const user = await User.findById(req.user._id).select("-password -tokens");
-    res.status(200).json({ success: true, msg: "Get me", data: user });
-  },
-);
-
-/**
- * @method --- PUT
- * @desc --- update user profile
- * @access --- Private
- * @route --- user/me/update
- */
-
-export const updateMe = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
-    let user = await User.findById(req.user._id);
-
-    if (!user) {
-      return next(new ErrorResponse("User not found", 404));
-    }
-
-    user = await User.findByIdAndUpdate(req.user._id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-
-    res.status(201).json({
-      success: true,
-      msg: `${user?.firstName} got updated!` ,
-      data: user,
-    });
-  },
-);
-
-/**
- * @method --- Delete
- * @desc --- remove user profile
- * @access --- Private
- * @route --- user/me/remove
- */
-
-export const removeMe = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
-    let user = await User.findById(req.user._id);
-
-    if (!user) {
-      return next(new ErrorResponse("User not found", 404));
-    }
-
-    await User.findByIdAndRemove(req.user._id);
-
-    res
-      .status(200)
-      .json({ success: true, msg: `${user.firstName} got removed` , data: {} });
-  },
-);
 ```
+
+### Prerequisites
+
+What things you need to install the software and how to install them.
+
+```
+ Node > 8.0
+
+```
+
+<!-- ### Installing
+
+A step by step series of examples that tell you how to get a development env running.
+
+Say what the step will be
+
+```
+Give the example
+```
+
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo. -->
+
+<!-- ## 🔧 Running the tests <a name = "tests"></a> -->
+
+<!-- ### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+``` -->
+
+## ⛏️ Built Using <a name = "built_using"></a>
+
+- [MongoDB](https://www.mongodb.com/) - Database
+- [Express](https://expressjs.com/) - Server Framework
+- [React](https://reactjs.org/) - Web Framework
+- [NodeJs](https://nodejs.org/en/) - Server Environment
+- [Next Js](https://nextjs.org/) - Framework for React
+- [Typescript](https://www.typescriptlang.org/) - Superset of Javascript
+
+## ✍️ Authors <a name = "authors"></a>
+
+- [@masiuciszek](https://github.com/masiuciszek) - Me
+
+<!-- See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project. -->
+
+<!-- ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+
+- Hat tip to anyone whose code was used
+- Inspiration
+- References -->
