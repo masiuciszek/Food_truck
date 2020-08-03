@@ -6,6 +6,7 @@ import { router as userRoutes } from "./routes/user.routes";
 import { router as masterRoutes } from "./routes/master.routes";
 import { router as storeRoutes } from "./routes/store.routes";
 import cors from "cors";
+import cookiesParser from "cookie-parser";
 
 const app: Application = express();
 
@@ -15,6 +16,7 @@ const port = process.env.PORT || 4000;
   await connectDb();
 })();
 
+app.use(cookiesParser());
 app.use(cors());
 app.use(express.json());
 

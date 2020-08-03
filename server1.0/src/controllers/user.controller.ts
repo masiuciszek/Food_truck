@@ -9,6 +9,7 @@ import { sendEmail } from "../utils/sendEmail";
 import sharp from "sharp";
 import crypto from "crypto";
 import "dotenv/config";
+import { tokenResponse } from "../utils/tokenResponse";
 
 /**
  * @method --- POST
@@ -21,12 +22,13 @@ export const registerUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const newUser = await User.create(req.body);
 
-    // Create new Token
-    let token = await newUser.generateAuthToken();
+    tokenResponse(newUser, 201, res);
 
-    res
-      .status(201)
-      .json({ success: true, msg: "User Registered!", data: newUser, token });
+    // let token = await newUser.generateAuthToken();
+
+    // res
+    //   .status(201)
+    //   .json({ success: true, msg: "User Registered!", data: newUser, token });
   },
 );
 
@@ -90,9 +92,11 @@ export const updatePassword = asyncHandler(
     user.password = req.body.password;
     await user.save();
 
-    res.status(200).json({ success: true, message: "password updated" });
+    tokenResponse(user, 200, res);
 
-    jsonResponse<UserType>(res, 200, true, "password updated", user);
+    // res.status(200).json({ success: true, message: "password updated" });
+
+    // jsonResponse<UserType>(res, 200, true, "password updated", user);
   },
 );
 
@@ -176,7 +180,8 @@ export const resetPassword = asyncHandler(
     user.resetPasswordExpire = undefined;
     await user.save();
 
-    jsonResponse<UserType>(res, 200, true, "new password", user);
+    tokenResponse(user, 200, res);
+    // jsonResponse<UserType>(res, 200, true, "new password", user);
   },
 );
 
