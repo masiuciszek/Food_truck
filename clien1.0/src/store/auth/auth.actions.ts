@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import {
   ActionTypes,
+  LoginUser,
   LogoutUser,
   RegisterUser,
   SetAuthToken,
@@ -50,8 +51,24 @@ export const registerUser = (formData: RegisterFormData) => async (
       type: ActionTypes.REGISTER_USER,
       payload: data.token,
     });
+  } catch (err) {
+    console.error(err);
+  }
+};
 
-    // userLoaded();
+export const loginUser = (loginData: LoginData) => async (
+  dispatch: Dispatch<LoginUser>,
+) => {
+  try {
+    const res = await fetch("http://localhost:4000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginData),
+    });
+    const data: TokenResponse = await res.json();
+    dispatch({ type: ActionTypes.LOGIN_USER, payload: data.token });
   } catch (err) {
     console.error(err);
   }

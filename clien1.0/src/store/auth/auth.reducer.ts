@@ -18,6 +18,7 @@ const authReducer = (state: AuthState = initialState, action: Action) => {
         ...state,
         isAuth: true,
         status: "resolved",
+        userError: "",
       };
     case ActionTypes.SET_AUTH_TOKEN:
       return {

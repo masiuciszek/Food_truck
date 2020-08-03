@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import { useSelector } from "react-redux";
 import useLocalStorage from "src/hooks/useLocalStorage";
@@ -7,6 +8,7 @@ import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { lightTheme, darkTheme } from "utils/theme";
 import Footer from "./Footer";
 import Nav from "./Nav";
+import Head from "next/head";
 
 const StyledPage = styled.div`
   background: ${(props) => props.theme.colors.background};
@@ -64,12 +66,30 @@ const Page: React.FC = ({ children }) => {
 
   return (
     <ThemeProvider theme={themeState === "LIGHT" ? lightTheme : darkTheme}>
+      <Head>
+        <link rel="shortcut icon" href="/favicons/favicon.ico" />
+
+        <link rel="icon" sizes="32x32" href="/favicons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" href="/favicons/favicon-16x16" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicons/apple-touch-icon.png"
+        />
+        <link rel="manifest" href="/favicons/site.webmanifest" />
+        <link
+          rel="mask-icon"
+          href="favicons/safari-pinned-tab.svg"
+          color="#5bbad5"
+        />
+        <meta name="theme-color" content="#ffffff" />
+      </Head>
       <GlobalStyles />
-      <Nav className='main-nav' />
+      <Nav className="main-nav" />
       <StyledPage>
         <Main>{children}</Main>
       </StyledPage>
-      <Footer className='main-footer' />
+      <Footer className="main-footer" />
     </ThemeProvider>
   );
 };

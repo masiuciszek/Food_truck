@@ -23,16 +23,49 @@ export const Input = styled.input`
     width: 43rem;
     height: 6.3rem;
     margin: 1rem 0;
+
+    &:focus {
+      width: 42rem;
+      height: 6rem;
+      border: 1px solid ${({ theme }) => theme.colors.secondary};
+      ${({
+        theme: {
+          shadow: { elevations },
+        },
+      }) => elevations[2]};
+    }
   }
   &[type="email"] {
     width: 43rem;
     height: 6.3rem;
     margin: 1rem 0;
+
+    &:focus {
+      width: 42rem;
+      height: 6rem;
+      border: 1px solid ${({ theme }) => theme.colors.secondary};
+      ${({
+        theme: {
+          shadow: { elevations },
+        },
+      }) => elevations[2]};
+    }
   }
   &[type="password"] {
     width: 43rem;
     height: 6.3rem;
     margin: 1rem 0;
+
+    &:focus {
+      width: 42rem;
+      height: 6rem;
+      border: 1px solid ${({ theme }) => theme.colors.secondary};
+      ${({
+        theme: {
+          shadow: { elevations },
+        },
+      }) => elevations[2]};
+    }
   }
   &[type="radio"] {
     opacity: 0;
@@ -53,22 +86,6 @@ export const Input = styled.input`
     text-transform: capitalize;
     font-weight: 700;
   }
-
-  &:focus {
-    width: 42rem;
-    height: 6rem;
-    border: 1px solid ${({ theme }) => theme.colors.secondary};
-    ${({
-      theme: {
-        shadow: { elevations },
-      },
-    }) => elevations[2]};
-  }
-
-  /* &:checked + label {
-    padding: 3rem;
-
-  } */
 `;
 
 export const FormGroup = styled.div``;

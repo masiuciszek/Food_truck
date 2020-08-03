@@ -50,11 +50,19 @@ const LoginRegister = () => {
 
   return (
     <LoginRegisterStyles>
-      <Item>
-        <Link href="/register">
-          <a>Register</a>
-        </Link>
-      </Item>
+      {isAuth ? (
+        <Item>
+          <Link href="/profile">
+            <a>Profile</a>
+          </Link>
+        </Item>
+      ) : (
+        <Item>
+          <Link href="/register">
+            <a>Register</a>
+          </Link>
+        </Item>
+      )}
 
       {isAuth ? (
         <Item onClick={() => dispatch(logoutUser(authToken))}>
