@@ -1,5 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "src/store";
+import { logoutUser } from "src/store/auth/auth.actions";
+import { selectIsAuth, selectToken } from "src/store/auth/auth.selectors";
 import styled from "styled-components";
 import { below, handleFlex } from "./styles/Helpers";
 
@@ -31,26 +35,38 @@ const Item = styled.li`
   &:hover {
     background: ${({ theme }) => theme.colors.button};
     ${({ theme }) => theme.shadow.elevations[1]};
-    a {
+    a,
+    span {
       color: #fff;
     }
   }
 `;
 
 const LoginRegister = () => {
+  const isAuth = useSelector((state: AppState) => selectIsAuth(state));
+  const authToken = useSelector((state: AppState) => selectToken(state));
+
+  const dispatch = useDispatch();
+
   return (
     <LoginRegisterStyles>
       <Item>
-        <Link href='/register'>
+        <Link href="/register">
           <a>Register</a>
         </Link>
       </Item>
 
-      <Item>
-        <Link href='/login'>
-          <a>Login</a>
-        </Link>
-      </Item>
+      {isAuth ? (
+        <Item onClick={() => dispatch(logoutUser(authToken))}>
+          <span>Logout</span>
+        </Item>
+      ) : (
+        <Item>
+          <Link href="/login">
+            <a>Login</a>
+          </Link>
+        </Item>
+      )}
     </LoginRegisterStyles>
   );
 };

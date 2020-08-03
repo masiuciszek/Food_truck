@@ -40,6 +40,16 @@ const authReducer = (state: AuthState = initialState, action: Action) => {
         isAuth: true,
         status: "resolved",
         user: action.payload,
+        userError: "",
+      };
+    case ActionTypes.LOGOUT_USER:
+      Cookie.remove("token");
+      return {
+        ...state,
+        isAuth: true,
+        status: "resolved",
+        user: null,
+        userError: "",
       };
     default:
       return state;

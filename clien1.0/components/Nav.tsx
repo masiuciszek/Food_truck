@@ -19,24 +19,24 @@ const Nav = ({ className }: Props) => {
   const isNavOpen = useSelector((state: AppState) => selectNavOpen(state));
   const dispatch = useDispatch();
 
-  let navMenuImg =
+  const navMenuImg =
     whatTheme === "LIGHT" ? "/images/menu-dark.png" : "/images/menu-light.png";
 
   return (
     <nav className={className}>
-      <div className='title'>
+      <div className="title">
         <NavLogo>
-          <Link href='/'>
+          <Link href="/">
             <a>
-              <img src='/images/logo4.png' alt='app logo' />
+              <img src="/images/logo4.png" alt="app logo" />
             </a>
           </Link>
         </NavLogo>
       </div>
       <ThemeToggler />
       <MainNavMenu isNavOpen={isNavOpen} />
-      <div className='menu-icon' onClick={() => dispatch(handleNavOpen())}>
-        <img src={navMenuImg} alt='menu icon' />
+      <div className="menu-icon" onClick={() => dispatch(handleNavOpen())}>
+        <img src={navMenuImg} alt="menu icon" />
       </div>
     </nav>
   );

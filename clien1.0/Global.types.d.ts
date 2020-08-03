@@ -61,3 +61,14 @@ interface TokenResponse {
   success: boolean;
   token: string;
 }
+
+interface UserLoadedResponse {
+  success: boolean;
+  msg: string;
+  data: User;
+}
+
+interface LoginData {
+  email: string;
+  password: string;
+}

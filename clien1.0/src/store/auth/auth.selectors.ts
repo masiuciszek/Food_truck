@@ -8,3 +8,8 @@ export const selectIsAuth = createSelector(
   [authState],
   (state: AuthState) => state.isAuth,
 );
+
+export const selectToken = createSelector(
+  [authState],
+  (state: AuthState) => state.token,
+);

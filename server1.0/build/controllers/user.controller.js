@@ -48,6 +48,7 @@ var sendEmail_1 = require("../utils/sendEmail");
 var sharp_1 = __importDefault(require("sharp"));
 var crypto_1 = __importDefault(require("crypto"));
 require("dotenv/config");
+var tokenResponse_1 = require("../utils/tokenResponse");
 /**
  * @method --- POST
  * @access --- Public
@@ -55,18 +56,13 @@ require("dotenv/config");
  * @desc --- register new user
  */
 exports.registerUser = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var newUser, token;
+    var newUser;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, User_1.userModel.create(req.body)];
             case 1:
                 newUser = _a.sent();
-                return [4 /*yield*/, newUser.generateAuthToken()];
-            case 2:
-                token = _a.sent();
-                res
-                    .status(201)
-                    .json({ success: true, msg: "User Registered!", data: newUser, token: token });
+                tokenResponse_1.tokenResponse(newUser, 201, res);
                 return [2 /*return*/];
         }
     });
@@ -140,8 +136,7 @@ exports.updatePassword = asyncHandler_1.default(function (req, res, next) { retu
                 return [4 /*yield*/, user.save()];
             case 2:
                 _a.sent();
-                res.status(200).json({ success: true, message: "password updated" });
-                helpers_1.jsonResponse(res, 200, true, "password updated", user);
+                tokenResponse_1.tokenResponse(user, 200, res);
                 return [2 /*return*/];
         }
     });
@@ -227,7 +222,7 @@ exports.resetPassword = asyncHandler_1.default(function (req, res, next) { retur
                 return [4 /*yield*/, user.save()];
             case 2:
                 _a.sent();
-                helpers_1.jsonResponse(res, 200, true, "new password", user);
+                tokenResponse_1.tokenResponse(user, 200, res);
                 return [2 /*return*/];
         }
     });

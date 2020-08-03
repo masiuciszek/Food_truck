@@ -43,13 +43,14 @@ exports.logoutAllSessions = exports.logout = exports.login = void 0;
 var asyncHandler_1 = __importDefault(require("../middleware/asyncHandler"));
 var User_1 = require("../models/User");
 var errorResponse_1 = require("../utils/errorResponse");
+var tokenResponse_1 = require("../utils/tokenResponse");
 /**
  * @method --- POST
  * @access --- Public
  * @route --- auth/login
  */
 exports.login = asyncHandler_1.default(function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, password, user, isMatchedPassword, token;
+    var _a, email, password, user, isMatchedPassword;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -69,12 +70,7 @@ exports.login = asyncHandler_1.default(function (req, res, next) { return __awai
                 if (!isMatchedPassword) {
                     return [2 /*return*/, next(new errorResponse_1.ErrorResponse("Authentication error", 404))];
                 }
-                return [4 /*yield*/, user.generateAuthToken()];
-            case 3:
-                token = _b.sent();
-                res
-                    .status(200)
-                    .json({ success: true, msg: "Logged in", data: user, token: token });
+                tokenResponse_1.tokenResponse(user, 200, res);
                 return [2 /*return*/];
         }
     });
@@ -120,13 +116,4 @@ exports.logoutAllSessions = asyncHandler_1.default(function (req, res, next) { r
         }
     });
 }); });
-// export const test = asyncHandler(
-//   async (req: Request, res: Response, next: NextFunction) => {
-//     console.log(req.url);
-//     console.log(req.method);
-//     console.log(req.baseUrl);
-//     console.log(req.path);
-//     res.send('test');
-//   },
-// );
 //# sourceMappingURL=auth.controller.js.map

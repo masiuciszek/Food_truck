@@ -6,19 +6,28 @@ import Image from "components/Image";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "lib/parseCookies";
 import { useDispatch } from "react-redux";
-import { setAuthToken } from "src/store/auth/auth.actions";
+import { setAuthToken, userLoaded } from "src/store/auth/auth.actions";
 
 interface IndexServerProps {
-  tokenCookie: string;
+  token: string;
+  fallback: string;
 }
 
-function Index({ tokenCookie }: IndexServerProps) {
+function Index({ token, fallback }: IndexServerProps) {
   const dispatch = useDispatch();
+
   React.useEffect(() => {
-    if (tokenCookie) {
-      dispatch(setAuthToken(tokenCookie));
+    // if (!token) {
+    //   return () => {};
+    // } else {
+    //   dispatch(setAuthToken(token));
+    //   dispatch(userLoaded(token));
+    // }
+    if (token) {
+      dispatch(setAuthToken(token));
+      dispatch(userLoaded(token));
     }
-  }, [tokenCookie]);
+  }, [token]);
 
   return (
     <>
@@ -40,10 +49,12 @@ function Index({ tokenCookie }: IndexServerProps) {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { req } = ctx;
+
   const cookies = parseCookies(req);
   return {
     props: {
-      tokenCookie: cookies.token,
+      token: cookies.token || "",
+      fallback: "",
     },
   };
 };

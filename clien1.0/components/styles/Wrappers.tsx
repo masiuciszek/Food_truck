@@ -24,6 +24,24 @@ export const NavLogo = styled.div`
   }
 `;
 
+interface LargeWrapperProps {
+  margin?: string;
+  height?: string;
+}
+
+export const LargeWrapper = styled.div<LargeWrapperProps>`
+  margin: ${({ margin }) => (margin ? margin : "0")};
+  ${handleFlex("row", "space-between", "center")};
+  ${below.medium`
+    ${handleFlex("column", "center", "center")};
+  `}
+`;
+
+export const ImageWrapper = styled.div`
+  flex: 1;
+  ${handleFlex("row", "center", "center")};
+`;
+
 export const FormWrapper = styled.div`
   padding: 1rem;
   ${handleFlex("column", "center", "flex-start")};

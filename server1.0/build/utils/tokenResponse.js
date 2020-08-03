@@ -35,47 +35,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var db_1 = __importDefault(require("./db"));
-var error_1 = require("./middleware/error");
-var auth_route_1 = require("./routes/auth.route");
-var user_routes_1 = require("./routes/user.routes");
-var master_routes_1 = require("./routes/master.routes");
-var store_routes_1 = require("./routes/store.routes");
-var cors_1 = __importDefault(require("cors"));
-var cookie_parser_1 = __importDefault(require("cookie-parser"));
-var app = express_1.default();
-var port = process.env.PORT || 4000;
-(function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, db_1.default()];
-            case 1:
-                _a.sent();
-                return [2 /*return*/];
-        }
+exports.tokenResponse = void 0;
+function tokenResponse(user, statusCode, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var token, date, options;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user.generateAuthToken()];
+                case 1:
+                    token = _a.sent();
+                    date = new Date();
+                    options = {
+                        expire: date.setHours(date.getHours() + 24),
+                        httpOnly: false,
+                        secure: false,
+                    };
+                    if (process.env.NODE_ENV === "production") {
+                        (options.httpOnly = true), (options.secure = true);
+                    }
+                    res
+                        .status(statusCode)
+                        .cookie("token", token, options)
+                        .json({ success: true, token: token });
+                    return [2 /*return*/];
+            }
+        });
     });
-}); })();
-app.use(cookie_parser_1.default());
-app.use(cors_1.default());
-app.use(express_1.default.json());
-// TODO: DELETE
-app.get("/", function (req, res) {
-    res.json([
-        { id: 1, name: "Yooo" },
-        { id: 2, name: "Coool" },
-    ]);
-});
-app.use("/auth", auth_route_1.router);
-app.use("/user", user_routes_1.router);
-app.use("/master", master_routes_1.router);
-app.use("/store", store_routes_1.router);
-app.use(error_1.errorHandler);
-app.listen(port, function () {
-    console.log("port is on localhost " + port);
-});
-//# sourceMappingURL=index.js.map
+}
+exports.tokenResponse = tokenResponse;
+//# sourceMappingURL=tokenResponse.js.map
