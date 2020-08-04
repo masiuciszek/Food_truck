@@ -88,7 +88,19 @@ export const Input = styled.input`
   }
 `;
 
-export const FormGroup = styled.div``;
+export const FormGroup = styled.div`
+  padding: 0.5rem 0;
+  #forgot-password {
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    color: ${(props) => props.theme.colors.button};
+    border-bottom: 2px solid ${(props) => props.theme.colors.text};
+    line-height: 3rem;
+    letter-spacing: 0.3rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+`;
 
 export const Label = styled.label`
   display: block;

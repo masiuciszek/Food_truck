@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
 import { useSelector } from "react-redux";
-import useLocalStorage from "src/hooks/useLocalStorage";
 import { AppState } from "src/store";
 import { selectTheme } from "src/store/page/page.selector";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";

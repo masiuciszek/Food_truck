@@ -13,3 +13,8 @@ export const selectToken = createSelector(
   [authState],
   (state: AuthState) => state.token,
 );
+
+export const selectUserMessage = createSelector(
+  [authState],
+  (state: AuthState) => state.userMessage,
+);

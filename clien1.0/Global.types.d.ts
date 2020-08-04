@@ -51,10 +51,12 @@ interface RegisterFormData {
   password: string;
 }
 
-type ErrorMessage =
+type UserMessage =
   | "Please Try Again"
   | "Success"
   | "Ooops Something went wrong"
+  | "reset token sent to your email"
+  | "input invalid"
   | "";
 
 interface TokenResponse {
@@ -72,3 +74,5 @@ interface LoginData {
   email: string;
   password: string;
 }
+
+type ModalBodyType = "forgot password";

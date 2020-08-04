@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuth } from "src/store/auth/auth.selectors";
 import { AppState } from "src/store";
 import { loginUser } from "src/store/auth/auth.actions";
+import Modal from "./Modal";
+import useToggle from "src/hooks/useToggle";
 
 interface Props {
   title: string;
@@ -18,6 +20,8 @@ const LoginForm = ({ title }: Props) => {
     password: "",
   });
 
+  const [on, toggleOn] = useToggle();
+  console.log(on);
   const { email, password } = loginData;
 
   const isAuth = useSelector((state: AppState) => selectIsAuth(state));
@@ -41,32 +45,41 @@ const LoginForm = ({ title }: Props) => {
   }, [isAuth]);
 
   return (
-    <FormWrapper>
-      <h3>{title}</h3>
-      <FormStyles onSubmit={handleSubmit}>
-        <FormGroup>
-          <Input
-            name="email"
-            type="email"
-            placeholder="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </FormGroup>
+    <>
+      <FormWrapper>
+        <h3>{title}</h3>
+        <FormStyles onSubmit={handleSubmit}>
+          <FormGroup>
+            <Input
+              name="email"
+              type="email"
+              placeholder="email"
+              value={email}
+              onChange={handleChange}
+            />
+          </FormGroup>
 
-        <FormGroup>
-          <Input
-            name="password"
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </FormGroup>
+          <FormGroup>
+            <Input
+              name="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </FormGroup>
 
-        <Btn type="submit">Register</Btn>
-      </FormStyles>
-    </FormWrapper>
+          <FormGroup>
+            <span id="forgot-password" onClick={toggleOn}>
+              forgot password?
+            </span>
+          </FormGroup>
+
+          <Btn type="submit">Register</Btn>
+        </FormStyles>
+      </FormWrapper>
+      <Modal on={on} modalBodyType="forgot password" onSwitch={toggleOn} />
+    </>
   );
 };
 

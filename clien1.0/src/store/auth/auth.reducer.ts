@@ -5,7 +5,7 @@ const initialState: AuthState = {
   isAuth: false,
   user: null,
   status: "passive",
-  userError: "",
+  userMessage: "",
   token: "",
 };
 
@@ -18,22 +18,27 @@ const authReducer = (state: AuthState = initialState, action: Action) => {
         ...state,
         isAuth: true,
         status: "resolved",
-        userError: "",
+        userMessage: "",
       };
     case ActionTypes.SET_AUTH_TOKEN:
       return {
         ...state,
         token: action.payload,
       };
-    case ActionTypes.SET_ERROR_MSG:
+    case ActionTypes.HANDLE_FORGOT_PASSWORD:
       return {
         ...state,
-        userError: action.payload,
+        userMessage: action.payload,
       };
-    case ActionTypes.CLEAR_ERROR_MSG:
+    case ActionTypes.SET_USER_MSG:
       return {
         ...state,
-        userError: "",
+        userMessage: action.payload,
+      };
+    case ActionTypes.CLEAR_USER_MSG:
+      return {
+        ...state,
+        userMessage: "",
       };
     case ActionTypes.USER_LOADED:
       return {
@@ -41,7 +46,7 @@ const authReducer = (state: AuthState = initialState, action: Action) => {
         isAuth: true,
         status: "resolved",
         user: action.payload,
-        userError: "",
+        userMessage: "",
       };
     case ActionTypes.LOGOUT_USER:
       Cookie.remove("token");
@@ -50,7 +55,7 @@ const authReducer = (state: AuthState = initialState, action: Action) => {
         isAuth: true,
         status: "resolved",
         user: null,
-        userError: "",
+        userMessage: "",
       };
     default:
       return state;

@@ -12,6 +12,7 @@ export const Btn = styled.button`
   cursor: pointer;
   border: 2px solid transparent;
   border-radius: 0.4rem;
+  text-transform: capitalize;
   &:hover {
     color: ${({ theme }) => theme.colors.text};
     background: transparent;

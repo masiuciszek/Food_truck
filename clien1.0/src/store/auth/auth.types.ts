@@ -2,7 +2,7 @@ export interface AuthState {
   isAuth: boolean;
   user: User | null;
   status: Status;
-  userError: ErrorMessage;
+  userMessage: UserMessage;
   token: string;
 }
 
@@ -12,8 +12,9 @@ export enum ActionTypes {
   LOGIN_USER = "LOGIN_USER",
   LOGOUT_USER = "LOGOUT_USER",
   SET_AUTH_TOKEN = "SET_AUTH_TOKEN",
-  SET_ERROR_MSG = "SET_ERROR_MSG",
-  CLEAR_ERROR_MSG = "CLEAR_ERROR_MSG",
+  SET_USER_MSG = "SET_USER_MSG",
+  CLEAR_USER_MSG = "CLEAR_USER_MSG",
+  HANDLE_FORGOT_PASSWORD = "HANDLE_FORGOT_PASSWORD",
 }
 
 export interface RegisterUser {
@@ -38,19 +39,25 @@ export interface LogoutUser {
   type: ActionTypes.LOGOUT_USER;
 }
 
-export interface SetErrorMsg {
-  type: ActionTypes.SET_ERROR_MSG;
-  payload: ErrorMessage;
+export interface SerUserMessage {
+  type: ActionTypes.SET_USER_MSG;
+  payload: UserMessage;
 }
-export interface ClearErrorMsg {
-  type: ActionTypes.CLEAR_ERROR_MSG;
+export interface ClearUserMsg {
+  type: ActionTypes.CLEAR_USER_MSG;
+}
+
+export interface ForgotPassword {
+  type: ActionTypes.HANDLE_FORGOT_PASSWORD;
+  payload: UserMessage;
 }
 
 export type Action =
   | RegisterUser
   | LoginUser
   | LogoutUser
-  | SetErrorMsg
+  | SerUserMessage
   | UserLoaded
   | SetAuthToken
-  | ClearErrorMsg;
+  | ForgotPassword
+  | ClearUserMsg;
