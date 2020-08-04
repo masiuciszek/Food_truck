@@ -9,6 +9,7 @@ export const lightTheme: DefaultTheme = {
     background: "#fff",
     menuBg: "rgba(250,250,250,.7)",
     shadowOne: "rgba(0,0,0,0.5)",
+    shadowTwo: "rgba(0,0,0,0.8)",
   },
   size: {
     h1: "50px",
@@ -44,6 +45,7 @@ export const darkTheme: DefaultTheme = {
     background: "#212121",
     menuBg: "rgba(33,33,33,.7)",
     shadowOne: "rgba(0,0,0,0.5)",
+    shadowTwo: "rgba(0,0,0,0.8)",
   },
   size: {
     h1: "50px",

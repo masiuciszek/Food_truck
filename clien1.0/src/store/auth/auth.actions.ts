@@ -89,11 +89,11 @@ export const setAuthToken = (token: string): SetAuthToken => {
   return { type: ActionTypes.SET_AUTH_TOKEN, payload: token };
 };
 
-export const getNewPasswordToken = (email: string) => async (
+export const getNewPasswordToken = (email: { email: string }) => async (
   dispatch: Dispatch<ForgotPassword | SerUserMessage>,
 ) => {
   try {
-    await fetch("http://localhost:4000/user/forgot_password", {
+    await fetch("http://localhost:4000/user/me/forgot_password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -118,6 +118,10 @@ export const clearUserMessage = (): ClearUserMsg => {
   return {
     type: ActionTypes.CLEAR_USER_MSG,
   };
+};
+
+export const setUserMessage = (msg: UserMessage): SerUserMessage => {
+  return { type: ActionTypes.SET_USER_MSG, payload: msg };
 };
 
 export const logoutUser = (token: string) => async (

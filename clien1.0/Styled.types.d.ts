@@ -13,6 +13,7 @@ declare module "styled-components" {
       button: string;
       menuBg: string;
       shadowOne: string;
+      shadowTwo: string;
     };
     size: {
       h1: string;
