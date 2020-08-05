@@ -5,17 +5,16 @@ import { AppState } from "src/store";
 import { logoutUser } from "src/store/auth/auth.actions";
 import { selectIsAuth, selectToken } from "src/store/auth/auth.selectors";
 import styled from "styled-components";
-import { below, handleFlex } from "./styles/Helpers";
+import { above, below, handleFlex } from "./styles/Helpers";
 
 const LoginRegisterStyles = styled.ul`
   flex: 1;
   border-radius: 1rem;
   padding: 1rem;
-  width: 10rem;
   ${handleFlex("row", "space-evenly", "center")};
   margin: 0 1rem;
+
   ${below.smallMedium`
-    width: 30rem;
     display:none;
   `}
 `;

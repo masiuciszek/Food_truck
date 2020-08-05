@@ -4,7 +4,7 @@ type Theme = "LIGHT" | "DARK";
 
 type Gender = "MALE" | "FEMALE";
 
-type AppLink = "home" | "about" | "stores";
+type AppLink = "home" | "about" | "stores" | "top" | "blog";
 
 type SocialType = "twitter" | "instagram" | "github";
 

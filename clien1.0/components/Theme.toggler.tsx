@@ -26,7 +26,8 @@ const ThemeToggler = () => {
             onClick={() => {
               setTheme("DARK");
               dispatch(handleTheme(theme));
-            }}>
+            }}
+          >
             🌑
           </button>
         ) : (
@@ -34,7 +35,8 @@ const ThemeToggler = () => {
             onClick={() => {
               setTheme("LIGHT");
               dispatch(handleTheme(theme));
-            }}>
+            }}
+          >
             🌝
           </button>
         )}

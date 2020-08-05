@@ -50,6 +50,9 @@ export default styled(Nav)`
   position: relative;
   .title {
     flex: 1;
+    ${above.medium`
+      flex: 2;
+    `}
   }
   .menu-icon {
     z-index: 1000;

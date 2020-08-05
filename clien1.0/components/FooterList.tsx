@@ -1,6 +1,7 @@
 import Link from "next/link";
 import * as React from "react";
 import { navigationLinks, socialLinks } from "src/data/initialData";
+import { useLinks } from "src/hooks/useLinks";
 import styled from "styled-components";
 import { below, handleFlex } from "./styles/Helpers";
 
@@ -48,12 +49,10 @@ const List = styled.ul`
 `;
 
 const FooterList = () => {
-  const [navigation, setNavigation] = React.useState<LinkType<AppLink>[]>(
-    navigationLinks,
-  );
-  const [social, setSocial] = React.useState<LinkType<SocialType>[]>(
-    socialLinks,
-  );
+  const [navigation] = useLinks<AppLink>("Navigation");
+  const [social] = useLinks<SocialType>("Social");
+
+  console.log(navigation);
 
   return (
     <StyledList>
@@ -69,7 +68,7 @@ const FooterList = () => {
       <List>
         {social.map(({ name, path }) => (
           <li key={path}>
-            <a href={path} target='_blank' rel='noreferrer'>
+            <a href={path} target="_blank" rel="noreferrer">
               {name === "github"
                 ? `🐒 ${name}`
                 : name === "instagram"

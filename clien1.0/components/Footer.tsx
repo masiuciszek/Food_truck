@@ -11,11 +11,11 @@ interface Props {
 const Footer = ({ className }: Props) => {
   return (
     <footer className={className}>
-      <div className='logo'>
+      <div className="logo">
         <NavLogo>
-          <Link href='/'>
+          <Link href="/">
             <a>
-              <img src='/images/logo4.png' alt='main logo' />
+              <img src="/images/logo4.png" alt="main logo" />
             </a>
           </Link>
         </NavLogo>

@@ -10,7 +10,6 @@ export const ToggleStyles = styled.div<P>`
   border-radius: 1rem;
   display: flex;
   position: relative;
-  /* padding: 2rem 0; */
   button {
     background: transparent;
     border: 0;
@@ -32,7 +31,6 @@ export const ToggleStyles = styled.div<P>`
 export const Knob = styled.div<P>`
   background: ${({ themeProp }) =>
     themeProp === "LIGHT" ? "rgba(0, 0, 0, 0.4)" : "rgba(255, 255, 255, 0.4)"};
-  /* width: 8rem; */
   width: 12rem;
   height: 100%;
   transition: ${({ theme }) => theme.transition.mainTransition};

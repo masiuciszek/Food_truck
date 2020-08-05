@@ -4,8 +4,12 @@ export const navigationLinks: LinkType<AppLink>[] = [
     path: "/",
   },
   {
-    name: "about",
-    path: "/about",
+    name: "blog",
+    path: "/blog",
+  },
+  {
+    name: "top",
+    path: "/top",
   },
   {
     name: "stores",
@@ -18,3 +22,4 @@ export const socialLinks: LinkType<SocialType>[] = [
   { name: "github", path: "https://github.com/masiuciszek" },
   { name: "instagram", path: "https://www.instagram.com/masiuciszek/" },
 ];
+//
