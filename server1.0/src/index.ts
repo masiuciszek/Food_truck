@@ -5,6 +5,7 @@ import { router as authRoutes } from "./routes/auth.route";
 import { router as userRoutes } from "./routes/user.routes";
 import { router as masterRoutes } from "./routes/master.routes";
 import { router as storeRoutes } from "./routes/store.routes";
+import { router as reviewRoutes } from "./routes/review.routes";
 import cors from "cors";
 import cookiesParser from "cookie-parser";
 
@@ -31,6 +32,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/master", masterRoutes);
+app.use("/review", reviewRoutes);
 app.use("/store", storeRoutes);
 
 app.use(errorHandler);

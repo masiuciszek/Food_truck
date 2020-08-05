@@ -10,6 +10,7 @@ const ReviewSchema = new Schema<Review>({
     type: Number,
     min: 1,
     max: 5,
+    required: ["please leave a rating", true],
   },
   store: {
     type: Schema.Types.ObjectId,
@@ -28,7 +29,18 @@ const ReviewSchema = new Schema<Review>({
   },
 });
 
+// Populate by default when quiring from the Review schema
 ReviewSchema.pre<Review>("find", function (next: HookNextFunction): void {
+  this.populate("author");
+  next();
+});
+
+ReviewSchema.pre<Review>("find", function (next: HookNextFunction): void {
+  this.populate("store");
+  next();
+});
+
+ReviewSchema.pre<Review>("findOne", function (next: HookNextFunction): void {
   this.populate("author");
   next();
 });
