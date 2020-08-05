@@ -8,7 +8,21 @@ type AppLink = "home" | "about" | "stores" | "top" | "blog";
 
 type SocialType = "twitter" | "instagram" | "github";
 
-type Status = "rejected" | "resolved" | "pending" | "passive";
+type Status = "rejected" | "resolved" | "pending" | "passive" | "";
+
+type StoreType = "FRIENDLY" | "LOVELY" | "FAMILY" | "SPORTS_FAN";
+interface Store {
+  type: StoreType;
+  _id: string;
+  name: string;
+  owner: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+  createdAt: Date;
+}
 
 interface LinkType<T> {
   name: T;
@@ -75,4 +89,4 @@ interface LoginData {
   password: string;
 }
 
-type ModalBodyType = "forgot password";
+type ModalBodyType = "forgot password" | "";
