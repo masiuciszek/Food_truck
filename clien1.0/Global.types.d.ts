@@ -18,11 +18,17 @@ interface Store {
   owner: {
     _id: string;
     firstName: string;
+    lastName?: string;
     email: string;
   };
   image: Buffer;
+  imageString?: string;
   createdAt: Date;
 }
+
+// interface SingleStore  {
+
+// }
 
 interface LinkType<T> {
   name: T;

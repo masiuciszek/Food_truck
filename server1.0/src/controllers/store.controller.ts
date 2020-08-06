@@ -216,3 +216,56 @@ export const getStoreImage = asyncHandler(
     res.status(200).send(store?.image);
   },
 );
+
+/**
+ * @method --- POST
+ * @access --- Private
+ * @route --- store/uploadimage2/:id
+ * @desc Get Store Image
+ */
+export const uploadImage2 = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const store = await Store.findById(req.params.id).populate({
+      path: "owner",
+      select: "firstName lastName",
+    });
+
+    if (!store) {
+      return next(
+        new ErrorResponse(`Store with id ${req.params.id} was not found`, 404),
+      );
+    }
+
+    if (store.owner.id !== req.user.id) {
+      return next(new ErrorResponse(`User ${req.user.id} has no access`, 404));
+    }
+
+    store.imageString = req.body.imageString;
+    await store.save();
+    jsonResponse(res, 201, true, "uploaded image", store);
+  },
+);
+
+/**
+ * @method --- Get
+ * @access --- Public
+ * @route --- store/:id
+ * @desc Get store by slug
+ */
+
+export const getStoreById = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const store = await Store.findById(req.params.id).populate({
+      path: "owner",
+      select: "firstName lastName email",
+    });
+
+    if (!store) {
+      return next(
+        new ErrorResponse(`Store not found with id of ${req.params.id}`, 404),
+      );
+    }
+
+    jsonResponse(res, 200, true, "", store);
+  },
+);

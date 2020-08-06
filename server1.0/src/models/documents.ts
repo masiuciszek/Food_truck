@@ -33,7 +33,9 @@ export interface Store extends Document {
   owner: User["_id"];
   type: StoreType;
   image: Buffer | undefined;
+  imageString: string;
   createdAt: Date;
+  generateSlug: () => void;
 }
 
 export interface Review extends Document {

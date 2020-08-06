@@ -32,7 +32,7 @@ const StoreItem = ({ store }: Props) => {
   const slug = store.name.split(" ").join("-").toLowerCase();
 
   return (
-    <Link href="/store/[slug]" as={`/store/${slug}`}>
+    <Link as={`/store/${store._id}`} href="/store/[id]">
       <a>
         <StoreItemStyles>
           <h2>{store.name}</h2>

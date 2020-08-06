@@ -18,6 +18,7 @@ const StoreSchema = new Schema<Store>({
     enum: ["FRIENDLY", "LOVELY", "FAMILY", "SPORTS_FAN"],
     default: "FRIENDLY",
   },
+  imageString: String,
   image: {
     type: Buffer,
   },
@@ -31,8 +32,8 @@ const Store = mongoose.model<Store>("Store", StoreSchema);
 
 // for creating slug when created
 StoreSchema.pre<Store>("save", function (next: HookNextFunction): void {
-  const store = this;
-  store.slug = slugify(store.name, { lower: true });
+  // this.slug = slugify(this.name, { lower: true });
+  this.slug = this.name.split("").join("-").toLowerCase();
   next();
 });
 

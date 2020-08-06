@@ -38,4 +38,10 @@ router
 
 router.route("/image/:id").get(storeController.getStoreImage);
 
+router.route("/:id").get(storeController.getStoreById);
+
+router
+  .route("/uploadimage2/:id")
+  .post(authHandler, storeController.uploadImage2);
+
 export { router };

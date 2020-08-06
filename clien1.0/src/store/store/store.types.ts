@@ -2,6 +2,7 @@ export interface StoreState {
   stores: Store[];
   status: Status;
   image: string;
+  store: Store | null;
 }
 
 export interface GetStores {
@@ -19,4 +20,9 @@ export interface GetStoreImage {
   payload: string;
 }
 
-export type Action = GetStores | DeleteStore | GetStoreImage;
+export interface GetStoreById {
+  type: "GET_STORE_BY_ID";
+  payload: Store;
+}
+
+export type Action = GetStores | DeleteStore | GetStoreImage | GetStoreById;
