@@ -3,6 +3,7 @@ import { Action, StoreState } from "./store.types";
 const initialState: StoreState = {
   stores: [],
   status: "",
+  image: "",
 };
 
 const storeReducer = (state: StoreState = initialState, action: Action) => {
@@ -13,7 +14,12 @@ const storeReducer = (state: StoreState = initialState, action: Action) => {
         stores: action.payload,
         status: "resolved",
       };
-
+    case "GET_STORE_IMAGE":
+      return {
+        ...state,
+        image: action.payload,
+        status: "resolved",
+      };
     default:
       return state;
   }

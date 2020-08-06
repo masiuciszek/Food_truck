@@ -18,9 +18,9 @@ interface Store {
   owner: {
     _id: string;
     firstName: string;
-    lastName: string;
     email: string;
   };
+  image: Buffer;
   createdAt: Date;
 }
 

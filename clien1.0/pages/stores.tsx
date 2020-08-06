@@ -1,3 +1,5 @@
+import Stores from "components/Stores";
+import Title from "components/Title";
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { parseCookies } from "lib/parseCookies";
 import { GetServerSideProps } from "next";
@@ -23,9 +25,10 @@ const StoresPage = ({ token, stores }: Props) => {
   }, [token, stores]);
 
   return (
-    <div>
-      <h1>StoresPage</h1>
-    </div>
+    <>
+      <Title mainTitle="Stores" className="stores-title" />
+      <Stores />
+    </>
   );
 };
 

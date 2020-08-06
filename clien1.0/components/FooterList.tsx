@@ -52,8 +52,6 @@ const FooterList = () => {
   const [navigation] = useLinks<AppLink>("Navigation");
   const [social] = useLinks<SocialType>("Social");
 
-  console.log(navigation);
-
   return (
     <StyledList>
       <List>

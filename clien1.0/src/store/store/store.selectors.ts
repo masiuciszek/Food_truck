@@ -8,3 +8,8 @@ export const selectStores = createSelector(
   [storeState],
   (store: StoreState) => store.stores,
 );
+
+export const selectImage = createSelector(
+  [storeState],
+  (store: StoreState) => store.image,
+);

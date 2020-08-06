@@ -19,6 +19,8 @@ export const createStore = asyncHandler(
 
     const newStore = await Store.create(req.body);
 
+    await newStore.save();
+
     res
       .status(201)
       .json({ success: true, msg: "store created", data: newStore });

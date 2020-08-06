@@ -32,7 +32,7 @@ const Store = mongoose.model<Store>("Store", StoreSchema);
 // for creating slug when created
 StoreSchema.pre<Store>("save", function (next: HookNextFunction): void {
   const store = this;
-  store.slug = slugify(store.name, { lower: true, replacement: "-" });
+  store.slug = slugify(store.name, { lower: true });
   next();
 });
 
