@@ -17,6 +17,13 @@ const StoreItemStyles = styled.section`
     text-transform: capitalize;
     border-bottom: 2px solid ${({ theme }) => theme.colors.button};
   }
+  .storeItemHeader {
+    img {
+      width: 100%;
+      border-radius: 0.5rem;
+      ${(props) => props.theme.shadow.elevations[1]};
+    }
+  }
 `;
 
 const StoreFooter = styled.div`
@@ -35,6 +42,11 @@ const StoreItem = ({ store }: Props) => {
     <Link as={`/store/${store._id}`} href="/store/[id]">
       <a>
         <StoreItemStyles>
+          <div className="storeItemHeader">
+            {store.imageString && (
+              <img src={store.imageString} alt={`${store.name}-table`} />
+            )}
+          </div>
           <h2>{store.name}</h2>
           <StoreFooter>
             <h3>

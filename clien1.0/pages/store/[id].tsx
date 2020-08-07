@@ -17,6 +17,7 @@ const SingleStore = ({ singleStore }: Props) => {
   return (
     <div>
       <h1>{singleStore.name}</h1>
+      <h1>{singleStore.owner.firstName}</h1>
     </div>
   );
 };
@@ -24,9 +25,10 @@ const SingleStore = ({ singleStore }: Props) => {
 SingleStore.getInitialProps = async (ctx: NextPageContext) => {
   const { query, req } = ctx;
 
-  if (!req) {
-    return { singleStore: {} };
-  }
+  // if (!req) {
+  //   return { singleStore: {} };
+  // }
+
   const res = await fetch(`http://localhost:4000/store/${query.id}`);
   const data: { success: boolean; msg: string; data: Store } = await res.json();
 

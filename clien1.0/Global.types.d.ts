@@ -11,6 +11,7 @@ type SocialType = "twitter" | "instagram" | "github";
 type Status = "rejected" | "resolved" | "pending" | "passive" | "";
 
 type StoreType = "FRIENDLY" | "LOVELY" | "FAMILY" | "SPORTS_FAN";
+
 interface Store {
   type: StoreType;
   _id: string;
@@ -25,10 +26,6 @@ interface Store {
   imageString?: string;
   createdAt: Date;
 }
-
-// interface SingleStore  {
-
-// }
 
 interface LinkType<T> {
   name: T;
@@ -96,3 +93,12 @@ interface LoginData {
 }
 
 type ModalBodyType = "forgot password" | "";
+
+interface Review {
+  _id: string;
+  text: string;
+  rating: number;
+  author: User;
+  store: Store;
+  createdAt: Date;
+}
