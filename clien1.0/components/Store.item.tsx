@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { AppState } from "src/store";
 import styled from "styled-components";
 
 interface Props {
@@ -38,6 +39,12 @@ const StoreFooter = styled.div`
 const StoreItem = ({ store }: Props) => {
   const slug = store.name.split(" ").join("-").toLowerCase();
 
+  // TODO: Just for testing
+  console.log(
+    store.reviews &&
+      store.reviews[0] &&
+      store.reviews.map((x) => x.author.firstName),
+  );
   return (
     <Link as={`/store/${store._id}`} href="/store/[id]">
       <a>

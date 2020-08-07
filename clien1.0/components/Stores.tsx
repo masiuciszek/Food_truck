@@ -11,14 +11,12 @@ const Grid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-row: auto;
   margin: 1rem auto 5rem auto;
-  /* grid-auto-rows: 150px; */
-  /* grid-auto-flow: row dense; */
+  grid-auto-flow: row dense;
 `;
 
 const Stores = () => {
   const stores = useSelector((state: AppState) => selectStores(state));
 
-  console.log(stores);
   return (
     <Grid>
       {stores.map((store) => (

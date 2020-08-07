@@ -3,6 +3,7 @@ import { Router } from "express";
 import authHandler from "../middleware/authHandler";
 import { handleAdmin } from "../middleware/adminHandler";
 import { upload } from "../utils/imgUpload";
+import asyncHandler from "../middleware/asyncHandler";
 
 const router = Router();
 
@@ -43,5 +44,9 @@ router.route("/:id").get(storeController.getStoreById);
 router
   .route("/uploadimage2/:id")
   .post(authHandler, storeController.uploadImage2);
+
+router.route("/get_review/:id").get(storeController.getStoreReviewById);
+
+router.route("/get_review_rating/:id").get(storeController.getStoreRating);
 
 export { router };

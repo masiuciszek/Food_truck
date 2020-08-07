@@ -37,4 +37,22 @@ StoreSchema.pre<Store>("save", function (next: HookNextFunction): void {
   next();
 });
 
+// find reviews where the stores _id property === reviews store property
+StoreSchema.virtual("reviews", {
+  ref: "Review", // what model to link ?
+  localField: "_id", // which field on the store?
+  foreignField: "store", // which field on the review?
+});
+
+StoreSchema.pre<Store>("find", function (next: HookNextFunction) {
+  this.populate("reviews");
+  next();
+});
+
+StoreSchema.pre("findOne", function (next: HookNextFunction) {
+  this.populate("reviews");
+
+  next();
+});
+
 export { Store };

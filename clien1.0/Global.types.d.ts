@@ -22,6 +22,7 @@ interface Store {
     lastName?: string;
     email: string;
   };
+  reviews?: Review[];
   image: Buffer;
   imageString?: string;
   createdAt: Date;
@@ -102,3 +103,9 @@ interface Review {
   store: Store;
   createdAt: Date;
 }
+
+interface Empty {
+  found: boolean;
+}
+
+type Maybe<T> = Empty | T;

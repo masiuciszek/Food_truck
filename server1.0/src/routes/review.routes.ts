@@ -4,6 +4,8 @@ import authHandler from "../middleware/authHandler";
 
 const router = Router();
 
+router.route("/reviews").get(reviewController.getAllReviews);
+
 router
   .route("/add_review/:storeId")
   .post(authHandler, reviewController.addReview);

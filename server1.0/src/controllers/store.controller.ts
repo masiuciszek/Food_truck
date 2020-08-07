@@ -2,6 +2,7 @@ import { NextFunction, Request, response, Response } from "express";
 import sharp from "sharp";
 import asyncHandler from "../middleware/asyncHandler";
 import { AuthRequest } from "../middleware/authHandler";
+import { Review } from "../models/Review";
 import { Store } from "../models/Store";
 import { userModel as User } from "../models/User";
 import { ErrorResponse } from "../utils/errorResponse";
@@ -56,8 +57,8 @@ export const myStores = asyncHandler(
 export const getAllStores = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const stores = await Store.find({}).populate({
-      path: "owner",
-      select: "firstName email",
+      path: "owner reviews",
+      select: "firstName email rating text",
     });
 
     if (!stores) return new ErrorResponse(`No stores`, 400);
@@ -267,5 +268,51 @@ export const getStoreById = asyncHandler(
     }
 
     jsonResponse(res, 200, true, "", store);
+  },
+);
+
+/**
+ * @method --- Get
+ * @access --- Public
+ * @route --- store/get_review/:id
+ * @desc Get store Review
+ */
+
+export const getStoreReviewById = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // const review = await Review.findOne({ store: req.params.id }).populate(
+    //   "store",
+    // );
+
+    const store = await Store.findById(req.params.id)
+      .select("reviews")
+      .populate("reviews");
+
+    if (!store) {
+      return next(new ErrorResponse("no review on this store", 400));
+    }
+
+    jsonResponse(res, 200, true, "", store);
+  },
+);
+
+/**
+ * @method --- Get
+ * @access --- Public
+ * @route --- store/get_review_rating/:id
+ * @desc Get store Review rating, (only rating)
+ */
+
+export const getStoreRating = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const review = await Review.findOne({ store: req.params.id }).select(
+      "rating -author",
+    );
+
+    if (!review) {
+      return next(new ErrorResponse("no rating on this store", 400));
+    }
+
+    jsonResponse(res, 200, true, "", review);
   },
 );

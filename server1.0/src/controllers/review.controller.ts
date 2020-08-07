@@ -65,6 +65,21 @@ export const getMyReviews = asyncHandler(
  */
 
 /**
+ * @method --- GET
+ * @access --- Public
+ * @route --- /reviews/
+ * @desc --- get all review
+ */
+
+export const getAllReviews = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const reviews = await Review.find({});
+
+    jsonResponse(res, 200, true, "all reviews", reviews);
+  },
+);
+
+/**
  * @method --- DELETE
  * @access --- Private
  * @route --- /user/reviews/delete/:reviewId
