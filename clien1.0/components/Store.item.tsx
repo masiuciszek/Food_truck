@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import { AppState } from "src/store";
 import styled from "styled-components";
 
 interface Props {
@@ -23,6 +22,9 @@ const StoreItemStyles = styled.section`
       width: 100%;
       border-radius: 0.5rem;
       ${(props) => props.theme.shadow.elevations[1]};
+      object-fit: cover;
+      height: 30rem;
+      border: 1px solid ${({ theme }) => theme.colors.button};
     }
   }
 `;

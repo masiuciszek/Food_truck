@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
@@ -11,6 +12,11 @@ interface Props {
   ctaText?: string;
   ctaPath?: string;
   className: string;
+  textColor?: string;
+  shadow?: string;
+  size?: string;
+  size2?: string;
+  bgColor?: string;
 }
 
 const Title: React.FC<Props> = ({
@@ -24,10 +30,10 @@ const Title: React.FC<Props> = ({
   return (
     <section className={className}>
       <h1>{mainTitle}</h1>
-      {subTitle && <h4>{subTitle}</h4>}
+      {subTitle && <h3>{subTitle}</h3>}
       {cta && (
         <Link href={`/${ctaPath}`}>
-          <Btn as='a'> {ctaText} </Btn>
+          <Btn as="a"> {ctaText} </Btn>
         </Link>
       )}
     </section>
@@ -37,8 +43,19 @@ const Title: React.FC<Props> = ({
 export default styled(Title)`
   padding: 1rem;
   ${handleFlex("column", "center", "center")};
+  ${({ theme, shadow }) => shadow && theme.shadow.elevations[2]};
+  background: ${({ theme, bgColor }) => (bgColor ? bgColor : "none")};
+
   h1 {
-    font-size: 4rem;
+    font-size: ${({ theme, size }) => (size ? size : "4rem")};
     border-bottom: 2px solid ${({ theme: { colors } }) => colors.button};
+    color: ${({ theme, textColor }) =>
+      textColor ? textColor : theme.colors.text};
+    text-transform: capitalize;
+  }
+  h3 {
+    font-size: ${({ theme, size2 }) => (size2 ? size2 : "2rem")};
+    color: ${({ theme, textColor }) =>
+      textColor ? textColor : theme.colors.text};
   }
 `;
