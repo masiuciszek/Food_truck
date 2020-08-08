@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 import { NextPageContext } from "next";
 import Title from "components/Title";
 import RatingBar from "components/RatingBar";
@@ -17,7 +17,12 @@ import {
   Tag,
 } from "components/styles/Single.store.styles";
 import { parseCookies } from "lib/parseCookies";
-import { setAuthToken, userLoaded } from "src/store/auth/auth.actions";
+import {
+  setAuthToken,
+  setUserMessage,
+  userLoaded,
+} from "src/store/auth/auth.actions";
+import { leaveStoreReview } from "src/store/store/store.actions";
 
 interface Props {
   singleStore: Store;
@@ -49,16 +54,18 @@ const SingleStore = ({ singleStore, token }: Props) => {
 
     if (!comment && !selectedRate) {
       alert("no empty values allowed");
+      dispatch(setUserMessage("No empty fields allowed"));
     } else if (comment.length < 5) {
-      alert("leave a real comment");
+      dispatch(setUserMessage("Please Try Again"));
+    } else {
+      const newRating = {
+        text: comment,
+        rating: selectedRate,
+      };
+      dispatch(leaveStoreReview(newRating, token, singleStore._id));
+      setComment("");
+      setSelectedRate(0);
     }
-
-    const newRating = {
-      text: comment,
-      rating: selectedRate,
-    };
-
-    console.log(newRating);
   };
 
   const isAuth = useSelector((state: AppState) => selectIsAuth(state));
@@ -119,14 +126,17 @@ SingleStore.getInitialProps = async (ctx: NextPageContext) => {
 
   const res = await fetch(`http://localhost:4000/store/${query.id}`);
   const data: { success: boolean; msg: string; data: Store } = await res.json();
-  // const cookies = parseCookies(req);
+
+  const cookies = parseCookies(req!);
 
   return {
     singleStore: data.data,
-    token: "",
+    token: cookies.token || "",
   };
 };
 
-export const get: GetInit = () => {};
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   //
+// };
 
 export default SingleStore;

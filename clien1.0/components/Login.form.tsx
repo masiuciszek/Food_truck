@@ -21,7 +21,7 @@ const LoginForm = ({ title }: Props) => {
   });
 
   const [on, toggleOn] = useToggle();
-  console.log(on);
+
   const { email, password } = loginData;
 
   const isAuth = useSelector((state: AppState) => selectIsAuth(state));

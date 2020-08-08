@@ -75,6 +75,7 @@ type UserMessage =
   | "Ooops Something went wrong"
   | "reset token sent to your email"
   | "input invalid"
+  | "No empty fields allowed"
   | "";
 
 interface TokenResponse {
