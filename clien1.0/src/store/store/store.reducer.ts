@@ -4,6 +4,7 @@ const initialState: StoreState = {
   stores: [],
   status: "",
   image: "",
+  store: null,
 };
 
 const storeReducer = (state: StoreState = initialState, action: Action) => {
@@ -14,10 +15,9 @@ const storeReducer = (state: StoreState = initialState, action: Action) => {
         stores: action.payload,
         status: "resolved",
       };
-    case "GET_STORE_IMAGE":
+    case "LEAVE_REVIEW":
       return {
         ...state,
-        image: action.payload,
         status: "resolved",
       };
     default:

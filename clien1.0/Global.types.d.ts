@@ -109,3 +109,9 @@ interface Empty {
 }
 
 type Maybe<T> = Empty | T;
+
+// for submitting
+interface ReviewData {
+  text: string;
+  rating: number;
+}

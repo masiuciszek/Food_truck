@@ -15,14 +15,13 @@ export interface DeleteStore {
   payload: string; // store id
 }
 
-export interface GetStoreImage {
-  type: "GET_STORE_IMAGE";
-  payload: string;
-}
-
 export interface GetStoreById {
   type: "GET_STORE_BY_ID";
   payload: Store;
 }
 
-export type Action = GetStores | DeleteStore | GetStoreImage | GetStoreById;
+export interface LeaveStoreReview {
+  type: "LEAVE_REVIEW";
+}
+
+export type Action = GetStores | DeleteStore | GetStoreById | LeaveStoreReview;

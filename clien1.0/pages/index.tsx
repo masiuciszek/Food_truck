@@ -17,12 +17,6 @@ function Index({ token, fallback }: IndexServerProps) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    // if (!token) {
-    //   return () => {};
-    // } else {
-    //   dispatch(setAuthToken(token));
-    //   dispatch(userLoaded(token));
-    // }
     if (token) {
       dispatch(setAuthToken(token));
       dispatch(userLoaded(token));

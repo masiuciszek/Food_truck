@@ -147,7 +147,7 @@ const RegisterForm = ({ title }: Props) => {
             onChange={(e) => setPassword2(e.target.value)}
           />
         </FormGroup>
-        <Btn type="submit">Register</Btn>
+        <Btn type="submit">Login</Btn>
       </FormStyles>
     </FormWrapper>
   );
