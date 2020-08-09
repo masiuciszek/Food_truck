@@ -3,6 +3,7 @@ import { User } from "./documents";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+import { Store } from "./Store";
 import "dotenv/config";
 
 const UserSchema = new Schema<User>({
@@ -104,6 +105,13 @@ UserSchema.methods.getResetPasswordToken = function () {
 
   return resetToken;
 };
+
+// Remove all stores that belongs to the user
+UserSchema.pre("remove", async function (next: HookNextFunction) {
+  await Store.deleteMany({ user: this._id });
+
+  next();
+});
 
 const userModel = mongoose.model<User>("User", UserSchema);
 

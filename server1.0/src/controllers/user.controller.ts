@@ -10,6 +10,7 @@ import sharp from "sharp";
 import crypto from "crypto";
 import "dotenv/config";
 import { tokenResponse } from "../utils/tokenResponse";
+import { Store } from "../models/Store";
 
 /**
  * @method --- POST
@@ -264,6 +265,8 @@ export const removeMe = asyncHandler(
       return next(new ErrorResponse("User not found", 404));
     }
 
+    // DELETE all stores that belong to the user
+    await Store.deleteMany({ owner: req.user._id });
     await User.findByIdAndRemove(req.user._id);
 
     jsonResponse(res, 200, true, `${user.firstName} got removed`, {});
