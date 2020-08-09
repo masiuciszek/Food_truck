@@ -21,14 +21,6 @@ app.use(cookiesParser());
 app.use(cors());
 app.use(express.json());
 
-// TODO: DELETE
-app.get("/", (req, res) => {
-  res.json([
-    { id: 1, name: "Yooo" },
-    { id: 2, name: "Coool" },
-  ]);
-});
-
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/master", masterRoutes);
