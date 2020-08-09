@@ -45,8 +45,9 @@ const StoreItem = ({ store }: Props) => {
   console.log(
     store.reviews &&
       store.reviews[0] &&
-      store.reviews.map((x) => x.author.firstName),
+      store.reviews.map((x) => ({ a: x.author.firstName, b: x.store.name })),
   );
+
   return (
     <Link as={`/store/${store._id}`} href="/store/[id]">
       <a>

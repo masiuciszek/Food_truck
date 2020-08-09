@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GetServerSideProps } from "next";
+
 import { NextPageContext } from "next";
 import Title from "components/Title";
 import RatingBar from "components/RatingBar";
@@ -69,7 +69,7 @@ const SingleStore = ({ singleStore, token }: Props) => {
   };
 
   const isAuth = useSelector((state: AppState) => selectIsAuth(state));
-
+  console.log(singleStore);
   return (
     <StoreStyles>
       <StoreHero bgImg={singleStore.imageString || ""} />
@@ -86,6 +86,7 @@ const SingleStore = ({ singleStore, token }: Props) => {
           ctaText="Stores"
         />
       </TitleAttached>
+
       <Info>
         <h3>{singleStore.name}</h3>
         <Tag>{singleStore.type}</Tag>
@@ -119,10 +120,6 @@ const SingleStore = ({ singleStore, token }: Props) => {
 
 SingleStore.getInitialProps = async (ctx: NextPageContext) => {
   const { query, req } = ctx;
-
-  // if (!req) {
-  //   return { singleStore: {} };
-  // }
 
   const res = await fetch(`http://localhost:4000/store/${query.id}`);
   const data: { success: boolean; msg: string; data: Store } = await res.json();

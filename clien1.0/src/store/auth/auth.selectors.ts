@@ -18,3 +18,8 @@ export const selectUserMessage = createSelector(
   [authState],
   (state: AuthState) => state.userMessage,
 );
+
+export const selectUser = createSelector(
+  [authState],
+  (state: AuthState) => state.user,
+);
