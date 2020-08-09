@@ -26,7 +26,7 @@ const ProfilePage = ({ token }: Props) => {
 
   return (
     <LargeWrapper>
-      <Profile user={user} />
+      <Profile user={user} token={token} />
     </LargeWrapper>
   );
 };

@@ -41,13 +41,6 @@ const StoreFooter = styled.div`
 const StoreItem = ({ store }: Props) => {
   const slug = store.name.split(" ").join("-").toLowerCase();
 
-  // TODO: Just for testing
-  console.log(
-    store.reviews &&
-      store.reviews[0] &&
-      store.reviews.map((x) => ({ a: x.author.firstName, b: x.store.name })),
-  );
-
   return (
     <Link as={`/store/${store._id}`} href="/store/[id]">
       <a>
@@ -57,11 +50,11 @@ const StoreItem = ({ store }: Props) => {
               <img src={store.imageString} alt={`${store.name}-table`} />
             )}
           </div>
-          <h2>{store.name}</h2>
+          <h2>{store?.name}</h2>
           <StoreFooter>
             <h3>
               {" "}
-              Store Owner <span>{store.owner.firstName}</span>
+              Store Owner <span>{store?.owner?.firstName}</span>
             </h3>
           </StoreFooter>
         </StoreItemStyles>

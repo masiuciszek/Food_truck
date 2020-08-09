@@ -10,6 +10,8 @@ import {
   SerUserMessage,
   UserLoaded,
   ClearUserMsg,
+  EditMe,
+  DeleteMe,
 } from "./auth.types";
 
 // const isServer = typeof window === "undefined";
@@ -141,5 +143,41 @@ export const logoutUser = (token: string) => async (
       type: ActionTypes.SET_USER_MSG,
       payload: "Ooops Something went wrong",
     });
+  }
+};
+
+export const editMe = (
+  formBody: EditFormBody,
+  token: string,
+  id: string,
+) => async (dispatch: Dispatch<EditMe>) => {
+  try {
+    await fetch("http://localhost:4000/user/me/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formBody),
+    });
+    dispatch({ type: ActionTypes.EDIT_ME, payload: id });
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+export const deleteMe = (token: string) => async (
+  dispatch: Dispatch<DeleteMe>,
+) => {
+  try {
+    await fetch("http://localhost:4000/user/me/remove", {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch({ type: ActionTypes.DELETE_ME });
+  } catch (err) {
+    console.error(err.message);
   }
 };

@@ -116,3 +116,11 @@ interface ReviewData {
   text: string;
   rating: number;
 }
+
+interface EditFormBody {
+  firstName: string;
+  lastName: string;
+  email: string;
+  gender: string;
+  age: string;
+}

@@ -1,10 +1,16 @@
+import { useRouter } from "next/router";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "src/store";
+import { deleteMe } from "src/store/auth/auth.actions";
+import { selectIsAuth } from "src/store/auth/auth.selectors";
 import styled from "styled-components";
 import { Btn } from "./styles/Btns";
 import { handleFlex } from "./styles/Helpers";
 
 interface Props {
-  user: User;
+  user: User | null;
+  token: string;
 }
 
 const StyledProfile = styled.section`
@@ -34,7 +40,7 @@ const BtnGroup = styled.div`
   }
 `;
 
-const Profile = ({ user }: Props) => {
+const Profile = ({ user, token }: Props) => {
   const date = user?.createdAt.toString().split("-");
   let yy = "";
   let mm = "";
@@ -78,6 +84,17 @@ const Profile = ({ user }: Props) => {
 
   const random = (amount = 5) => Math.floor(Math.random() * amount);
 
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state: AppState) => selectIsAuth(state));
+
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (!isAuth) {
+      router.push("/");
+    }
+  }, [isAuth]);
+
   return (
     <StyledProfile>
       <p style={{ transform: `rotate(${random(3)}deg)` }}>
@@ -89,13 +106,13 @@ const Profile = ({ user }: Props) => {
       <p style={{ transform: `rotate(${random(8)}deg)` }}>
         <span>{user?.gender} </span>
       </p>
-      <p style={{ transform: `rotate(${random(2)}deg)` }}>
+      <p style={{ transform: `rotate(${random(1)}deg)` }}>
         Created at Year <span>{yy}</span>
         <span>{handleDate(mm)}</span>
       </p>
       <BtnGroup>
         <Btn>Edit profile</Btn>
-        <Btn>Delete profile</Btn>
+        <Btn onClick={() => dispatch(deleteMe(token))}>Delete profile</Btn>
       </BtnGroup>
     </StyledProfile>
   );

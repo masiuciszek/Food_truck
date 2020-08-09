@@ -15,6 +15,8 @@ export enum ActionTypes {
   SET_USER_MSG = "SET_USER_MSG",
   CLEAR_USER_MSG = "CLEAR_USER_MSG",
   HANDLE_FORGOT_PASSWORD = "HANDLE_FORGOT_PASSWORD",
+  EDIT_ME = "EDIT_USER",
+  DELETE_ME = "DELETE_ME",
 }
 
 export interface RegisterUser {
@@ -52,6 +54,14 @@ export interface ForgotPassword {
   payload: UserMessage;
 }
 
+export interface EditMe {
+  type: ActionTypes.EDIT_ME;
+  payload: string; // id
+}
+export interface DeleteMe {
+  type: ActionTypes.DELETE_ME;
+}
+
 export type Action =
   | RegisterUser
   | LoginUser
@@ -60,4 +70,6 @@ export type Action =
   | UserLoaded
   | SetAuthToken
   | ForgotPassword
-  | ClearUserMsg;
+  | ClearUserMsg
+  | EditMe
+  | DeleteMe;

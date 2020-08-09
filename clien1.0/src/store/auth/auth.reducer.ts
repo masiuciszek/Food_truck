@@ -48,11 +48,19 @@ const authReducer = (state: AuthState = initialState, action: Action) => {
         user: action.payload,
         userMessage: "",
       };
+    case ActionTypes.EDIT_ME:
+      return {
+        ...state,
+        status: "resolved",
+        // user:
+        //   action.payload === state.user?._id ? { ...state.user } : state.user,
+      };
     case ActionTypes.LOGOUT_USER:
+    case ActionTypes.DELETE_ME:
       Cookie.remove("token");
       return {
         ...state,
-        isAuth: true,
+        isAuth: false,
         status: "resolved",
         user: null,
         userMessage: "",

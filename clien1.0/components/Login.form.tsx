@@ -75,7 +75,7 @@ const LoginForm = ({ title }: Props) => {
             </span>
           </FormGroup>
 
-          <Btn type="submit">Register</Btn>
+          <Btn type="submit">Login</Btn>
         </FormStyles>
       </FormWrapper>
       <Modal on={on} modalBodyType="forgot password" onSwitch={toggleOn} />
