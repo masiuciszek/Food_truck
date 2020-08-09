@@ -17,8 +17,8 @@
 ---
 
 <p align="center">
-Application focused on the backend , using express and typescript.
-Mongodb as database and using NEXT JS for servers side rendering the UI.
+Application where I will try different backend technologies , more like a hobby project, to have a reference and to understand the back end world much better.
+I will still aim to build a front end for every backend application.
 
 This is just production application for own case, nothing that will be in production. That's why some error messages that I handle is there for a special purpose. Just to understand the code on what's going on. I know that in a real case you would have write in a more a anonymous way. 🧛‍♂️
 <br>
