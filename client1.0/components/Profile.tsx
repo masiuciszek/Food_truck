@@ -1,10 +1,12 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useToggle from "src/hooks/useToggle";
 import { AppState } from "src/store";
 import { deleteMe, setUserMessage } from "src/store/auth/auth.actions";
-import { selectIsAuth } from "src/store/auth/auth.selectors";
+import { selectIsAuth, selectUser } from "src/store/auth/auth.selectors";
 import styled from "styled-components";
+import EditForm from "./Edit.form";
 import Message from "./Message";
 import { Btn } from "./styles/Btns";
 import { handleFlex } from "./styles/Helpers";
@@ -86,9 +88,11 @@ const Profile = ({ user, token }: Props) => {
 
   const dispatch = useDispatch();
   const isAuth = useSelector((state: AppState) => selectIsAuth(state));
+
   const router = useRouter();
 
-  const [confirmDelete, setConfirmDelete] = React.useState(false);
+  const [confirmDelete, toggleConfirmDelete] = useToggle();
+  const [isEdit, toggleEdit] = useToggle();
 
   React.useEffect(() => {
     if (!isAuth) {
@@ -119,11 +123,12 @@ const Profile = ({ user, token }: Props) => {
         <span>{handleDate(mm)}</span>
       </p>
       <BtnGroup>
-        <Btn>Edit profile</Btn>
+        <Btn onClick={toggleEdit}>Edit profile</Btn>
         {/* <Btn onClick={() => dispatch(deleteMe(token))}>Delete profile</Btn> */}
         <Btn onClick={handleDeleteMe}>Delete profile</Btn>
       </BtnGroup>
       <Message ctaDelete token={token} />
+      <EditForm isEdit={isEdit} toggleEdit={toggleEdit} token={token} />
     </StyledProfile>
   );
 };

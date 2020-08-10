@@ -31,8 +31,8 @@ function Index({ token, fallback }: IndexServerProps) {
             className="HomeTitle"
             mainTitle="Delicious tables"
             cta
-            ctaText="Tables"
-            ctaPath="tables"
+            ctaText="Stores"
+            ctaPath="stores"
           />
           <Image imagePath="/images/the-munchies.png" imageAlt="Home Hero" />
         </HeroContentWrapper>

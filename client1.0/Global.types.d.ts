@@ -46,6 +46,7 @@ interface User {
   lastName: string;
   email: string;
   password: string;
+  age: number;
   gender: Gender;
   role: Role;
   tokens: Token[];
@@ -119,9 +120,9 @@ interface ReviewData {
 }
 
 interface EditFormBody {
-  firstName: string;
-  lastName: string;
-  email: string;
-  gender: string;
-  age: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  gender?: string;
+  age?: number;
 }
