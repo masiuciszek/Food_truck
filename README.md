@@ -3,7 +3,7 @@
  <img width=200px height=200px src="server.png" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Food trucks</h3>
+<h3 align="center">fullstacks!!! λ⚛️😎👨🏻‍💻</h3>
 
 <div align="center">
 
@@ -17,7 +17,7 @@
 ---
 
 <p align="center">
-Application where I will try different backend technologies , more like a hobby project, to have a reference and to understand the back end world much better.
+Applications where I will try different backend technologies , more like a hobby project, to have a reference and to understand the back end world much better.
 I will still aim to build a front end for every backend application.
 
 This is just production application for own case, nothing that will be in production. That's why some error messages that I handle is there for a special purpose. Just to understand the code on what's going on. I know that in a real case you would have write in a more a anonymous way. 🧛‍♂️
