@@ -4,7 +4,8 @@ import morgan from "morgan";
 import connectDb from "./config/connectDB";
 import cookiesParser from "cookie-parser";
 import { router as userRoutes } from "./routes/user.routes";
-import errorHandler from "middleware/errorHandler";
+import { router as authRoutes } from "./routes/auth.routes";
+import errorHandler from "./middleware/errorHandler";
 
 const app: Application = express();
 
@@ -20,6 +21,7 @@ app.use(morgan("dev"));
 })();
 
 app.use("/user", userRoutes);
+app.use("/auth", authRoutes);
 
 app.use(errorHandler);
 

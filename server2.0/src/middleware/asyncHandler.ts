@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express";
+import { User as UserType } from "../models/User";
 
 type Fn = (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
-const asyncHandler = (fn: Fn) => (
+const asyncHandler = (fn: Function) => (
   req: Request,
   res: Response,
   next: NextFunction,

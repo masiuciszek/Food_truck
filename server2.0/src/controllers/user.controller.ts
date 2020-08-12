@@ -1,23 +1,34 @@
 import { Request, Response, NextFunction } from "express";
-import asyncHandler from "middleware/asyncHandler";
+import tokenResponse from "../utils/jsonTokenResponse";
+import asyncHandler from "../middleware/asyncHandler";
 import User from "../models/User";
+
+/**
+ * @method POST
+ * @route /user/register
+ * @desc register new user
+ * @status public
+ */
 
 export const register = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { email, password } = req.body;
+    const newUser = await User.create(req.body);
 
-    if (!email && !password) throw Error("oooo");
+    tokenResponse(newUser, 200, res);
+  },
+);
 
-    let user = await User.findOne({ email });
+/**
+ * @method GET
+ * @route /user/all
+ * @desc get all users
+ * @status public
+ */
 
-    if (user) {
-      throw new Error("User already exits");
-    }
+export const getAllUsers = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const allUsers = await User.find({});
 
-    let newUser = await User.create(req.body);
-
-    await newUser.save();
-
-    res.status(200).send(newUser);
+    res.status(200).json({ success: true, data: allUsers });
   },
 );
