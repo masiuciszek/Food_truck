@@ -4,6 +4,8 @@ import morgan from "morgan";
 import connectDb from "./config/connectDB";
 import cookiesParser from "cookie-parser";
 import { router as userRoutes } from "./routes/user.routes";
+import errorHandler from "middleware/errorHandler";
+
 const app: Application = express();
 
 const port = process.env.PORT || 4000;
@@ -17,9 +19,10 @@ app.use(morgan("dev"));
   await connectDb();
 })();
 
-// app.use(errorHandler);
 app.use("/user", userRoutes);
 
+app.use(errorHandler);
+
 app.listen(port, () => {
-  console.log(`port is on localhost ${port}`);
+  console.log(`🚀 port is on localhost ${port}`);
 });
