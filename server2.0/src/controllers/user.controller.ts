@@ -1,12 +1,9 @@
 import { Request, Response, NextFunction } from "express";
+import asyncHandler from "middleware/asyncHandler";
 import User from "../models/User";
 
-export const register = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
+export const register = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
 
     if (!email && !password) throw Error("oooo");
@@ -22,8 +19,5 @@ export const register = async (
     await newUser.save();
 
     res.status(200).send(newUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send();
-  }
-};
+  },
+);
