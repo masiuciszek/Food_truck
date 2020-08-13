@@ -29,6 +29,14 @@ const MenuToggle = styled.div`
   `}
 `;
 
+const AuthOptions = styled.div`
+  display: none;
+
+  ${above.medium`
+    display: block;
+  `}
+`;
+
 const Nav = ({ className }: Props) => {
   return (
     <nav className={className}>
@@ -41,6 +49,14 @@ const Nav = ({ className }: Props) => {
       </Logo>
 
       <NavLinks />
+      <AuthOptions>
+        <Link href="/login">
+          <a>Login</a>
+        </Link>
+        <Link href="/register">
+          <a>Register</a>
+        </Link>
+      </AuthOptions>
       <MenuToggle>
         <img src="/menu.svg" alt="menu-icon" />
       </MenuToggle>
