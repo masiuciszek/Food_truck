@@ -19,6 +19,8 @@ const StyledLinksList = styled.ul`
     display: block;
     position: relative;
     color: ${(props) => props.theme.colors.text};
+    padding: 0.5rem;
+    border-radius: 4px;
     &:after {
       content: "";
       position: absolute;
@@ -31,6 +33,9 @@ const StyledLinksList = styled.ul`
       background: ${({ theme: { colors } }) => colors.text};
     }
     &:hover {
+      background: ${({ theme: { colors } }) => colors.button}
+        url("https://wesbos.com/static/blackgrit-15c168539fb7109ce300574e7b4b0732.png");
+      ${({ theme }) => theme.shadow.elevations[1]};
       &:after {
         width: 100%;
         padding: 0.1rem;

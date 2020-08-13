@@ -3,7 +3,8 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { lightTheme } from "../../src/utils/theme";
 import { Main } from "../styled/Page";
 import Head from "next/head";
-import Nav from "../styled/nav/Nav";
+import Nav from "../styled/nav";
+import Footer from "../styled/footer";
 
 const GlobalStyles = createGlobalStyle`
   *,
@@ -51,12 +52,16 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Space Mono', monospace;
     font-weight: 400;
     line-height: 1.15;
-
+    color: ${({ theme }) => theme.colors.text};
   }
 
   small {
       font-size: 0.8em;
       }
+
+  p{
+    color: ${({ theme }) => theme.colors.text};
+  }
 
 `;
 
@@ -73,6 +78,7 @@ const Layout: React.FC = ({ children }) => {
       <Nav className="Main-nav" />
       <GlobalStyles />
       <Main>{children}</Main>
+      <Footer className="Main-Footer" />
     </ThemeProvider>
   );
 };

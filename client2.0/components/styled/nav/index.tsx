@@ -36,7 +36,7 @@ const AuthOptions = styled.div`
     display: block;
     ${({ theme }) => theme.shadow.elevations[1]};
     padding: 0.5rem;
-    border-radius: 0.5em;
+    border-radius: 4px;
     text-transform: capitalize;
     font-size: 1.2rem;
     color: ${(props) => props.theme.colors.text};

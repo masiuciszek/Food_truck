@@ -17,3 +17,23 @@ export const Page = styled.div`
     ${handleFlex("column", "space-between", "center")};
   `}
 `;
+
+export const TitleWrapper = styled.div`
+  flex: 1;
+  button {
+    margin: 1rem 0;
+  }
+`;
+
+interface Props {
+  height?: string;
+  width?: string;
+  padding?: string;
+  margin?: string;
+}
+export const PushDownFix = styled.div<Props>`
+  height: ${({ height }) => (height ? height : "0")};
+  width: ${({ width }) => (width ? width : "0")};
+  padding: ${({ padding }) => (padding ? padding : "0")};
+  margin: ${({ margin }) => (margin ? margin : "0")};
+`;
