@@ -1,9 +1,29 @@
 import React from "react";
+import styled from "styled-components";
 
-export const Title = () => {
+interface Props {
+  title: string;
+  className: string;
+  subTitle?: string;
+  cta?: boolean;
+  ctaText?: string;
+  ctaPath?: string;
+}
+
+const Title = ({
+  title,
+  subTitle,
+  cta,
+  ctaPath,
+  ctaText,
+  className,
+}: Props) => {
   return (
-    <div>
-      <h1>Title</h1>
-    </div>
+    <section className={className}>
+      <h1>{title}</h1>
+      <h3>{subTitle}</h3>
+    </section>
   );
 };
+
+export default styled(Title)``;

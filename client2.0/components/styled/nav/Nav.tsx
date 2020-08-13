@@ -42,6 +42,8 @@ const AuthOptions = styled.div`
     color: ${(props) => props.theme.colors.text};
     transition: ${(props) => props.theme.transition.mainTransition};
     margin: 0 0.5rem;
+    width: 5em;
+    text-align: center;
     &:hover {
       ${({ theme }) => theme.shadow.elevations[2]};
     }
@@ -81,7 +83,6 @@ const Nav = ({ className }: Props) => {
 
 export default styled(Nav)`
   padding: 0 0.5rem;
-  border: 3px solid red;
   ${handleFlex("row", "space-between", "center")};
   height: 12rem;
   width: 100%;
