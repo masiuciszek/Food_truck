@@ -31,9 +31,24 @@ const MenuToggle = styled.div`
 
 const AuthOptions = styled.div`
   display: none;
+  flex: 1;
+  a {
+    display: block;
+    ${({ theme }) => theme.shadow.elevations[1]};
+    padding: 0.5rem;
+    border-radius: 0.5em;
+    text-transform: capitalize;
+    font-size: 1.2rem;
+    color: ${(props) => props.theme.colors.text};
+    transition: ${(props) => props.theme.transition.mainTransition};
+    margin: 0 0.5rem;
+    &:hover {
+      ${({ theme }) => theme.shadow.elevations[2]};
+    }
+  }
 
   ${above.medium`
-    display: block;
+    ${handleFlex("row", "space-between", "center")};
   `}
 `;
 
@@ -71,4 +86,5 @@ export default styled(Nav)`
   height: 12rem;
   width: 100%;
   position: relative;
+  background: ${(props) => props.theme.colors.background};
 `;

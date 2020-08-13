@@ -18,6 +18,7 @@ const StyledLinksList = styled.ul`
     transition: ${(props) => props.theme.transition.mainTransition};
     display: block;
     position: relative;
+    color: ${(props) => props.theme.colors.text};
     &:after {
       content: "";
       position: absolute;
