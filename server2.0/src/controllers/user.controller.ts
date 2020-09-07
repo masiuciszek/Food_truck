@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import tokenResponse from "../utils/jsonTokenResponse";
 import asyncHandler from "../middleware/asyncHandler";
 import User from "../models/User";
+import { AuthRequest } from "middleware/authHandler";
 
 /**
  * @method POST
@@ -30,5 +31,19 @@ export const getAllUsers = asyncHandler(
     const allUsers = await User.find({});
 
     res.status(200).json({ success: true, data: allUsers });
+  },
+);
+
+/**
+ * @method GET
+ * @route /user/get_me
+ * @desc get user profile
+ * @status private
+ */
+
+export const getUserProfile = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.user.id);
+    res.status(200).json({ success: true, data: user });
   },
 );
