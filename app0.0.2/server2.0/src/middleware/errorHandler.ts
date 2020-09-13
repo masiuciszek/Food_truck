@@ -14,7 +14,7 @@ const errorHandler = (
   console.log("ERROR", error);
 
   if (error.code === 11000) {
-    let message = `User already exits!`;
+    let message = `Document already exits!`;
     error = new ErrorResponse(message, 401);
   }
 

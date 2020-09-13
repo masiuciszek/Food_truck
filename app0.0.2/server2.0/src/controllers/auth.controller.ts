@@ -93,3 +93,10 @@ export const logout = asyncHandler(
     // res.send("logout");
   },
 );
+
+/**
+ * @method DELETE
+ * @route /auth/delete_me
+ * @desc delete profile and all dishes that belong to the user
+ * @status private
+ */
