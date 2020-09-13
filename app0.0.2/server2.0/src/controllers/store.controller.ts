@@ -32,7 +32,10 @@ export const createStore = asyncHandler(
 
 export const getStores = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const stores = await Store.find({});
+    const stores = await Store.find({}).populate({
+      path: "author",
+      select: "firstName lastName email",
+    });
 
     res.status(200).json({ success: true, data: stores });
   },
@@ -53,6 +56,23 @@ export const getMyStores = asyncHandler(
     });
 
     res.status(200).json({ success: true, data: stores });
+  },
+);
+/**
+ * @method GET
+ * @route /store/:slug
+ * @desc get store by slug
+ * @status public
+ */
+
+export const getStoreBySlug = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const store = await Store.find({ slug: req.params.slug }).populate({
+      path: "author",
+      select: "firstName lastName email",
+    });
+
+    res.status(200).json({ success: true, data: store });
   },
 );
 
@@ -79,5 +99,37 @@ export const updateMyStore = asyncHandler(
     await newUpdatedStore?.save();
 
     res.status(200).json({ success: true, data: newUpdatedStore });
+  },
+);
+
+/**
+ * @method Delete
+ * @route /store/delete/:id
+ * @desc delete my store
+ * @status Private
+ */
+
+export const deleteStore = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const storeToDelete = await Store.findById(req.params.id);
+
+    if (!storeToDelete) {
+      return next(
+        new ErrorResponse(`store not found with id of ${req.params.id}`, 404),
+      );
+    }
+    // make sure that store belongs to the user
+    if (storeToDelete.author.toString() !== req.user.id) {
+      return next(
+        new ErrorResponse(
+          `User  ${req.user.id} is not authorized to delete this store`,
+          401,
+        ),
+      );
+    }
+
+    await storeToDelete.remove();
+
+    res.status(200).json({ success: true, data: {} });
   },
 );

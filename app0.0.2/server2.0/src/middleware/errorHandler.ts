@@ -22,6 +22,10 @@ const errorHandler = (
     let message = `Authentication error`;
     error = new ErrorResponse(message, 401);
   }
+  if (error.kind === "ObjectId") {
+    let message = `Authentication id wrong formatted`;
+    error = new ErrorResponse(message, 401);
+  }
 
   res
     .status(err.statusCode || 500)

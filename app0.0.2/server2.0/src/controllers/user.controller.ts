@@ -29,7 +29,25 @@ export const register = asyncHandler(
 export const getAllUsers = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const allUsers = await User.find({});
-
+    User.foo();
     res.status(200).json({ success: true, data: allUsers });
+  },
+);
+
+/**
+ * @method DELETE
+ * @route /user/delete_me
+ * @desc delete profile and all stores that belong to the user
+ * @status private
+ */
+
+export const deleteMe = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    await User.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      data: {},
+    });
   },
 );

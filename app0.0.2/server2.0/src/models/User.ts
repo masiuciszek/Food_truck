@@ -2,6 +2,7 @@ import { Schema, Model, Document, model, HookNextFunction } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
+import Store from "./Store";
 
 type Role = "USER" | "ADMIN";
 export interface User extends Document {
@@ -90,9 +91,17 @@ userSchema.methods.comparePasswords = async function (
   return isMatch;
 };
 
-userSchema.statics.foo = function () {
+userSchema.statics.foo = async function () {
   return "hello world!";
 };
+
+// remove all the stores whe user profile get's removed
+userSchema.pre<User>("remove", async function (next: HookNextFunction) {
+  console.log(`Stores being removed from User ${this._id}`);
+
+  await Store.deleteMany({ author: this._id });
+  next();
+});
 
 const userModel = model<User, IUser>("User", userSchema);
 export default userModel;
