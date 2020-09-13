@@ -98,7 +98,6 @@ userSchema.statics.foo = async function () {
 // remove all the stores whe user profile get's removed
 userSchema.pre<User>("remove", async function (next: HookNextFunction) {
   console.log(`Stores being removed from User ${this._id}`);
-
   await Store.deleteMany({ author: this._id });
   next();
 });
