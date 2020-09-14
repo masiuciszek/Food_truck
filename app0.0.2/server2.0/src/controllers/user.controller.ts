@@ -49,20 +49,27 @@ export const deleteMe = asyncHandler(
     if (!user) {
       return next(new ErrorResponse(`no user with id ${req.params.id}`, 404));
     }
+    // remove all the stores that belongs to the user
     await Store.deleteMany({ author: req.user._id });
 
     await User.findByIdAndDelete(req.user.id);
 
-    res.cookie("token", "none", {
-      expires: new Date(Date.now() + 10 * 1000),
-      httpOnly: false, // TODO: CHANGE IN PRODUCTION
-    });
+    // res.cookie("token", "none", {
+    //   expires: new Date(Date.now() + 10 * 1000),
+    //   httpOnly: false, // TODO: CHANGE IN PRODUCTION
+    // });
 
-    res.status(200).json({
-      success: true,
-      data: {
-        msg: `user deleted with id ${req.user.id}`,
-      },
-    });
+    res
+      .cookie("token", "none", {
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: false, // TODO: CHANGE IN PRODUCTION
+      })
+      .status(200)
+      .json({
+        success: true,
+        data: {
+          msg: `user deleted with id ${req.user.id}`,
+        },
+      });
   },
 );

@@ -3,18 +3,22 @@ import "styled-components";
 declare module "styled-components" {
   export interface DefaultTheme {
     appSize: string;
-    shadow: {
-      elevations: string[];
-    };
+    borderRadius: string;
     colors: {
-      text: string;
-      background: string;
-      secondary: string;
-      button: string;
-      menuBg: string;
-      shadowOne: string;
-      shadowTwo: string;
-      shadowThree: string;
+      elements: {
+        bg: string;
+        button: string;
+        headline: string;
+        buttonText: string;
+        paragraph: string;
+      };
+      illustrations: {
+        stroke: string;
+        main: string;
+        highlight: string;
+        secondary: string;
+        tertiary: string;
+      };
     };
     size: {
       h1: string;
@@ -26,13 +30,13 @@ declare module "styled-components" {
       a: string;
       maxWidth: string;
     };
-    shadow: {
-      elevations: Array<string>;
-    };
     transition: {
       mainTransition: string;
       secondaryTransition: string;
       quickTransition: string;
+    };
+    shadow: {
+      elevations: Array<string>;
     };
   }
 }

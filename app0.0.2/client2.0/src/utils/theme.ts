@@ -1,16 +1,23 @@
 import { DefaultTheme } from "styled-components";
 
-export const lightTheme: DefaultTheme = {
+const mainTheme: DefaultTheme = {
   appSize: "100%",
+  borderRadius: "4px",
   colors: {
-    text: "#333652",
-    button: "#fad02c",
-    secondary: "#90adc6",
-    background: "#e9eaec",
-    menuBg: "rgba(250,250,250,.7)",
-    shadowOne: "rgba(0,0,0,0.5)",
-    shadowTwo: "rgba(0,0,0,0.8)",
-    shadowThree: "rgba(255,255,255,0.8)",
+    elements: {
+      bg: "#0f0e17",
+      headline: "#fffffe",
+      paragraph: "#a7a9be",
+      button: "#ff8906",
+      buttonText: "#fffffe",
+    },
+    illustrations: {
+      highlight: "#ff8906",
+      main: "#fffffe",
+      stroke: "#000",
+      secondary: "#f45d48",
+      tertiary: "#e53170",
+    },
   },
   size: {
     h1: "3.052em",
@@ -18,16 +25,21 @@ export const lightTheme: DefaultTheme = {
     h3: "1.953em",
     h4: "1.563em",
     h5: "1.25em",
-    p: "1.15rem",
-    a: "1rem",
-    maxWidth: "1200px",
+    p: "1.15em",
+    a: "1em",
+    maxWidth: "970px",
   },
   shadow: {
     elevations: [
-      "box-shadow: inset 0 7px 9px -7px rgba(0,0,0, 0.7)",
-      "box-shadow: 0 1px 3px rgba(0,0,0, 0.12), 0 1px 2px rgba(0,0,0, 0.24)",
-      "box-shadow: 0 3px 6px rgba(0,0,0, 0.16), 0 3px 6px rgba(0,0,0, 0.23)",
-      "box-shadow: 3px 2px rgba(42, 43, 49,.3)",
+      "0 0 0 1px rgba(0, 0, 0, 0.05)",
+      "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+      "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+      "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+      "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+      "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+      "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)",
+      "0 0 0 3px rgba(66, 153, 225, 0.5)",
     ],
   },
   transition: {
@@ -37,39 +49,4 @@ export const lightTheme: DefaultTheme = {
   },
 };
 
-export const darkTheme: DefaultTheme = {
-  appSize: "100%",
-  colors: {
-    text: "#e9eaec",
-    button: "#fad02c",
-    secondary: "#90adc6",
-    background: "#333652",
-    menuBg: "rgba(250,250,250,.7)",
-    shadowOne: "rgba(0,0,0,0.5)",
-    shadowTwo: "rgba(0,0,0,0.8)",
-    shadowThree: "rgba(255,255,255,0.8)",
-  },
-  size: {
-    h1: "3.052em",
-    h2: "2.441em",
-    h3: "1.953em",
-    h4: "1.563em",
-    h5: "1.25em",
-    p: "1.15rem",
-    a: "1rem",
-    maxWidth: "1200px",
-  },
-  shadow: {
-    elevations: [
-      "box-shadow: inset 0 7px 9px -7px rgba(0,0,0, 0.7)",
-      "box-shadow: 0 1px 3px rgba(0,0,0, 0.12), 0 1px 2px rgba(0,0,0, 0.24)",
-      "box-shadow: 0 3px 6px rgba(0,0,0, 0.16), 0 3px 6px rgba(0,0,0, 0.23)",
-      "box-shadow: 3px 2px rgba(42, 43, 49,.3)",
-    ],
-  },
-  transition: {
-    mainTransition: "all .3s linear",
-    secondaryTransition: "all 1s ease",
-    quickTransition: "all 200ms ease-in-out",
-  },
-};
+export { mainTheme };
