@@ -2,7 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import tokenResponse from "../utils/jsonTokenResponse";
 import asyncHandler from "../middleware/asyncHandler";
 import User from "../models/User";
-import { AuthRequest } from "middleware/authHandler";
+import Store from "../models/Store";
+import { AuthRequest } from "../middleware/authHandler";
+import { ErrorResponse } from "../utils/ErrorResponse";
 
 /**
  * @method POST
@@ -43,11 +45,24 @@ export const getAllUsers = asyncHandler(
 
 export const deleteMe = asyncHandler(
   async (req: AuthRequest, res: Response, next: NextFunction) => {
-    await User.findByIdAndDelete(req.params.id);
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return next(new ErrorResponse(`no user with id ${req.params.id}`, 404));
+    }
+    await Store.deleteMany({ author: req.user._id });
+
+    await User.findByIdAndDelete(req.user.id);
+
+    res.cookie("token", "none", {
+      expires: new Date(Date.now() + 10 * 1000),
+      httpOnly: false, // TODO: CHANGE IN PRODUCTION
+    });
 
     res.status(200).json({
       success: true,
-      data: {},
+      data: {
+        msg: `user deleted with id ${req.user.id}`,
+      },
     });
   },
 );

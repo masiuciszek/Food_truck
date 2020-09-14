@@ -95,12 +95,14 @@ userSchema.statics.foo = async function () {
   return "hello world!";
 };
 
-// remove all the stores whe user profile get's removed
-userSchema.pre<User>("remove", async function (next: HookNextFunction) {
-  console.log(`Stores being removed from User ${this._id}`);
-  await Store.deleteMany({ author: this._id });
-  next();
-});
+// TODO Enable this middleware
+// // remove all the stores whe user profile get's removed
+// userSchema.pre<User>("remove", async function (next: HookNextFunction) {
+//   console.log(`Stores being removed from User ${this._id}`);
+//   await Store.deleteMany({ author: this.email });
+//   await Store.deleteMany({ author: this._id });
+//   next();
+// });
 
 const userModel = model<User, IUser>("User", userSchema);
 export default userModel;
