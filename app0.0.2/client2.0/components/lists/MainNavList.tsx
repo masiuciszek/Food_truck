@@ -2,8 +2,8 @@ import React from "react";
 import { navigationLinks } from "../../src/utils/initialData";
 import styled from "styled-components";
 import { above, handleFlex } from "../../src/utils/helpers";
-import { AppLink } from "../styled/links";
 
+import Link from "next/link";
 interface MainNavListProps {}
 
 const StyledNavList = styled.ul`
@@ -30,6 +30,7 @@ const StyledNavList = styled.ul`
       padding: 0;
     }
     &:hover {
+      color: ${({ theme }) => theme.colors.elements.button};
       &:after {
         width: 100%;
 
@@ -52,9 +53,9 @@ const MainNavList: React.FC<MainNavListProps> = ({}) => {
     <StyledNavList>
       {navData.map(({ name, path }) => (
         <li key={path}>
-          <AppLink href={path}>
+          <Link href={path}>
             <a>{name}</a>
-          </AppLink>
+          </Link>
         </li>
       ))}
     </StyledNavList>

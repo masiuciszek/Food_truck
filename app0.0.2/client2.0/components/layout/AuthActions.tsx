@@ -1,6 +1,9 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { below, above, handleFlex } from "../../src/utils/helpers";
+import { Button } from "../styled/Buttons";
+
 interface AuthActionsProps {}
 
 const StyledAuthActions = styled.div`
@@ -12,12 +15,25 @@ const StyledAuthActions = styled.div`
     border: 2px solid #fff;
     flex-basis: 20%;
   `}
+
+  a {
+  }
 `;
-const AuthActions: React.FC<AuthActionsProps> = ({}) => {
+
+const AuthActions = () => {
   return (
     <StyledAuthActions>
-      <button>Login</button>
-      <button>Register</button>
+      <Link href="/login">
+        <a>
+          <Button>Login</Button>
+        </a>
+      </Link>
+
+      <Link href="/register">
+        <a>
+          <Button>Register</Button>
+        </a>
+      </Link>
     </StyledAuthActions>
   );
 };
