@@ -1,14 +1,14 @@
 import React from "react";
 import { navigationLinks } from "../../src/utils/initialData";
 import styled from "styled-components";
-import { handleFlex } from "../../src/utils/helpers";
+import { above, handleFlex } from "../../src/utils/helpers";
 import { AppLink } from "../styled/links";
 
 interface MainNavListProps {}
 
 const StyledNavList = styled.ul`
-  flex: 1;
-  ${handleFlex("row", "space-between", "center")};
+  flex: 2;
+  display: none;
   li {
     padding: 1em;
   }
@@ -39,6 +39,10 @@ const StyledNavList = styled.ul`
       }
     }
   }
+
+  ${above.medium`
+    ${handleFlex("row", "space-between", "center")};
+  `}
 `;
 
 const MainNavList: React.FC<MainNavListProps> = ({}) => {

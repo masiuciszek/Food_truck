@@ -8,12 +8,18 @@ const SearchFilterWrapper = styled.div`
   border: 2px solid white;
   height: 6rem;
 `;
-const SearchFilterElement = styled.input``;
+const SearchFilterElement = styled.input`
+  width: 80%;
+  border: 2px solid ${({ theme }) => theme.colors.elements.headline};
+  padding: 0.4rem 0.7rem;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  font-size: 1rem;
+`;
 
 const SearchFilter = () => {
   return (
     <SearchFilterWrapper>
-      <SearchFilterElement type="text" />
+      <SearchFilterElement type="text" placeholder="search store..." />
     </SearchFilterWrapper>
   );
 };

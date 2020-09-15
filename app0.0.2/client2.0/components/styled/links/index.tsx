@@ -6,9 +6,7 @@ export const AppLink = styled(Link)`
   display: block;
   position: relative;
   background: red;
-  a {
-    font-size: 3rem;
-  }
+
   &:after {
     content: "";
     position: absolute;

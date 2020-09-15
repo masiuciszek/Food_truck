@@ -1,17 +1,41 @@
 import React from "react";
 import MainNavList from "../lists/MainNavList";
 import styled from "styled-components";
-import { handleFlex } from "../../src/utils/helpers";
+import { above, below, handleFlex } from "../../src/utils/helpers";
 import SearchFilter from "./SearchFilter";
+import AuthActions from "./AuthActions";
+import Link from "next/link";
+
 interface NavProps {
   className?: string;
 }
 
 const Title = styled.div`
-  ${handleFlex("row", "flex-start", "center")};
   flex: 1;
-  border: 2px solid blue;
   height: 6rem;
+
+  ${handleFlex("row", "flex-start", "center")};
+
+  a {
+    ${handleFlex("row", "flex-start", "center")};
+    flex-basis: 100%;
+    padding: 0.5rem;
+    img {
+      width: 64px;
+    }
+    strong {
+      margin-left: 1rem;
+      font-size: 1.7rem;
+    }
+  }
+  position: relative;
+`;
+
+const SearchLogo = styled.span`
+  cursor: pointer;
+  img {
+    width: 32px;
+  }
 `;
 
 const Nav: React.FC<NavProps> = ({
@@ -20,10 +44,19 @@ const Nav: React.FC<NavProps> = ({
   return (
     <nav className={className}>
       <Title>
-        <h3>Title</h3>
+        <Link href="/">
+          <a>
+            <img src="/ramen.png" alt="ramen-logo" />
+            <strong>Sick tastes</strong>
+          </a>
+        </Link>
+        <SearchLogo>
+          <img src="/search-white.png" alt="search-logo" />
+        </SearchLogo>
       </Title>
-      <SearchFilter />
+      {/* <SearchFilter /> */}
       <MainNavList />
+      <AuthActions />
     </nav>
   );
 };
