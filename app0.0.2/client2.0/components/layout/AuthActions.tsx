@@ -16,8 +16,9 @@ const StyledAuthActions = styled.div`
     flex-basis: 20%;
   `}
 
-  a {
-  }
+  ${below.small`
+    display: none;
+  `}
 `;
 
 const AuthActions = () => {

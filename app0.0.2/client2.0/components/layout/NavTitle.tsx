@@ -24,13 +24,6 @@ const TitleStyles = styled.div`
   position: relative;
 `;
 
-const SearchLogo = styled.span`
-  cursor: pointer;
-  img {
-    width: 32px;
-  }
-`;
-
 const NavTitle = () => {
   return (
     <TitleStyles>
@@ -40,9 +33,6 @@ const NavTitle = () => {
           <strong>Sick tastes</strong>
         </a>
       </Link>
-      <SearchLogo>
-        <img src="/search-white.png" alt="search-logo" />
-      </SearchLogo>
     </TitleStyles>
   );
 };
