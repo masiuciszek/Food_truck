@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { handleFlex } from "../../src/utils/helpers";
+import { handleFlex } from "../../../src/utils/helpers";
 
 const TitleStyles = styled.div`
   flex: 1;

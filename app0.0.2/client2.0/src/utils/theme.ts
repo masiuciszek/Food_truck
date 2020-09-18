@@ -18,6 +18,9 @@ const mainTheme: DefaultTheme = {
       secondary: "#f45d48",
       tertiary: "#e53170",
     },
+    shadow: {
+      highlightShadow: "rgba(244,93,72,.8)",
+    },
   },
   size: {
     h1: "3.052em",

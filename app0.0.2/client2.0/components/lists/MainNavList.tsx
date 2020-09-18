@@ -1,10 +1,10 @@
 import React from "react";
-import { navigationLinks } from "../../src/utils/initialData";
 import styled from "styled-components";
-import { above, handleFlex } from "../../src/utils/helpers";
+import { above, handleFlex, renderList } from "../../src/utils/helpers";
 
-import Link from "next/link";
-interface MainNavListProps {}
+interface MainNavListProps {
+  onNavData: Link[];
+}
 
 const StyledNavList = styled.ul`
   flex: 2;
@@ -46,19 +46,7 @@ const StyledNavList = styled.ul`
   `}
 `;
 
-const MainNavList: React.FC<MainNavListProps> = ({}) => {
-  const [navData, setNavData] = React.useState<Link[]>(navigationLinks);
-
-  return (
-    <StyledNavList>
-      {navData.map(({ name, path }) => (
-        <li key={path}>
-          <Link href={path}>
-            <a>{name}</a>
-          </Link>
-        </li>
-      ))}
-    </StyledNavList>
-  );
+const MainNavList: React.FC<MainNavListProps> = ({ onNavData }) => {
+  return <StyledNavList>{renderList(onNavData)}</StyledNavList>;
 };
 export default MainNavList;

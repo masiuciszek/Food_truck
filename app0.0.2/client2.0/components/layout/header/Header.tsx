@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
-import { useToggle } from "../../hooks/useToggle";
-import { above } from "../../src/utils/helpers";
+import { useToggle } from "../../../hooks/useToggle";
+import { above } from "../../../src/utils/helpers";
 import Nav from "./Nav";
 import SearchFilter from "./SearchFilter";
 
@@ -16,6 +16,7 @@ const MenuIcon = styled.div`
   right: 1rem;
   cursor: pointer;
   height: 100%;
+  z-index: 3;
   img {
     width: 54px;
   }
@@ -48,14 +49,14 @@ const Header: React.FC<NavProps> = ({
   className = "layout-header-main-header",
 }) => {
   const { state: showFilerSearch, toggle: toggleFilterSearch } = useToggle();
-  const { state: showMenu, toggle: toggleMenu } = useToggle();
+  const { state: showMobileMenu, toggle: toggleMobileMenu } = useToggle();
 
   return (
     <header className={className}>
-      <MenuIcon>
+      <MenuIcon onClick={toggleMobileMenu}>
         <img src="/menu-white.png" alt="menu-white" />
       </MenuIcon>
-      <Nav />
+      <Nav onShowMobileMenu={showMobileMenu} />
       <SearchLogo
         onClick={toggleFilterSearch}
         whileHover={{ width: "5rem", height: "5rem" }}
@@ -68,7 +69,6 @@ const Header: React.FC<NavProps> = ({
 };
 
 export default styled(Header)`
-  border: 2px solid white;
   padding: 2rem 1rem;
   position: relative;
 `;

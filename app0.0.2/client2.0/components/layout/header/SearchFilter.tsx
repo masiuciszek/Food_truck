@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
-import { above, below, handleFlex } from "../../src/utils/helpers";
+import { above, below, handleFlex } from "../../../src/utils/helpers";
 
 interface Props {
   showFilerSearch: boolean;

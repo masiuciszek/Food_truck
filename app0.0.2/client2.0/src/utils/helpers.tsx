@@ -1,4 +1,6 @@
+import * as React from "react";
 import { css } from "styled-components";
+import Link from "next/link";
 
 interface Size {
   small: number;
@@ -39,6 +41,15 @@ export const above = typedKeys(size).reduce((acc, label: keyof Size) => {
   `;
   return acc;
 }, {} as StyleFnMap);
+
+export const renderList = (list: Link[]) =>
+  list.map(({ name, path }) => (
+    <li key={path}>
+      <Link href={path}>
+        <a>{name}</a>
+      </Link>
+    </li>
+  ));
 
 type FlexDirection = "row" | "column" | "column-reverse" | "row-reverse";
 type JustifyContent =

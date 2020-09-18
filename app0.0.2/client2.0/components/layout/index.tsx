@@ -3,7 +3,7 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { mainTheme } from "../../src/utils/theme";
 import Head from "next/head";
 import styled from "styled-components";
-import Header from "./Header";
+import Header from "./header/Header";
 
 const GlobalStyles = createGlobalStyle`
   *,

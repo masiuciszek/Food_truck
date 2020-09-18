@@ -19,6 +19,9 @@ declare module "styled-components" {
         secondary: string;
         tertiary: string;
       };
+      shadow: {
+        highlightShadow: string;
+      };
     };
     size: {
       h1: string;
