@@ -10,18 +10,25 @@ interface AuthActionsProps {
 
 const StyledAuthActionsLargeScreen = styled.div`
   flex-basis: 40%;
-  ${handleFlex("row", "space-around", "center")};
+  border: 2px solid red;
+  ${handleFlex("row", "space-around", "center")}
   height: 6rem;
+  a {
+    margin: 0 0.5rem;
+  }
   ${above.medium`
     flex-basis: 20%;
   `}
 
-  ${below.small`
+  ${below.medium`
     display: none;
   `}
 `;
 
-const StyledAuthActionsSmallScreen = styled.div``;
+const StyledAuthActionsSmallScreen = styled.div`
+  width: 100%;
+  ${handleFlex("row", "space-around", "center")};
+`;
 
 const render = (isOnSmallScreen: boolean) =>
   !isOnSmallScreen ? (
@@ -42,19 +49,27 @@ const render = (isOnSmallScreen: boolean) =>
     <StyledAuthActionsSmallScreen>
       <Link href="/login">
         <a>
-          <Button>Login</Button>
+          <Button bgColor textColor>
+            Login
+          </Button>
         </a>
       </Link>
 
       <Link href="/register">
         <a>
-          <Button>Register</Button>
+          <Button bgColor textColor>
+            Register
+          </Button>
         </a>
       </Link>
     </StyledAuthActionsSmallScreen>
   );
 
-const AuthActions = ({ isOnSmallScreen }: AuthActionsProps) => {
-  return <>{render(isOnSmallScreen)}</>;
+const AuthActions = ({
+  isOnSmallScreen,
+  onShowMobileMenu,
+}: AuthActionsProps) => {
+  return render(isOnSmallScreen, onShowMobileMenu);
 };
+
 export default AuthActions;

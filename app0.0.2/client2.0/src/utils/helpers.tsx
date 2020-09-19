@@ -1,6 +1,7 @@
 import * as React from "react";
 import { css } from "styled-components";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface Size {
   small: number;
@@ -44,11 +45,11 @@ export const above = typedKeys(size).reduce((acc, label: keyof Size) => {
 
 export const renderList = (list: Link[]) =>
   list.map(({ name, path }) => (
-    <li key={path}>
+    <motion.li key={path} whileHover={{ scale: [1.04, 0.9, 1.08, 1.1] }}>
       <Link href={path}>
         <a>{name}</a>
       </Link>
-    </li>
+    </motion.li>
   ));
 
 type FlexDirection = "row" | "column" | "column-reverse" | "row-reverse";
