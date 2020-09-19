@@ -28,7 +28,7 @@ const MenuIcon = styled.div`
 const SearchLogo = styled(motion.span)`
   cursor: pointer;
   position: fixed;
-  bottom: 120px;
+  bottom: 170px;
   right: 2rem;
   background: ${({ theme }) => theme.colors.illustrations.highlight};
   border-radius: 50%;

@@ -3,7 +3,11 @@ import React from "react";
 import styled from "styled-components";
 import { handleFlex } from "../../../src/utils/helpers";
 
-const TitleStyles = styled.div`
+interface NavTitleProps {
+  isOnFooter?: boolean;
+}
+
+const TitleStyles = styled.div<NavTitleProps>`
   flex: 1;
   height: 6rem;
 
@@ -19,14 +23,18 @@ const TitleStyles = styled.div`
     strong {
       margin-left: 1rem;
       font-size: 1.7rem;
+      color: ${({ theme, isOnFooter }) =>
+        isOnFooter
+          ? theme.colors.illustrations.stroke
+          : theme.colors.illustrations.main};
     }
   }
   position: relative;
 `;
 
-const NavTitle = () => {
+const NavTitle = ({ isOnFooter = false }: NavTitleProps) => {
   return (
-    <TitleStyles>
+    <TitleStyles isOnFooter={isOnFooter}>
       <Link href="/">
         <a>
           <img src="/ramen.png" alt="ramen-logo" />

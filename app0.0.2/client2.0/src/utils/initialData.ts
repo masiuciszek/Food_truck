@@ -8,8 +8,8 @@ const navigationLinks: Link[] = [
     path: "/blog",
   },
   {
-    name: "dishes",
-    path: "/dishes",
+    name: "stores",
+    path: "/stores",
   },
   {
     name: "contact",

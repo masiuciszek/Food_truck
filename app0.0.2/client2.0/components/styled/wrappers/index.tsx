@@ -4,7 +4,7 @@ import { above, below, handleFlex } from "../../../src/utils/helpers";
 export const Page = styled.section`
   margin: 0 auto;
   max-width: ${({ theme }) => theme.size.maxWidth};
-  min-height: 80vh;
+  min-height: 65vh;
   display: flex;
   align-items: center;
   h1,
@@ -24,6 +24,14 @@ export const HomePageWrapper = styled.div`
   ${handleFlex("column", "center", "center")};
   ${above.medium`
     ${handleFlex("row", "space-between", "center")};
+  `}
+`;
+
+export const PushDown = styled.div`
+  padding: 1.5em;
+  ${below.medium`
+    padding: 1.5em;
+
   `}
 `;
 

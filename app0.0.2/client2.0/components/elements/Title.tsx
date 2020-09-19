@@ -1,16 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { handleFlex } from "../../src/utils/helpers";
+import { Button } from "../styled/Buttons";
 
 interface TitleProps {
   title: string;
   className?: string;
   subTitle?: string;
   ctaPath?: string;
-  ctaText?: string;
   isCta?: boolean;
-  isInCol?: boolean;
 }
 
 const Title = ({
@@ -18,9 +17,7 @@ const Title = ({
   title,
   subTitle,
   ctaPath,
-  ctaText,
   isCta,
-  isInCol,
 }: TitleProps) => {
   return (
     <section className={className}>
@@ -28,7 +25,9 @@ const Title = ({
       <p>{subTitle}</p>
       {isCta && (
         <Link href={`/${ctaPath}`}>
-          <a> {ctaText}</a>
+          <a>
+            <Button>{ctaPath}</Button>
+          </a>
         </Link>
       )}
     </section>
@@ -36,7 +35,15 @@ const Title = ({
 };
 
 export default styled(Title)`
-  padding: 1em 0.5em;
+  padding: 2rem 0.5em;
   ${handleFlex("column", "center", "center")};
   height: 100%;
+
+  h1 {
+    text-align: center;
+  }
+  ${Button} {
+    text-transform: capitalize;
+    width: 8em;
+  }
 `;

@@ -4,6 +4,7 @@ import { mainTheme } from "../../src/utils/theme";
 import Head from "next/head";
 import styled from "styled-components";
 import Header from "./header/Header";
+import Footer from "./footer";
 
 const GlobalStyles = createGlobalStyle`
   *,
@@ -94,6 +95,7 @@ const Layout: React.FC = ({ children }) => {
       <Header />
       <GlobalStyles />
       <Main>{children}</Main>
+      <Footer className="main_footer" />
     </ThemeProvider>
   );
 };

@@ -30,7 +30,7 @@ const mainTheme: DefaultTheme = {
     h5: "1.25em",
     p: "1.15em",
     a: "1em",
-    maxWidth: "1050px",
+    maxWidth: "1200px",
   },
   shadow: {
     elevations: [
