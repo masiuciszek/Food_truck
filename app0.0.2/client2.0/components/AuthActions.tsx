@@ -10,7 +10,6 @@ interface AuthActionsProps {
 
 const StyledAuthActionsLargeScreen = styled.div`
   flex-basis: 40%;
-  border: 2px solid red;
   ${handleFlex("row", "space-around", "center")}
   height: 6rem;
   a {
