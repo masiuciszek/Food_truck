@@ -17,6 +17,11 @@ export const Page = styled.section`
   }
 `;
 
+export const ColumnPage = styled(Page)`
+  display: block;
+  max-width: ${({ theme }) => theme.size.maxWidthPage};
+`;
+
 export const HomePageWrapper = styled.div`
   padding: 1em 0.5em;
   width: 100%;

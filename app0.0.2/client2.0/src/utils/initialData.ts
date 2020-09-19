@@ -1,9 +1,5 @@
 const navigationLinks: Link[] = [
   {
-    name: "main",
-    path: "/",
-  },
-  {
     name: "blog",
     path: "/blog",
   },

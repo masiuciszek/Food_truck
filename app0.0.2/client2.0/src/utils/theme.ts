@@ -31,6 +31,7 @@ const mainTheme: DefaultTheme = {
     p: "1.15em",
     a: "1em",
     maxWidth: "1200px",
+    maxWidthPage: "970px",
   },
   shadow: {
     elevations: [

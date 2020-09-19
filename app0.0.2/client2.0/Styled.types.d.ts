@@ -32,6 +32,7 @@ declare module "styled-components" {
       p: string;
       a: string;
       maxWidth: string;
+      maxWidthPage: string;
     };
     transition: {
       mainTransition: string;
