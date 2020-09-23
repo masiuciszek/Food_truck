@@ -5,29 +5,26 @@ import { renderForm } from "../../src/utils/render_helpers";
 import { Button } from "../styled/Buttons";
 
 interface FormProps {
+  formData: FormDataType;
+  handleChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   className: string;
   submitText: string;
   isLoginForm?: boolean;
 }
 
 const Form: React.FC<FormProps> = ({
+  formData,
   className,
   submitText,
   isLoginForm = false,
+  handleChange,
 }) => {
-  const [formData, setFormData] = React.useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const { firstName, lastName, email, password, confirmPassword } = formData;
+  // TODO: Handle what kind of data you sen to the form
+  // filter it before you send form data
 
   return (
     <form className={className}>
-      {renderForm(isLoginForm)}
+      {renderForm(isLoginForm)(formData)(handleChange)}
       <Button type="submit"> {submitText} </Button>
     </form>
   );

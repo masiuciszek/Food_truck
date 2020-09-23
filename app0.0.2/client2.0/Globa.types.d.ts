@@ -13,3 +13,16 @@ interface User {
 }
 
 type Status = "LOADING" | "PENDING" | "RESOLVED" | "REJECTED" | "NATURAL";
+
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+interface RegisterFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+type FormDataType = LoginFormData | RegisterFormData;

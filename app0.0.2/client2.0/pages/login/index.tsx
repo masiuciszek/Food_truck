@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../../components/elements/Form";
+import LoginPageContainer from "../../components/containers/LoginPageContainer";
 import Title from "../../components/elements/Title";
 import { ColumnPage } from "../../components/styled/wrappers";
 
@@ -8,7 +8,7 @@ const LoginPage = () => {
     <>
       <ColumnPage>
         <Title className="login-page-title" title="Sign in" />
-        <Form className="sign-in-form" submitText="sign in" isLoginForm />
+        <LoginPageContainer />
       </ColumnPage>
     </>
   );

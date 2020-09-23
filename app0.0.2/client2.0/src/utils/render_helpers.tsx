@@ -9,41 +9,47 @@ import {
 } from "../../components/styled/FormElements";
 import { above, below, handleFlex } from "./helpers";
 
-export const renderForm = (isLoginForm: boolean) =>
+export const renderForm = (isLoginForm: boolean) => (
+  formData: FormDataType,
+) => (handleChange: (evt: React.ChangeEvent<HTMLInputElement>) => void) =>
   !isLoginForm ? (
     <>
       <FormGroup>
         <FormLabel>
           <span>firstname</span>
-          <FormInput type="text" placeholder="firstname" />
+          <FormInput type="text" placeholder="firstname" name="firstName" />
         </FormLabel>
       </FormGroup>
 
       <FormGroup>
         <FormLabel>
           <span>lastname</span>
-          <FormInput type="text" placeholder="lastname" />
+          <FormInput type="text" placeholder="lastname" name="lastName" />
         </FormLabel>
       </FormGroup>
 
       <FormGroup>
         <FormLabel>
           <span>email</span>
-          <FormInput type="email" placeholder="email" />
+          <FormInput type="email" placeholder="email" name="email" />
         </FormLabel>
       </FormGroup>
 
       <FormGroup>
         <FormLabel>
           <span>password</span>
-          <FormInput type="password" placeholder="password" />
+          <FormInput type="password" placeholder="password" name="password" />
         </FormLabel>
       </FormGroup>
 
       <FormGroup>
         <FormLabel>
           <span>confirm password</span>
-          <FormInput type="password" placeholder="repeat password" />
+          <FormInput
+            type="password"
+            placeholder="confirm password"
+            name="confirmPassword"
+          />
         </FormLabel>
       </FormGroup>
     </>
@@ -52,14 +58,26 @@ export const renderForm = (isLoginForm: boolean) =>
       <FormGroup>
         <FormLabel>
           <span>email</span>
-          <FormInput type="email" placeholder="email" />
+          <FormInput
+            type="email"
+            placeholder="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
         </FormLabel>
       </FormGroup>
 
       <FormGroup>
         <FormLabel>
           <span>password</span>
-          <FormInput type="password" placeholder="password" />
+          <FormInput
+            type="password"
+            placeholder="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
         </FormLabel>
       </FormGroup>
     </>
