@@ -10,6 +10,7 @@ const initialState: State = {
   user: null,
   status: "NATURAL",
   isLoggedIn: false,
+  token: null,
 };
 
 const reducer = (state: State, action: Action) => {
@@ -17,6 +18,7 @@ const reducer = (state: State, action: Action) => {
     case "LOGIN":
       return {
         ...state,
+        token: action.payload,
       };
     case "REGISTER":
       return {

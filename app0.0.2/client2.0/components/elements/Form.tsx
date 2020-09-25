@@ -10,6 +10,7 @@ interface FormProps {
   className: string;
   submitText: string;
   isLoginForm?: boolean;
+  handleSubmit: (evt: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const Form: React.FC<FormProps> = ({
@@ -18,12 +19,10 @@ const Form: React.FC<FormProps> = ({
   submitText,
   isLoginForm = false,
   handleChange,
+  handleSubmit,
 }) => {
-  // TODO: Handle what kind of data you send to the form
-  // filter it before you send form data
-
   return (
-    <form className={className}>
+    <form className={className} onSubmit={handleSubmit}>
       {renderForm(isLoginForm)(formData)(handleChange)}
       <Button type="submit"> {submitText} </Button>
     </form>

@@ -14,8 +14,8 @@ type HandleChangeType = (evt: React.ChangeEvent<HTMLInputElement>) => void;
 
 export const renderForm = (isLoginForm: boolean) => (
   formData: FormDataType,
-) => (handleChange: HandleChangeType) =>
-  !isLoginForm ? (
+) => (handleChange: HandleChangeType) => {
+  return !isLoginForm ? (
     <>
       <FormGroup>
         <FormLabel>
@@ -25,7 +25,7 @@ export const renderForm = (isLoginForm: boolean) => (
             placeholder="firstname"
             name="firstName"
             onChange={handleChange}
-            value={formData.firstName}
+            value={"firstName" in formData ? formData.firstName : ""}
           />
         </FormLabel>
       </FormGroup>
@@ -38,7 +38,7 @@ export const renderForm = (isLoginForm: boolean) => (
             placeholder="lastname"
             name="lastName"
             onChange={handleChange}
-            value={formData.lastName}
+            value={"lastName" in formData ? formData.lastName : ""}
           />
         </FormLabel>
       </FormGroup>
@@ -51,7 +51,7 @@ export const renderForm = (isLoginForm: boolean) => (
             placeholder="email"
             name="email"
             onChange={handleChange}
-            value={formData.email}
+            value={"email" in formData ? formData.email : ""}
           />
         </FormLabel>
       </FormGroup>
@@ -64,7 +64,7 @@ export const renderForm = (isLoginForm: boolean) => (
             placeholder="password"
             name="password"
             onChange={handleChange}
-            value={formData.password}
+            value={"password" in formData ? formData.password : ""}
           />
         </FormLabel>
       </FormGroup>
@@ -77,7 +77,9 @@ export const renderForm = (isLoginForm: boolean) => (
             placeholder="confirm password"
             name="confirmPassword"
             onChange={handleChange}
-            value={formData.confirmPassword}
+            value={
+              "confirmPassword" in formData ? formData.confirmPassword : ""
+            }
           />
         </FormLabel>
       </FormGroup>
@@ -111,6 +113,7 @@ export const renderForm = (isLoginForm: boolean) => (
       </FormGroup>
     </>
   );
+};
 
 const StyledAuthActionsLargeScreen = styled.div`
   flex-basis: 40%;

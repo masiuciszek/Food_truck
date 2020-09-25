@@ -26,4 +26,4 @@ interface RegisterFormData {
   confirmPassword: string;
 }
 
-type FormDataType = LoginFormData | RegisterFormData;
+type FormDataType = RegisterFormData | LoginFormData;

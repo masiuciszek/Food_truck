@@ -16,6 +16,7 @@ const LoginPageContainer: React.FC<LoginPageContainerProps> = ({}) => {
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
+    console.log("Login");
   };
 
   return (
@@ -25,6 +26,7 @@ const LoginPageContainer: React.FC<LoginPageContainerProps> = ({}) => {
       isLoginForm
       formData={loginData}
       handleChange={handleChange}
+      handleSubmit={handleSubmit}
     />
   );
 };
