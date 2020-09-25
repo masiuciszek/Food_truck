@@ -19,7 +19,7 @@ const Form: React.FC<FormProps> = ({
   isLoginForm = false,
   handleChange,
 }) => {
-  // TODO: Handle what kind of data you sen to the form
+  // TODO: Handle what kind of data you send to the form
   // filter it before you send form data
 
   return (

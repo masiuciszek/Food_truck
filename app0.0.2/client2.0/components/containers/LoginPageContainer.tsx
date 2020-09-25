@@ -14,16 +14,18 @@ const LoginPageContainer: React.FC<LoginPageContainerProps> = ({}) => {
     setLoginData({ ...loginData, [name]: value });
   };
 
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
+    evt.preventDefault();
+  };
+
   return (
-    <>
-      <Form
-        className="sign-in-form"
-        submitText="sign in"
-        isLoginForm
-        formData={loginData}
-        handleChange={handleChange}
-      />
-    </>
+    <Form
+      className="sign-in-form"
+      submitText="sign in"
+      isLoginForm
+      formData={loginData}
+      handleChange={handleChange}
+    />
   );
 };
 export default LoginPageContainer;

@@ -23,6 +23,7 @@ interface RegisterFormData {
   lastName: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 type FormDataType = LoginFormData | RegisterFormData;

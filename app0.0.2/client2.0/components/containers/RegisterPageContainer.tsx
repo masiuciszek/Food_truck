@@ -4,7 +4,7 @@ import Form from "../elements/Form";
 interface RegisterPageContainerProps {}
 
 const RegisterPageContainer: React.FC<RegisterPageContainerProps> = ({}) => {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState<RegisterFormData>({
     firstName: "",
     lastName: "",
     email: "",
@@ -18,14 +18,13 @@ const RegisterPageContainer: React.FC<RegisterPageContainerProps> = ({}) => {
   };
 
   return (
-    <>
-      <Form
-        className="sign-in-form"
-        submitText="sign in"
-        formData={formData}
-        handleChange={handleChange}
-      />
-    </>
+    <Form
+      className="sign-in-form"
+      submitText="sign in"
+      formData={formData}
+      isLoginForm={false}
+      handleChange={handleChange}
+    />
   );
 };
 export default RegisterPageContainer;
