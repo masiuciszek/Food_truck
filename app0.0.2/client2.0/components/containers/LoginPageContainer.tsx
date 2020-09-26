@@ -32,7 +32,6 @@ const LoginPageContainer: React.FC<LoginPageContainerProps> = ({}) => {
     });
   };
 
-  console.log(isLoggedIn);
   React.useEffect(() => {
     if (isLoggedIn) {
       // TODO: When stores is ready then redirect to stores
