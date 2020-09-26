@@ -20,6 +20,11 @@ interface LogoutUser {
   type: "LOGOUT_USER";
 }
 
+interface MessageHandler {
+  type: "MESSAGE_HANDLER";
+  payload: Status;
+}
+
 export interface State {
   user: null | User;
   status: Status;
@@ -29,4 +34,10 @@ export interface State {
 
 export type Dispatch = (action: Action) => void;
 
-export type Action = Login | Register | SetAuthToken | UserLoaded | LogoutUser;
+export type Action =
+  | Login
+  | Register
+  | SetAuthToken
+  | UserLoaded
+  | LogoutUser
+  | MessageHandler;

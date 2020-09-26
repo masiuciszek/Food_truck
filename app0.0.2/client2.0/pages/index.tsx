@@ -8,10 +8,7 @@ import {
   PushDown,
 } from "../components/styled/wrappers";
 import { parseCookies } from "../lib/parseCookies";
-import {
-  useAuthDispatch,
-  useAuthState,
-} from "../context/authState/AuthProvider";
+import { useAuthDispatch } from "../context/authState/AuthProvider";
 import { getMe } from "../context/authState/AuthActions";
 
 interface HomePageProps {
@@ -20,12 +17,10 @@ interface HomePageProps {
 
 const HomePage = ({ token }: HomePageProps) => {
   const dispatch = useAuthDispatch();
-  const { isLoggedIn } = useAuthState();
 
   React.useEffect(() => {
-    // console.log(token, isLoggedIn);
-    dispatch({ type: "SET_AUTH_TOKEN", payload: token });
     if (token) {
+      dispatch({ type: "SET_AUTH_TOKEN", payload: token });
       getMe(token)(dispatch);
     }
   }, [token]);
