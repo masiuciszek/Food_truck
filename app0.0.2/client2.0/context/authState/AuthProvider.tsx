@@ -1,5 +1,6 @@
 import * as React from "react";
 import { State, Dispatch, Action } from "./AuthType";
+import Cookie from "js-cookie";
 
 const AuthStateContext = React.createContext<State | undefined>(undefined);
 const AuthDispatchContext = React.createContext<Dispatch | undefined>(
@@ -8,7 +9,7 @@ const AuthDispatchContext = React.createContext<Dispatch | undefined>(
 
 const initialState: State = {
   user: null,
-  status: "NATURAL",
+  status: "EMPTY",
   isLoggedIn: false,
   token: null,
 };
@@ -16,14 +17,25 @@ const initialState: State = {
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "LOGIN":
+    case "REGISTER":
+      Cookie.set("token", action.payload);
+      return {
+        ...state,
+        isLoggedIn: true,
+      };
+    case "SET_AUTH_TOKEN":
       return {
         ...state,
         token: action.payload,
       };
-    case "REGISTER":
+
+    case "USER_LOADED":
       return {
         ...state,
+        isLoggedIn: true,
+        user: action.payload,
       };
+
     default: {
       throw new Error(`Unable to resolve action type `);
     }

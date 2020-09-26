@@ -4,6 +4,17 @@ interface Login {
 }
 interface Register {
   type: "REGISTER";
+  payload: string; // token
+}
+
+interface SetAuthToken {
+  type: "SET_AUTH_TOKEN";
+  payload: string; // token
+}
+
+interface UserLoaded {
+  type: "USER_LOADED";
+  payload: User;
 }
 
 export interface State {
@@ -15,4 +26,4 @@ export interface State {
 
 export type Dispatch = (action: Action) => void;
 
-export type Action = Login | Register;
+export type Action = Login | Register | SetAuthToken | UserLoaded;

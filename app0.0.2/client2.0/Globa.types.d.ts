@@ -4,15 +4,24 @@ interface Link {
 }
 
 type FnVoid = () => void;
+type Role = "USER" | "ADMIN";
 
 interface User {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  role: ROLE;
 }
 
-type Status = "LOADING" | "PENDING" | "RESOLVED" | "REJECTED" | "NATURAL";
+type Status =
+  | "LOADING"
+  | "PENDING"
+  | "RESOLVED"
+  | "REJECTED"
+  | "NATURAL"
+  | "EMPTY";
 
 interface LoginFormData {
   email: string;
