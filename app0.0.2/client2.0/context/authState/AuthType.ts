@@ -16,6 +16,9 @@ interface UserLoaded {
   type: "USER_LOADED";
   payload: User;
 }
+interface LogoutUser {
+  type: "LOGOUT_USER";
+}
 
 export interface State {
   user: null | User;
@@ -26,4 +29,4 @@ export interface State {
 
 export type Dispatch = (action: Action) => void;
 
-export type Action = Login | Register | SetAuthToken | UserLoaded;
+export type Action = Login | Register | SetAuthToken | UserLoaded | LogoutUser;

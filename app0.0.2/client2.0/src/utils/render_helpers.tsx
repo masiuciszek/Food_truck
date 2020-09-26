@@ -2,12 +2,14 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { Button } from "../../components/styled/Buttons";
+import { generateNameSlug } from "../utils/helperFn";
 import {
   FormGroup,
   FormLabel,
   FormInput,
 } from "../../components/styled/FormElements";
 import { above, below, handleFlex } from "./helpers";
+import { Dispatch } from "../../context/authState/AuthType";
 
 type FormSubmitEventType = (evt: React.FormEvent<HTMLFormElement>) => void;
 type HandleChangeType = (evt: React.ChangeEvent<HTMLInputElement>) => void;
@@ -138,20 +140,45 @@ const StyledAuthActionsSmallScreen = styled.div`
 export const renderAuthElements = (
   isOnSmallScreen: boolean,
   isLoggedIn: boolean,
-) =>
-  !isOnSmallScreen ? (
+  user: User | null,
+  dispatch: Dispatch,
+) => {
+  return !isOnSmallScreen ? (
     <StyledAuthActionsLargeScreen>
-      <Link href="/login">
-        <a>
-          <Button>Login</Button>
-        </a>
-      </Link>
+      {isLoggedIn ? (
+        <>
+          <Link href="/login">
+            <a>
+              <Button>
+                {user
+                  ? generateNameSlug(user.firstName, user.lastName)
+                  : "name"}
+              </Button>
+            </a>
+          </Link>
+          <span>
+            <a>
+              <Button onClick={() => dispatch({ type: "LOGOUT_USER" })}>
+                Logout
+              </Button>
+            </a>
+          </span>
+        </>
+      ) : (
+        <>
+          <Link href="/login">
+            <a>
+              <Button>Login</Button>
+            </a>
+          </Link>
 
-      <Link href="/register">
-        <a>
-          <Button>Register</Button>
-        </a>
-      </Link>
+          <Link href="/register">
+            <a>
+              <Button>Register</Button>
+            </a>
+          </Link>
+        </>
+      )}
     </StyledAuthActionsLargeScreen>
   ) : (
     <StyledAuthActionsSmallScreen>
@@ -172,3 +199,4 @@ export const renderAuthElements = (
       </Link>
     </StyledAuthActionsSmallScreen>
   );
+};

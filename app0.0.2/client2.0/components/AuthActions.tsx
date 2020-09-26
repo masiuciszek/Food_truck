@@ -1,5 +1,8 @@
 import * as React from "react";
-import { useAuthState } from "../context/authState/AuthProvider";
+import {
+  useAuthDispatch,
+  useAuthState,
+} from "../context/authState/AuthProvider";
 import { renderAuthElements } from "../src/utils/render_helpers";
 
 interface AuthActionsProps {
@@ -7,9 +10,12 @@ interface AuthActionsProps {
 }
 
 const AuthActions = ({ isOnSmallScreen }: AuthActionsProps) => {
-  const { isLoggedIn } = useAuthState();
+  const { isLoggedIn, user } = useAuthState();
+  const dispatch = useAuthDispatch();
 
-  return renderAuthElements(isOnSmallScreen, isLoggedIn);
+  return user
+    ? renderAuthElements(isOnSmallScreen, isLoggedIn, user, dispatch)
+    : renderAuthElements(isOnSmallScreen, isLoggedIn, null, dispatch);
 };
 
 export default AuthActions;

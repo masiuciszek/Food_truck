@@ -26,6 +26,7 @@ const reducer = (state: State, action: Action) => {
     case "SET_AUTH_TOKEN":
       return {
         ...state,
+        isLoggedIn: true,
         token: action.payload,
       };
 
@@ -34,6 +35,14 @@ const reducer = (state: State, action: Action) => {
         ...state,
         isLoggedIn: true,
         user: action.payload,
+      };
+
+    case "LOGOUT_USER":
+      Cookie.remove("token");
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
       };
 
     default: {

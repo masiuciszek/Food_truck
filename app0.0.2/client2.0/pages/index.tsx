@@ -1,4 +1,4 @@
-import Image from "../components/Image";
+import * as React from "react";
 import { GetServerSideProps } from "next";
 import Title from "../components/elements/Title";
 import {
@@ -7,8 +7,29 @@ import {
   Page,
   PushDown,
 } from "../components/styled/wrappers";
+import { parseCookies } from "../lib/parseCookies";
+import {
+  useAuthDispatch,
+  useAuthState,
+} from "../context/authState/AuthProvider";
+import { getMe } from "../context/authState/AuthActions";
 
-const HomePage = () => {
+interface HomePageProps {
+  token: string;
+}
+
+const HomePage = ({ token }: HomePageProps) => {
+  const dispatch = useAuthDispatch();
+  const { isLoggedIn } = useAuthState();
+
+  React.useEffect(() => {
+    // console.log(token, isLoggedIn);
+    dispatch({ type: "SET_AUTH_TOKEN", payload: token });
+    if (token) {
+      getMe(token)(dispatch);
+    }
+  }, [token]);
+
   return (
     <>
       <Page>
@@ -30,6 +51,15 @@ const HomePage = () => {
       <PushDown />
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = parseCookies(ctx.req);
+  return {
+    props: {
+      token: cookies.token || "",
+    },
+  };
 };
 
 export default HomePage;
