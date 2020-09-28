@@ -17,6 +17,11 @@ export const Page = styled.section`
   }
 `;
 
+export const PageColumn = styled(Page)`
+  ${handleFlex("column", "center", "center")}
+  min-height: 45vh;
+`;
+
 export const ColumnPage = styled(Page)`
   display: block;
   max-width: ${({ theme }) => theme.size.maxWidthPage};

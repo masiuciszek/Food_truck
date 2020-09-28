@@ -16,7 +16,7 @@ const StoreDispatchContext = React.createContext<Dispatch | undefined>(
 
 function reducer(state: StoreState = initialState, action: Action) {
   switch (action.type) {
-    case "GET_STORES":
+    case "SET_STORES":
       return {
         ...state,
         stores: action.payload,
@@ -38,6 +38,26 @@ const StoreProvider: React.FC = ({ children }) => {
       </StoreDispatchContext.Provider>
     </StoreStateContext.Provider>
   );
+};
+
+export const useStoreState = () => {
+  const context = React.useContext(StoreStateContext);
+  if (!context) {
+    throw new Error(
+      "useStoreState need to be wrapped in StoreStateContext Provider ",
+    );
+  }
+  return context;
+};
+
+export const useStoreDispatch = () => {
+  const context = React.useContext(StoreDispatchContext);
+  if (!context) {
+    throw new Error(
+      "useStoreDispatch need to be wrapped in StoreStateContext Provider ",
+    );
+  }
+  return context;
 };
 
 export default StoreProvider;

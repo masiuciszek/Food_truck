@@ -5,9 +5,13 @@ export interface StoreState {
 
 interface GetStores {
   type: "GET_STORES";
+}
+
+interface SetStores {
+  type: "SET_STORES";
   payload: Store[];
 }
 
 export type Dispatch = (action: Action) => void;
 
-export type Action = GetStores;
+export type Action = GetStores | SetStores;
