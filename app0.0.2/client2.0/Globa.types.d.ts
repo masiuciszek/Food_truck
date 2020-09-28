@@ -35,4 +35,19 @@ interface RegisterFormData {
   confirmPassword: string;
 }
 
+type Rating = "one" | "two" | "three" | "four" | "five";
+
+interface Store {
+  rating: Rating;
+  tags: string[];
+  _id: string;
+  name: string;
+  address: string;
+  desc: string;
+  author: User["id"];
+  slug: string;
+  __v: 0;
+  id: string;
+}
+
 type FormDataType = RegisterFormData | LoginFormData;
