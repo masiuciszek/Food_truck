@@ -39,7 +39,7 @@ const SearchLogo = styled(motion.span)`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-
+  z-index: 2;
   img {
     width: 46px;
   }

@@ -44,7 +44,7 @@ interface Store {
   name: string;
   address: string;
   desc: string;
-  author: User["id"];
+  author: User;
   slug: string;
   __v: 0;
   id: string;

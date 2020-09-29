@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { above, below, handleFlex } from "../../../src/utils/helpers";
+import { motion } from "framer-motion";
 
 export const Page = styled.section`
   margin: 0 auto;
@@ -55,4 +56,10 @@ export const Col = styled.section`
   `}
 `;
 
-export const Grid = styled.section``;
+export const Grid = styled(motion.section)`
+  margin: 1rem auto 5rem auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap: 2rem;
+`;

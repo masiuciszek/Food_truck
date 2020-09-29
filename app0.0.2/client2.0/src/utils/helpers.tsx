@@ -52,6 +52,23 @@ export const renderList = (list: Link[]) =>
     </motion.li>
   ));
 
+export const formatRatingToStars = (rating: Rating) => {
+  switch (rating) {
+    case "one":
+      return "⭐️";
+    case "two":
+      return "⭐️".repeat(2);
+    case "three":
+      return "⭐️".repeat(3);
+    case "four":
+      return "⭐️".repeat(4);
+    case "five":
+      return "⭐️".repeat(5);
+    default:
+      return "";
+  }
+};
+
 type FlexDirection = "row" | "column" | "column-reverse" | "row-reverse";
 type JustifyContent =
   | "center"
@@ -66,7 +83,7 @@ type AlignItems = "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
 export const handleFlex = (
   flexDirection: FlexDirection,
   justifyContent: JustifyContent,
-  alignItems: AlignItems,
+  alignItems: AlignItems
 ) => {
   return css`
     display: flex;

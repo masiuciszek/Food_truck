@@ -16,7 +16,7 @@ type FormSubmitEventType = (evt: React.FormEvent<HTMLFormElement>) => void;
 type HandleChangeType = (evt: React.ChangeEvent<HTMLInputElement>) => void;
 
 export const renderForm = (isLoginForm: boolean) => (
-  formData: FormDataType,
+  formData: FormDataType
 ) => (handleChange: HandleChangeType) => {
   return !isLoginForm ? (
     <>
@@ -142,7 +142,7 @@ export const renderAuthElements = (
   isOnSmallScreen: boolean,
   isLoggedIn: boolean,
   user: User | null,
-  dispatch: Dispatch,
+  dispatch: Dispatch
 ) => {
   return !isOnSmallScreen ? (
     <StyledAuthActionsLargeScreen>
@@ -203,5 +203,9 @@ export const renderAuthElements = (
 };
 
 export const renderStores = (stores: Store[]) => {
-  return stores.map((store) => <StoreItem key={store.id} store={store} />);
+  return stores.length > 0 ? (
+    stores.map((store) => <StoreItem key={store.id} store={store} />)
+  ) : (
+    <h3>No Stores</h3>
+  );
 };
