@@ -54,3 +54,5 @@ export const Col = styled.section`
 
   `}
 `;
+
+export const Grid = styled.section``;

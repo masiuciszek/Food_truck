@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import React from "react";
+import StoreContainer from "../../components/containers/StoreContainer";
 import Title from "../../components/elements/Title";
 import { PageColumn } from "../../components/styled/wrappers";
 import { useStoreDispatch } from "../../context/storeState/StoreProvider";
@@ -23,6 +24,7 @@ const StoresPage: React.FC<StoresPageProps> = ({ stores }) => {
         title="Stores"
         subTitle="sick stores"
       />
+      <StoreContainer />
     </PageColumn>
   );
 };

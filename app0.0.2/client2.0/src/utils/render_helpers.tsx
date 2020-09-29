@@ -10,6 +10,7 @@ import {
 } from "../../components/styled/FormElements";
 import { above, below, handleFlex } from "./helpers";
 import { Dispatch } from "../../context/authState/AuthType";
+import StoreItem from "../../components/store/StoreItem";
 
 type FormSubmitEventType = (evt: React.FormEvent<HTMLFormElement>) => void;
 type HandleChangeType = (evt: React.ChangeEvent<HTMLInputElement>) => void;
@@ -199,4 +200,8 @@ export const renderAuthElements = (
       </Link>
     </StyledAuthActionsSmallScreen>
   );
+};
+
+export const renderStores = (stores: Store[]) => {
+  return stores.map((store) => <StoreItem key={store.id} store={store} />);
 };
