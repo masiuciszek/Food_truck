@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { formatRatingToStars } from "../../src/utils/helpers";
+import Link from "next/link";
 
 interface StoreItemProps {
   store: Store;
@@ -74,15 +75,19 @@ const StoreItem: React.FC<StoreItemProps> = ({ store }) => {
     return store.name.split(" ").map((x) => <span key={x}>{x}</span>);
   }
   return (
-    <StyledStore>
-      <StoreHero></StoreHero>
-      <Body>
-        <h3>{handleWord(store.name)}</h3>
-        <p>{store.name}</p>
-        <p>{formatRatingToStars(store.rating)}</p>
-        <p>owner {store.author.firstName} </p>
-      </Body>
-    </StyledStore>
+    <Link href="/stores/store/[slug]" as={`/stores/store/${store.slug}`}>
+      <a>
+        <StyledStore>
+          <StoreHero></StoreHero>
+          <Body>
+            <h3>{handleWord(store.name)}</h3>
+            <p>{store.name}</p>
+            <p>{formatRatingToStars(store.rating)}</p>
+            <p>owner {store.author.firstName} </p>
+          </Body>
+        </StyledStore>
+      </a>
+    </Link>
   );
 };
 export default StoreItem;

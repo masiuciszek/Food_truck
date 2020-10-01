@@ -23,6 +23,11 @@ export const PageColumn = styled(Page)`
   min-height: 45vh;
 `;
 
+export const PageWrapper = styled.section`
+  margin: 2rem auto;
+  max-width: ${({ theme }) => theme.size.maxWidth};
+`;
+
 export const ColumnPage = styled(Page)`
   display: block;
   max-width: ${({ theme }) => theme.size.maxWidthPage};
@@ -60,6 +65,6 @@ export const Grid = styled(motion.section)`
   margin: 1rem auto 5rem auto;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 2rem;
 `;
