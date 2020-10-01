@@ -43,6 +43,7 @@ interface Store {
   _id: string;
   name: string;
   address: string;
+  photo: string;
   desc: string;
   author: User;
   slug: string;

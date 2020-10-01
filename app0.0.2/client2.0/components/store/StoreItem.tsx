@@ -13,8 +13,11 @@ const StyledStore = styled.section`
   background: ${({ theme: { colors } }) => colors.illustrations.main};
 `;
 
-const StoreHero = styled.div`
-  background-image: url("https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+interface StoreHeroProps {
+  photo: string;
+}
+const StoreHero = styled.div<StoreHeroProps>`
+  background-image: ${({ photo }) => `url(${photo})`};
   background-size: cover;
   background-position: center;
   padding-bottom: 62.5%;
@@ -47,15 +50,16 @@ const StoreHero = styled.div`
 
 const Body = styled.div`
   background: ${({ theme: { colors } }) => colors.illustrations.main};
-  height: 12em;
+  min-height: 12em;
   margin: 0;
   padding: 0 0.5em;
   h3 {
     background: ${({ theme: { colors } }) => colors.illustrations.tertiary};
     color: ${({ theme: { colors } }) => colors.elements.headline};
-    padding: 0 0.4em;
+    padding: 0.5em 0.4em;
     border-radius: ${({ theme }) => theme.borderRadius};
     box-shadow: ${({ theme }) => theme.shadow.elevations[4]};
+    font-size: ${(props) => props.theme.size.h4};
     span {
       display: inline-block;
       &:last-child {
@@ -72,13 +76,13 @@ const Body = styled.div`
 
 const StoreItem: React.FC<StoreItemProps> = ({ store }) => {
   function handleWord(word: string) {
-    return store.name.split(" ").map((x) => <span key={x}>{x}</span>);
+    return word.split(" ").map((x) => <span key={x}>{x}</span>);
   }
   return (
     <Link href="/stores/store/[slug]" as={`/stores/store/${store.slug}`}>
       <a>
         <StyledStore>
-          <StoreHero></StoreHero>
+          <StoreHero photo={store.photo} />
           <Body>
             <h3>{handleWord(store.name)}</h3>
             <p>{store.name}</p>

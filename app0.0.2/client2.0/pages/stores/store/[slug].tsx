@@ -2,16 +2,23 @@ import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 import { PageWrapper } from "../../../components/styled/wrappers";
+import { GetServerSideProps } from "next";
 
-interface StoreProfileProps {}
+interface StoreProfileProps {
+  storeData: Store;
+}
 
 const Wrapper = styled.section`
   border-radius: ${(props) => props.theme.borderRadius};
   border: 2px solid ${({ theme }) => theme.colors.illustrations.main};
 `;
 
-const StoreHero = styled.div`
-  background-image: url("https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+interface StoreHeroProps {
+  image: string;
+}
+const StoreHero = styled.div<StoreHeroProps>`
+  background-image: ${({ image }) => `url(${image})`};
+
   background-size: cover;
   background-position: center;
   padding-bottom: 62.5%;
@@ -24,23 +31,29 @@ const StoreProfileBody = styled.div`
   border-radius: 0 0 4px 4px;
 `;
 
-const StoreProfile: React.FC<StoreProfileProps> = ({}) => {
-  const router = useRouter();
-  console.log(router.query);
+const StoreProfile: React.FC<StoreProfileProps> = ({ storeData }) => {
+  console.log(storeData);
   return (
     <PageWrapper>
       <Wrapper>
-        <StoreHero />
+        <StoreHero image={storeData.photo} />
         <StoreProfileBody>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-            veniam adipisci perspiciatis saepe? Ad ratione repellendus odio
-            dolores deserunt ex asperiores! Distinctio, voluptates a. Corrupti
-            ullam illo quidem numquam quos?
-          </p>
+          <p>{storeData.desc}</p>
         </StoreProfileBody>
       </Wrapper>
     </PageWrapper>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { slug } = ctx.query;
+  const res = await fetch(`http://localhost:4000/store/${slug}`);
+  const { data } = await res.json();
+  return {
+    props: {
+      storeData: data[0],
+    },
+  };
+};
+
 export default StoreProfile;
