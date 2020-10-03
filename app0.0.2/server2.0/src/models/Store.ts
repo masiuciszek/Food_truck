@@ -67,6 +67,9 @@ storeSchema.pre<Store>("save", async function (next: HookNextFunction) {
 storeSchema.statics.bar = function () {
   return "apa";
 };
+
+// Go to another model , in this case the Review model
+// ALMOST like a join in SQL , (ALMOST)!!!
 // find reviews where the stores _id property === reviews store property
 storeSchema.virtual("reviews", {
   ref: "Review", // what model do we link to
