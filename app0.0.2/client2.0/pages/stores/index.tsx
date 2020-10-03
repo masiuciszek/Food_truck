@@ -15,17 +15,19 @@ const StoresPage: React.FC<StoresPageProps> = ({ stores }) => {
     if (stores) {
       dispatch({ type: "SET_STORES", payload: stores });
     }
-  }, []);
+  }, [stores]);
 
   return (
-    <PageColumn>
-      <Title
-        className="main_title_stores_page"
-        title="Stores"
-        subTitle="sick stores"
-      />
-      <StoreContainer />
-    </PageColumn>
+    <>
+      <PageColumn>
+        <Title
+          className="main_title_stores_page"
+          title="Stores"
+          subTitle="sick stores"
+        />
+        <StoreContainer />
+      </PageColumn>
+    </>
   );
 };
 

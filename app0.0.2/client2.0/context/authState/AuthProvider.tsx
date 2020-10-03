@@ -4,7 +4,7 @@ import Cookie from "js-cookie";
 
 const AuthStateContext = React.createContext<State | undefined>(undefined);
 const AuthDispatchContext = React.createContext<Dispatch | undefined>(
-  undefined,
+  undefined
 );
 
 const initialState: State = {
@@ -29,7 +29,11 @@ const reducer = (state: State, action: Action) => {
         isLoggedIn: true,
         token: action.payload,
       };
-
+    case "MESSAGE_HANDLER":
+      return {
+        ...state,
+        status: action.payload,
+      };
     case "USER_LOADED":
       return {
         ...state,
@@ -66,7 +70,7 @@ export const useAuthState = () => {
   const ctx = React.useContext(AuthStateContext);
   if (!ctx) {
     throw new Error(
-      "useAuthState need to be wrapped in AuthStateContext Provider ",
+      "useAuthState need to be wrapped in AuthStateContext Provider "
     );
   }
   return ctx;
@@ -76,7 +80,7 @@ export const useAuthDispatch = () => {
   const ctx = React.useContext(AuthDispatchContext);
   if (!ctx) {
     throw new Error(
-      "useAuthDispatch need to be wrapped in AuthDispatchContext Provider ",
+      "useAuthDispatch need to be wrapped in AuthDispatchContext Provider "
     );
   }
   return ctx;
