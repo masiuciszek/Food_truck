@@ -11,6 +11,7 @@ const StyledStore = styled.section`
   border: 2px solid ${({ theme }) => theme.colors.illustrations.main};
   border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme: { colors } }) => colors.illustrations.main};
+  position: relative;
 `;
 
 interface StoreHeroProps {
@@ -54,6 +55,8 @@ const Body = styled.div`
   margin: 0;
   padding: 0 0.5em;
   h3 {
+    position: absolute;
+    top: 0;
     background: ${({ theme: { colors } }) => colors.illustrations.tertiary};
     color: ${({ theme: { colors } }) => colors.elements.headline};
     padding: 0.5em 0.4em;
@@ -70,7 +73,7 @@ const Body = styled.div`
   }
 
   p {
-    color: ${({ theme: { colors } }) => colors.elements.paragraph};
+    color: ${({ theme }) => theme.colors.elements.paragraph};
   }
 `;
 

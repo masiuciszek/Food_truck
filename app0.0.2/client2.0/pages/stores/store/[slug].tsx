@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { PageWrapper } from "../../../components/styled/wrappers";
 import { GetServerSideProps } from "next";
 import { Button } from "../../../components/styled/Buttons";
@@ -38,10 +38,42 @@ const StoreHero = styled.div<StoreHeroProps>`
 
 const StoreProfileBody = styled.div`
   background: ${({ theme }) => theme.colors.elements.headline};
-  padding: 1em 5em;
+  padding: 1em 3em;
   border-radius: 0 0 4px 4px;
   position: relative;
+  display: flex;
+
+  .col1,
+  .col2 {
+    flex: 1;
+  }
+
+  .col2 {
+    button {
+      width: 12em;
+      border: 2px solid ${({ theme }) => theme.colors.illustrations.highlight};
+      margin-left: auto;
+      display: block;
+      &:hover {
+        width: 11.5em;
+      }
+    }
+  }
+  h2 {
+    font-size: ${({ theme }) => theme.size.h3};
+    position: absolute;
+    top: -6rem;
+    left: 1rem;
+    background: ${({ theme }) => theme.colors.elements.button};
+    color: ${({ theme }) => theme.colors.elements.headline};
+    padding: 0.2em;
+    border-radius: ${({ theme }) => theme.borderRadius};
+    transform: rotate(-4deg);
+    border: 2px solid ${({ theme }) => theme.colors.illustrations.stroke};
+    box-shadow: ${({ theme }) => theme.shadow.elevations[3]};
+  }
   p {
+    padding: 0.5em;
   }
   span,
   li {
@@ -52,9 +84,8 @@ const StoreProfileBody = styled.div`
     box-shadow: ${({ theme }) => theme.shadow.elevations[4]};
   }
   .tags {
-    position: absolute;
-    right: 3em;
-    top: 0;
+    ${handleFlex("row", "flex-end", "center")};
+    padding: 1em 0;
   }
   .tag {
     margin: 0.2em 0.5em;
@@ -62,19 +93,22 @@ const StoreProfileBody = styled.div`
     display: inline-block;
     text-align: center;
   }
+  ${below.medium`
+    ${handleFlex("column", "center", "center")};
+    .col1,.col2{
+      width: 100%;
+    }
+  `}
+
+  ${below.small`
+    padding: 1em 0;
+    p{
+      font-size: 1rem;
+    }
+  `}
 `;
 
-const CommentsWrapper = styled.div`
-  button {
-    width: 12em;
-    border: 2px solid ${({ theme }) => theme.colors.illustrations.highlight};
-    margin: 1rem auto 2rem auto;
-    display: block;
-    &:hover {
-      width: 11.5em;
-    }
-  }
-`;
+const CommentsWrapper = styled.div``;
 
 const StoreProfile: React.FC<StoreProfileProps> = ({ storeData }) => {
   const { state: showComments, toggle } = useToggle();
@@ -85,32 +119,37 @@ const StoreProfile: React.FC<StoreProfileProps> = ({ storeData }) => {
     dispatch({ type: "MESSAGE_HANDLER", payload: "REJECTED" });
   };
   return (
-    <PageWrapper>
+    <PageWrapper width="900px">
       {status === "REJECTED" && (
         <Alert message="you have to be logged in to leave a review" />
       )}
       <Wrapper>
         <StoreHero image={storeData.photo} />
         <StoreProfileBody>
-          <p>{storeData.desc}</p>
-          <p>
-            Owner{" "}
-            <span>
-              {storeData.author.firstName} {storeData.author.lastName}
-            </span>
-          </p>
-          <ul className="tags">
-            {storeData.tags.map((tag) => (
-              <li className="tag" key={tag}>
-                {tag}
-              </li>
-            ))}
-          </ul>
-          <CommentsWrapper>
+          <h2>{storeData.name}</h2>
+          <div className="col1">
+            <p>{storeData.desc}</p>
+            <p>
+              Owner
+              <span>
+                {storeData.author.firstName} {storeData.author.lastName}
+              </span>
+            </p>
+          </div>
+
+          <div className="col2">
+            <ul className="tags">
+              {storeData.tags.map((tag) => (
+                <li className="tag" key={tag}>
+                  {tag}
+                </li>
+              ))}
+            </ul>
             <Button textColor bgColor onClick={isLoggedIn ? toggle : showAlert}>
               Leave a Review
             </Button>
-
+          </div>
+          <CommentsWrapper>
             <AnimatePresence>
               {showComments && <CommentArea on={showComments} />}
             </AnimatePresence>

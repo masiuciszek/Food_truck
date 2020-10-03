@@ -23,9 +23,12 @@ export const PageColumn = styled(Page)`
   min-height: 45vh;
 `;
 
-export const PageWrapper = styled.section`
+interface PageWrapperPropps {
+  width?: string;
+}
+export const PageWrapper = styled.section<PageWrapperPropps>`
   margin: 2rem auto;
-  max-width: ${({ theme }) => theme.size.maxWidth};
+  max-width: ${({ theme, width }) => (width ? width : theme.size.maxWidth)};
 `;
 
 export const ColumnPage = styled(Page)`

@@ -65,7 +65,7 @@ const MobileList: React.FC<MobileListProps> = ({
       initial="closed"
       animate={onShowMobileMenu ? "open" : "closed"}
       variants={variants}>
-      <AuthActions isOnSmallScreen onShowMobileMenu={onShowMobileMenu} />
+      <AuthActions isOnSmallScreen />
       <StyledList>{renderList(onNavData)}</StyledList>
     </motion.section>
   );
@@ -76,6 +76,7 @@ export default styled(MobileList)`
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 5;
   background: ${({ theme }) => theme.colors.shadow.highlightShadow};
   ${handleFlex("column", "center", "center")};
   ${above.medium`

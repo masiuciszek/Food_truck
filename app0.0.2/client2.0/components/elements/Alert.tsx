@@ -28,6 +28,7 @@ const StyledAlert = styled(motion.div)`
   left: 50%;
   margin-left: -37.5%;
   top: 50%;
+  z-index: 2;
   p {
     font-size: 2rem;
   }

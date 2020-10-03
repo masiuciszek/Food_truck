@@ -72,7 +72,7 @@ const GlobalStyles = createGlobalStyle`
       font-size: 0.8em;
       }
   p{
-    color: ${({ theme }) => theme.colors.elements.paragraph};
+    color: ${({ theme }) => theme.colors.elements.paragraph} !important;
     font-size: ${({ theme }) => theme.size.p};
   }
 `;
