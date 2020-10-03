@@ -67,6 +67,22 @@ storeSchema.pre<Store>("save", async function (next: HookNextFunction) {
 storeSchema.statics.bar = function () {
   return "apa";
 };
+// find reviews where the stores _id property === reviews store property
+storeSchema.virtual("reviews", {
+  ref: "Review", // what model do we link to
+  localField: "_id", // which field on the store
+  foreignField: "store", // which field on the review?
+});
+
+storeSchema.pre("find", function (next: HookNextFunction) {
+  this.populate("reviews");
+  next();
+});
+
+storeSchema.pre("findOne", function (next: HookNextFunction) {
+  this.populate("reviews");
+  next();
+});
 
 const storeModel = model<Store, IStore>("Store", storeSchema);
 export default storeModel;

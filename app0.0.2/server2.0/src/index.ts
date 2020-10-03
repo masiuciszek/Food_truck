@@ -6,6 +6,7 @@ import cookiesParser from "cookie-parser";
 import { router as userRoutes } from "./routes/user.routes";
 import { router as authRoutes } from "./routes/auth.routes";
 import { router as storeRoutes } from "./routes/store.routes";
+import { router as reviewRoutes } from "./routes/review.routes";
 import errorHandler from "./middleware/errorHandler";
 
 const app: Application = express();
@@ -24,6 +25,7 @@ app.use(morgan("dev"));
 app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/store", storeRoutes);
+app.use("/review", reviewRoutes);
 
 app.use(errorHandler);
 

@@ -91,6 +91,15 @@ userSchema.methods.comparePasswords = async function (
   return isMatch;
 };
 
+// To not include the user password on the virtual fields
+userSchema.methods.toJSON = function () {
+  const user = this;
+  const userObject = user.toObject();
+  delete userObject.password;
+
+  return userObject;
+};
+
 userSchema.statics.foo = async function () {
   return "hello world!";
 };
