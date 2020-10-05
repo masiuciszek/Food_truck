@@ -148,7 +148,7 @@ export const renderAuthElements = (
     <StyledAuthActionsLargeScreen>
       {isLoggedIn ? (
         <>
-          <Link href="/login">
+          <Link href="/profile">
             <a>
               <Button>
                 {user
