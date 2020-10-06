@@ -38,3 +38,18 @@ export const FormInput = styled.input`
     width: 97%;
   }
 `;
+
+export const TextArea = styled.textarea`
+  width: 42em;
+  height: 8em;
+  box-shadow: ${({ theme }) => theme.shadow.elevations[3]};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  border: 2px solid ${({ theme }) => theme.colors.illustrations.stroke};
+  transition: all 350ms ease-in-out;
+  outline: 0;
+  &:focus {
+    box-shadow: ${({ theme }) => theme.shadow.elevations[4]};
+    border: 2px solid ${({ theme }) => theme.colors.illustrations.tertiary};
+    width: 41em;
+  }
+`;

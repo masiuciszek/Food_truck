@@ -8,6 +8,8 @@ interface StoreHeroProps {
 export const Wrapper = styled.section`
   border-radius: ${(props) => props.theme.borderRadius};
   border: 2px solid ${({ theme }) => theme.colors.illustrations.main};
+  background: ${({ theme }) => theme.colors.elements.headline};
+  margin: 3rem 0 12rem 0;
   ${below.small`
     margin-bottom: 3em;
   `}
@@ -44,7 +46,7 @@ export const StoreProfileBody = styled.div`
   border-radius: 0 0 4px 4px;
   position: relative;
   display: flex;
-
+  min-height: 20em;
   .col1,
   .col2 {
     flex: 1;
