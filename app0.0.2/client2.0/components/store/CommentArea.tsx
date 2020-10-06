@@ -41,8 +41,8 @@ const CommentArea: React.FC<CommentAreaProps> = ({ on }) => {
       exit="closed"
       transition={{ damping: 100 }}>
       <h3>Leave a review</h3>
-      <Stars />
       <form>
+        <Stars />
         <TextArea />
         <Button bgColor textColor type="submit">
           Leave a review

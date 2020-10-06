@@ -46,7 +46,7 @@ export const StoreProfileBody = styled.div`
   border-radius: 0 0 4px 4px;
   position: relative;
   display: flex;
-  min-height: 20em;
+  min-height: 17em;
   .col1,
   .col2 {
     flex: 1;

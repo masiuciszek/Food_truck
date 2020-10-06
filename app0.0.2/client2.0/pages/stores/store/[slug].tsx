@@ -68,7 +68,7 @@ const StoreProfile: React.FC<StoreProfileProps> = ({ storeData, token }) => {
               ))}
             </ul>
             <Button textColor bgColor onClick={isLoggedIn ? toggle : showAlert}>
-              Leave a Review
+              {showComments ? "close up" : "Leave a Review"}
             </Button>
           </div>
         </StoreProfileBody>
