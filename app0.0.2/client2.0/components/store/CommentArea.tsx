@@ -1,13 +1,13 @@
-import { motion } from "framer-motion";
-import React from "react";
-import styled from "styled-components";
-import { handleFlex } from "../../src/utils/helpers";
-import { Button } from "../styled/Buttons";
-import { TextArea } from "../styled/FormElements";
-import Stars from "./Stars";
+import { motion } from "framer-motion"
+import React from "react"
+import styled from "styled-components"
+import { handleFlex } from "../../src/utils/helpers"
+import { Button } from "../styled/Buttons"
+import { TextArea } from "../styled/FormElements"
+import Stars from "./Stars"
 
 interface CommentAreaProps {
-  on: boolean;
+  on: boolean
 }
 
 const StyledCommentArea = styled(motion.section)`
@@ -26,13 +26,23 @@ const StyledCommentArea = styled(motion.section)`
       }
     }
   }
-`;
+`
 
 const CommentArea: React.FC<CommentAreaProps> = ({ on }) => {
+  const [formData, setFormData] = React.useState({
+    text: "",
+    rating: 1,
+  })
+
   const variants = {
     open: { opacity: 1, x: 0 },
     closed: { opacity: 0, x: "-100%" },
-  };
+  }
+
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    //
+  }
+
   return (
     <StyledCommentArea
       initial="closed"
@@ -49,6 +59,6 @@ const CommentArea: React.FC<CommentAreaProps> = ({ on }) => {
         </Button>
       </form>
     </StyledCommentArea>
-  );
-};
-export default CommentArea;
+  )
+}
+export default CommentArea
