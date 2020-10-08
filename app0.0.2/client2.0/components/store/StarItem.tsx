@@ -3,34 +3,41 @@ import styled from "styled-components"
 import { formatRatingToStars, handleFlex } from "../../src/utils/helpers"
 
 interface StarItemProps {
-  rate: number
+  rating: number
+  index: number
+  onMouseEnter: () => void
+  onMouseLeave: () => void
+  onClick: (index: number) => void
 }
 
 const StyledStar = styled.div`
-  border: 2px solid red;
-  padding: 0.5em;
-  text-align: center;
-  ${handleFlex("row", "center", "center")};
-  input[type="radio"] {
-    opacity: 0;
-    width: 1em;
-    height: 1em;
+  transition: 400ms all ease-in-out;
+  cursor: pointer;
+  span {
+    font-size: 2.5em;
   }
-  label {
-    position: absolute;
+  &:hover {
   }
 `
 
-const StarItem: React.FC<StarItemProps> = ({ rate }) => {
-  return <StyledStar></StyledStar>
+const StarItem: React.FC<StarItemProps> = ({
+  rating,
+  index,
+  onMouseEnter,
+  onMouseLeave,
+  onClick,
+}) => {
+  return (
+    <StyledStar
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={() => onClick(index)}>
+      {rating && rating >= index + 1 ? (
+        <span className="star"> ⭐️ </span>
+      ) : (
+        <span className="star">✭</span>
+      )}
+    </StyledStar>
+  )
 }
 export default StarItem
-
-{
-  /* <StyledStar>
-<input type="radio" value={rate} name="rating" id={`stars${rate}`} />
-<label htmlFor={`star${rate}`}>
-  <span>{formatRatingToStars(rate)}</span>
-</label>
-</StyledStar> */
-}
