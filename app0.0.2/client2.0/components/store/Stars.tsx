@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from "uuid"
 import styled from "styled-components"
 import StarItem from "./StarItem"
 import { below, handleFlex } from "../../src/utils/helpers"
+import { useToggle } from "../../hooks/useToggle"
 
 const StyledStars = styled.section`
-  border: 2px solid red;
   ${handleFlex("row", "space-evenly", "center")};
   width: 50%;
   padding: 1em 0;
@@ -14,17 +14,26 @@ const StyledStars = styled.section`
     width: 100%;
   `}
 `
+interface StarsProps {
+  rating: number
+  setRating: React.Dispatch<React.SetStateAction<number>>
+}
 
-const Stars = ({}) => {
-  // const [stars, setStars] = React.useState(
-  //   Array.from({ length: 5 }, (_, i) => i + 1)
-  // )
-  const [stars, setStars] = React.useState([...Array(5).keys()])
-  const [rating, setRating] = React.useState(() => 0)
-  const [hover, setHover] = React.useState(() => 0)
+const Stars = ({ rating, setRating }: StarsProps) => {
+  const [stars, setStars] = useState([...Array(5).keys()])
+  const [hover, setHover] = useState(() => 0)
 
+  // TODO: Make this function cleaner
   const handleRating = (index: number) => {
     if (rating === 1 && rating && rating > index) {
+      setRating(0)
+    } else if (rating === 2 && rating && rating > index) {
+      setRating(0)
+    } else if (rating === 3 && rating && rating > index) {
+      setRating(0)
+    } else if (rating === 4 && rating && rating > index) {
+      setRating(0)
+    } else if (rating === 5 && rating && rating > index) {
       setRating(0)
     } else {
       setRating(index + 1)

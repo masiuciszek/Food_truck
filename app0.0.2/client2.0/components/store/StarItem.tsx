@@ -35,7 +35,7 @@ const StarItem: React.FC<StarItemProps> = ({
       {rating && rating >= index + 1 ? (
         <span className="star"> ⭐️ </span>
       ) : (
-        <span className="star">✭</span>
+        <span className="star"> ✩ </span>
       )}
     </StyledStar>
   )

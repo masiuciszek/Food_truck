@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { handleFlex } from "../../src/utils/helpers"
 import { Button } from "../styled/Buttons"
@@ -29,19 +29,16 @@ const StyledCommentArea = styled(motion.section)`
 `
 
 const CommentArea: React.FC<CommentAreaProps> = ({ on }) => {
-  const [formData, setFormData] = React.useState({
-    text: "",
-    rating: 1,
-  })
+  const [rating, setRating] = useState(() => 0)
+  const [commentText, setCommentText] = useState("")
 
   const variants = {
     open: { opacity: 1, x: 0 },
     closed: { opacity: 0, x: "-100%" },
   }
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    //
-  }
+  const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void =>
+    setCommentText(evt.target.value)
 
   return (
     <StyledCommentArea
@@ -52,8 +49,12 @@ const CommentArea: React.FC<CommentAreaProps> = ({ on }) => {
       transition={{ damping: 100 }}>
       <h3>Leave a review</h3>
       <form>
-        <Stars />
-        <TextArea />
+        <Stars rating={rating} setRating={setRating} />
+        <TextArea
+          name="commentText"
+          value={commentText}
+          onChange={handleChange}
+        />
         <Button bgColor textColor type="submit">
           Leave a review
         </Button>
