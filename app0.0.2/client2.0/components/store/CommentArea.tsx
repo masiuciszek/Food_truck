@@ -1,6 +1,8 @@
 import { motion } from "framer-motion"
 import React, { useState } from "react"
 import styled from "styled-components"
+import { leaveReview } from "../../context/storeState/storeActions"
+import { useStoreDispatch } from "../../context/storeState/StoreProvider"
 import { handleFlex } from "../../src/utils/helpers"
 import { Button } from "../styled/Buttons"
 import { TextArea } from "../styled/FormElements"
@@ -8,6 +10,7 @@ import Stars from "./Stars"
 
 interface CommentAreaProps {
   on: boolean
+  storeId: string
 }
 
 const StyledCommentArea = styled(motion.section)`
@@ -28,9 +31,10 @@ const StyledCommentArea = styled(motion.section)`
   }
 `
 
-const CommentArea: React.FC<CommentAreaProps> = ({ on }) => {
+const CommentArea: React.FC<CommentAreaProps> = ({ on, storeId }) => {
   const [rating, setRating] = useState(() => 0)
-  const [commentText, setCommentText] = useState("")
+  const [text, setText] = useState("")
+  const d = useStoreDispatch()
 
   const variants = {
     open: { opacity: 1, x: 0 },
@@ -38,7 +42,15 @@ const CommentArea: React.FC<CommentAreaProps> = ({ on }) => {
   }
 
   const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void =>
-    setCommentText(evt.target.value)
+    setText(evt.target.value)
+
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
+    evt.preventDefault()
+    const formData = { text, rating }
+    // TODO: You also have to auteticate the user to leave a comment
+    // get the logged in user token and send it to leaveReview
+    leaveReview(formData)(d)(storeId)
+  }
 
   return (
     <StyledCommentArea
@@ -48,13 +60,9 @@ const CommentArea: React.FC<CommentAreaProps> = ({ on }) => {
       exit="closed"
       transition={{ damping: 100 }}>
       <h3>Leave a review</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Stars rating={rating} setRating={setRating} />
-        <TextArea
-          name="commentText"
-          value={commentText}
-          onChange={handleChange}
-        />
+        <TextArea name="text" value={text} onChange={handleChange} />
         <Button bgColor textColor type="submit">
           Leave a review
         </Button>

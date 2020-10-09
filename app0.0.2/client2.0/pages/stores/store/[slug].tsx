@@ -1,44 +1,44 @@
-import React from "react";
-import { PageWrapper } from "../../../components/styled/wrappers";
-import { GetServerSideProps } from "next";
-import { Button } from "../../../components/styled/Buttons";
-import { useToggle } from "../../../hooks/useToggle";
-import CommentArea from "../../../components/store/CommentArea";
-import { AnimatePresence } from "framer-motion";
+import React from "react"
+import { PageWrapper } from "../../../components/styled/wrappers"
+import { GetServerSideProps } from "next"
+import { Button } from "../../../components/styled/Buttons"
+import { useToggle } from "../../../hooks/useToggle"
+import CommentArea from "../../../components/store/CommentArea"
+import { AnimatePresence } from "framer-motion"
 import {
   useAuthState,
   useAuthDispatch,
-} from "../../../context/authState/AuthProvider";
-import Alert from "../../../components/elements/Alert";
+} from "../../../context/authState/AuthProvider"
+import Alert from "../../../components/elements/Alert"
 import {
   CommentsWrapper,
   StoreHero,
   StoreProfileBody,
   Wrapper,
-} from "../../../components/store/storeStyles";
-import { parseCookies } from "../../../lib/parseCookies";
-import { getMe } from "../../../context/authState/AuthActions";
+} from "../../../components/store/storeStyles"
+import { parseCookies } from "../../../lib/parseCookies"
+import { getMe } from "../../../context/authState/AuthActions"
 
 interface StoreProfileProps {
-  storeData: Store;
-  token: string;
+  storeData: Store
+  token: string
 }
 
 const StoreProfile: React.FC<StoreProfileProps> = ({ storeData, token }) => {
-  const { state: showComments, toggle } = useToggle();
-  const { isLoggedIn, status } = useAuthState();
-  const dispatch = useAuthDispatch();
+  const { state: showComments, toggle } = useToggle()
+  const { isLoggedIn, status } = useAuthState()
+  const dispatch = useAuthDispatch()
 
   const showAlert = () => {
-    dispatch({ type: "MESSAGE_HANDLER", payload: "REJECTED" });
-  };
+    dispatch({ type: "MESSAGE_HANDLER", payload: "REJECTED" })
+  }
 
   React.useEffect(() => {
     if (token) {
-      dispatch({ type: "SET_AUTH_TOKEN", payload: token });
-      getMe(token)(dispatch);
+      dispatch({ type: "SET_AUTH_TOKEN", payload: token })
+      getMe(token)(dispatch)
     }
-  }, [token]);
+  }, [token])
 
   return (
     <PageWrapper width="900px">
@@ -74,25 +74,27 @@ const StoreProfile: React.FC<StoreProfileProps> = ({ storeData, token }) => {
         </StoreProfileBody>
         <CommentsWrapper>
           <AnimatePresence>
-            {showComments && <CommentArea on={showComments} />}
+            {showComments && (
+              <CommentArea storeId={storeData._id} on={showComments} />
+            )}
           </AnimatePresence>
         </CommentsWrapper>
       </Wrapper>
     </PageWrapper>
-  );
-};
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { slug } = ctx.query;
-  const res = await fetch(`http://localhost:4000/store/${slug}`);
-  const { data } = await res.json();
-  const cookies = parseCookies(ctx.req);
+  const { slug } = ctx.query
+  const res = await fetch(`http://localhost:4000/store/${slug}`)
+  const { data } = await res.json()
+  const cookies = parseCookies(ctx.req)
   return {
     props: {
       storeData: data[0],
       token: cookies.token || "",
     },
-  };
-};
+  }
+}
 
-export default StoreProfile;
+export default StoreProfile

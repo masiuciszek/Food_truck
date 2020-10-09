@@ -1,18 +1,16 @@
-import * as React from "react";
+import * as React from "react"
 
-import { StoreState, Dispatch, Action } from "./storeTypes";
+import { StoreState, Dispatch, Action } from "./storeTypes"
 
 const initialState: StoreState = {
   stores: [],
   status: "NATURAL",
-};
+}
 
-const StoreStateContext = React.createContext<StoreState | undefined>(
-  undefined,
-);
+const StoreStateContext = React.createContext<StoreState | undefined>(undefined)
 const StoreDispatchContext = React.createContext<Dispatch | undefined>(
-  undefined,
-);
+  undefined
+)
 
 function reducer(state: StoreState = initialState, action: Action) {
   switch (action.type) {
@@ -20,16 +18,21 @@ function reducer(state: StoreState = initialState, action: Action) {
       return {
         ...state,
         stores: action.payload,
-      };
+      }
+    case "STORE_MESSAGE_HANDLER":
+      return {
+        ...state,
+        status: action.payload,
+      }
 
     default: {
-      throw new Error(`Unable to resolve action type `);
+      throw new Error(`Unable to resolve action type `)
     }
   }
 }
 
 const StoreProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState)
 
   return (
     <StoreStateContext.Provider value={state}>
@@ -37,27 +40,27 @@ const StoreProvider: React.FC = ({ children }) => {
         {children}
       </StoreDispatchContext.Provider>
     </StoreStateContext.Provider>
-  );
-};
+  )
+}
 
 export const useStoreState = () => {
-  const context = React.useContext(StoreStateContext);
+  const context = React.useContext(StoreStateContext)
   if (!context) {
     throw new Error(
-      "useStoreState need to be wrapped in StoreStateContext Provider ",
-    );
+      "useStoreState need to be wrapped in StoreStateContext Provider "
+    )
   }
-  return context;
-};
+  return context
+}
 
 export const useStoreDispatch = () => {
-  const context = React.useContext(StoreDispatchContext);
+  const context = React.useContext(StoreDispatchContext)
   if (!context) {
     throw new Error(
-      "useStoreDispatch need to be wrapped in StoreStateContext Provider ",
-    );
+      "useStoreDispatch need to be wrapped in StoreStateContext Provider "
+    )
   }
-  return context;
-};
+  return context
+}
 
-export default StoreProvider;
+export default StoreProvider

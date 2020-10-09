@@ -1,17 +1,22 @@
 export interface StoreState {
-  stores: Store[] | [];
-  status: Status;
+  stores: Store[] | []
+  status: Status
 }
 
 interface GetStores {
-  type: "GET_STORES";
+  type: "GET_STORES"
 }
 
 interface SetStores {
-  type: "SET_STORES";
-  payload: Store[];
+  type: "SET_STORES"
+  payload: Store[]
 }
 
-export type Dispatch = (action: Action) => void;
+interface StoreMessageHandler {
+  type: "STORE_MESSAGE_HANDLER"
+  payload: Status
+}
 
-export type Action = GetStores | SetStores;
+export type Dispatch = (action: Action) => void
+
+export type Action = GetStores | SetStores | StoreMessageHandler
