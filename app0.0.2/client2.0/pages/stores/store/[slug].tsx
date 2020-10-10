@@ -18,6 +18,8 @@ import {
 } from "../../../components/store/storeStyles"
 import { parseCookies } from "../../../lib/parseCookies"
 import { getMe } from "../../../context/authState/AuthActions"
+import PostedComments from "../../../components/store/PostedComments"
+import { checkLength } from "../../../src/utils/helperFn"
 
 interface StoreProfileProps {
   storeData: Store
@@ -78,6 +80,10 @@ const StoreProfile: React.FC<StoreProfileProps> = ({ storeData, token }) => {
               <CommentArea storeId={storeData._id} on={showComments} />
             )}
           </AnimatePresence>
+
+          {storeData.reviews && checkLength(storeData.reviews)(0) && (
+            <PostedComments reviews={storeData.reviews} />
+          )}
         </CommentsWrapper>
       </Wrapper>
     </PageWrapper>

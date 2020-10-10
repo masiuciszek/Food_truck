@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { formatRatingToStars } from "../../src/utils/helpers";
-import Link from "next/link";
+import React from "react"
+import styled from "styled-components"
+import { formatRatingToStars } from "../../src/utils/helpers"
+import Link from "next/link"
 
 interface StoreItemProps {
-  store: Store;
+  store: Store
 }
 
 const StyledStore = styled.section`
@@ -12,10 +12,15 @@ const StyledStore = styled.section`
   border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme: { colors } }) => colors.illustrations.main};
   position: relative;
-`;
+  transition: ${({ theme }) => theme.transition.mainTransition};
+  &:hover {
+    transform: scale(1.045);
+    border: 2px solid ${({ theme }) => theme.colors.illustrations.tertiary};
+  }
+`
 
 interface StoreHeroProps {
-  photo: string;
+  photo: string
 }
 const StoreHero = styled.div<StoreHeroProps>`
   background-image: ${({ photo }) => `url(${photo})`};
@@ -47,7 +52,7 @@ const StoreHero = styled.div<StoreHeroProps>`
       rgba(95, 251, 241, 0.85)
     );
   }
-`;
+`
 
 const Body = styled.div`
   background: ${({ theme: { colors } }) => colors.illustrations.main};
@@ -75,11 +80,11 @@ const Body = styled.div`
   p {
     color: ${({ theme }) => theme.colors.elements.paragraph};
   }
-`;
+`
 
 const StoreItem: React.FC<StoreItemProps> = ({ store }) => {
   function handleWord(word: string) {
-    return word.split(" ").map((x) => <span key={x}>{x}</span>);
+    return word.split(" ").map((x) => <span key={x}>{x}</span>)
   }
   return (
     <Link href="/stores/store/[slug]" as={`/stores/store/${store.slug}`}>
@@ -95,6 +100,6 @@ const StoreItem: React.FC<StoreItemProps> = ({ store }) => {
         </StyledStore>
       </a>
     </Link>
-  );
-};
-export default StoreItem;
+  )
+}
+export default StoreItem

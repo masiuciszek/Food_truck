@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import React, { useState } from "react"
 import styled from "styled-components"
+import { useAuthState } from "../../context/authState/AuthProvider"
 import { leaveReview } from "../../context/storeState/storeActions"
 import { useStoreDispatch } from "../../context/storeState/StoreProvider"
 import { handleFlex } from "../../src/utils/helpers"
@@ -34,8 +35,9 @@ const StyledCommentArea = styled(motion.section)`
 const CommentArea: React.FC<CommentAreaProps> = ({ on, storeId }) => {
   const [rating, setRating] = useState(() => 0)
   const [text, setText] = useState("")
+  const { token: authToken } = useAuthState()
   const d = useStoreDispatch()
-
+  console.log(storeId)
   const variants = {
     open: { opacity: 1, x: 0 },
     closed: { opacity: 0, x: "-100%" },
@@ -47,9 +49,14 @@ const CommentArea: React.FC<CommentAreaProps> = ({ on, storeId }) => {
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
     evt.preventDefault()
     const formData = { text, rating }
-    // TODO: You also have to auteticate the user to leave a comment
-    // get the logged in user token and send it to leaveReview
-    leaveReview(formData)(d)(storeId)
+
+    if (authToken) {
+      leaveReview(formData)(authToken)(d)(storeId)
+      setText("")
+      setRating(0)
+    } else {
+      d({ type: "STORE_MESSAGE_HANDLER", payload: "REJECTED" })
+    }
   }
 
   return (
