@@ -71,17 +71,17 @@ export const formatRatingToStars = (rating: Rating | number): string => {
   } else {
     switch (rating) {
       case 0:
-        return "✭"
+        return "🌟"
       case 1:
-        return "✭".repeat(2)
+        return "🌟🌟"
       case 2:
-        return "✭".repeat(3)
+        return "🌟".repeat(2)
       case 3:
-        return "✭".repeat(4)
+        return "🌟".repeat(3)
       case 4:
-        return "✭".repeat(5)
+        return "🌟".repeat(5)
       default:
-        return "✭"
+        return "🌟"
     }
   }
 }

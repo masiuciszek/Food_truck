@@ -7,7 +7,6 @@ interface PostedCommentsProps {
 }
 
 const StyledPostedCommentsBox = styled.ul`
-  border: 2px solid red;
   ${handleFlex("column", "center", "center")};
   margin: 1rem auto 0 auto;
   width: 100%;
