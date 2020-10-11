@@ -17,6 +17,11 @@ interface StoreMessageHandler {
   payload: Status
 }
 
+interface RemoveReview {
+  type: "REMOVE_REVIEW"
+  payload: string // id
+}
+
 export type Dispatch = (action: Action) => void
 
-export type Action = GetStores | SetStores | StoreMessageHandler
+export type Action = GetStores | SetStores | StoreMessageHandler | RemoveReview

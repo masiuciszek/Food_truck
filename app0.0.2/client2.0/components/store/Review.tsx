@@ -1,6 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 import { useAuthState } from "../../context/authState/AuthProvider"
+import { deleteReview } from "../../context/storeState/storeActions"
+
+import { useStoreDispatch } from "../../context/storeState/StoreProvider"
 import {
   above,
   below,
@@ -61,14 +64,20 @@ const StyledReview = styled.li`
 `
 
 const Review: React.FC<ReviewProps> = ({ review }) => {
-  const { user } = useAuthState()
+  const { user, token } = useAuthState()
+  const dispatch = useStoreDispatch()
 
   const isOwnerForComment = review.author.id === user?.id
+
   return (
     <StyledReview>
-      {isOwnerForComment && (
+      {isOwnerForComment && token && (
         <div className="delete">
-          <button type="button">╳</button>
+          <button
+            type="button"
+            onClick={() => deleteReview(token)(dispatch)(review._id)}>
+            ╳
+          </button>
         </div>
       )}
       <div className="head">

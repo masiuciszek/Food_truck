@@ -25,6 +25,12 @@ function reducer(state: StoreState = initialState, action: Action) {
         status: action.payload,
       }
 
+    case "REMOVE_REVIEW":
+      return {
+        ...state,
+        stores: state.stores.filter((store) => store._id !== action.payload),
+      }
+
     default: {
       throw new Error(`Unable to resolve action type `)
     }
