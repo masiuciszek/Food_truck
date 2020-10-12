@@ -133,3 +133,21 @@ export const deleteStore = asyncHandler(
     res.status(200).json({ success: true, data: {} });
   },
 );
+
+/**
+ * @method GET
+ * @route /store/filterstore
+ * @desc filter stores
+ * @status Public
+ */
+
+export const filterStore = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // const stores = await Store.find({ name: { $match: "t" } });
+    const { name } = req.query;
+    let reg = new RegExp(`${name}`, "gi");
+    const stores = await Store.find({ name: reg });
+
+    res.status(200).json({ success: true, data: stores });
+  },
+);

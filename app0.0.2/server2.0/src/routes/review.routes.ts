@@ -6,4 +6,6 @@ const router = Router();
 
 router.route("/:storeId").post(authHandler, review.leaveReview);
 
+router.route("/:reviewId").delete(authHandler, review.deleteReview);
+
 export { router };
