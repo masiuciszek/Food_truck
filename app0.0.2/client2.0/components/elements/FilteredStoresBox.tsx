@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { useStoreState } from "../../context/storeState/StoreProvider"
-import { handleFlex } from "../../src/utils/helpers"
+import { below, handleFlex } from "../../src/utils/helpers"
 import FilteredStoreItem from "./FilteredStoreItem"
 
 interface FilteredStoresBoxProps {}
@@ -11,8 +11,7 @@ const StyledStoreBox = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
-  border: 2px solid red;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
   ${handleFlex("row", "center", "center")};
@@ -21,6 +20,14 @@ const StyledStoreBox = styled(motion.div)`
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.colors.illustrations.main};
   padding: 1em 1.5em;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  width: 28em;
+  height: 24em;
+  overflow-y: scroll;
+  ${handleFlex("column", "center", "center")};
+  ${below.small`
+    width: 100%;
+  `}
 `
 
 const FilteredStoresBox: React.FC<FilteredStoresBoxProps> = ({}) => {
@@ -35,7 +42,6 @@ const FilteredStoresBox: React.FC<FilteredStoresBoxProps> = ({}) => {
   React.useEffect(() => {
     setState(filteredStores)
   })
-  console.log(filteredStores)
 
   return (
     <StyledStoreBox
@@ -44,13 +50,10 @@ const FilteredStoresBox: React.FC<FilteredStoresBoxProps> = ({}) => {
       variants={variants}
       transition={{ duration: 0.8 }}>
       <Wrapper>
-        {state.length > 0 ? (
+        {state.length > 0 &&
           (state as Array<Store>).map((store) => (
             <FilteredStoreItem key={store._id} store={store} />
-          ))
-        ) : (
-          <p>nooo</p>
-        )}
+          ))}
       </Wrapper>
     </StyledStoreBox>
   )
