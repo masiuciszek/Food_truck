@@ -1,5 +1,6 @@
 export interface StoreState {
   stores: Store[] | []
+  filteredStores: Store[] | []
   status: Status
 }
 
@@ -17,6 +18,16 @@ interface StoreMessageHandler {
   payload: Status
 }
 
+interface SearchStore {
+  type: "SEARCH_STORE"
+  // payload: string // text
+  payload: Store[]
+}
+interface ClearSearchStore {
+  type: "CLEAR_SEARCH_STORE"
+}
+
+// TODO: This will refactor to ot own provider, Review Context
 interface RemoveReview {
   type: "REMOVE_REVIEW"
   payload: string // id
@@ -24,4 +35,10 @@ interface RemoveReview {
 
 export type Dispatch = (action: Action) => void
 
-export type Action = GetStores | SetStores | StoreMessageHandler | RemoveReview
+export type Action =
+  | GetStores
+  | SetStores
+  | StoreMessageHandler
+  | RemoveReview
+  | SearchStore
+  | ClearSearchStore

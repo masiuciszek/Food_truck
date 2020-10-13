@@ -1,10 +1,14 @@
-import { motion } from "framer-motion";
-import React from "react";
-import styled from "styled-components";
-import { above, below, handleFlex } from "../../../src/utils/helpers";
+import { motion } from "framer-motion"
+import React, { useState, useEffect } from "react"
+import styled from "styled-components"
+import {
+  useStoreDispatch,
+  useStoreState,
+} from "../../../context/storeState/StoreProvider"
+import { above, below } from "../../../src/utils/helpers"
 
 interface Props {
-  showFilerSearch: boolean;
+  showFilerSearch: boolean
 }
 
 const SearchFilterWrapper = styled(motion.div)`
@@ -15,7 +19,7 @@ const SearchFilterWrapper = styled(motion.div)`
   ${below.small`
     width: 85%;
   `}
-`;
+`
 
 const SearchFilterElement = styled.input`
   border: 3px solid ${({ theme }) => theme.colors.elements.headline};
@@ -58,21 +62,56 @@ const SearchFilterElement = styled.input`
   ${above.xLarge`
     width: 45rem;
   `}
-`;
+`
 
 const SearchFilter = ({ showFilerSearch }: Props) => {
+  const [text, setText] = useState("")
+  const [storesState, setStoreState] = useState<Store[] | []>([])
+  const d = useStoreDispatch()
+  const { filteredStores } = useStoreState()
+
   const variants = {
     open: { opacity: 1, x: 0 },
     closed: { opacity: 0, x: "-100%" },
-  };
+  }
+
+  const getStoresByName = async (text: string): Promise<void> => {
+    const res = await fetch(
+      `http://localhost:4000/store/filterstore?name=${text}`
+    )
+    const { data: stores } = await res.json()
+
+    setStoreState(stores)
+  }
+
+  const handleSearch = (evt: React.ChangeEvent<HTMLInputElement>): void => {
+    setText(evt.target.value)
+    if (evt.target.value !== "") {
+      d({ type: "SEARCH_STORE", payload: storesState })
+    } else {
+      d({ type: "CLEAR_SEARCH_STORE" })
+    }
+  }
+
+  useEffect(() => {
+    getStoresByName(text)
+    console.log(filteredStores)
+  }, [text])
+
   return (
     <SearchFilterWrapper
       initial="closed"
       animate={showFilerSearch ? "open" : "closed"}
       variants={variants}
       transition={{ duration: 0.8 }}>
-      <SearchFilterElement type="text" placeholder="search store..." />
+      <SearchFilterElement
+        type="text"
+        placeholder="search store..."
+        name="text"
+        value={text}
+        onChange={handleSearch}
+      />
     </SearchFilterWrapper>
-  );
-};
-export default SearchFilter;
+  )
+}
+export default SearchFilter

@@ -5,6 +5,7 @@ import { StoreState, Dispatch, Action } from "./storeTypes"
 const initialState: StoreState = {
   stores: [],
   status: "NATURAL",
+  filteredStores: [],
 }
 
 const StoreStateContext = React.createContext<StoreState | undefined>(undefined)
@@ -29,6 +30,19 @@ function reducer(state: StoreState = initialState, action: Action) {
       return {
         ...state,
         stores: state.stores.filter((store) => store._id !== action.payload),
+      }
+
+    case "SEARCH_STORE":
+      return {
+        ...state,
+        // stores: state.stores.filter((store) => {}),
+        filteredStores: action.payload,
+      }
+
+    case "CLEAR_SEARCH_STORE":
+      return {
+        ...state,
+        filteredStores: [],
       }
 
     default: {
