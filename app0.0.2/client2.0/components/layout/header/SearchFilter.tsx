@@ -16,6 +16,7 @@ const SearchFilterWrapper = styled(motion.div)`
   position: fixed;
   width: 70%;
   padding: 1rem;
+  z-index: 1;
   ${below.small`
     width: 85%;
   `}

@@ -1,13 +1,14 @@
-import { motion } from "framer-motion";
-import React from "react";
-import styled from "styled-components";
-import { useToggle } from "../../../hooks/useToggle";
-import { above } from "../../../src/utils/helpers";
-import Nav from "./Nav";
-import SearchFilter from "./SearchFilter";
+import { motion } from "framer-motion"
+import React from "react"
+import styled from "styled-components"
+import { useToggle } from "../../../hooks/useToggle"
+import { above } from "../../../src/utils/helpers"
+import FilteredStoresBox from "../../elements/FilteredStoresBox"
+import Nav from "./Nav"
+import SearchFilter from "./SearchFilter"
 
 interface NavProps {
-  className?: string;
+  className?: string
 }
 
 const MenuIcon = styled.div`
@@ -23,7 +24,7 @@ const MenuIcon = styled.div`
   ${above.medium`
     display:none;
   `}
-`;
+`
 
 const SearchLogo = styled(motion.span)`
   cursor: pointer;
@@ -43,13 +44,13 @@ const SearchLogo = styled(motion.span)`
   img {
     width: 46px;
   }
-`;
+`
 
 const Header: React.FC<NavProps> = ({
   className = "layout-header-main-header",
 }) => {
-  const { state: showFilerSearch, toggle: toggleFilterSearch } = useToggle();
-  const { state: showMobileMenu, toggle: toggleMobileMenu } = useToggle();
+  const { state: showFilerSearch, toggle: toggleFilterSearch } = useToggle()
+  const { state: showMobileMenu, toggle: toggleMobileMenu } = useToggle()
 
   return (
     <header className={className}>
@@ -64,11 +65,12 @@ const Header: React.FC<NavProps> = ({
         <img src="/search-white.png" alt="search-logo" />
       </SearchLogo>
       <SearchFilter showFilerSearch={showFilerSearch} />
+      <FilteredStoresBox />
     </header>
-  );
-};
+  )
+}
 
 export default styled(Header)`
   padding: 2rem 1rem;
   position: relative;
-`;
+`
