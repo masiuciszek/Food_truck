@@ -8,8 +8,7 @@ import { Col, HomePageWrapper, Page } from "../../components/styled/wrappers"
 import { useToggle } from "../../hooks/useToggle"
 
 const ContactPage = () => {
-  const { state: showModal, toggle } = useToggle()
-  console.log(showModal)
+  const { state: showModal, toggle: toggleModal } = useToggle()
   return (
     <Page>
       <HomePageWrapper>
@@ -19,7 +18,7 @@ const ContactPage = () => {
             title="Food stores"
             subTitle="with a special twist"
             actionText="Contact us"
-            handleClick={toggle}
+            handleClick={toggleModal}
           />
         </Col>
         <Col>
@@ -38,7 +37,7 @@ const ContactPage = () => {
         {showModal && (
           <Modal
             on={showModal}
-            toggle={toggle}
+            toggle={toggleModal}
             dataTestId="contact-page-modal"
             key="contact-modal"
           />
