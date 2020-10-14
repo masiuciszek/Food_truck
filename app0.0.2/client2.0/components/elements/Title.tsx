@@ -1,15 +1,17 @@
-import React from "react";
-import Link from "next/link";
-import styled from "styled-components";
-import { handleFlex } from "../../src/utils/helpers";
-import { Button } from "../styled/Buttons";
+import React from "react"
+import Link from "next/link"
+import styled from "styled-components"
+import { handleFlex } from "../../src/utils/helpers"
+import { Button } from "../styled/Buttons"
 
 interface TitleProps {
-  title: string;
-  className?: string;
-  subTitle?: string;
-  ctaPath?: string;
-  isCta?: boolean;
+  title: string
+  className?: string
+  subTitle?: string
+  ctaPath?: string
+  actionText?: string
+  isCta?: boolean
+  handleClick?: () => void
 }
 
 const Title = ({
@@ -18,6 +20,8 @@ const Title = ({
   subTitle,
   ctaPath,
   isCta,
+  actionText,
+  handleClick,
 }: TitleProps) => {
   return (
     <section className={className}>
@@ -30,9 +34,10 @@ const Title = ({
           </a>
         </Link>
       )}
+      {handleClick && <Button onClick={handleClick}>{actionText}</Button>}
     </section>
-  );
-};
+  )
+}
 
 export default styled(Title)`
   padding: 2rem 0.5em;
@@ -44,6 +49,6 @@ export default styled(Title)`
   }
   ${Button} {
     text-transform: capitalize;
-    width: 8em;
+    width: 12em;
   }
-`;
+`

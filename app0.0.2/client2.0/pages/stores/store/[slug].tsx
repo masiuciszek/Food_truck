@@ -77,7 +77,11 @@ const StoreProfile: React.FC<StoreProfileProps> = ({ storeData, token }) => {
         <CommentsWrapper>
           <AnimatePresence>
             {showComments && (
-              <CommentArea storeId={storeData._id} on={showComments} />
+              <CommentArea
+                storeId={storeData._id}
+                on={showComments}
+                key="comment"
+              />
             )}
           </AnimatePresence>
 

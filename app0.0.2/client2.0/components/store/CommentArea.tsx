@@ -12,6 +12,7 @@ import Stars from "./Stars"
 interface CommentAreaProps {
   on: boolean
   storeId: string
+  key: string
 }
 
 const StyledCommentArea = styled(motion.section)`
@@ -32,7 +33,7 @@ const StyledCommentArea = styled(motion.section)`
   }
 `
 
-const CommentArea: React.FC<CommentAreaProps> = ({ on, storeId }) => {
+const CommentArea: React.FC<CommentAreaProps> = ({ on, storeId, key }) => {
   const [rating, setRating] = useState(() => 0)
   const [text, setText] = useState("")
   const { token: authToken } = useAuthState()
@@ -61,6 +62,7 @@ const CommentArea: React.FC<CommentAreaProps> = ({ on, storeId }) => {
 
   return (
     <StyledCommentArea
+      key={key}
       initial="closed"
       animate={on ? "open" : "closed"}
       variants={variants}
