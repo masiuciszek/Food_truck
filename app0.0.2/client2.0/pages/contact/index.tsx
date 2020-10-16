@@ -5,10 +5,13 @@ import Image from "../../components/elements/Image"
 import Modal from "../../components/elements/Modal"
 import Title from "../../components/elements/Title"
 import { Col, HomePageWrapper, Page } from "../../components/styled/wrappers"
+import { useTextKey } from "../../hooks/useTextKey"
 import { useToggle } from "../../hooks/useToggle"
 
 const ContactPage = () => {
   const { state: showModal, toggle: toggleModal } = useToggle()
+  const { t } = useTextKey()
+
   return (
     <Page>
       <HomePageWrapper>
@@ -26,6 +29,7 @@ const ContactPage = () => {
             src="/cool.png"
             alt="contact-page-hero-image"
             className="contact-page-image"
+            testId="contact-page-hero-image"
             style={`${css`
               width: 100%;
             `}`}
@@ -40,7 +44,10 @@ const ContactPage = () => {
             toggle={toggleModal}
             dataTestId="contact-page-modal"
             key="contact-modal"
-          />
+            title={t("ContactUsFormTitle")}
+            desc={t("ContactUsFormText")}>
+            <h1>aoa</h1>
+          </Modal>
         )}
       </AnimatePresence>
     </Page>

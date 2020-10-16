@@ -1,19 +1,17 @@
-import Link from "next/link";
-import React from "react";
-import styled from "styled-components";
-import { Button } from "../../components/styled/Buttons";
-import { generateNameSlug } from "../utils/helperFn";
+import Link from "next/link"
+import React from "react"
+import styled from "styled-components"
+import { Button } from "../../components/styled/Buttons"
+import { generateNameSlug } from "../utils/helperFn"
 import {
   FormGroup,
   FormLabel,
   FormInput,
-} from "../../components/styled/FormElements";
-import { above, below, handleFlex } from "./helpers";
-import { Dispatch } from "../../context/authState/AuthType";
-import StoreItem from "../../components/store/StoreItem";
-
-type FormSubmitEventType = (evt: React.FormEvent<HTMLFormElement>) => void;
-type HandleChangeType = (evt: React.ChangeEvent<HTMLInputElement>) => void;
+} from "../../components/styled/FormElements"
+import { above, below, handleFlex } from "./helpers"
+import { Dispatch } from "../../context/authState/AuthType"
+import StoreItem from "../../components/store/StoreItem"
+type HandleChangeType = (evt: React.ChangeEvent<HTMLInputElement>) => void
 
 export const renderForm = (isLoginForm: boolean) => (
   formData: FormDataType
@@ -115,8 +113,8 @@ export const renderForm = (isLoginForm: boolean) => (
         </FormLabel>
       </FormGroup>
     </>
-  );
-};
+  )
+}
 
 const StyledAuthActionsLargeScreen = styled.div`
   flex-basis: 40%;
@@ -132,11 +130,11 @@ const StyledAuthActionsLargeScreen = styled.div`
   ${below.medium`
     display: none;
   `}
-`;
+`
 const StyledAuthActionsSmallScreen = styled.div`
   width: 100%;
   ${handleFlex("row", "space-around", "center")};
-`;
+`
 
 export const renderAuthElements = (
   isOnSmallScreen: boolean,
@@ -199,13 +197,13 @@ export const renderAuthElements = (
         </a>
       </Link>
     </StyledAuthActionsSmallScreen>
-  );
-};
+  )
+}
 
 export const renderStores = (stores: Store[]) => {
   return stores.length > 0 ? (
     stores.map((store) => <StoreItem key={store.id} store={store} />)
   ) : (
     <h3>No Stores</h3>
-  );
-};
+  )
+}

@@ -8,6 +8,8 @@ interface ModalProps {
   toggle: () => void
   dataTestId: string
   key?: string
+  title: string
+  desc?: string
 }
 
 const Modalwrapper = styled(motion.div)`
@@ -25,7 +27,7 @@ const Modalbody = styled.div`
   color: ${({ theme }) => theme.colors.elements.paragraph};
   padding: 2em 1em;
   width: 100%;
-  ${handleFlex("row", "center", "center")};
+  ${handleFlex("column", "center", "center")};
   margin: 0 auto;
   border-radius: ${({ theme }) => theme.borderRadius};
   border: 2px solid ${({ theme }) => theme.colors.illustrations.secondary};
@@ -50,6 +52,9 @@ const Modal: React.FC<ModalProps> = ({
   toggle,
   dataTestId,
   key = "modal",
+  children,
+  title,
+  desc,
 }) => {
   return (
     <Modalwrapper
@@ -63,7 +68,9 @@ const Modal: React.FC<ModalProps> = ({
         <button type="button" onClick={toggle}>
           𝙓
         </button>
-        <p>hello</p>
+        <h3>{title}</h3>
+        <p>{desc}</p>
+        {children}
       </Modalbody>
     </Modalwrapper>
   )

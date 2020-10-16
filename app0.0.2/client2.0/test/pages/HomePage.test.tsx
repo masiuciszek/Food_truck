@@ -3,12 +3,15 @@ import { screen } from "@testing-library/react"
 import HomePage from "../../pages"
 import { render } from "../testUtils"
 
-global.fetch = jest.fn(() => {})
-// global.fetch = jest.fn(() =>
-//   Promise.resolve({
-//     json: () => Promise.resolve({ rates: { CAD: 1.42 } }),
-//   })
-// );
+global.fetch = jest.fn(() => {
+  Promise.resolve({
+    json: () => Promise.resolve({ data: { id: "342dd@!2sfa" } }),
+  })
+})
+beforeEach(() => {
+  fetch.mockClear()
+})
+
 describe("<HomePage/>", () => {
   test("renders correctly", () => {
     const token = "token"
