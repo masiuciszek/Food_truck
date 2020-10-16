@@ -1,7 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 import styled from "styled-components"
-import { above, handleFlex } from "../../src/utils/helpers"
+import { above, below, handleFlex } from "../../src/utils/helpers"
 
 interface ModalProps {
   on: boolean
@@ -20,6 +20,7 @@ const Modalwrapper = styled(motion.div)`
   width: 100%;
   height: 100%;
   ${handleFlex("row", "center", "center")};
+  z-index: 4;
 `
 
 const Modalbody = styled.div`
@@ -30,8 +31,8 @@ const Modalbody = styled.div`
   ${handleFlex("column", "center", "center")};
   margin: 0 auto;
   border-radius: ${({ theme }) => theme.borderRadius};
-  border: 2px solid ${({ theme }) => theme.colors.illustrations.secondary};
   position: relative;
+
   ${above.medium`
     width: 80%;
   `}

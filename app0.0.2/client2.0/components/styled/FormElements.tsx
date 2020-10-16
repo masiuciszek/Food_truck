@@ -1,5 +1,7 @@
-import styled from "styled-components";
-import { above, below, handleFlex } from "../../src/utils/helpers";
+import styled from "styled-components"
+import { above, below, handleFlex } from "../../src/utils/helpers"
+
+export const FormElement = styled.form``
 
 export const FormGroup = styled.div`
   padding: 0.5rem;
@@ -17,14 +19,14 @@ export const FormGroup = styled.div`
   ${above.large`
     width: 45rem;
   `}
-`;
+`
 export const FormLabel = styled.label`
   ${handleFlex("column", "flex-start", "flex-start")};
   span {
     text-transform: capitalize;
     padding: 0.5rem 0;
   }
-`;
+`
 export const FormInput = styled.input`
   width: 100%;
   padding: 0.4rem 0.6rem;
@@ -37,7 +39,7 @@ export const FormInput = styled.input`
     border-color: ${({ theme }) => theme.colors.illustrations.secondary};
     width: 97%;
   }
-`;
+`
 
 export const TextArea = styled.textarea`
   width: 42em;
@@ -52,4 +54,4 @@ export const TextArea = styled.textarea`
     border: 2px solid ${({ theme }) => theme.colors.illustrations.tertiary};
     width: 41em;
   }
-`;
+`
