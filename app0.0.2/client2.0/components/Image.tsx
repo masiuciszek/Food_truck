@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { below } from "../src/utils/helpers";
+import React from "react"
+import styled from "styled-components"
+import { below } from "../src/utils/helpers"
 
 interface Props {
-  imageUrl?: string;
-  imageTitle?: string;
-  className: string;
+  imageUrl?: string
+  imageTitle?: string
+  className: string
 }
 
 const Image = ({
@@ -17,8 +17,8 @@ const Image = ({
     <section className={className}>
       <img src={`/${imageUrl}`} alt={imageTitle} />
     </section>
-  );
-};
+  )
+}
 
 export default styled(Image)`
   flex: 1;
@@ -28,4 +28,4 @@ export default styled(Image)`
       width: 100%;
     }
   `}
-`;
+`

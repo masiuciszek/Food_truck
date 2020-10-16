@@ -40,7 +40,12 @@ const HomePage = ({ token }: HomePageProps) => {
             />
           </Col>
           <Col>
-            <Image src="/home-hero.png" alt="home-hero" className="home-hero" />
+            <Image
+              src="/home-hero.png"
+              alt="home-hero"
+              className="home-hero"
+              testId="home-hero-image"
+            />
           </Col>
         </HomePageWrapper>
       </Page>

@@ -6,6 +6,7 @@ interface ImageProps {
   alt?: string
   className?: string
   style?: string
+  testId: string
 }
 
 const Image: React.FC<ImageProps> = ({
@@ -13,9 +14,9 @@ const Image: React.FC<ImageProps> = ({
   alt = "some-image",
   className = "className",
   style = "",
+  testId,
 }) => {
-  console.log(style)
-  return <img src={src} alt={alt} className={className} />
+  return <img src={src} alt={alt} className={className} data-testid={testId} />
 }
 export default styled(Image)`
   ${({ style }) => style}
