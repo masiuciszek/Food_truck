@@ -1,6 +1,10 @@
-import React from "react";
-import { useAuthDispatch } from "../../context/authState/AuthProvider";
-import Form from "../elements/Form";
+import React from "react"
+import {
+  useAuthDispatch,
+  useAuthState,
+} from "../../context/authState/AuthProvider"
+import Form from "../elements/Form"
+import { useRouter } from "next/router"
 
 const RegisterPageContainer = () => {
   const [formData, setFormData] = React.useState<RegisterFormData>({
@@ -9,13 +13,16 @@ const RegisterPageContainer = () => {
     email: "",
     password: "",
     confirmPassword: "",
-  });
+  })
 
-  const dispatch = useAuthDispatch();
+  const { isLoggedIn } = useAuthState()
+  const dispatch = useAuthDispatch()
+  const router = useRouter()
+
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = evt.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value } = evt.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   const handleRegister = async (registerFormData: RegisterFormData) => {
     const res = await fetch("http://localhost:4000/user/register", {
@@ -24,24 +31,29 @@ const RegisterPageContainer = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(registerFormData),
-    });
-    const data = await res.json();
-    const { token } = data as Record<string, any>;
-    dispatch({ type: "LOGIN", payload: token });
-  };
+    })
+    const data = await res.json()
+    const { token } = data as Record<string, any>
+    dispatch({ type: "LOGIN", payload: token })
+  }
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
-    evt.preventDefault();
-    handleRegister(formData);
+    evt.preventDefault()
+    handleRegister(formData)
     setFormData({
       firstName: "",
       lastName: "",
       email: "",
       password: "",
       confirmPassword: "",
-    });
-    console.log("Register");
-  };
+    })
+  }
+
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/stores")
+    }
+  }, [isLoggedIn])
 
   return (
     <Form
@@ -52,6 +64,6 @@ const RegisterPageContainer = () => {
       handleChange={handleChange}
       handleSubmit={handleSubmit}
     />
-  );
-};
-export default RegisterPageContainer;
+  )
+}
+export default RegisterPageContainer

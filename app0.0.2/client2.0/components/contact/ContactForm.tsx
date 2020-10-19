@@ -10,8 +10,6 @@ import {
   TextArea,
 } from "../styled/FormElements"
 
-interface ContactFormProps {}
-
 const StyledFormWrapper = styled.section`
   width: 100%;
   div {
@@ -43,7 +41,7 @@ const StyledFormWrapper = styled.section`
   }
 `
 
-const ContactForm: React.FC<ContactFormProps> = ({}) => {
+const ContactForm = () => {
   return (
     <StyledFormWrapper>
       <FormElement>

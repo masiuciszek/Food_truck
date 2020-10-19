@@ -86,6 +86,16 @@ export const formatRatingToStars = (rating: Rating | number): string => {
   }
 }
 
+export const randomSentence = (): string => {
+  const sens = [
+    "master is who you are",
+    "Hope you have a wonderful day",
+    "Do we have a good day?",
+    "We have missed you",
+  ]
+  return sens[Math.floor(Math.random() * sens.length)]
+}
+
 type FlexDirection = "row" | "column" | "column-reverse" | "row-reverse"
 type JustifyContent =
   | "center"
