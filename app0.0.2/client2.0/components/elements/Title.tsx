@@ -24,17 +24,21 @@ const Title = ({
   handleClick,
 }: TitleProps) => {
   return (
-    <section className={className}>
+    <section className={className} data-testid="title-component-main">
       <h1>{title}</h1>
       <p>{subTitle}</p>
       {isCta && (
         <Link href={`/${ctaPath}`}>
           <a>
-            <Button>{ctaPath}</Button>
+            <Button data-testid="title-action-link">{ctaPath}</Button>
           </a>
         </Link>
       )}
-      {handleClick && <Button onClick={handleClick}>{actionText}</Button>}
+      {handleClick && (
+        <Button data-testid="title-action-button" onClick={handleClick}>
+          {actionText}
+        </Button>
+      )}
     </section>
   )
 }
