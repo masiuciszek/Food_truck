@@ -1,7 +1,10 @@
+import { AnimatePresence } from "framer-motion"
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router"
 import React from "react"
+import Modal from "../../components/elements/Modal"
 import Title from "../../components/elements/Title"
+import Profile from "../../components/profile/Profile"
 import { Page, PageWrapper } from "../../components/styled/wrappers"
 import { getMe } from "../../context/authState/AuthActions"
 import {
@@ -44,6 +47,19 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token }) => {
             actionText={`${user?.firstName}`}
           />
         </PageWrapper>
+
+        <AnimatePresence>
+          {showProfile && (
+            <Modal
+              dataTestId="profile-modal"
+              title={`${user?.firstName} ${user?.lastName}`}
+              desc="your profile"
+              on={showProfile}
+              toggle={toggleShowProfile}>
+              <Profile />
+            </Modal>
+          )}
+        </AnimatePresence>
       </Page>
     </>
   )
