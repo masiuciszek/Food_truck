@@ -3,19 +3,23 @@ import {
   useAuthState,
   useAuthDispatch,
 } from "../../context/authState/AuthProvider"
-
 import styled from "styled-components"
 import { Button } from "../styled/Buttons"
-import { below } from "../../src/utils/helpers"
+import ProfileForm from "./ProfileForm"
+import { useToggle } from "../../hooks/useToggle"
 
 const StyledProfile = styled.section`
   border: 2px solid red;
   padding: 2rem 1rem;
   width: 100%;
 `
+const Grid = styled.div`
+  display: grid;
+  border: 2px solid red;
+  grid-template-columns: 1fr 1fr;
+`
 
 const BtnWrapper = styled.div`
-  /* width: 25em; */
   margin: 1rem auto;
   display: flex;
   flex-flow: row wrap;
@@ -33,13 +37,22 @@ const BtnWrapper = styled.div`
 const Profile = () => {
   const { user } = useAuthState()
   const dispatch = useAuthDispatch()
+  const { state: wantToEdit, toggle: toggleWantToEdit } = useToggle()
+
+  const handleEdit = (user: User): void => {
+    dispatch({ type: "SET_USER", payload: user })
+    toggleWantToEdit()
+  }
 
   return (
     <StyledProfile>
-      <strong>{user?.firstName}</strong>
+      <Grid>
+        <h2>{user?.firstName}</h2>
+        <ProfileForm wantToEdit={wantToEdit} />
+      </Grid>
 
       <BtnWrapper>
-        <Button>Edit</Button>
+        {user && <Button onClick={() => handleEdit(user)}>Edit</Button>}
         <Button>Delete</Button>
       </BtnWrapper>
     </StyledProfile>

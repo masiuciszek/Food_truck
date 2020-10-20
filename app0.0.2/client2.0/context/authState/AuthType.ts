@@ -1,38 +1,49 @@
 interface Login {
-  type: "LOGIN";
-  payload: string; // token
+  type: "LOGIN"
+  payload: string // token
 }
 interface Register {
-  type: "REGISTER";
-  payload: string; // token
+  type: "REGISTER"
+  payload: string // token
 }
 
 interface SetAuthToken {
-  type: "SET_AUTH_TOKEN";
-  payload: string; // token
+  type: "SET_AUTH_TOKEN"
+  payload: string // token
 }
 
 interface UserLoaded {
-  type: "USER_LOADED";
-  payload: User;
+  type: "USER_LOADED"
+  payload: User
 }
 interface LogoutUser {
-  type: "LOGOUT_USER";
+  type: "LOGOUT_USER"
 }
 
 interface MessageHandler {
-  type: "MESSAGE_HANDLER";
-  payload: Status;
+  type: "MESSAGE_HANDLER"
+  payload: Status
+}
+
+interface SetUser {
+  // to edit the user
+  type: "SET_USER"
+  payload: User
+}
+interface ClearSetUser {
+  // to edit the user
+  type: "CLEAR_SET_USER"
 }
 
 export interface State {
-  user: null | User;
-  status: Status;
-  isLoggedIn: boolean;
-  token: string | null;
+  user: null | User
+  status: Status
+  isLoggedIn: boolean
+  token: string | null
+  editUser: null | User
 }
 
-export type Dispatch = (action: Action) => void;
+export type Dispatch = (action: Action) => void
 
 export type Action =
   | Login
@@ -40,4 +51,6 @@ export type Action =
   | SetAuthToken
   | UserLoaded
   | LogoutUser
-  | MessageHandler;
+  | MessageHandler
+  | SetUser
+  | ClearSetUser
