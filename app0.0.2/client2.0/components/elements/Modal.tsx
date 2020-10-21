@@ -46,6 +46,9 @@ const Modalbody = styled.div`
     font-size: 1.5em;
     cursor: pointer;
   }
+  ${below.small`
+    padding: 2em .2em;
+  `}
 `
 
 const Modal: React.FC<ModalProps> = ({
