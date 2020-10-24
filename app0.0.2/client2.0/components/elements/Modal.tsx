@@ -69,7 +69,7 @@ const Modal: React.FC<ModalProps> = ({
       transition={{ damping: 8, delay: 0.25 }}
       exit={{ opacity: 0, x: "-100%" }}>
       <Modalbody>
-        <button type="button" onClick={toggle}>
+        <button type="button" onClick={toggle} data-testid="button-modal-close">
           𝙓
         </button>
         <h3>{title}</h3>

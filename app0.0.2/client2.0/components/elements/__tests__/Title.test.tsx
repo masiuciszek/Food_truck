@@ -1,7 +1,7 @@
 import { fireEvent, screen } from "@testing-library/react"
 import * as React from "react"
-import Title from "../../components/elements/Title"
-import { render } from "../testUtils"
+import Title from "../Title"
+import { render } from "../../../test/testUtils"
 
 describe("<Title/>", () => {
   test("should render correctly", () => {
