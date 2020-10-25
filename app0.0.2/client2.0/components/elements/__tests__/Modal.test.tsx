@@ -12,7 +12,7 @@ describe("<Modal/>", () => {
     title: "title",
     desc: "desc",
   }
-  test("should ", () => {
+  test("should work correctly ", () => {
     render(<Modal {...props} />)
 
     screen.getByText(props.title)

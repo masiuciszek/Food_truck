@@ -59,4 +59,10 @@ interface Store {
   reviews?: Review[]
 }
 
+interface NewUserValues {
+  firstName: string
+  lastName: string
+  email: string
+}
+
 type FormDataType = RegisterFormData | LoginFormData

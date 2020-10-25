@@ -43,6 +43,11 @@ const reducer = (state: State, action: Action) => {
         ...state,
         editUser: null,
       }
+    case "UPDATE_USER":
+      return {
+        ...state,
+        user: action.payload,
+      }
     case "USER_LOADED":
       return {
         ...state,

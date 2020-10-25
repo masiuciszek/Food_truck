@@ -32,14 +32,19 @@ const Grid = styled.div<GridProps>`
     align-items: center;
     justify-content: center;
     p {
-      border-bottom: 2px solid
+      border-bottom: 1px solid
         ${({ theme }) => theme.colors.illustrations.stroke};
       padding: 0.5rem;
-      width: ${({ wantToEdit }) => (wantToEdit ? "70%" : "80%")};
+      width: ${({ wantToEdit }) => (wantToEdit ? "70%" : "25em")};
       span {
         color: ${({ theme }) => theme.colors.illustrations.stroke};
         margin: 0 0.3rem;
         text-transform: capitalize;
+        background: ${({ theme }) => theme.colors.illustrations.highlight};
+        color: ${({ theme }) => theme.colors.illustrations.stroke};
+        padding: 0.2em;
+        box-shadow: ${({ theme }) => theme.shadow.elevations[3]};
+        border-radius: ${({ theme }) => theme.borderRadius};
       }
     }
   }
@@ -65,6 +70,7 @@ const BtnWrapper = styled.div`
     border: 2px solid ${({ theme }) => theme.colors.illustrations.stroke};
     box-shadow: ${({ theme }) => theme.shadow.elevations[3]};
     font-size: 1.3em;
+    z-index: 1;
   }
 `
 
@@ -91,12 +97,19 @@ const Profile = () => {
             <span>Role</span> {user?.role}
           </p>
         </div>
-        <ProfileForm wantToEdit={wantToEdit} />
+        <ProfileForm
+          wantToEdit={wantToEdit}
+          toggleWantToEdit={toggleWantToEdit}
+        />
       </Grid>
 
       <BtnWrapper>
-        {user && <Button onClick={() => handleEdit(user)}>Edit</Button>}
-        <Button>Delete</Button>
+        {user && (
+          <Button onClick={() => handleEdit(user)}>
+            {wantToEdit ? "𝙓" : "Edit"}
+          </Button>
+        )}
+        <Button onClick={() => console.log("test")}>Delete</Button>
       </BtnWrapper>
     </StyledProfile>
   )

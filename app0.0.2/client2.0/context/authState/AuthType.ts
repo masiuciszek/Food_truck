@@ -35,6 +35,11 @@ interface ClearSetUser {
   type: "CLEAR_SET_USER"
 }
 
+interface UpdateUser {
+  type: "UPDATE_USER"
+  payload: User
+}
+
 export interface State {
   user: null | User
   status: Status
@@ -54,3 +59,4 @@ export type Action =
   | MessageHandler
   | SetUser
   | ClearSetUser
+  | UpdateUser

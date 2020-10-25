@@ -1,6 +1,11 @@
 import { motion } from "framer-motion"
 import React from "react"
 import styled from "styled-components"
+import { updateUser } from "../../context/authState/AuthActions"
+import {
+  useAuthDispatch,
+  useAuthState,
+} from "../../context/authState/AuthProvider"
 import { above, below } from "../../src/utils/helpers"
 import { Button } from "../styled/Buttons"
 import {
@@ -12,25 +17,31 @@ import {
 
 interface ProfileFormProps {
   wantToEdit: boolean
+  toggleWantToEdit: () => void
+}
+interface ProfileFormWrapperProps {
+  wantToEdit: boolean
 }
 
-const ProfileFormWrapper = styled(motion.div)<ProfileFormProps>`
+const ProfileFormWrapper = styled(motion.div)<ProfileFormWrapperProps>`
   position: ${({ wantToEdit }) => (wantToEdit ? "static" : "absolute")};
   flex: 1 1 50%;
   width: 50%;
-  /* TODO: start here please!! */
   .group {
-    border: 2px solid red;
+    width: 80%;
+    margin: 0 auto;
+    ${above.medium`
+      width: 100%;
+      margin: .2em auto;
+    `}
+    ${below.small`
+      width: 100%;
+    `}
   }
   input {
     border: 2px solid ${({ theme }) => theme.colors.illustrations.stroke};
     box-shadow: ${({ theme }) => theme.shadow.elevations[4]};
     width: 100%;
-    /* 1140  1520*/
-    /* TODO: Make a function */
-    @media (min-width: 1140px) and (max-width: 1520px) {
-      width: 59%;
-    }
   }
 
   button[type="submit"] {
@@ -58,7 +69,12 @@ const ProfileFormWrapper = styled(motion.div)<ProfileFormProps>`
     `}
 `
 
-const ProfileForm: React.FC<ProfileFormProps> = ({ wantToEdit }) => {
+const ProfileForm: React.FC<ProfileFormProps> = ({
+  wantToEdit,
+  toggleWantToEdit,
+}) => {
+  const d = useAuthDispatch()
+  const { editUser, token } = useAuthState()
   const [formData, setFormData] = React.useState({
     firstName: "",
     lastName: "",
@@ -78,13 +94,33 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ wantToEdit }) => {
     setFormData({ ...formData, [name]: value })
   }
 
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
+    evt.preventDefault()
+    const newUserValues = { firstName, lastName, email }
+    updateUser(newUserValues)(token || "")(d)
+    // d({ type: "CLEAR_SET_USER" })
+    // toggleWantToEdit()
+  }
+
+  React.useEffect(() => {
+    if (editUser) {
+      setFormData((prev) => ({
+        ...prev,
+        firstName: editUser.firstName,
+        lastName: editUser.lastName,
+        email: editUser.email,
+      }))
+    }
+  }, [wantToEdit])
+
   return (
     <ProfileFormWrapper
       wantToEdit={wantToEdit}
       initial="closed"
       animate={wantToEdit ? "open" : "closed"}
-      variants={variants}>
-      <FormElement>
+      variants={variants}
+      transition={{ damping: 8, duration: 0.1 }}>
+      <FormElement onSubmit={handleSubmit}>
         <FormGroup className="group">
           <FormLabel>
             <span>first name</span>
