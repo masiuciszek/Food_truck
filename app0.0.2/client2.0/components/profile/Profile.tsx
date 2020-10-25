@@ -79,6 +79,16 @@ const Profile = () => {
   const { user, status } = useAuthState()
   const dispatch = useAuthDispatch()
   const { state: wantToEdit, toggle: toggleWantToEdit } = useToggle()
+  // const [shouldBeDeleted, setShouldBeDeleted] = React.useState(
+  //   () =>
+  //     typeof window !== "undefined" &&
+  //     JSON.parse(sessionStorage.getItem("deleteMe") || "false")
+  // )
+
+  const {
+    state: shouldBeDeleted,
+    setStateToTrue: shouldBeDeletedSetToTrue,
+  } = useToggle()
 
   const handleEdit = (user: User): void => {
     dispatch({ type: "SET_USER", payload: user })
@@ -93,6 +103,8 @@ const Profile = () => {
     //
   }
 
+  console.log(shouldBeDeleted)
+  console.log("apa")
   return (
     <StyledProfile>
       {status === "QUESTION" && (
@@ -100,7 +112,8 @@ const Profile = () => {
           message="Are you sure?"
           messageSecondary="This can not been undone"
           styles={alertStyles}
-          fn={handleDeleMe}
+          showDeleteActions
+          fn={shouldBeDeletedSetToTrue}
         />
       )}
       <Grid wantToEdit={wantToEdit}>

@@ -12,7 +12,8 @@ interface AlertProps {
   message?: string
   messageSecondary?: string
   styles?: Record<string, any>
-  fn?: any
+  showDeleteActions?: any
+  fn: FnVoid
 }
 
 interface StyleAlertProps {
@@ -70,6 +71,7 @@ const Alert: React.FC<AlertProps> = ({
   message = "ooops",
   messageSecondary,
   styles,
+  showDeleteActions,
   fn,
 }) => {
   const { status } = useAuthState()
@@ -97,11 +99,9 @@ const Alert: React.FC<AlertProps> = ({
       <div className="content">
         <p className="main">{message}</p>
         {messageSecondary && <p className="secondary">{messageSecondary}</p>}
-        {fn && (
+        {showDeleteActions && (
           <div className="btn-group">
-            <Button onClick={() => sessionStorage.setItem("deleteMe", "true")}>
-              Yes
-            </Button>
+            <Button onClick={() => fn()}>Yes</Button>
             <Button
               onClick={() =>
                 d({ type: "MESSAGE_HANDLER", payload: "NATURAL" })

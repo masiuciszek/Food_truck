@@ -1,26 +1,26 @@
-import { useState } from "react";
+import { useState } from "react"
 
 type UseToggleReturnType<T> = {
-  state: boolean;
-  toggle: T;
-  setStateToFalse: T;
-  setStateToTrue: T;
-};
+  state: boolean
+  toggle: T
+  setStateToFalse: T
+  setStateToTrue: T
+}
 
 export const useToggle = (
-  initialState: boolean = false,
+  initialState = false
 ): UseToggleReturnType<FnVoid> => {
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState(initialState)
 
   const toggle = (): void => {
-    setState((prev) => !prev);
-  };
+    setState((prev) => !prev)
+  }
   const setStateToFalse = (): void => {
-    setState(false);
-  };
+    setState(false)
+  }
   const setStateToTrue = (): void => {
-    setState(true);
-  };
+    setState(true)
+  }
 
-  return { state, toggle, setStateToFalse, setStateToTrue };
-};
+  return { state, toggle, setStateToFalse, setStateToTrue }
+}
