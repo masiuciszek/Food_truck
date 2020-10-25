@@ -1,3 +1,12 @@
-const BlogPage = () => <h1>BlogPage</h1>;
+import Link from "next/link"
+import { Page } from "../../components/styled/wrappers"
 
-export default BlogPage;
+const BlogPage = () => (
+  <Page>
+    <Link href="/blog/beer">
+      <a>go to post beer ore slug</a>
+    </Link>
+  </Page>
+)
+
+export default BlogPage

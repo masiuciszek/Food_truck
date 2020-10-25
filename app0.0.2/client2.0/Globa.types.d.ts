@@ -84,3 +84,15 @@ interface Post {
 interface Items<T> {
   [key: string]: T
 }
+
+interface BlogParams {
+  params: {
+    slug: string
+  }
+}
+
+interface FrontMatter {
+  title: string
+  desc: string
+  author: { name: string }
+}

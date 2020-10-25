@@ -13,7 +13,7 @@ interface AlertProps {
   messageSecondary?: string
   styles?: Record<string, any>
   showDeleteActions?: any
-  fn: FnVoid
+  fn?: FnVoid
 }
 
 interface StyleAlertProps {

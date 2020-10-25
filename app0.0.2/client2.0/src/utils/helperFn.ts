@@ -1,5 +1,5 @@
 export const checkLength = <T>(input: string | Array<T>) => (
-  len: number = 1
+  len = 1
 ): boolean => {
   return input.length > len
 }
