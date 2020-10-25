@@ -67,3 +67,20 @@ interface NewUserValues {
 }
 
 type FormDataType = RegisterFormData | LoginFormData
+
+interface Post {
+  slug: string
+  title: string
+  date: string
+  coverImage: string
+  author: Author
+  excerpt: string
+  ogImage: {
+    url: string
+  }
+  content: string
+}
+
+interface Items<T> {
+  [key: string]: T
+}
