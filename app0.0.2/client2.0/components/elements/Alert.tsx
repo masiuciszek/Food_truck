@@ -1,18 +1,25 @@
-import React from "react";
+import React from "react"
 import {
   useAuthDispatch,
   useAuthState,
-} from "../../context/authState/AuthProvider";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { below } from "../../src/utils/helpers";
+} from "../../context/authState/AuthProvider"
+import styled from "styled-components"
+import { motion } from "framer-motion"
+import { below, handleFlex } from "../../src/utils/helpers"
+import { Button } from "../styled/Buttons"
 
 interface AlertProps {
-  message?: string;
-  styles?: string;
+  message?: string
+  messageSecondary?: string
+  styles?: Record<string, any>
+  fn?: any
 }
 
-const StyledAlert = styled(motion.div)`
+interface StyleAlertProps {
+  styles?: Record<string, any>
+}
+
+const StyledAlert = styled(motion.div)<StyleAlertProps>`
   background: ${({ theme }) => theme.colors.elements.headline};
   color: ${({ theme }) => theme.colors.elements.paragraph};
   padding: 1em 0.5em;
@@ -37,32 +44,74 @@ const StyledAlert = styled(motion.div)`
     margin: 0;
     left: 0;
   `}
-`;
+  .content {
+    ${handleFlex("column", "center", "center")};
+  }
+  ${({ styles }) => styles && styles};
+  .btn-group {
+    display: flex;
+    flex-wrap: row wrap;
+    button {
+      position: static;
+      background: ${({ theme }) => theme.colors.illustrations.main};
+      color: ${({ theme }) => theme.colors.illustrations.highlight};
+      width: 7em;
+      padding: 0.1rem 0.2rem;
+      margin: 0.5rem;
+      &:hover {
+        background: ${({ theme }) => theme.colors.illustrations.highlight};
+        color: ${({ theme }) => theme.colors.illustrations.main};
+      }
+    }
+  }
+`
 
-const Alert: React.FC<AlertProps> = ({ message = "ooops", styles }) => {
-  const { status } = useAuthState();
-  const d = useAuthDispatch();
+const Alert: React.FC<AlertProps> = ({
+  message = "ooops",
+  messageSecondary,
+  styles,
+  fn,
+}) => {
+  const { status } = useAuthState()
+  const d = useAuthDispatch()
 
   const variants = {
     open: { opacity: 1, x: 0 },
     closed: { opacity: 0, x: -100 },
-  };
+  }
   React.useEffect(() => {
     if (status === "REJECTED") {
       setTimeout(() => {
-        d({ type: "MESSAGE_HANDLER", payload: "EMPTY" });
-      }, 5000);
+        d({ type: "MESSAGE_HANDLER", payload: "EMPTY" })
+      }, 5000)
     }
-  }, [status]);
+  }, [status])
 
   return (
     <StyledAlert
+      styles={styles}
       initial="closed"
       animate="open"
       transition={{ damping: 50 }}
       variants={variants}>
-      <p>{message}</p>
+      <div className="content">
+        <p className="main">{message}</p>
+        {messageSecondary && <p className="secondary">{messageSecondary}</p>}
+        {fn && (
+          <div className="btn-group">
+            <Button onClick={() => sessionStorage.setItem("deleteMe", "true")}>
+              Yes
+            </Button>
+            <Button
+              onClick={() =>
+                d({ type: "MESSAGE_HANDLER", payload: "NATURAL" })
+              }>
+              No
+            </Button>
+          </div>
+        )}
+      </div>
     </StyledAlert>
-  );
-};
-export default Alert;
+  )
+}
+export default Alert

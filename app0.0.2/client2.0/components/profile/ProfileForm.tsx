@@ -98,8 +98,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     evt.preventDefault()
     const newUserValues = { firstName, lastName, email }
     updateUser(newUserValues)(token || "")(d)
-    // d({ type: "CLEAR_SET_USER" })
-    // toggleWantToEdit()
+    d({ type: "CLEAR_SET_USER" })
+    toggleWantToEdit()
   }
 
   React.useEffect(() => {

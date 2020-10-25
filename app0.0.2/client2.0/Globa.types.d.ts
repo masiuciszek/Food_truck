@@ -19,6 +19,7 @@ type Status =
   | "LOADING"
   | "PENDING"
   | "RESOLVED"
+  | "QUESTION"
   | "REJECTED"
   | "NATURAL"
   | "EMPTY"

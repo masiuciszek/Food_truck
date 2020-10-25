@@ -5,8 +5,6 @@ import { useStoreState } from "../../context/storeState/StoreProvider"
 import { below, handleFlex } from "../../src/utils/helpers"
 import FilteredStoreItem from "./FilteredStoreItem"
 
-interface FilteredStoresBoxProps {}
-
 const StyledStoreBox = styled(motion.div)`
   position: fixed;
   top: 0;
@@ -15,6 +13,7 @@ const StyledStoreBox = styled(motion.div)`
   width: 100%;
   height: 100%;
   ${handleFlex("row", "center", "center")};
+  z-index: 1;
 `
 
 const Wrapper = styled.div`
@@ -30,7 +29,7 @@ const Wrapper = styled.div`
   `}
 `
 
-const FilteredStoresBox: React.FC<FilteredStoresBoxProps> = ({}) => {
+const FilteredStoresBox = () => {
   const { filteredStores } = useStoreState()
   const [state, setState] = useState<Store[] | []>(() => [])
 
@@ -41,16 +40,16 @@ const FilteredStoresBox: React.FC<FilteredStoresBoxProps> = ({}) => {
 
   React.useEffect(() => {
     setState(filteredStores)
-  })
+  }, [filteredStores.length])
 
   return (
     <StyledStoreBox
       initial="closed"
-      animate={filteredStores.length > 0 ? "open" : "closed"}
+      animate={filteredStores.length ? "open" : "closed"}
       variants={variants}
       transition={{ duration: 0.8 }}>
       <Wrapper>
-        {state.length > 0 &&
+        {state.length &&
           (state as Array<Store>).map((store) => (
             <FilteredStoreItem key={store._id} store={store} />
           ))}

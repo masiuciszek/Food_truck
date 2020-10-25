@@ -3,11 +3,12 @@ import {
   useAuthState,
   useAuthDispatch,
 } from "../../context/authState/AuthProvider"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Button } from "../styled/Buttons"
 import ProfileForm from "./ProfileForm"
 import { useToggle } from "../../hooks/useToggle"
 import { below } from "../../src/utils/helpers"
+import Alert from "../elements/Alert"
 
 const StyledProfile = styled.section`
   padding: 2rem 1rem;
@@ -75,7 +76,7 @@ const BtnWrapper = styled.div`
 `
 
 const Profile = () => {
-  const { user } = useAuthState()
+  const { user, status } = useAuthState()
   const dispatch = useAuthDispatch()
   const { state: wantToEdit, toggle: toggleWantToEdit } = useToggle()
 
@@ -84,8 +85,24 @@ const Profile = () => {
     toggleWantToEdit()
   }
 
+  const handleConfirmMessage = (): void => {
+    dispatch({ type: "MESSAGE_HANDLER", payload: "QUESTION" })
+  }
+
+  const handleDeleMe = () => {
+    //
+  }
+
   return (
     <StyledProfile>
+      {status === "QUESTION" && (
+        <Alert
+          message="Are you sure?"
+          messageSecondary="This can not been undone"
+          styles={alertStyles}
+          fn={handleDeleMe}
+        />
+      )}
       <Grid wantToEdit={wantToEdit}>
         <div className="user">
           <p>
@@ -109,9 +126,20 @@ const Profile = () => {
             {wantToEdit ? "𝙓" : "Edit"}
           </Button>
         )}
-        <Button onClick={() => console.log("test")}>Delete</Button>
+        <Button onClick={handleConfirmMessage}>Delete</Button>
       </BtnWrapper>
     </StyledProfile>
   )
 }
+
 export default Profile
+
+const alertStyles = css`
+  top: 1rem;
+  background: ${(props) => props.theme.colors.illustrations.secondary};
+  .content {
+    p {
+      color: ${(props) => props.theme.colors.illustrations.main} !important;
+    }
+  }
+`

@@ -39,6 +39,9 @@ interface UpdateUser {
   type: "UPDATE_USER"
   payload: User
 }
+interface DeleteUser {
+  type: "DELETE_USER"
+}
 
 export interface State {
   user: null | User
@@ -60,3 +63,4 @@ export type Action =
   | SetUser
   | ClearSetUser
   | UpdateUser
+  | DeleteUser

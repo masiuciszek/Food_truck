@@ -1,10 +1,7 @@
 import { motion } from "framer-motion"
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import {
-  useStoreDispatch,
-  useStoreState,
-} from "../../../context/storeState/StoreProvider"
+import { useStoreDispatch } from "../../../context/storeState/StoreProvider"
 import { above, below } from "../../../src/utils/helpers"
 
 interface Props {
@@ -16,7 +13,7 @@ const SearchFilterWrapper = styled(motion.div)`
   position: fixed;
   width: 70%;
   padding: 1rem;
-  z-index: 1;
+  z-index: 2;
   ${below.small`
     width: 85%;
   `}
@@ -69,7 +66,6 @@ const SearchFilter = ({ showFilerSearch }: Props) => {
   const [text, setText] = useState("")
   const [storesState, setStoreState] = useState<Store[] | []>([])
   const d = useStoreDispatch()
-  const { filteredStores } = useStoreState()
 
   const variants = {
     open: { opacity: 1, x: 0 },
@@ -96,7 +92,6 @@ const SearchFilter = ({ showFilerSearch }: Props) => {
 
   useEffect(() => {
     getStoresByName(text)
-    console.log(filteredStores)
   }, [text])
 
   return (
