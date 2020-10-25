@@ -59,3 +59,19 @@ export const updateUser = (newUserData: NewUserValues) => (
     dispatch({ type: "MESSAGE_HANDLER", payload: "REJECTED" })
   }
 }
+
+export const deleteUser = (token: string) => async (dispatch: Dispatch) => {
+  try {
+    await fetch(" http://localhost:4000/user/delete_me", {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    dispatch({ type: "DELETE_USER" })
+  } catch (err) {
+    console.error(err)
+    dispatch({ type: "MESSAGE_HANDLER", payload: "REJECTED" })
+  }
+}

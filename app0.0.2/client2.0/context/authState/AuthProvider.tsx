@@ -56,6 +56,7 @@ const reducer = (state: State, action: Action) => {
       }
 
     case "LOGOUT_USER":
+    case "DELETE_USER":
       Cookie.remove("token")
       return {
         ...state,

@@ -9,6 +9,8 @@ import ProfileForm from "./ProfileForm"
 import { useToggle } from "../../hooks/useToggle"
 import { below } from "../../src/utils/helpers"
 import Alert from "../elements/Alert"
+import { deleteUser } from "../../context/authState/AuthActions"
+import { useRouter } from "next/router"
 
 const StyledProfile = styled.section`
   padding: 2rem 1rem;
@@ -76,14 +78,10 @@ const BtnWrapper = styled.div`
 `
 
 const Profile = () => {
-  const { user, status } = useAuthState()
+  const { user, status, token } = useAuthState()
   const dispatch = useAuthDispatch()
+  const router = useRouter()
   const { state: wantToEdit, toggle: toggleWantToEdit } = useToggle()
-  // const [shouldBeDeleted, setShouldBeDeleted] = React.useState(
-  //   () =>
-  //     typeof window !== "undefined" &&
-  //     JSON.parse(sessionStorage.getItem("deleteMe") || "false")
-  // )
 
   const {
     state: shouldBeDeleted,
@@ -99,12 +97,13 @@ const Profile = () => {
     dispatch({ type: "MESSAGE_HANDLER", payload: "QUESTION" })
   }
 
-  const handleDeleMe = () => {
-    //
-  }
+  React.useEffect(() => {
+    if (shouldBeDeleted) {
+      deleteUser(token || "")(dispatch)
+      router.push("/")
+    }
+  }, [shouldBeDeleted])
 
-  console.log(shouldBeDeleted)
-  console.log("apa")
   return (
     <StyledProfile>
       {status === "QUESTION" && (
