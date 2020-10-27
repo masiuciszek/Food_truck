@@ -2,10 +2,8 @@ import { useRouter } from "next/router"
 import ErrorPage from "next/error"
 import Head from "next/head"
 import { GetStaticPaths, GetStaticProps } from "next"
-import fs from "fs"
-import path from "path"
-import matter, { GrayMatterFile } from "gray-matter"
-import marked from "marked"
+import { GrayMatterFile } from "gray-matter"
+import { handleMarkDown, readFiles } from "../../lib/api"
 
 interface BlogPostProps {
   contents: GrayMatterFile<string>
@@ -45,24 +43,16 @@ const BlogPost = ({ contents, data, htmlContent }: BlogPostProps) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync("posts")
-  const paths = files.map((post) => ({
-    params: { slug: post.replace(".md", "") },
-  }))
+  const paths = readFiles()
 
   return {
     paths,
-    fallback: false,
+    fallback: false, // build on buildtime
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
-  const rawMarkDown = fs
-    .readFileSync(path.join("posts", slug + ".md"))
-    .toString()
-
-  const parsedMarkDown = matter(rawMarkDown)
-  const htmlContent = marked(parsedMarkDown.content)
+  const { parsedMarkDown, htmlContent } = handleMarkDown(slug)
   return {
     props: {
       contents: parsedMarkDown.content,

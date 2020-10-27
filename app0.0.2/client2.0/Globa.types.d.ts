@@ -94,5 +94,7 @@ interface BlogParams {
 interface FrontMatter {
   title: string
   desc: string
+  slug: string
+  date: string
   author: { name: string }
 }

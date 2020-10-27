@@ -2,6 +2,7 @@
 title: "Beer is what we need"
 desc: "Beer and why we need it is a great story to read..."
 date: "2020-03-16T05:35:07.322Z"
+slug: /beer
 author:
   name: Randy Simpson
 ---

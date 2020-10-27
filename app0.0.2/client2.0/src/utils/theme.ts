@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme } from "styled-components"
 
 const mainTheme: DefaultTheme = {
   appSize: "100%",
@@ -20,6 +20,7 @@ const mainTheme: DefaultTheme = {
     },
     shadow: {
       highlightShadow: "rgba(244,93,72,.8)",
+      highlightShadowDark: "rgba(4,3,2,.6)",
     },
   },
   size: {
@@ -51,6 +52,6 @@ const mainTheme: DefaultTheme = {
     secondaryTransition: "all 1s ease",
     quickTransition: "all 200ms ease-in-out",
   },
-};
+}
 
-export { mainTheme };
+export { mainTheme }

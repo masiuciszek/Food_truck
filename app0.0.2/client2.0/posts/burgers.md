@@ -2,6 +2,7 @@
 title: "Burgers world"
 desc: "All about burgers and how they can save people from hate each other"
 date: "2020-09-21T05:35:07.322Z"
+slug: /burgers
 author:
   name: Donald Stenson
 ---
