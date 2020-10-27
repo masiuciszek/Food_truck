@@ -1,10 +1,10 @@
 ---
-title: "Burgers world"
-desc: "All about burgers and how they can save people from hate each other"
-date: "Nov 03 2020 12:00:00 GMT-0500"
-slug: /burgers
+title: "Coke is the elixir of life"
+desc: "Who does not love a cold Pepsi or a Coke?"
+date: "Oct 12 2020 12:00:00 GMT-0500"
+slug: /coke
 author:
-  name: Donald Stenson
+  name: Tina Frankie
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.

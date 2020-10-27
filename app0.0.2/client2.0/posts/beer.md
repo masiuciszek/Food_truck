@@ -1,7 +1,7 @@
 ---
 title: "Beer is what we need"
 desc: "Beer and why we need it is a great story to read..."
-date: "Thu May 02 2019 00:00:00 GMT+0200 (Central European Summer Time)"
+date: "Nov 25 2018 12:00:00 GMT-0500"
 slug: /beer
 author:
   name: Randy Simpson

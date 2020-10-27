@@ -5,10 +5,11 @@ import { Page } from "../../components/styled/wrappers"
 import { parsedMarkDownHandler, readDir } from "../../lib/api"
 import styled from "styled-components"
 import { above, below, handleFlex } from "../../src/utils/helpers"
-import { format } from "date-fns"
+// import { format } from "date-fns"
 
 interface BlogPageProps {
   frontmatter: FrontMatter[]
+  postsSize: number
 }
 
 const BlogPageStyles = styled(Page)`
@@ -78,7 +79,11 @@ const PostList = styled.ul`
   }
 `
 
-const BlogPage = ({ frontmatter }: BlogPageProps) => {
+const BlogPage = ({ frontmatter, postsSize }: BlogPageProps) => {
+  const sorted = frontmatter.sort(
+    (a, b) => Date.parse(b.date) - Date.parse(a.date)
+  )
+
   return (
     <BlogPageStyles>
       <Title
@@ -87,10 +92,10 @@ const BlogPage = ({ frontmatter }: BlogPageProps) => {
         subTitle="content with a small twist"
       />
       <PostList>
-        {frontmatter.map(({ slug, date, title, author: { name } }) => (
+        {sorted.map(({ slug, date, title, author: { name } }) => (
           <li key={slug}>
             <p>Written by {name}</p>
-            <p>On {date.slice(0, 16)}</p>
+            <p>On {date.slice(0, 12)}</p>
             <Link href={`/blog${slug}`}>
               <a> {title} </a>
             </Link>
@@ -113,6 +118,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
       frontmatter: postFrontMatter,
+      postsSize: posts.length,
     },
   }
 }

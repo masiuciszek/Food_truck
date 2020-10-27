@@ -1,10 +1,10 @@
 ---
-title: "Burgers world"
-desc: "All about burgers and how they can save people from hate each other"
-date: "Nov 03 2020 12:00:00 GMT-0500"
-slug: /burgers
+title: "How to drink"
+desc: "Drink in not just a drink it is a drink"
+date: "Nov 12 2019 12:00:00 GMT-0500"
+slug: /drinks
 author:
-  name: Donald Stenson
+  name: Mike Smith
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.

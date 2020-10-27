@@ -1,9 +1,9 @@
 import { useRouter } from "next/router"
 import ErrorPage from "next/error"
-import Head from "next/head"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { GrayMatterFile } from "gray-matter"
 import { handleMarkDown, readFiles } from "../../lib/api"
+import BlogLayout from "../../components/blog/BlogLayout"
 
 interface BlogPostProps {
   contents: GrayMatterFile<string>
@@ -18,27 +18,14 @@ const BlogPost = ({ contents, data, htmlContent }: BlogPostProps) => {
     return <ErrorPage statusCode={404} />
   }
 
-  const handleTitle = (title: string) =>
-    title.split(" ").slice(0, 3).join("-") + "..."
-
   return (
-    <>
+    <BlogLayout preview data={data}>
       {router.isFallback ? (
         <h2>...Loading</h2>
       ) : (
-        <>
-          <article>
-            <Head>
-              <title>{handleTitle(data.title)}</title>
-              {/* <meta property="og:image" content={post.ogImage.url} /> */}
-              <meta title="description" content={data.desc} />
-            </Head>
-            <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-            {/* <pre>{contents}</pre> */}
-          </article>
-        </>
+        <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
       )}
-    </>
+    </BlogLayout>
   )
 }
 
