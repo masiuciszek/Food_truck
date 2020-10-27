@@ -7,7 +7,11 @@ const prisma = new PrismaClient()
 const userRouter = Router()
 const postRouter = Router()
 
+// Users
 userRouter.route("/").get(userController.getUsers(prisma))
+userRouter.route("/:userId").get(userController.getUserById(prisma))
+
+// Posts
 postRouter.route("/").get(postController.getPosts(prisma))
 
 export { userRouter, postRouter }
