@@ -2,80 +2,20 @@
   <a href="" rel="noopener">
  <img width=200px height=200px src="server.png" alt="Project logo"></a>
 </p>
-
-<h3 align="center">fullstacks!!! λ⚛️😎👨🏻‍💻</h3>
+<h3 align="center">fullstacks!!! λ⚛️😎👨🏻  <200d>💻</h3>
 
 <div align="center">
-
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-
+  Applications where I will try different backend technologies , more like a hobby project, to have a reference and to understand the back end world much better.
+  I will still aim to build a front end for every backend application.
+    <br>
+  This is just production application for own case, nothing that will be in production. That's why some error messages that I handle is there for a special purpose. Just to understand the code on what's going on. I know that in a real case you would have write in a more a anonymous way. 🧛<200d>♂️
 </div>
 
----
+### Techs included
 
-<p align="center">
-Applications where I will try different backend technologies , more like a hobby project, to have a reference and to understand the back end world much better.
-I will still aim to build a front end for every backend application.
-
-This is just production application for own case, nothing that will be in production. That's why some error messages that I handle is there for a special purpose. Just to understand the code on what's going on. I know that in a real case you would have write in a more a anonymous way. 🧛‍♂️
-<br>
-
-</p>
-
-## 📝 Table of Contents
-
-* [About](#about)
-* [Getting Started](#getting_started)
-* [Built Using](#built_using)
-* [TODO](../TODO.md)
-* [Contributing](../CONTRIBUTING.md)
-* [Authors](#authors)
-
-<!-- - [Acknowledgments](#acknowledgement) -->
-
-## 🧐 About <a name = "about"></a>
-
-Practicing on building a fullstack modern application. Using server side rendered content with Next js.
-
-## 🏁 Getting Started <a name = "getting_started"></a>
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
-
-``` bash
-  git clone <project url>
-
-  cd <project name> / server or frontend
-
-  yarn/npm install (in both server and client)
-
-  yarn/npm start in server
-  yarn/npm dev in client
-
-```
-
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
-``` 
- Node > 8.0
-
-```
-
-End with an example of getting some data out of the system or using it for a little demo. -->
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-* [MongoDB](https://www.mongodb.com/) - Database
-* [Express](https://expressjs.com/) - Server Framework
-* [React](https://reactjs.org/) - Web Framework
-* [NodeJs](https://nodejs.org/en/) - Server Environment
-* [Next Js](https://nextjs.org/) - Framework for React
-* [Typescript](https://www.typescriptlang.org/) - Superset of Javascript
-
-## ✍️ Authors <a name = "authors"></a>
-
-* [@masiuciszek](https://github.com/masiuciszek) - Me
+- [MonogoDB](https://www.mongodb.com/cloud/atlas/lp/try2?utm_source=google&utm_campaign=gs_emea_sweden_search_brand_atlas_desktop&utm_term=mongodb&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=1718986537)
+- [SQLLite](https://www.sqlite.org/index.html)
+- [prisma](https://www.prisma.io/)
+- [Next Js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
