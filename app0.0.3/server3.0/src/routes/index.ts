@@ -2,7 +2,11 @@ import { PrismaClient } from "@prisma/client"
 import { Router } from "express"
 import * as userController from "../controllers/userController"
 import * as postController from "../controllers/postController"
+import { preSaveUser, routeInfo } from "../middleware/prismaMiddleware"
+
 const prisma = new PrismaClient()
+
+routeInfo(prisma) // middleware
 
 const userRouter = Router()
 const postRouter = Router()
@@ -15,4 +19,5 @@ userRouter.route("/register").post(userController.register(prisma))
 // Posts
 postRouter.route("/").get(postController.getPosts(prisma))
 
+preSaveUser(prisma) // middleware
 export { userRouter, postRouter }
