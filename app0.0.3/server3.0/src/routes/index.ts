@@ -7,6 +7,7 @@ import { preSaveUser, routeInfo } from "../middleware/prismaMiddleware"
 const prisma = new PrismaClient()
 
 routeInfo(prisma) // middleware
+preSaveUser(prisma) // middleware
 
 const userRouter = Router()
 const postRouter = Router()
@@ -19,5 +20,4 @@ userRouter.route("/register").post(userController.register(prisma))
 // Posts
 postRouter.route("/").get(postController.getPosts(prisma))
 
-preSaveUser(prisma) // middleware
 export { userRouter, postRouter }

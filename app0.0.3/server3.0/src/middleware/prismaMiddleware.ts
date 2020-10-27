@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client"
-import { hashPassword } from "../utils/passwordHandler"
 import bcrypt from "bcryptjs"
 
 export const routeInfo = (prisma: PrismaClient) => {
