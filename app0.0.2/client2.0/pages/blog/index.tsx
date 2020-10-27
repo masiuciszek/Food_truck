@@ -5,6 +5,7 @@ import { Page } from "../../components/styled/wrappers"
 import { parsedMarkDownHandler, readDir } from "../../lib/api"
 import styled from "styled-components"
 import { above, below, handleFlex } from "../../src/utils/helpers"
+import { format } from "date-fns"
 
 interface BlogPageProps {
   frontmatter: FrontMatter[]
@@ -15,16 +16,15 @@ const BlogPageStyles = styled(Page)`
 `
 
 const PostList = styled.ul`
-  border: 2px solid red;
   width: 100%;
   font-size: 1rem;
   padding: 0;
   ${handleFlex("column", "center", "center")};
   li {
     padding: 0.3em;
-    background: ${({ theme }) => theme.colors.illustrations.main};
     width: 22em;
     margin: 0.8em 0;
+    margin-bottom: 2em;
     border-radius: 4px;
     text-align: center;
     transition: 300ms ease-in-out all;
@@ -45,7 +45,7 @@ const PostList = styled.ul`
     }
   }
   a {
-    color: ${({ theme }) => theme.colors.illustrations.stroke};
+    color: ${({ theme }) => theme.colors.illustrations.main};
     font-size: 2em;
     transition: 300ms ease-in-out all;
     position: relative;
@@ -90,6 +90,7 @@ const BlogPage = ({ frontmatter }: BlogPageProps) => {
         {frontmatter.map(({ slug, date, title, author: { name } }) => (
           <li key={slug}>
             <p>Written by {name}</p>
+            <p>On {date.slice(0, 16)}</p>
             <Link href={`/blog${slug}`}>
               <a> {title} </a>
             </Link>
