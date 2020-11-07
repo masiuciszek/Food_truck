@@ -2,18 +2,10 @@ import { motion } from "framer-motion"
 import React from "react"
 import styled from "styled-components"
 import { updateUser } from "../../context/authState/AuthActions"
-import {
-  useAuthDispatch,
-  useAuthState,
-} from "../../context/authState/AuthProvider"
-import { above, below } from "../../src/utils/helpers"
+import { useAuthDispatch, useAuthState } from "../../context/authState/AuthProvider"
+import { above, below } from "../../utils/helpers"
 import { Button } from "../styled/Buttons"
-import {
-  FormElement,
-  FormGroup,
-  FormInput,
-  FormLabel,
-} from "../styled/FormElements"
+import { FormElement, FormGroup, FormInput, FormLabel } from "../styled/FormElements"
 
 interface ProfileFormProps {
   wantToEdit: boolean
@@ -69,10 +61,7 @@ const ProfileFormWrapper = styled(motion.div)<ProfileFormWrapperProps>`
     `}
 `
 
-const ProfileForm: React.FC<ProfileFormProps> = ({
-  wantToEdit,
-  toggleWantToEdit,
-}) => {
+const ProfileForm: React.FC<ProfileFormProps> = ({ wantToEdit, toggleWantToEdit }) => {
   const d = useAuthDispatch()
   const { editUser, token } = useAuthState()
   const [formData, setFormData] = React.useState({
@@ -119,7 +108,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
       initial="closed"
       animate={wantToEdit ? "open" : "closed"}
       variants={variants}
-      transition={{ damping: 8, duration: 0.1 }}>
+      transition={{ damping: 8, duration: 0.1 }}
+    >
       <FormElement onSubmit={handleSubmit}>
         <FormGroup className="group">
           <FormLabel>

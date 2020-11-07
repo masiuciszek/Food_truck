@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { formatRatingToStars } from "../../src/utils/helpers"
+import { formatRatingToStars } from "../../utils/helpers"
 import Link from "next/link"
 
 interface StoreItemProps {

@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { useAuthState } from "../../context/authState/AuthProvider"
 import { leaveReview } from "../../context/storeState/storeActions"
 import { useStoreDispatch } from "../../context/storeState/StoreProvider"
-import { handleFlex } from "../../src/utils/helpers"
+import { handleFlex } from "../../utils/helpers"
 import { Button } from "../styled/Buttons"
 import { TextArea } from "../styled/FormElements"
 import Stars from "./Stars"
@@ -67,7 +67,8 @@ const CommentArea: React.FC<CommentAreaProps> = ({ on, storeId, key }) => {
       animate={on ? "open" : "closed"}
       variants={variants}
       exit="closed"
-      transition={{ damping: 100 }}>
+      transition={{ damping: 100 }}
+    >
       <h3>Leave a review</h3>
       <form onSubmit={handleSubmit}>
         <Stars rating={rating} setRating={setRating} />

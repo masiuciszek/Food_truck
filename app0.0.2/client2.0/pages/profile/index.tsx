@@ -2,18 +2,15 @@ import { AnimatePresence } from "framer-motion"
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router"
 import React from "react"
-import Modal from "../../components/elements/Modal"
-import Title from "../../components/elements/Title"
-import Profile from "../../components/profile/Profile"
-import { Page, PageWrapper } from "../../components/styled/wrappers"
+import Modal from "@components/elements/Modal"
+import Title from "@components/elements/Title"
+import Profile from "@components/profile/Profile"
+import { Page, PageWrapper } from "@components/styled/wrappers"
 import { getMe } from "../../context/authState/AuthActions"
-import {
-  useAuthDispatch,
-  useAuthState,
-} from "../../context/authState/AuthProvider"
+import { useAuthDispatch, useAuthState } from "../../context/authState/AuthProvider"
 import { useToggle } from "../../hooks/useToggle"
 import { parseCookies } from "../../lib/parseCookies"
-import { randomSentence } from "../../src/utils/helpers"
+import { randomSentence } from "../../utils/helpers"
 
 interface ProfilePageProps {
   token: string
@@ -55,7 +52,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token }) => {
               title={`${user?.firstName} ${user?.lastName}`}
               desc="your profile"
               on={showProfile}
-              toggle={toggleShowProfile}>
+              toggle={toggleShowProfile}
+            >
               <Profile />
             </Modal>
           )}

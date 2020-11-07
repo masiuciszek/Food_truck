@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { below } from "../src/utils/helpers"
+import { below } from "../utils/helpers"
 
 interface Props {
   imageUrl?: string
@@ -8,11 +8,7 @@ interface Props {
   className: string
 }
 
-const Image = ({
-  imageTitle = "hero",
-  imageUrl = "home.png",
-  className,
-}: Props) => {
+const Image = ({ imageTitle = "hero", imageUrl = "home.png", className }: Props) => {
   return (
     <section className={className}>
       <img src={`/${imageUrl}`} alt={imageTitle} />

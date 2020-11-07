@@ -1,10 +1,10 @@
-import { GetStaticProps } from "next"
+import { GetStaticProps, NextPage } from "next"
 import Link from "next/link"
-import Title from "../../components/elements/Title"
-import { Page } from "../../components/styled/wrappers"
+import Title from "@components/elements/Title"
+import { Page } from "@components/styled/wrappers"
 import { parsedMarkDownHandler, readDir } from "../../lib/api"
 import styled from "styled-components"
-import { above, below, handleFlex } from "../../src/utils/helpers"
+import { above, below, handleFlex } from "@utils/helpers"
 // import { format } from "date-fns"
 
 interface BlogPageProps {
@@ -64,8 +64,7 @@ const PostList = styled.ul`
     }
     &:hover {
       color: ${({ theme }) => theme.colors.illustrations.highlight};
-      text-shadow: 1px 1px 2px
-        ${(props) => props.theme.colors.shadow.highlightShadow};
+      text-shadow: 1px 1px 2px ${(props) => props.theme.colors.shadow.highlightShadow};
       &:after {
         content: "";
         position: relative;
@@ -79,11 +78,7 @@ const PostList = styled.ul`
   }
 `
 
-const BlogPage = ({ frontmatter, postsSize }: BlogPageProps) => {
-  const sorted = frontmatter.sort(
-    (a, b) => Date.parse(b.date) - Date.parse(a.date)
-  )
-
+const BlogPage: NextPage<BlogPageProps> = ({ frontmatter, postsSize }) => {
   return (
     <BlogPageStyles>
       <Title
@@ -92,7 +87,7 @@ const BlogPage = ({ frontmatter, postsSize }: BlogPageProps) => {
         subTitle="content with a small twist"
       />
       <PostList>
-        {sorted.map(({ slug, date, title, author: { name } }) => (
+        {frontmatter.map(({ slug, date, title, author: { name } }) => (
           <li key={slug}>
             <p>Written by {name}</p>
             <p>On {date.slice(0, 12)}</p>

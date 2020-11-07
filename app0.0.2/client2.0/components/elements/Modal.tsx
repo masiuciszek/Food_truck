@@ -1,7 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 import styled from "styled-components"
-import { above, below, handleFlex } from "../../src/utils/helpers"
+import { above, below, handleFlex } from "../../utils/helpers"
 
 interface ModalProps {
   on: boolean
@@ -67,7 +67,8 @@ const Modal: React.FC<ModalProps> = ({
       initial={{ opacity: 0, y: "100%" }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ damping: 8, delay: 0.25 }}
-      exit={{ opacity: 0, x: "-100%" }}>
+      exit={{ opacity: 0, x: "-100%" }}
+    >
       <Modalbody>
         <button type="button" onClick={toggle} data-testid="button-modal-close">
           𝙓

@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { formatRatingToStars, handleFlex } from "../../src/utils/helpers"
+import { formatRatingToStars, handleFlex } from "../../utils/helpers"
 
 interface StarItemProps {
   rating: number
@@ -31,7 +31,8 @@ const StarItem: React.FC<StarItemProps> = ({
     <StyledStar
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={() => onClick(index)}>
+      onClick={() => onClick(index)}
+    >
       {rating && rating >= index + 1 ? (
         <span className="star"> ⭐️ </span>
       ) : (

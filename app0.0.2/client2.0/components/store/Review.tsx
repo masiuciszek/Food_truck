@@ -4,12 +4,7 @@ import { useAuthState } from "../../context/authState/AuthProvider"
 import { deleteReview } from "../../context/storeState/storeActions"
 
 import { useStoreDispatch } from "../../context/storeState/StoreProvider"
-import {
-  above,
-  below,
-  formatRatingToStars,
-  handleFlex,
-} from "../../src/utils/helpers"
+import { above, below, formatRatingToStars, handleFlex } from "../../utils/helpers"
 interface ReviewProps {
   review: Review
 }
@@ -73,9 +68,7 @@ const Review: React.FC<ReviewProps> = ({ review }) => {
     <StyledReview>
       {isOwnerForComment && token && (
         <div className="delete">
-          <button
-            type="button"
-            onClick={() => deleteReview(token)(dispatch)(review._id)}>
+          <button type="button" onClick={() => deleteReview(token)(dispatch)(review._id)}>
             ╳
           </button>
         </div>

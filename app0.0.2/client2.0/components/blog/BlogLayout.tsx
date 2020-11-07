@@ -17,8 +17,7 @@ const BlogWrapper = styled.div`
 const Article = styled.article``
 
 const BlogLayout: React.FC<BlogLayoutProps> = ({ preview, children, data }) => {
-  const handleTitle = (title: string) =>
-    title.split(" ").slice(0, 3).join("-") + "..."
+  const handleTitle = (title: string) => title.split(" ").slice(0, 3).join("-") + "..."
   return (
     <>
       <Meta />

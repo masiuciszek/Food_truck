@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { below, handleFlex } from "../../../src/utils/helpers";
-import NavTitle from "../header/NavTitle";
-import FooterList from "./FooterList";
+import React from "react"
+import styled from "styled-components"
+import { below, handleFlex } from "../../../utils/helpers"
+import NavTitle from "../header/NavTitle"
+import FooterList from "./FooterList"
 
 interface FooterProps {
-  className?: string;
+  className?: string
 }
 
 const Footer = ({ className = "main-footer" }: FooterProps) => {
@@ -14,8 +14,8 @@ const Footer = ({ className = "main-footer" }: FooterProps) => {
       <NavTitle isOnFooter />
       <FooterList />
     </footer>
-  );
-};
+  )
+}
 export default styled(Footer)`
   ${handleFlex("row", "space-between", "center")};
   background: ${({ theme }) => theme.colors.illustrations.main};
@@ -23,4 +23,4 @@ export default styled(Footer)`
   ${below.medium`
     ${handleFlex("column", "space-between", "center")};
   `}
-`;
+`

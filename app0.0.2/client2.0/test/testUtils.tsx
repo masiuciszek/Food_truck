@@ -1,7 +1,7 @@
 import * as React from "react"
 import { render } from "@testing-library/react"
 import { ThemeProvider } from "styled-components"
-import { mainTheme } from "../src/utils/theme"
+import { mainTheme } from "../utils/theme"
 import AuthProvider from "../context/authState/AuthProvider"
 import StoreProvider from "../context/storeState/StoreProvider"
 // import { ThemeProvider } from "my-ui-lib"
@@ -25,8 +25,7 @@ const Providers: React.FC = ({ children }) => {
   // )
 }
 
-const customRender = (ui, options = {}) =>
-  render(ui, { wrapper: Providers, ...options })
+const customRender = (ui, options = {}) => render(ui, { wrapper: Providers, ...options })
 
 // re-export everything
 export * from "@testing-library/react"

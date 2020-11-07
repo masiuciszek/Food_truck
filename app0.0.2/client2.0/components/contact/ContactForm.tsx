@@ -1,14 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import { above, below } from "../../src/utils/helpers"
+import { above, below } from "../../utils/helpers"
 import { Button } from "../styled/Buttons"
-import {
-  FormElement,
-  FormGroup,
-  FormInput,
-  FormLabel,
-  TextArea,
-} from "../styled/FormElements"
+import { FormElement, FormGroup, FormInput, FormLabel, TextArea } from "../styled/FormElements"
 
 const StyledFormWrapper = styled.section`
   width: 100%;

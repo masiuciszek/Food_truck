@@ -1,10 +1,10 @@
-import Link from "next/link";
-import React from "react";
-import styled from "styled-components";
-import { handleFlex } from "../../../src/utils/helpers";
+import Link from "next/link"
+import React from "react"
+import styled from "styled-components"
+import { handleFlex } from "../../../utils/helpers"
 
 interface NavTitleProps {
-  isOnFooter?: boolean;
+  isOnFooter?: boolean
 }
 
 const TitleStyles = styled.div<NavTitleProps>`
@@ -24,13 +24,11 @@ const TitleStyles = styled.div<NavTitleProps>`
       margin-left: 1rem;
       font-size: 1.7rem;
       color: ${({ theme, isOnFooter }) =>
-        isOnFooter
-          ? theme.colors.illustrations.stroke
-          : theme.colors.illustrations.main};
+        isOnFooter ? theme.colors.illustrations.stroke : theme.colors.illustrations.main};
     }
   }
   position: relative;
-`;
+`
 
 const NavTitle = ({ isOnFooter = false }: NavTitleProps) => {
   return (
@@ -42,7 +40,7 @@ const NavTitle = ({ isOnFooter = false }: NavTitleProps) => {
         </a>
       </Link>
     </TitleStyles>
-  );
-};
+  )
+}
 
-export default NavTitle;
+export default NavTitle

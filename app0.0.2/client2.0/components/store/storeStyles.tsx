@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { handleFlex, below } from "../../src/utils/helpers";
+import styled from "styled-components"
+import { handleFlex, below } from "../../utils/helpers"
 
 interface StoreHeroProps {
-  image: string;
+  image: string
 }
 
 export const Wrapper = styled.section`
@@ -13,7 +13,7 @@ export const Wrapper = styled.section`
   ${below.small`
     margin-bottom: 3em;
   `}
-`;
+`
 
 export const StoreHero = styled.div<StoreHeroProps>`
   background-image: ${({ image }) => `url(${image})`};
@@ -38,7 +38,7 @@ export const StoreHero = styled.div<StoreHeroProps>`
     width: 100%;
     height: 100%;
   }
-`;
+`
 
 export const StoreProfileBody = styled.div`
   background: ${({ theme }) => theme.colors.elements.headline};
@@ -110,6 +110,6 @@ export const StoreProfileBody = styled.div`
       font-size: 1rem;
     }
   `}
-`;
+`
 
-export const CommentsWrapper = styled.div``;
+export const CommentsWrapper = styled.div``

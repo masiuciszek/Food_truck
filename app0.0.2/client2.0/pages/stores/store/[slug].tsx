@@ -5,10 +5,7 @@ import { Button } from "../../../components/styled/Buttons"
 import { useToggle } from "../../../hooks/useToggle"
 import CommentArea from "../../../components/store/CommentArea"
 import { AnimatePresence } from "framer-motion"
-import {
-  useAuthState,
-  useAuthDispatch,
-} from "../../../context/authState/AuthProvider"
+import { useAuthState, useAuthDispatch } from "../../../context/authState/AuthProvider"
 import Alert from "../../../components/elements/Alert"
 import {
   CommentsWrapper,
@@ -19,7 +16,7 @@ import {
 import { parseCookies } from "../../../lib/parseCookies"
 import { getMe } from "../../../context/authState/AuthActions"
 import PostedComments from "../../../components/store/PostedComments"
-import { checkLength } from "../../../src/utils/helperFn"
+import { checkLength } from "../../../utils/helperFn"
 
 interface StoreProfileProps {
   storeData: Store
@@ -44,9 +41,7 @@ const StoreProfile: React.FC<StoreProfileProps> = ({ storeData, token }) => {
 
   return (
     <PageWrapper width="900px">
-      {status === "REJECTED" && (
-        <Alert message="you have to be logged in to leave a review" />
-      )}
+      {status === "REJECTED" && <Alert message="you have to be logged in to leave a review" />}
       <Wrapper>
         <StoreHero image={storeData.photo} />
         <StoreProfileBody>
@@ -77,11 +72,7 @@ const StoreProfile: React.FC<StoreProfileProps> = ({ storeData, token }) => {
         <CommentsWrapper>
           <AnimatePresence>
             {showComments && (
-              <CommentArea
-                storeId={storeData._id}
-                on={showComments}
-                key="comment"
-              />
+              <CommentArea storeId={storeData._id} on={showComments} key="comment" />
             )}
           </AnimatePresence>
 

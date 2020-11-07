@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { above, below, handleFlex } from "../../../src/utils/helpers"
+import { above, below, handleFlex } from "../../../utils/helpers"
 import { motion } from "framer-motion"
 
 export const Page = styled.section`

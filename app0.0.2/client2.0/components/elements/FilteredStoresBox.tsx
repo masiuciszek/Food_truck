@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { useStoreState } from "../../context/storeState/StoreProvider"
-import { below, handleFlex } from "../../src/utils/helpers"
+import { below, handleFlex } from "../../utils/helpers"
 import FilteredStoreItem from "./FilteredStoreItem"
 
 const StyledStoreBox = styled(motion.div)`
@@ -47,7 +47,8 @@ const FilteredStoresBox = () => {
       initial="closed"
       animate={filteredStores.length ? "open" : "closed"}
       variants={variants}
-      transition={{ duration: 0.8 }}>
+      transition={{ duration: 0.8 }}
+    >
       <Wrapper>
         {state.length &&
           (state as Array<Store>).map((store) => (

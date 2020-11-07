@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { useStoreDispatch } from "../../../context/storeState/StoreProvider"
-import { above, below } from "../../../src/utils/helpers"
+import { above, below } from "../../../utils/helpers"
 
 interface Props {
   showFilerSearch: boolean
@@ -73,9 +73,7 @@ const SearchFilter = ({ showFilerSearch }: Props) => {
   }
 
   const getStoresByName = async (text: string): Promise<void> => {
-    const res = await fetch(
-      `http://localhost:4000/store/filterstore?name=${text}`
-    )
+    const res = await fetch(`http://localhost:4000/store/filterstore?name=${text}`)
     const { data: stores } = await res.json()
 
     setStoreState(stores)
@@ -99,7 +97,8 @@ const SearchFilter = ({ showFilerSearch }: Props) => {
       initial="closed"
       animate={showFilerSearch ? "open" : "closed"}
       variants={variants}
-      transition={{ duration: 0.8 }}>
+      transition={{ duration: 0.8 }}
+    >
       <SearchFilterElement
         type="text"
         placeholder="search store..."

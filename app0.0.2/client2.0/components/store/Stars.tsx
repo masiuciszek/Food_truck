@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import styled from "styled-components"
 import StarItem from "./StarItem"
-import { below, handleFlex } from "../../src/utils/helpers"
+import { below, handleFlex } from "../../utils/helpers"
 import { useToggle } from "../../hooks/useToggle"
 
 const StyledStars = styled.section`

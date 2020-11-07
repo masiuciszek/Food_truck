@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { below, handleFlex, renderList } from "../../../src/utils/helpers";
-import { navigationLinks } from "../../../src/utils/initialData";
+import React from "react"
+import styled from "styled-components"
+import { below, handleFlex, renderList } from "../../../utils/helpers"
+import { navigationLinks } from "../../../utils/initialData"
 interface FooterListProps {}
 
 const StyledFooterList = styled.ul`
@@ -43,10 +43,10 @@ const StyledFooterList = styled.ul`
   ${below.small`
     width: 100%;
   `}
-`;
+`
 
 const FooterList: React.FC<FooterListProps> = ({}) => {
-  const [navData, setNavData] = React.useState(navigationLinks);
-  return <StyledFooterList>{renderList(navData)}</StyledFooterList>;
-};
-export default FooterList;
+  const [navData, setNavData] = React.useState(navigationLinks)
+  return <StyledFooterList>{renderList(navData)}</StyledFooterList>
+}
+export default FooterList

@@ -1,11 +1,8 @@
 import React from "react"
-import {
-  useAuthDispatch,
-  useAuthState,
-} from "../../context/authState/AuthProvider"
+import { useAuthDispatch, useAuthState } from "../../context/authState/AuthProvider"
 import styled from "styled-components"
 import { motion } from "framer-motion"
-import { below, handleFlex } from "../../src/utils/helpers"
+import { below, handleFlex } from "../../utils/helpers"
 import { Button } from "../styled/Buttons"
 
 interface AlertProps {
@@ -95,19 +92,15 @@ const Alert: React.FC<AlertProps> = ({
       initial="closed"
       animate="open"
       transition={{ damping: 50 }}
-      variants={variants}>
+      variants={variants}
+    >
       <div className="content">
         <p className="main">{message}</p>
         {messageSecondary && <p className="secondary">{messageSecondary}</p>}
         {showDeleteActions && (
           <div className="btn-group">
             <Button onClick={() => fn()}>Yes</Button>
-            <Button
-              onClick={() =>
-                d({ type: "MESSAGE_HANDLER", payload: "NATURAL" })
-              }>
-              No
-            </Button>
+            <Button onClick={() => d({ type: "MESSAGE_HANDLER", payload: "NATURAL" })}>No</Button>
           </div>
         )}
       </div>

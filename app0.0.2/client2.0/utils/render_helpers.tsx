@@ -1,21 +1,17 @@
 import Link from "next/link"
 import React from "react"
 import styled from "styled-components"
-import { Button } from "../../components/styled/Buttons"
-import { generateNameSlug } from "../utils/helperFn"
-import {
-  FormGroup,
-  FormLabel,
-  FormInput,
-} from "../../components/styled/FormElements"
+import { Button } from "../components/styled/Buttons"
+import { generateNameSlug } from "./helperFn"
+import { FormGroup, FormLabel, FormInput } from "../components/styled/FormElements"
 import { above, below, handleFlex } from "./helpers"
-import { Dispatch } from "../../context/authState/AuthType"
-import StoreItem from "../../components/store/StoreItem"
+import { Dispatch } from "../context/authState/AuthType"
+import StoreItem from "../components/store/StoreItem"
 type HandleChangeType = (evt: React.ChangeEvent<HTMLInputElement>) => void
 
-export const renderForm = (isLoginForm: boolean) => (
-  formData: FormDataType
-) => (handleChange: HandleChangeType) => {
+export const renderForm = (isLoginForm: boolean) => (formData: FormDataType) => (
+  handleChange: HandleChangeType
+) => {
   return !isLoginForm ? (
     <>
       <FormGroup>
@@ -78,9 +74,7 @@ export const renderForm = (isLoginForm: boolean) => (
             placeholder="confirm password"
             name="confirmPassword"
             onChange={handleChange}
-            value={
-              "confirmPassword" in formData ? formData.confirmPassword : ""
-            }
+            value={"confirmPassword" in formData ? formData.confirmPassword : ""}
           />
         </FormLabel>
       </FormGroup>
@@ -148,18 +142,12 @@ export const renderAuthElements = (
         <>
           <Link href="/profile">
             <a>
-              <Button>
-                {user
-                  ? generateNameSlug(user.firstName, user.lastName)
-                  : "name"}
-              </Button>
+              <Button>{user ? generateNameSlug(user.firstName, user.lastName) : "name"}</Button>
             </a>
           </Link>
           <span>
             <a>
-              <Button onClick={() => dispatch({ type: "LOGOUT_USER" })}>
-                Logout
-              </Button>
+              <Button onClick={() => dispatch({ type: "LOGOUT_USER" })}>Logout</Button>
             </a>
           </span>
         </>

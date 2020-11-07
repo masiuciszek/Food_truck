@@ -1,16 +1,16 @@
-import React from "react";
-import styled from "styled-components";
-import { handleFlex } from "../../src/utils/helpers";
-import { renderForm } from "../../src/utils/render_helpers";
-import { Button } from "../styled/Buttons";
+import React from "react"
+import styled from "styled-components"
+import { handleFlex } from "../../utils/helpers"
+import { renderForm } from "../../utils/render_helpers"
+import { Button } from "../styled/Buttons"
 
 interface FormProps {
-  formData: FormDataType;
-  handleChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
-  className: string;
-  submitText: string;
-  isLoginForm?: boolean;
-  handleSubmit: (evt: React.FormEvent<HTMLFormElement>) => void;
+  formData: FormDataType
+  handleChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
+  className: string
+  submitText: string
+  isLoginForm?: boolean
+  handleSubmit: (evt: React.FormEvent<HTMLFormElement>) => void
 }
 
 const Form: React.FC<FormProps> = ({
@@ -26,8 +26,8 @@ const Form: React.FC<FormProps> = ({
       {renderForm(isLoginForm)(formData)(handleChange)}
       <Button type="submit"> {submitText} </Button>
     </form>
-  );
-};
+  )
+}
 
 export default styled(Form)`
   height: 100%;
@@ -38,4 +38,4 @@ export default styled(Form)`
     margin: 1rem 0;
     width: 12em;
   }
-`;
+`

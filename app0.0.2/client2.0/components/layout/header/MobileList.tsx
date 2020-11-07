@@ -1,13 +1,13 @@
-import React from "react";
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import { above, handleFlex, renderList } from "../../../src/utils/helpers";
-import AuthActions from "../../AuthActions";
+import React from "react"
+import { motion } from "framer-motion"
+import styled from "styled-components"
+import { above, handleFlex, renderList } from "../../../utils/helpers"
+import AuthActions from "../../AuthActions"
 
 interface MobileListProps {
-  onShowMobileMenu: boolean;
-  className: string;
-  onNavData: Link[];
+  onShowMobileMenu: boolean
+  className: string
+  onNavData: Link[]
 }
 
 const StyledList = styled.ul`
@@ -48,28 +48,25 @@ const StyledList = styled.ul`
       }
     }
   }
-`;
+`
 
-const MobileList: React.FC<MobileListProps> = ({
-  onShowMobileMenu,
-  className,
-  onNavData,
-}) => {
+const MobileList: React.FC<MobileListProps> = ({ onShowMobileMenu, className, onNavData }) => {
   const variants = {
     open: { y: 0, opacity: 1 },
     closed: { y: "-100%", opacity: 0 },
-  };
+  }
   return (
     <motion.section
       className={className}
       initial="closed"
       animate={onShowMobileMenu ? "open" : "closed"}
-      variants={variants}>
+      variants={variants}
+    >
       <AuthActions isOnSmallScreen />
       <StyledList>{renderList(onNavData)}</StyledList>
     </motion.section>
-  );
-};
+  )
+}
 export default styled(MobileList)`
   position: fixed;
   top: 0;
@@ -85,4 +82,4 @@ export default styled(MobileList)`
   ${above.small`
     width: 70%;
   `}
-`;
+`

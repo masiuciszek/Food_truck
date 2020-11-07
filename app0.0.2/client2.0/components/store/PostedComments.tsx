@@ -1,7 +1,7 @@
 import React from "react"
 import Review from "./Review"
 import styled from "styled-components"
-import { above, handleFlex } from "../../src/utils/helpers"
+import { above, handleFlex } from "../../utils/helpers"
 interface PostedCommentsProps {
   reviews: Review[]
 }

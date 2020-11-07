@@ -1,10 +1,10 @@
-import React from "react";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
-import { mainTheme } from "../../src/utils/theme";
-import Head from "next/head";
-import styled from "styled-components";
-import Header from "./header/Header";
-import Footer from "./footer";
+import React from "react"
+import { ThemeProvider, createGlobalStyle } from "styled-components"
+import { mainTheme } from "../../utils/theme"
+import Head from "next/head"
+import styled from "styled-components"
+import Header from "./header/Header"
+import Footer from "./footer"
 
 const GlobalStyles = createGlobalStyle`
   *,
@@ -75,11 +75,11 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.elements.paragraph} !important;
     font-size: ${({ theme }) => theme.size.p};
   }
-`;
+`
 
 const Main = styled.main`
   margin: 0 auto;
-`;
+`
 
 const Layout: React.FC = ({ children }) => {
   return (
@@ -97,7 +97,7 @@ const Layout: React.FC = ({ children }) => {
       <Main>{children}</Main>
       <Footer className="main_footer" />
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

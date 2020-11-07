@@ -1,13 +1,10 @@
 import React from "react"
-import {
-  useAuthState,
-  useAuthDispatch,
-} from "../../context/authState/AuthProvider"
+import { useAuthState, useAuthDispatch } from "../../context/authState/AuthProvider"
 import styled, { css } from "styled-components"
 import { Button } from "../styled/Buttons"
 import ProfileForm from "./ProfileForm"
 import { useToggle } from "../../hooks/useToggle"
-import { below } from "../../src/utils/helpers"
+import { below } from "../../utils/helpers"
 import Alert from "../elements/Alert"
 import { deleteUser } from "../../context/authState/AuthActions"
 import { useRouter } from "next/router"
@@ -35,8 +32,7 @@ const Grid = styled.div<GridProps>`
     align-items: center;
     justify-content: center;
     p {
-      border-bottom: 1px solid
-        ${({ theme }) => theme.colors.illustrations.stroke};
+      border-bottom: 1px solid ${({ theme }) => theme.colors.illustrations.stroke};
       padding: 0.5rem;
       width: ${({ wantToEdit }) => (wantToEdit ? "70%" : "25em")};
       span {
@@ -83,10 +79,7 @@ const Profile = () => {
   const router = useRouter()
   const { state: wantToEdit, toggle: toggleWantToEdit } = useToggle()
 
-  const {
-    state: shouldBeDeleted,
-    setStateToTrue: shouldBeDeletedSetToTrue,
-  } = useToggle()
+  const { state: shouldBeDeleted, setStateToTrue: shouldBeDeletedSetToTrue } = useToggle()
 
   const handleEdit = (user: User): void => {
     dispatch({ type: "SET_USER", payload: user })
@@ -126,18 +119,11 @@ const Profile = () => {
             <span>Role</span> {user?.role}
           </p>
         </div>
-        <ProfileForm
-          wantToEdit={wantToEdit}
-          toggleWantToEdit={toggleWantToEdit}
-        />
+        <ProfileForm wantToEdit={wantToEdit} toggleWantToEdit={toggleWantToEdit} />
       </Grid>
 
       <BtnWrapper>
-        {user && (
-          <Button onClick={() => handleEdit(user)}>
-            {wantToEdit ? "𝙓" : "Edit"}
-          </Button>
-        )}
+        {user && <Button onClick={() => handleEdit(user)}>{wantToEdit ? "𝙓" : "Edit"}</Button>}
         <Button onClick={handleConfirmMessage}>Delete</Button>
       </BtnWrapper>
     </StyledProfile>

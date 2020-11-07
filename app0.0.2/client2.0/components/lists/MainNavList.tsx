@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { above, handleFlex, renderList } from "../../src/utils/helpers";
+import React from "react"
+import styled from "styled-components"
+import { above, handleFlex, renderList } from "../../utils/helpers"
 
 interface MainNavListProps {
-  onNavData: Link[];
+  onNavData: Link[]
 }
 
 const StyledNavList = styled.ul`
@@ -44,9 +44,9 @@ const StyledNavList = styled.ul`
   ${above.medium`
     ${handleFlex("row", "space-between", "center")};
   `}
-`;
+`
 
 const MainNavList: React.FC<MainNavListProps> = ({ onNavData }) => {
-  return <StyledNavList>{renderList(onNavData)}</StyledNavList>;
-};
-export default MainNavList;
+  return <StyledNavList>{renderList(onNavData)}</StyledNavList>
+}
+export default MainNavList

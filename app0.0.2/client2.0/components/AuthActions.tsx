@@ -1,20 +1,17 @@
-import {
-  useAuthDispatch,
-  useAuthState,
-} from "../context/authState/AuthProvider";
-import { renderAuthElements } from "../src/utils/render_helpers";
+import { useAuthDispatch, useAuthState } from "../context/authState/AuthProvider"
+import { renderAuthElements } from "../utils/render_helpers"
 
 interface AuthActionsProps {
-  isOnSmallScreen: boolean;
+  isOnSmallScreen: boolean
 }
 
 const AuthActions = ({ isOnSmallScreen }: AuthActionsProps) => {
-  const { isLoggedIn, user } = useAuthState();
-  const dispatch = useAuthDispatch();
+  const { isLoggedIn, user } = useAuthState()
+  const dispatch = useAuthDispatch()
 
   return user
     ? renderAuthElements(isOnSmallScreen, isLoggedIn, user, dispatch)
-    : renderAuthElements(isOnSmallScreen, isLoggedIn, null, dispatch);
-};
+    : renderAuthElements(isOnSmallScreen, isLoggedIn, null, dispatch)
+}
 
-export default AuthActions;
+export default AuthActions

@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import styled from "styled-components"
-import { handleFlex } from "../../src/utils/helpers"
+import { handleFlex } from "../../utils/helpers"
 import { Button } from "../styled/Buttons"
 
 interface TitleProps {
