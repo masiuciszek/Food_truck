@@ -1,5 +1,4 @@
 import { GetStaticProps, NextPage } from "next"
-
 import Title from "@components/elements/Title"
 import { Page } from "@components/styled/wrappers"
 import { parsedMarkDownHandler, readDir } from "../../lib/api"
@@ -8,11 +7,9 @@ import { handleFlex } from "@utils/helpers"
 import { useState } from "react"
 import PostItem from "@components/blog/PostItem"
 import Paginate from "@components/blog/Paginate"
-// import { format } from "date-fns"
 
 interface BlogPageProps {
   frontmatter: FrontMatter[]
-  postsSize: number
 }
 
 const BlogPageStyles = styled(Page)`
@@ -29,9 +26,8 @@ const PostList = styled.ul`
   }
 `
 
-const BlogPage: NextPage<BlogPageProps> = ({ frontmatter, postsSize }) => {
+const BlogPage: NextPage<BlogPageProps> = ({ frontmatter }) => {
   const [currentPage, setCurrentPage] = useState(1)
-
   const postsPerPage = 3
   const indexOfLastPost = currentPage * postsPerPage
   const indexOfFirstPost = indexOfLastPost - postsPerPage
@@ -66,7 +62,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       frontmatter: postFrontMatter,
-      postsSize: posts.length,
     },
   }
 }

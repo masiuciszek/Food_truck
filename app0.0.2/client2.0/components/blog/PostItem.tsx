@@ -11,8 +11,7 @@ const PostItemStyles = styled.li`
   display: flex;
   justify-content: center;
   padding: 0.3em;
-  width: 22em;
-  margin: 0.8em 0;
+  margin: 2em 0;
   margin-bottom: 2em;
   border-radius: 4px;
   text-align: center;
@@ -31,6 +30,10 @@ const PostItemStyles = styled.li`
     `}
     &:hover {
     transform: scale(1.06);
+  }
+
+  p {
+    font-size: 2em;
   }
 
   a {

@@ -62,13 +62,15 @@ const BlogPost: NextPage<BlogPostProps> = ({ contents, data, htmlContent, allPos
       <BlogNavigation isFirst={isFirst} isLast={isLast}>
         {!isFirst && (
           <Link href={`/blog/${allPostsSlug[currentPostIndex - 1]}`}>
-            <a>{allPostsSlug[currentPostIndex - 1]}</a>
+            <a>← {allPostsSlug[currentPostIndex - 1]}</a>
           </Link>
         )}
 
-        <Link href={`/blog/${allPostsSlug[currentPostIndex + 1]}`}>
-          <a>{allPostsSlug[currentPostIndex + 1]}</a>
-        </Link>
+        {!isLast && (
+          <Link href={`/blog/${allPostsSlug[currentPostIndex + 1]}`}>
+            <a>{allPostsSlug[currentPostIndex + 1]} → </a>
+          </Link>
+        )}
       </BlogNavigation>
     </BlogLayout>
   )
