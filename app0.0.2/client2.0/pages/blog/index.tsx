@@ -5,6 +5,9 @@ import { Page } from "@components/styled/wrappers"
 import { parsedMarkDownHandler, readDir } from "../../lib/api"
 import styled from "styled-components"
 import { above, below, handleFlex } from "@utils/helpers"
+import { useState } from "react"
+import PostItem from "@components/blog/PostItem"
+import Paginate from "@components/blog/Paginate"
 // import { format } from "date-fns"
 
 interface BlogPageProps {
@@ -21,64 +24,22 @@ const PostList = styled.ul`
   font-size: 1rem;
   padding: 0;
   ${handleFlex("column", "center", "center")};
-  li {
-    padding: 0.3em;
-    width: 22em;
-    margin: 0.8em 0;
-    margin-bottom: 2em;
-    border-radius: 4px;
-    text-align: center;
-    transition: 300ms ease-in-out all;
-    ${below.small`
-      width: 100%;
-    `}
-    ${above.small`
-      width: 90%;
-    `}
-    ${above.medium`
-      width: 70%;
-    `}
-    ${above.large`
-      width: 55em;
-    `}
-    &:hover {
-      transform: scale(1.06);
-    }
-  }
-  a {
-    color: ${({ theme }) => theme.colors.illustrations.main};
-    font-size: 2em;
-    transition: 300ms ease-in-out all;
-    position: relative;
-    display: inline-block;
-    &:after {
-      content: "";
-      transition: 300ms ease-in-out all;
-      position: relative;
-      position: absolute;
-      background: ${({ theme }) => theme.colors.illustrations.highlight};
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 3%;
-    }
-    &:hover {
-      color: ${({ theme }) => theme.colors.illustrations.highlight};
-      text-shadow: 1px 1px 2px ${(props) => props.theme.colors.shadow.highlightShadow};
-      &:after {
-        content: "";
-        position: relative;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3%;
-      }
-    }
+  width: 100%;
+  margin: 0 auto;
   }
 `
 
 const BlogPage: NextPage<BlogPageProps> = ({ frontmatter, postsSize }) => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const [posts, setPosts] = useState<FrontMatter[]>(frontmatter)
+
+  const postsPerPage = 3
+  const indexOfLastPost = currentPage * postsPerPage
+  const indexOfFirstPost = indexOfLastPost - postsPerPage
+  const postsToRender = posts.slice(indexOfFirstPost, indexOfLastPost)
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+
   return (
     <BlogPageStyles>
       <Title
@@ -87,21 +48,14 @@ const BlogPage: NextPage<BlogPageProps> = ({ frontmatter, postsSize }) => {
         subTitle="content with a small twist"
       />
       <PostList>
-        {frontmatter.map(({ slug, date, title, author: { name } }) => (
-          <li key={slug}>
-            <p>Written by {name}</p>
-            <p>On {date.slice(0, 12)}</p>
-            <Link href={`/blog${slug}`}>
-              <a> {title} </a>
-            </Link>
-          </li>
-        ))}
+        <PostItem posts={postsToRender} />
+        <Paginate postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
       </PostList>
     </BlogPageStyles>
   )
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async () => {
   const posts = readDir("posts").map((post) => post.replace(".md", ""))
 
   const postFrontMatter = posts.map((p) => {

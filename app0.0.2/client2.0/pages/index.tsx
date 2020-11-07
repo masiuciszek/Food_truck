@@ -1,12 +1,7 @@
-import * as React from "react"
-import { GetServerSideProps } from "next"
+import React, { useState } from "react"
+import { GetServerSideProps, NextPage } from "next"
 import Title from "../components/elements/Title"
-import {
-  HomePageWrapper,
-  Col,
-  Page,
-  PushDown,
-} from "../components/styled/wrappers"
+import { HomePageWrapper, Col, Page, PushDown } from "../components/styled/wrappers"
 import { parseCookies } from "../lib/parseCookies"
 import { useAuthDispatch } from "../context/authState/AuthProvider"
 import { getMe } from "../context/authState/AuthActions"
@@ -16,7 +11,7 @@ interface HomePageProps {
   token: string
 }
 
-const HomePage = ({ token }: HomePageProps) => {
+const HomePage: NextPage<HomePageProps> = ({ token }) => {
   const dispatch = useAuthDispatch()
 
   React.useEffect(() => {
