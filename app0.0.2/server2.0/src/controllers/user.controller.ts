@@ -5,6 +5,7 @@ import User from "../models/User";
 import Store from "../models/Store";
 import { AuthRequest } from "../middleware/authHandler";
 import { ErrorResponse } from "../utils/ErrorResponse";
+import sendEmailFn from "../utils/sendEmail";
 
 /**
  * @method POST
@@ -71,5 +72,40 @@ export const deleteMe = asyncHandler(
           msg: `user deleted with id ${req.user.id}`,
         },
       });
+  },
+);
+
+/**
+ * @method POST
+ * @route /user/contact
+ * @desc contact company through email
+ * @status public
+ */
+
+export const sendEmail = asyncHandler(
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const { email, message, html, subject } = req.body;
+
+    if (!email && !message && !html && !subject) {
+      return next(
+        new ErrorResponse("please provide both email and your message", 404),
+      );
+    }
+
+    const protocol = `${req.protocol}://${req.get("host")}`;
+
+    try {
+      await sendEmailFn({
+        email,
+        subject,
+        message,
+        html,
+      });
+
+      res.status(200).json({ success: true, data: "Email sent", protocol });
+    } catch (err) {
+      console.log(err.message);
+      return next(new ErrorResponse(`Oooops... could not sen the email`, 500));
+    }
   },
 );

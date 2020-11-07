@@ -2,7 +2,6 @@ import { Schema, Model, Document, model, HookNextFunction } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
-import Store from "./Store";
 
 type Role = "USER" | "ADMIN";
 export interface User extends Document {

@@ -8,5 +8,6 @@ router.route("/register").post(user.register);
 router.route("/all").get(user.getAllUsers);
 
 router.route("/delete_me").delete(authHandler, user.deleteMe);
+router.route("/contact").post(user.sendEmail);
 
 export { router };
