@@ -1,11 +1,10 @@
 import React from "react"
-import BlogAlert from "./BlogAlert"
 import Meta from "./Meta"
 import styled from "styled-components"
 import Head from "next/head"
 
 interface BlogLayoutProps {
-  preview: boolean
+  preview?: boolean
   data: FrontMatter
 }
 
@@ -22,10 +21,8 @@ const BlogLayout: React.FC<BlogLayoutProps> = ({ preview, children, data }) => {
     <>
       <Meta />
       <BlogWrapper>
-        <BlogAlert preview={preview} />
         <Head>
           <title>{handleTitle(data.title)}</title>
-          {/* <meta property="og:image" content={post.ogImage.url} /> */}
           <meta title="description" content={data.desc} />
         </Head>
         <Article>{children}</Article>

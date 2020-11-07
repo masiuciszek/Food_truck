@@ -16,18 +16,14 @@ export const readFiles = () => {
 }
 
 export const parsedMarkDownHandler = (slug: string) => {
-  const rawMarkDown = fs
-    .readFileSync(path.join("posts", slug + ".md"))
-    .toString()
+  const rawMarkDown = fs.readFileSync(path.join("posts", slug + ".md")).toString()
   const parsedMarkDown = matter(rawMarkDown)
 
   return parsedMarkDown
 }
 
 export const handleMarkDown = (slug: string) => {
-  const rawMarkDown = fs
-    .readFileSync(path.join("posts", slug + ".md"))
-    .toString()
+  const rawMarkDown = fs.readFileSync(path.join("posts", slug + ".md")).toString()
 
   const parsedMarkDown = matter(rawMarkDown)
   const htmlContent = marked(parsedMarkDown.content)

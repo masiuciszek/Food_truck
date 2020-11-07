@@ -69,10 +69,10 @@ const PostItemStyles = styled.li`
 const PostItem: React.FC<PostItemProps> = ({ posts }) => {
   return (
     <>
-      {posts.map(({ slug, name, title, date }) => (
+      {posts.map(({ slug, author, title, date }) => (
         <PostItemStyles key={slug}>
           <li key={slug}>
-            <p>Written by {name}</p>
+            <p>Written by {author.name}</p>
             <p>On {date.slice(0, 12)}</p>
             <Link href={`/blog${slug}`}>
               <a> {title} </a>
