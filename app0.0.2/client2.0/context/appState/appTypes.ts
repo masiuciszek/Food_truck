@@ -10,4 +10,4 @@ interface SetStatus {
 
 export type Dispatch = (action: Action) => void
 
-export type Action = SetStatus | ClearStatus
+export type Action = SetStatus

@@ -1,3 +1,4 @@
+import Alert from "@components/elements/Alert"
 import { AnimatePresence } from "framer-motion"
 import React from "react"
 import { css } from "styled-components"
@@ -5,12 +6,7 @@ import ContactForm from "../../components/contact/ContactForm"
 import Image from "../../components/elements/Image"
 import Modal from "../../components/elements/Modal"
 import Title from "../../components/elements/Title"
-import {
-  Col,
-  HomePageWrapper,
-  Page,
-  PushDown,
-} from "../../components/styled/wrappers"
+import { Col, HomePageWrapper, Page, PushDown } from "../../components/styled/wrappers"
 import { useTextKey } from "../../hooks/useTextKey"
 import { useToggle } from "../../hooks/useToggle"
 
@@ -21,6 +17,8 @@ const ContactPage = () => {
   return (
     <>
       <Page>
+        {/* TODO: Fix alert component message when there is a sent email!!! */}
+        {/* <Alert /> */}
         <HomePageWrapper>
           <Col>
             <Title
@@ -52,7 +50,8 @@ const ContactPage = () => {
               dataTestId="contact-page-modal"
               key="contact-modal"
               title={t("ContactUsFormTitle")}
-              desc={t("ContactUsFormText")}>
+              desc={t("ContactUsFormText")}
+            >
               <ContactForm />
             </Modal>
           )}

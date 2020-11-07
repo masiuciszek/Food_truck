@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { above, below } from "@utils/helpers"
 import { Button } from "@components/styled/Buttons"
 import { FormElement, FormGroup, FormInput, FormLabel, TextArea } from "../styled/FormElements"
-import { useAuthDispatch } from "context/authState/AuthProvider"
+import { useAppDispatch } from "@context/appState/appProvider"
 
 const StyledFormWrapper = styled.section`
   width: 100%;
@@ -37,7 +37,7 @@ const StyledFormWrapper = styled.section`
 `
 
 const ContactForm = () => {
-  const d = useAuthDispatch()
+  const d = useAppDispatch()
   const [formData, setFormData] = useState({
     html: "",
     email: "",
@@ -62,7 +62,9 @@ const ContactForm = () => {
 
     const data: EmailResponse = await res.json()
     if (data.success) {
-      d({ type: "MESSAGE_HANDLER", payload: "RESOLVED" })
+      d({ type: "SET_STATUS", payload: "RESOLVED" })
+    } else {
+      d({ type: "SET_STATUS", payload: "REJECTED" })
     }
   }
 
@@ -81,6 +83,10 @@ const ContactForm = () => {
       html: "",
       email: "",
       subject: "",
+    })
+
+    setTimeout(() => {
+      d({ type: "SET_STATUS", payload: "EMPTY" })
     })
   }
 
