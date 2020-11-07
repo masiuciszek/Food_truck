@@ -15,14 +15,7 @@ interface User {
   role: ROLE
 }
 
-type Status =
-  | "LOADING"
-  | "PENDING"
-  | "RESOLVED"
-  | "QUESTION"
-  | "REJECTED"
-  | "NATURAL"
-  | "EMPTY"
+type Status = "LOADING" | "PENDING" | "RESOLVED" | "QUESTION" | "REJECTED" | "NATURAL" | "EMPTY"
 
 interface LoginFormData {
   email: string
@@ -97,4 +90,17 @@ interface FrontMatter {
   slug: string
   date: string
   author: { name: string }
+}
+
+interface EmailMessage {
+  html: string
+  email: string
+  title: string
+  subject: string
+}
+
+interface EmailResponse {
+  success: boolean
+  data: string
+  protocol: string
 }

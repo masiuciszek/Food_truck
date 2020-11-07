@@ -55,3 +55,5 @@ export const TextArea = styled.textarea`
     width: 41em;
   }
 `
+
+export const Select = styled.select``
