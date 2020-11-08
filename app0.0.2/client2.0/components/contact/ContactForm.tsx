@@ -36,7 +36,11 @@ const StyledFormWrapper = styled.section`
   }
 `
 
-const ContactForm = () => {
+interface ContactFormProps {
+  closeForm: () => void
+}
+
+const ContactForm = ({ closeForm }: ContactFormProps) => {
   const d = useAppDispatch()
   const [formData, setFormData] = useState({
     html: "",
@@ -85,9 +89,11 @@ const ContactForm = () => {
       subject: "",
     })
 
+    closeForm()
+
     setTimeout(() => {
       d({ type: "SET_STATUS", payload: "EMPTY" })
-    })
+    }, 6000)
   }
 
   return (

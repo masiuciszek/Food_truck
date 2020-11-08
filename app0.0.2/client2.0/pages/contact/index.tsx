@@ -1,24 +1,38 @@
 import Alert from "@components/elements/Alert"
+import { useAppState } from "@context/appState/appProvider"
 import { AnimatePresence } from "framer-motion"
 import React from "react"
 import { css } from "styled-components"
-import ContactForm from "../../components/contact/ContactForm"
-import Image from "../../components/elements/Image"
-import Modal from "../../components/elements/Modal"
-import Title from "../../components/elements/Title"
+import ContactForm from "@components/contact/ContactForm"
+import Image from "@components/elements/Image"
+import Modal from "@components/elements/Modal"
+import Title from "@components/elements/Title"
 import { Col, HomePageWrapper, Page, PushDown } from "../../components/styled/wrappers"
-import { useTextKey } from "../../hooks/useTextKey"
-import { useToggle } from "../../hooks/useToggle"
+import { useTextKey } from "@hooks/useTextKey"
+import { useToggle } from "@hooks/useToggle"
 
 const ContactPage = () => {
   const { state: showModal, toggle: toggleModal } = useToggle()
   const { t } = useTextKey()
+  const { status } = useAppState()
 
   return (
     <>
       <Page>
-        {/* TODO: Fix alert component message when there is a sent email!!! */}
-        {/* <Alert /> */}
+        {status === "RESOLVED" && (
+          <Alert
+            message="Your message has been sent "
+            messageSecondary="We will reply as soon as possible thank you"
+            styles={alertStyles}
+          />
+        )}
+        {status === "REJECTED" && (
+          <Alert
+            message="Ooops something went wrong "
+            messageSecondary="Could not send the message"
+            styles={alertStyles}
+          />
+        )}
         <HomePageWrapper>
           <Col>
             <Title
@@ -52,7 +66,7 @@ const ContactPage = () => {
               title={t("ContactUsFormTitle")}
               desc={t("ContactUsFormText")}
             >
-              <ContactForm />
+              <ContactForm closeForm={toggleModal} />
             </Modal>
           )}
         </AnimatePresence>
@@ -62,3 +76,13 @@ const ContactPage = () => {
   )
 }
 export default ContactPage
+
+const alertStyles = css`
+  top: 1rem;
+  background: ${(props) => props.theme.colors.illustrations.secondary};
+  .content {
+    p {
+      color: ${(props) => props.theme.colors.illustrations.main} !important;
+    }
+  }
+`

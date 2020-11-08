@@ -99,7 +99,7 @@ const Alert: React.FC<AlertProps> = ({
         {messageSecondary && <p className="secondary">{messageSecondary}</p>}
         {showDeleteActions && (
           <div className="btn-group">
-            <Button onClick={() => fn()}>Yes</Button>
+            <Button onClick={() => fn && fn()}>Yes</Button>
             <Button onClick={() => d({ type: "MESSAGE_HANDLER", payload: "NATURAL" })}>No</Button>
           </div>
         )}
