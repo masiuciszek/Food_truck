@@ -3,19 +3,23 @@ import React from "react"
 import styled from "styled-components"
 import { Button } from "../components/styled/Buttons"
 import { generateNameSlug } from "./helperFn"
-import { FormGroup, FormLabel, FormInput } from "../components/styled/FormElements"
+import {
+  FormGroup,
+  FormLabel,
+  FormInput,
+} from "../components/styled/FormElements"
 import { above, below, handleFlex } from "./helpers"
 import { Dispatch } from "../context/authState/AuthType"
 import StoreItem from "../components/store/StoreItem"
 type HandleChangeType = (evt: React.ChangeEvent<HTMLInputElement>) => void
 
-export const renderForm = (isLoginForm: boolean) => (formData: FormDataType) => (
-  handleChange: HandleChangeType
-) => {
+export const renderForm = (isLoginForm: boolean) => (
+  formData: FormDataType
+) => (handleChange: HandleChangeType) => {
   return !isLoginForm ? (
     <>
       <FormGroup>
-        <FormLabel>
+        <FormLabel htmlFor="firstname">
           <span>firstname</span>
           <FormInput
             type="text"
@@ -28,7 +32,7 @@ export const renderForm = (isLoginForm: boolean) => (formData: FormDataType) => 
       </FormGroup>
 
       <FormGroup>
-        <FormLabel>
+        <FormLabel htmlFor="lastname">
           <span>lastname</span>
           <FormInput
             type="text"
@@ -41,7 +45,7 @@ export const renderForm = (isLoginForm: boolean) => (formData: FormDataType) => 
       </FormGroup>
 
       <FormGroup>
-        <FormLabel>
+        <FormLabel htmlFor="email">
           <span>email</span>
           <FormInput
             type="email"
@@ -54,7 +58,7 @@ export const renderForm = (isLoginForm: boolean) => (formData: FormDataType) => 
       </FormGroup>
 
       <FormGroup>
-        <FormLabel>
+        <FormLabel htmlFor="password">
           <span>password</span>
           <FormInput
             type="password"
@@ -67,14 +71,16 @@ export const renderForm = (isLoginForm: boolean) => (formData: FormDataType) => 
       </FormGroup>
 
       <FormGroup>
-        <FormLabel>
+        <FormLabel htmlFor="confirmPassword">
           <span>confirm password</span>
           <FormInput
             type="password"
             placeholder="confirm password"
             name="confirmPassword"
             onChange={handleChange}
-            value={"confirmPassword" in formData ? formData.confirmPassword : ""}
+            value={
+              "confirmPassword" in formData ? formData.confirmPassword : ""
+            }
           />
         </FormLabel>
       </FormGroup>
@@ -82,9 +88,10 @@ export const renderForm = (isLoginForm: boolean) => (formData: FormDataType) => 
   ) : (
     <>
       <FormGroup>
-        <FormLabel>
+        <FormLabel htmlFor="email">
           <span>email</span>
           <FormInput
+            id="email"
             type="email"
             placeholder="email"
             name="email"
@@ -95,9 +102,11 @@ export const renderForm = (isLoginForm: boolean) => (formData: FormDataType) => 
       </FormGroup>
 
       <FormGroup>
-        <FormLabel>
+        <FormLabel htmlFor="password">
           <span>password</span>
           <FormInput
+            data-testid="login-password-input"
+            id="password"
             type="password"
             placeholder="password"
             name="password"
@@ -142,12 +151,18 @@ export const renderAuthElements = (
         <>
           <Link href="/profile">
             <a>
-              <Button>{user ? generateNameSlug(user.firstName, user.lastName) : "name"}</Button>
+              <Button>
+                {user
+                  ? generateNameSlug(user.firstName, user.lastName)
+                  : "name"}
+              </Button>
             </a>
           </Link>
           <span>
             <a>
-              <Button onClick={() => dispatch({ type: "LOGOUT_USER" })}>Logout</Button>
+              <Button onClick={() => dispatch({ type: "LOGOUT_USER" })}>
+                Logout
+              </Button>
             </a>
           </span>
         </>

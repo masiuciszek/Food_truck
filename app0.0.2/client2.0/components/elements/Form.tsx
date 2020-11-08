@@ -24,7 +24,10 @@ const Form: React.FC<FormProps> = ({
   return (
     <form className={className} onSubmit={handleSubmit}>
       {renderForm(isLoginForm)(formData)(handleChange)}
-      <Button type="submit"> {submitText} </Button>
+      <Button type="submit" data-testid="submit-btn">
+        {" "}
+        {submitText}{" "}
+      </Button>
     </form>
   )
 }
