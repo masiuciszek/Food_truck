@@ -27,7 +27,8 @@
       "@components/*": ["components/*"],
       "@context/*": ["context/*"],
       "@utils/*": ["utils/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@test/*": ["test/*"]
     }
   },
   "exclude": ["node_modules"],

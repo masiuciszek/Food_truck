@@ -9,7 +9,7 @@ interface AlertProps {
   message?: string
   messageSecondary?: string
   styles?: Record<string, any>
-  showDeleteActions?: any
+  showDeleteActions?: boolean
   fn?: FnVoid
 }
 
@@ -93,14 +93,22 @@ const Alert: React.FC<AlertProps> = ({
       animate="open"
       transition={{ damping: 50 }}
       variants={variants}
+      data-testid="alert-message"
     >
       <div className="content">
         <p className="main">{message}</p>
         {messageSecondary && <p className="secondary">{messageSecondary}</p>}
         {showDeleteActions && (
           <div className="btn-group">
-            <Button onClick={() => fn && fn()}>Yes</Button>
-            <Button onClick={() => d({ type: "MESSAGE_HANDLER", payload: "NATURAL" })}>No</Button>
+            <Button onClick={() => fn && fn()} data-testid="yes-btn">
+              Yes
+            </Button>
+            <Button
+              onClick={() => d({ type: "MESSAGE_HANDLER", payload: "NATURAL" })}
+              data-testid="no-btn"
+            >
+              No
+            </Button>
           </div>
         )}
       </div>

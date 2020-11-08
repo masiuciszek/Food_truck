@@ -28,7 +28,5 @@ describe("<Modal/>", () => {
 
     expect(style.top).toBe("0px")
     expect(style.opacity).toBe("0")
-
-    screen.debug()
   })
 })
