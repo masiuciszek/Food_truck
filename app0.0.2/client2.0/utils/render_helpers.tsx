@@ -22,6 +22,7 @@ export const renderForm = (isLoginForm: boolean) => (
         <FormLabel htmlFor="firstname">
           <span>firstname</span>
           <FormInput
+            id="firstname"
             type="text"
             placeholder="firstname"
             name="firstName"
@@ -35,6 +36,7 @@ export const renderForm = (isLoginForm: boolean) => (
         <FormLabel htmlFor="lastname">
           <span>lastname</span>
           <FormInput
+            id="lastname"
             type="text"
             placeholder="lastname"
             name="lastName"
@@ -48,6 +50,7 @@ export const renderForm = (isLoginForm: boolean) => (
         <FormLabel htmlFor="email">
           <span>email</span>
           <FormInput
+            id="email"
             type="email"
             placeholder="email"
             name="email"
@@ -61,6 +64,7 @@ export const renderForm = (isLoginForm: boolean) => (
         <FormLabel htmlFor="password">
           <span>password</span>
           <FormInput
+            id="password"
             type="password"
             placeholder="password"
             name="password"
@@ -74,6 +78,7 @@ export const renderForm = (isLoginForm: boolean) => (
         <FormLabel htmlFor="confirmPassword">
           <span>confirm password</span>
           <FormInput
+            id="confirmPassword"
             type="password"
             placeholder="confirm password"
             name="confirmPassword"

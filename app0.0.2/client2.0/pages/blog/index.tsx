@@ -25,7 +25,8 @@ const PostList = styled.ul`
   margin: 0 auto;
   }
 `
-
+// asdasd
+function name(params: type) {}
 const BlogPage: NextPage<BlogPageProps> = ({ frontmatter }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const postsPerPage = 3
@@ -44,7 +45,11 @@ const BlogPage: NextPage<BlogPageProps> = ({ frontmatter }) => {
       />
       <PostList>
         <PostItem posts={postsToRender} />
-        <Paginate postsPerPage={postsPerPage} totalPosts={frontmatter.length} paginate={paginate} />
+        <Paginate
+          postsPerPage={postsPerPage}
+          totalPosts={frontmatter.length}
+          paginate={paginate}
+        />
       </PostList>
     </BlogPageStyles>
   )
