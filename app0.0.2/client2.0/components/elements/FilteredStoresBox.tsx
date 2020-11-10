@@ -48,6 +48,7 @@ const FilteredStoresBox = () => {
       animate={filteredStores.length ? "open" : "closed"}
       variants={variants}
       transition={{ duration: 0.8 }}
+      data-testid="styled-store-box-component"
     >
       <Wrapper>
         {state.length &&

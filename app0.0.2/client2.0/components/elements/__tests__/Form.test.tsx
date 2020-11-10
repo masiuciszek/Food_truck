@@ -63,15 +63,21 @@ describe("<Form/>", () => {
 
     const firstNameInput = screen.getByRole("textbox", { name: /firstname/i })
     const lastNameInput = screen.getByRole("textbox", { name: /lastname/i })
-    // const passwordInput = screen.getByTestId("login-password-input")
+    const emailInput = screen.getByRole("textbox", { name: /email/i })
+    const passwordInput = screen.getByTestId("register-password")
+    const passwordCondirmInput = screen.getByTestId("register-password-confirm")
 
-    // userEvent.type(emailInput, "name@ex.io")
-    // userEvent.type(passwordInput, "123456")
-    // expect(handleChange).toHaveBeenCalled()
-    // expect(handleChange).toHaveBeenCalledTimes(16) // each key press!
+    userEvent.type(firstNameInput, "firstName")
+    userEvent.type(lastNameInput, "lastName")
+    userEvent.type(emailInput, "name@ex.io")
+    userEvent.type(passwordInput, "123456")
 
-    // userEvent.click(screen.getByTestId("submit-btn"))
-    // expect(handleSubmit).toHaveBeenCalled()
-    screen.debug()
+    expect(handleChange).toHaveBeenCalled()
+    expect(handleChange).toHaveBeenCalledTimes(33) // each key press!
+
+    expect(passwordCondirmInput).toBeInTheDocument()
+
+    userEvent.click(screen.getByTestId("submit-btn"))
+    expect(handleSubmit).toHaveBeenCalled()
   })
 })

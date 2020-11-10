@@ -67,6 +67,7 @@ export const renderForm = (isLoginForm: boolean) => (
             id="password"
             type="password"
             placeholder="password"
+            data-testid="register-password"
             name="password"
             onChange={handleChange}
             value={"password" in formData ? formData.password : ""}
@@ -81,6 +82,7 @@ export const renderForm = (isLoginForm: boolean) => (
             id="confirmPassword"
             type="password"
             placeholder="confirm password"
+            data-testid="register-password-confirm"
             name="confirmPassword"
             onChange={handleChange}
             value={

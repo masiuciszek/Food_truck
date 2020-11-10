@@ -24,7 +24,7 @@ const StyledStore = styled.strong`
 const FilteredStoreItem: React.FC<FilteredStoreItemProps> = ({ store }) => {
   return (
     <Link href="/stores/store/[slug]" as={`/stores/store/${store.slug}`}>
-      <a>
+      <a data-testid="filtered-store-item">
         <StyledStore>{store.name}</StyledStore>
       </a>
     </Link>
